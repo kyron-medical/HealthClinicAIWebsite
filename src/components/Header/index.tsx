@@ -57,15 +57,15 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/logo-2.svg"
-                  alt="logo"
+                  src="/images/logo/HealthClinicAI_logo.png"
+                  alt="Health Clinic AI Logo"
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
                 />
                 <Image
-                  src="/images/logo/logo.svg"
-                  alt="logo"
+                  src="/images/logo/HealthClinicAI_logo.png"
+                  alt="Health Clinic AI Logo"
                   width={140}
                   height={30}
                   className="hidden w-full dark:block"
