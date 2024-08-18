@@ -15,7 +15,7 @@ const AboutPage = () => {
     <>
       <Breadcrumb
         pageName="About Page"
-        description="We help your medical practice automate every repetitive task you do not want to do. No more insurance verification, appointment rescheduling, or back-and-forth to pull records from another system! Use Health Clinic AI today."
+        description="We help your medical practice automate every repetitive task you do&apos;t want to do. No more insurance verification, appointment rescheduling, or back-and-forth to pull records from another system! Use Health Clinic AI today."
       />
       <AboutSectionOne />
       <AboutSectionTwo />

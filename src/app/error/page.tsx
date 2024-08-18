@@ -146,7 +146,7 @@ const ErrorPage = () => {
                 </h3>
                 <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
                   The page you were looking for appears to have been moved,
-                  deleted or does not exist. 
+                  deleted or doesn&apos;t exist. 
                   
                   If you think this is a mistake, email support@healthclinicai.com
                 </p>
