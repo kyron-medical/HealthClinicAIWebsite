@@ -12,7 +12,7 @@ const Hero = () => {
             <div className="w-full px-4">
               <div className="mx-auto max-w-[800px] text-center">
                 <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  Spend more time with your patients. Weapos;ll handle everything else.
+                  Spend more time with your patients. We'll handle everything else.
                 </h1>
                 <p className="mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
                   Health Clinic AI is an online tool you can use to automate patient appointment scheduling, insurance verification, managing patient follow-ups, and more. 
