@@ -17,7 +17,7 @@ const Hero = () => {
                   Spend more time with your patients. We&#39;ll handle everything else.
                 </h1>
                 <p className="mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
-                  Health Clinic AI is an online tool you can use to automate patient appointment scheduling, insurance verification, managing patient follow-ups, and more. 
+                  Health Clinic AI is an online tool you can use to automate medical billing, patient appointment scheduling, insurance verification, managing patient follow-ups, and more. 
                 </p>
                 <div className="flex justify-center">
                   <Link
