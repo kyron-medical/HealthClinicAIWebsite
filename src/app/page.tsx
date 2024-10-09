@@ -22,6 +22,10 @@ export default function Home() {
     <>
       <ScrollUp />
       <Hero />
+    <section id="prototype" className="my-8 text-center">
+      <h2 className="text-3xl font-bold mb-4">Our Front-End Prototype</h2>
+      <img src="/images/frontend-prototype.png" alt="Front-End Prototype" className="mx-auto w-1/2"/>
+    </section>
       <Features />
       <Video />
       <Brands />
