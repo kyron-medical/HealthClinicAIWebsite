@@ -12,11 +12,6 @@ export const metadata: Metadata = {
 const ContactPage = () => {
   return (
     <>
-      <Breadcrumb
-        pageName="Contact Page"
-        description="Want to bring your clinic into the AI era? Have any feature requests or issues to report?"
-      />
-
       <Contact />
     </>
   );

@@ -22,19 +22,33 @@ export default function Home() {
     <>
       <ScrollUp />
       <Hero />
-    <section id="prototype" className="my-8 text-center">
-      <h2 className="text-3xl font-bold mb-4">Our Front-End Prototype</h2>
-      <img src="/images/frontend-prototype.png" alt="Front-End Prototype" className="mx-auto w-1/2"/>
-    </section>
-      <Features />
+      <section id="prototype" className="my-8 text-center">
+        <h2 className="mb-4 text-3xl font-bold">Our Front-End Prototype</h2>
+        <img
+          src="/images/frontend-prototype.png"
+          alt="Front-End Prototype"
+          className="mx-auto w-1/2"
+        />
+      </section>
+      <section className="py-16 text-center md:py-20 lg:py-28">
+        <div className="container">
+          <h2 className="text-2xl font-bold">About Health Clinic AI</h2>
+          <p className="text-lg text-body-color">
+            We help your medical practice automate every repetitive task you
+            don't want to do. No more insurance verification, appointment
+            rescheduling, or back-and-forth to pull records from another system!
+          </p>
+        </div>
+      </section>
+      {/*<Features />
       <Video />
       <Brands />
       <AboutSectionOne />
-      <AboutSectionTwo />
+      <AboutSectionTwo />*/}
       <Testimonials />
-      <Pricing />
+      {/*<Pricing />
       <Blog />
-      <Contact />
+      <Contact />*/}
     </>
   );
 }
