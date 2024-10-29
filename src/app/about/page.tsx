@@ -16,7 +16,7 @@ const AboutPage = () => {
           <h2 className="text-2xl font-bold">About Health Clinic AI</h2>
           <p className="text-lg text-body-color">
             We help your medical practice automate every repetitive task you
-            don&#39;t want to do. No more insurance verification, appointment
+            do not want to do. No more insurance verification, appointment
             rescheduling, or back-and-forth to pull records from another system!
           </p>
         </div>
