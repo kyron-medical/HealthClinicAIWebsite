@@ -27,7 +27,7 @@ const Footer = () => {
                   />
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
-                  © 2024 HealthClinicAI, Inc All rights reserved.
+                  © 2024 Kyron, Inc All rights reserved.
                 </p>
                 <div className="flex items-center">
                   <a

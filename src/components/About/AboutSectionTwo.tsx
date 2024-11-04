@@ -14,13 +14,33 @@ const teamMembers = [
   },
   {
     name: "Lisa Duan",
-    title: "Team Member",
+    title: "Technical Consultant",
     image: "/images/team/lisa-duan.jpg",
   },
   {
     name: "Yen Chu",
-    title: "Team Member",
+    title: "Technical Consultant",
     image: "/images/team/yen-chu.jpg",
+  },
+  {
+    name: "Maguire Anuszewski",
+    title: "Medical Consultant",
+    image: "/images/team/maguire-anuszewski.jpg",
+  },
+  {
+    name: "Henry Harary",
+    title: "Sales",
+    image: "/images/team/henry-harary.jpg",
+  },
+  {
+    name: "Samuel Latzman",
+    title: "Sales",
+    image: "/images/team/sam-latzman.jpg",
+  },
+  {
+    name: "Alejandro Jackson",
+    title: "Technical Consultant",
+    image: "/images/team/alejandro-jackson.jpg",
   },
 ];
 

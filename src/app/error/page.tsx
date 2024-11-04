@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Error Page | Health Clinic AI",
-  description: "Error Page for Health Clinic AI",
+  title: "Error Page | Kyron",
+  description: "Error Page for Kyron",
   // other metadata
 };
 
@@ -13,12 +13,12 @@ const ErrorPage = () => {
     <>
       <section className="relative z-10 pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto max-w-[530px] text-center">
-                <div className="mx-auto text-center mb-9">
+                <div className="mx-auto mb-9 text-center">
                   <svg
-                    className="w-full mx-auto text-center"
+                    className="mx-auto w-full text-center"
                     height="210"
                     viewBox="0 0 474 210"
                     fill="none"
@@ -146,13 +146,12 @@ const ErrorPage = () => {
                 </h3>
                 <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
                   The page you were looking for appears to have been moved,
-                  deleted or doesn&apos;t exist. 
-                  
-                  If you think this is a mistake, email support@healthclinicai.com
+                  deleted or doesn&apos;t exist. If you think this is a mistake,
+                  email support@healthclinicai.com
                 </p>
                 <Link
                   href="/"
-                  className="px-8 py-3 text-base font-bold text-white duration-300 rounded-md bg-primary shadow-signUp hover:bg-white hover:text-primary md:px-9 lg:px-8 xl:px-9"
+                  className="rounded-md bg-primary px-8 py-3 text-base font-bold text-white shadow-signUp duration-300 hover:bg-white hover:text-primary md:px-9 lg:px-8 xl:px-9"
                 >
                   Back to Homepage
                 </Link>
