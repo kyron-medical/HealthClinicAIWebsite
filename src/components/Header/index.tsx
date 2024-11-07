@@ -43,7 +43,7 @@ const Header = () => {
       <header
         className={`header left-0 top-0 z-40 flex w-full items-center ${
           sticky
-            ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
+            ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "absolute bg-transparent"
         }`}
       >
@@ -58,14 +58,14 @@ const Header = () => {
               >
                 <Image
                   src="/images/logo/HealthClinicAI_logo.png"
-                  alt="Health Clinic AI Logo"
+                  alt="Kyron Logo"
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
                 />
                 <Image
                   src="/images/logo/HealthClinicAI_logo.png"
-                  alt="Health Clinic AI Logo"
+                  alt="Kyron Logo"
                   width={140}
                   height={30}
                   className="hidden w-full dark:block"
@@ -141,7 +141,7 @@ const Header = () => {
                                 openIndex === index ? "block" : "hidden"
                               }`}
                             >
-                              {menuItem.submenu?.map((submenuItem, index) => (
+                              {menuItem.submenu?.map((submenuItem, index) =>
                                 submenuItem.path ? (
                                   <Link
                                     href={submenuItem.path}
@@ -150,8 +150,8 @@ const Header = () => {
                                   >
                                     {submenuItem.title}
                                   </Link>
-                                ) : null
-                              ))}
+                                ) : null,
+                              )}
                             </div>
                           </>
                         )}
@@ -160,7 +160,7 @@ const Header = () => {
                   </ul>
                 </nav>
               </div>
-              
+
               {/*<div className="flex items-center justify-end pr-16 lg:pr-0">
                 <Link
                   href="/signin"

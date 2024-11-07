@@ -25,7 +25,7 @@ const AboutSectionOne = () => {
             <div className="w-full px-4 lg:w-1/2">
               <SectionTitle
                 title="Section title"
-                paragraph="Paragraph text for Health Clinic AI"
+                paragraph="Paragraph text for Kyron"
                 mb="44px"
               />
 

@@ -35,8 +35,8 @@ const Hero = () => {
                   everything else.
                 </h1>
                 <p className="mb-12 text-base !leading-relaxed text-white sm:text-lg md:text-xl">
-                  Health Clinic AI is an online tool you can use to automate
-                  medical billing, patient appointment scheduling, insurance
+                  Kyron is an online tool you can use to automate medical
+                  billing, patient appointment scheduling, insurance
                   verification, managing patient follow-ups, and more.
                 </p>
                 <div className="flex justify-center">

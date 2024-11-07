@@ -12,7 +12,7 @@ import Video from "@/components/Video";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Health Clinic AI",
+  title: "Kyron",
   description: "Spend time with patients while we automate the paperwork",
   // other metadata
 };
@@ -32,10 +32,10 @@ export default function Home() {
       </section>
       <section className="py-16 text-center md:py-20 lg:py-28">
         <div className="container">
-          <h2 className="text-2xl font-bold">About Health Clinic AI</h2>
+          <h2 className="text-2xl font-bold">About Kyron</h2>
           <p className="text-lg text-body-color">
-            We help your medical practice automate every repetitive task you
-            do not want to do. No more insurance verification, appointment
+            We help your medical practice automate every repetitive task you do
+            not want to do. No more insurance verification, appointment
             rescheduling, or back-and-forth to pull records from another system!
           </p>
         </div>
