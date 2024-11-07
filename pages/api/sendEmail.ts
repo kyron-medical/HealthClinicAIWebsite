@@ -18,7 +18,7 @@ ${message}
 Best regards,
 ${name}`,
     );
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=jay.gopal@healthclinicai.com,lucas.lieberman@health-clinicai.com&su=${subject}&body=${body}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=jay.gopal@healthclinicai.com,lucas.lieberman@healthclinicai.com&su=${subject}&body=${body}`;
 
     // Send the URL back to the client
     res.status(200).json({ url: gmailUrl });
