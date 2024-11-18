@@ -161,7 +161,7 @@ const Demo = () => {
                     htmlFor="email"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
                   >
-                    Recipient's Email
+                    Recipient&apos;s Email
                   </label>
                   <input
                     type="email"
@@ -199,7 +199,6 @@ const Demo = () => {
                   ></textarea>
                 </div>
 
-                
                 <button
                   type="button"
                   className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
