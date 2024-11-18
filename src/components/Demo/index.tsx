@@ -1,124 +1,219 @@
+// src/components/Demo/index.tsx
 "use client";
 
-import React, { useState } from "react";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import React, { useEffect, useState } from "react";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import FileUploadBox from "./FileUpload";
+import { toast } from "react-hot-toast";
 
-const Contact = () => {
-  const [name, setName] = useState("");
+const Demo = () => {
+  const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
+
+  const [appealLetter, setAppealLetter] = useState<string>("");
+  // New state to check if textarea is filled
+  const [isTextareaFilled, setIsTextareaFilled] = useState<boolean>(false);
+  const [isEmailFilled, setIsEmailFilled] = useState<boolean>(false);
+  const [isSubjectFilled, setIsSubjectFilled] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (appealLetter.trim().length > 0) {
+      setIsTextareaFilled(true);
+    } else {
+      setIsTextareaFilled(false);
+    }
+  }, [appealLetter]);
+
+  useEffect(() => {
+    setIsEmailFilled(email.trim() !== "");
+  }, [email]);
+
+  useEffect(() => {
+    setIsSubjectFilled(subject.trim() !== "");
+  }, [subject]);
+
+  const handleFileChange = (selectedFiles: File[]) => {
+    setFiles(selectedFiles);
+  };
+
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
     event,
   ) => {
     event.preventDefault();
-    try {
-      const response = await fetch("/api/sendEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, subject, message }),
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        window.location.href = data.url; // Redirect to Gmail
-        console.log("Email sent successfully");
-      } else {
-        console.error("Failed to send email", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error: Failed to fetch", error);
+    if (files.length === 0) {
+      alert("Please fill in all fields and upload at least one file.");
+      return;
     }
+
+    const formData = new FormData();
+    files.forEach((file) => formData.append("files", file));
+    console.log(formData);
+
+    // Define the fetch promise
+    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+      method: "POST",
+      body: formData,
+    }).then(async (response) => {
+      if (response.ok) {
+        const data = await response.json(); // Parse the JSON response
+        const appealLetter = data.appeal_letter; // Extract the appeal_letter field
+
+        // Update the state to display the appeal letter
+        setAppealLetter(appealLetter);
+
+        // Create a blob from the appeal letter text for download
+        const blob = new Blob([appealLetter], { type: "text/plain" });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "appeal_letter.txt";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url); // Clean up the URL object
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to generate appeal.");
+      }
+    });
+
+    // Use toast.promise to handle notifications
+    toast.promise(
+      fetchPromise,
+      {
+        loading: "Generating your appeal letter...",
+        success: "Appeal letter generated successfully!",
+        error: (err) => `Error: ${err.message}`,
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+      },
+    );
+  };
+
+  const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
+    event,
+  ) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    files.forEach((file) => formData.append("files", file));
+    console.log(formData);
+
+    // Define the fetch promise
+    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+      method: "POST",
+      body: formData,
+    }).then(async (response) => {
+      if (response.ok) {
+        const data = await response.json(); // Parse the JSON response
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send email.");
+      }
+    });
+
+    // Use toast.promise to handle notifications
+    toast.promise(
+      fetchPromise,
+      {
+        loading: "Generating your appeal letter...",
+        success: "Appeal letter generated successfully!",
+        error: (err) => `Error: ${err.message}`,
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+      },
+    );
   };
 
   return (
-    <section id="contact" className="overflow-hidden py-16 md:py-20 lg:py-28">
+    <section id="demo" className="overflow-hidden py-16 md:py-20 lg:py-28">
       <div className="container">
         <SignedOut>
+          <h2 className="text-center text-3xl font-bold text-dark dark:text-white">
+            Sign in to generate your letter of appeal
+          </h2>
           <SignInButton />
         </SignedOut>
         <SignedIn>
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
-              <div
-                className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
-                data-wow-delay=".15s
-              "
-              >
-                <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                  Request a Demo
-                </h2>
-                <p className="mb-12 text-base font-medium text-body-color">
-                  Our support team will get back to you ASAP via email.
-                </p>
-                <form>
-                  <div className="-mx-4 flex flex-wrap">
-                    <div className="w-full px-4 md:w-1/2">
-                      <div className="mb-8">
-                        <label
-                          htmlFor="name"
-                          className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        >
-                          Your Name
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter your name"
-                          className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full px-4 md:w-1/2">
-                      <div className="mb-8">
-                        <label
-                          htmlFor="subject"
-                          className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        >
-                          Subject
-                        </label>
-                        <input
-                          type="subject"
-                          placeholder="Enter your Subject"
-                          className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-                          value={subject}
-                          onChange={(e) => setSubject(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full px-4">
-                      <div className="mb-8">
-                        <label
-                          htmlFor="message"
-                          className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        >
-                          Your Message
-                        </label>
-                        <textarea
-                          name="message"
-                          rows={5}
-                          placeholder="Enter your Message"
-                          className="border-stroke w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="w-full px-4">
-                      <button
-                        type="button"
-                        className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
-                        onClick={handleSubmit}
-                      >
-                        Submit Ticket
-                      </button>
-                    </div>
-                  </div>
-                </form>
+          <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
+            <FileUploadBox onFileChange={handleFileChange} />
+
+            <button
+              type="button"
+              className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
+              onClick={handleSubmit}
+            >
+              Generate Letter of Appeal
+            </button>
+
+            {isTextareaFilled && (
+              <div className="w-full px-4 md:w-1/2">
+                <div className="mb-8">
+                  <label
+                    htmlFor="email"
+                    className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                  >
+                    Recipient's Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter recipient's email"
+                    className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-8">
+                  <label
+                    htmlFor="subject"
+                    className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter subject"
+                    className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+                {/* Updated Textarea Container */}
+                <div className="w-full max-w-3xl">
+                  {" "}
+                  {/* Increased max-width */}
+                  {/* Letter of appeal from fetch request */}
+                  <textarea
+                    className="border-stroke h-96 w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={appealLetter}
+                    readOnly
+                    rows={15} // Increased number of visible text lines
+                  ></textarea>
+                </div>
+
+                
+                <button
+                  type="button"
+                  className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
+                    isEmailFilled && isSubjectFilled
+                      ? "bg-primary text-white hover:bg-primary/90 dark:shadow-submit-dark"
+                      : "cursor-not-allowed bg-gray-300 text-gray-700"
+                  }`}
+                  onClick={handleSubmit}
+                  disabled={!isEmailFilled || !isSubjectFilled}
+                >
+                  Send Email
+                </button>
               </div>
-            </div>
+            )}
           </div>
         </SignedIn>
       </div>
@@ -126,4 +221,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Demo;
