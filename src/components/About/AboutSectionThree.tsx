@@ -9,19 +9,19 @@ const advisors = [
   {
     name: "Jacob Joseph, MD",
     title:
-      "Chief of Cardiology, VA Providence Healthcare System \n" +
+      "Chief of Cardiology, VA Providence Healthcare System. \n" +
       "Professor of Medicine, The Warren Alpert Medical School",
     image: "/images/advisors/jacob-joseph.jpg",
   },
   {
     name: "Abigail Kohler",
-    title: "Co-Founder & CEO, ResusciTech \n" + 
+    title: "Co-Founder & CEO, ResusciTech \n " + 
     "Adjunct Lecturer, Brown University",
     image: "/images/advisors/abby-kohler.jpg",
   },
   {
     name: "Corey Keller, MD, PhD",
-    title: "Principal Investigator, Stanford Precision Neurotherapeutics Lab \n" +
+    title: "Principal Investigator, Stanford Precision Neurotherapeutics Lab. \n" +
     "Assistant Professor, Stanford University School of Medicine",
     image: "/images/advisors/corey-keller.jpg",
   },
@@ -33,12 +33,13 @@ const advisors = [
   },
   {
     name: "Neil J. Wimmer, MD",
-    title: "Cardiologist, ChristianaCare Health System. Brown Class of 2001",
+    title: "Cardiologist, ChristianaCare Health System. \n" + 
+    "Brown Class of 2001",
     image: "/images/advisors/neil-wimmer.jpg",
   },
   {
     name: "Robbie Felton",
-    title: "Co-Founder & CEO, IntusCare",
+    title: "Co-Founder & CEO, IntusCare. Forbes 30 Under 30. Brown Class of 2021 \n",
     image: "/images/advisors/robbie-felton.jpg",
   },
   {
@@ -62,7 +63,7 @@ const AboutSectionThree = () => {
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {advisors.map((member, index) => (
-            <div key={index} className="text-center">
+            <div key={index} className="flex flex-col text-center items-center">
               <div className="relative mx-auto mb-4 aspect-square h-32 w-32">
                 <Image
                   src={member.image}
@@ -72,7 +73,7 @@ const AboutSectionThree = () => {
                 />
               </div>
               <h3 className="text-xl font-bold">{member.name}</h3>
-              <p className="text-base text-body-color">{member.title}</p>
+              <p className="text-base text-body-color w-8/12 flex self-center">{member.title}</p>
             </div>
           ))}
         </div>
