@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import RequestDemoButton from "../Common/RequestDemoButton";
 
+
 const Hero = () => {
   return (
     <>
@@ -30,11 +31,14 @@ const Hero = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto max-w-[800px] text-center">
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                <h1
+                  id=""
+                  className="text-shadow-outline-black mb-5 rounded text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
+                >
                   Spend more time with your patients. We&#39;ll handle
                   everything else.
                 </h1>
-                <p className="mb-12 text-base !leading-relaxed text-white sm:text-lg md:text-xl">
+                <p className="text-shadow-outline-black mb-12 rounded text-base !leading-relaxed text-white sm:text-lg md:text-xl">
                   Kyron is an online tool you can use to automate medical
                   billing, patient appointment scheduling, insurance
                   verification, managing patient follow-ups, and more.
