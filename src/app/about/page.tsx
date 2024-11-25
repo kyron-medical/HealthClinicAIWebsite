@@ -1,6 +1,7 @@
 import AboutSectionTwo from "@/components/About/AboutSectionTwo";
 import { Metadata } from "next";
 import RequestDemoButton from "@/components/Common/RequestDemoButton";
+import AboutSectionThree from "@/components/About/AboutSectionThree";
 
 export const metadata: Metadata = {
   title: "About Page | Kyron",
@@ -27,6 +28,7 @@ const AboutPage = () => {
         </div>
       </section>
       <AboutSectionTwo />
+      <AboutSectionThree />
     </>
   );
 };
