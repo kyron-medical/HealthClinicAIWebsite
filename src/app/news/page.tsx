@@ -21,7 +21,7 @@ const NewsPage = () => {
       <div className="container">
         <SectionTitle
           title="Latest News"
-          paragraph="Stay up to date with the latest news and updates across various topics and trends."
+          paragraph="Stay up to date with the latest news and updates for Kyron!"
           center
         />
 
