@@ -1,5 +1,5 @@
-import AboutSectionOne from "@/components/About/AboutSectionOne";
-import AboutSectionTwo from "@/components/About/AboutSectionTwo";
+import AboutSectionOne from "@/app/about/_components/AboutSectionOne";
+import AboutSectionTwo from "@/app/about/_components/AboutSectionTwo";
 import Blog from "@/components/Blog";
 import Brands from "@/components/Brands";
 import ScrollUp from "@/components/Common/ScrollUp";
@@ -10,6 +10,7 @@ import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
 import { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "Kyron",

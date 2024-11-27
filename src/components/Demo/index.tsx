@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import FileUploadBox from "./FileUpload";
+import FileUploadBox from "../../app/demo/_components/FileUpload";
 import { toast } from "react-hot-toast";
 
 const Demo = () => {

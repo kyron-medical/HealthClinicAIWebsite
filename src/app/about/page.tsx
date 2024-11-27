@@ -1,7 +1,7 @@
-import AboutSectionTwo from "@/components/About/AboutSectionTwo";
+import AboutSectionTwo from "@/app/about/_components/AboutSectionTwo";
 import { Metadata } from "next";
 import RequestDemoButton from "@/components/Common/RequestDemoButton";
-import AboutSectionThree from "@/components/About/AboutSectionThree";
+import AboutSectionThree from "@/app/about/_components/AboutSectionThree";
 
 export const metadata: Metadata = {
   title: "About Page | Kyron",

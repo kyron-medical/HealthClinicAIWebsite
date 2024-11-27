@@ -11,6 +11,7 @@
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.2.26",
     "@clerk/nextjs": "^6.3.0",
+    "@rive-app/webgl": "^2.23.10",
     "@sendgrid/mail": "^8.1.4",
     "@vercel/analytics": "^1.3.1",
     "aws-amplify": "^6.8.0",
