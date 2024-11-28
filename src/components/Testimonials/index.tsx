@@ -8,7 +8,7 @@ const testimonialData: Testimonial[] = [
     name: "Dr. Musharof Chy",
     designation: "Infectious Disease Specialist",
     content:
-      "Kyron Medical's software is seamless, accurate, and saves staff countless hours of administrative work.",
+      "Kyron Medical offers software that's seamless, accurate, and saves staff countless hours of administrative work.",
     image: "/images/testimonials/auth-01.png",
     star: 5,
   },
@@ -26,7 +26,7 @@ const testimonialData: Testimonial[] = [
     name: "Dr. Lethium Frenci",
     designation: "Primary Care Provider",
     content:
-      "This platform simplifies the entire billing workflow. Doctors can finally focus on patient care without worrying about claim submissions or insurance follow-ups.",
+      "This platform simplifies the entire billing workflow. With Kyron Medical, doctors can finally focus on patient care without worrying about claim submissions or insurance follow-ups.",
     image: "/images/testimonials/auth-03.png",
     star: 5,
   },
