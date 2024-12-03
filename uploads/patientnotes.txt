@@ -1,0 +1,41 @@
+Patient Name: John Doe
+Date of Birth: April 3, 1975
+Date of Visit: October 3, 2024
+Primary Care Provider: Dr. Emily Roberts
+Visit Type: Office Visit - Follow-Up
+
+Reason for Visit:
+Patient presents for a follow-up visit regarding ongoing lower back pain, which he reports has been persistent for the past six months.
+
+Subjective:
+
+Chief Complaint: Lower back pain, described as dull and constant, radiating to the right leg.
+Pain Level: 5/10 on most days, occasional spikes to 7/10.
+History: Pain has not improved significantly despite physical therapy and over-the-counter pain medication (ibuprofen).
+Activity Limitation: Patient reports difficulty sitting for long periods at work and standing for more than 30 minutes.
+Prior Treatment: Physical therapy sessions (6 total), stretching exercises, hot/cold therapy. Minimal relief reported.
+Objective:
+
+Vitals:
+Blood Pressure: 128/82 mmHg
+Heart Rate: 72 bpm
+Respiratory Rate: 16 breaths/min
+Temperature: 98.6°F
+Physical Exam:
+Musculoskeletal: Positive for tenderness along the lumbar spine.
+Neurological: Reflexes normal, strength intact, but decreased sensation noted in the right leg.
+Range of Motion: Limited flexion and extension of the lumbar spine.
+Assessment:
+
+Chronic lower back pain, likely due to lumbar strain or mild disc herniation.
+Radicular symptoms in the right leg, likely secondary to lumbar pathology.
+Plan:
+
+Imaging: Ordered lumbar MRI to rule out disc herniation.
+Medications: Prescribed meloxicam 15mg daily for inflammation and pain management.
+Referral: Referred to a pain management specialist for further evaluation, including potential epidural steroid injections if conservative measures fail.
+Follow-up: In 4 weeks or sooner if symptoms worsen.
+Additional Notes:
+Patient was advised to continue physical therapy exercises at home and to use heat therapy as needed for pain relief.
+
+Signed: Dr. Emily Roberts

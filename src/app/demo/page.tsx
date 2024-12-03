@@ -1,7 +1,6 @@
 "use client";
 
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import Demo from "@/components/Demo";
 import React, { useEffect, useState } from "react";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import FileUploadBox from "../../app/demo/_components/FileUpload";
@@ -62,7 +61,7 @@ const DemoPage = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("/api/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -115,7 +114,7 @@ const DemoPage = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("/api/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {

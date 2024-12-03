@@ -1,8 +1,8 @@
 "use client";
 
-import Footer from "@/components/Footer";
+import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
-import ScrollToTop from "@/components/ScrollToTop";
+import ScrollToTop from "@/app/_components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";

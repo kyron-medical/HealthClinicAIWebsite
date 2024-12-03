@@ -1,0 +1,20 @@
+Date: October 15, 2024
+Patient Name: John Doe
+Claim Number: 123456789
+Policy Number: HIC-987654321
+
+Dear Mr. Doe,
+
+After reviewing your recent claim for the procedure CPT code 99214 (Office/Outpatient Visit), we regret to inform you that your claim has been denied. The reason for this denial is as follows:
+
+Denial Reason: The service provided has been determined to be Not Medically Necessary based on the information submitted.
+
+According to our review of your health plan and the clinical documentation provided, the procedure does not meet our criteria for medical necessity at this time. The specific guidelines used in making this determination are based on the absence of a significant change in your medical condition and lack of documented need for the requested level of care.
+
+If you have additional medical information or believe this decision was made in error, you may appeal this decision. Appeals must be submitted within 30 days of this notice. For more information on the appeal process, please contact our customer service department at 1-800-123-4567.
+
+We understand that claim denials can be frustrating, and we are here to assist you with any questions or concerns you may have.
+
+Sincerely,
+Claims Department
+HealthFirst Insurance
