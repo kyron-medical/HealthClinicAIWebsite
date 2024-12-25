@@ -142,6 +142,7 @@ const Demo = () => {
           </h2>
           <SignInButton />
         </SignedOut>
+        
         <SignedIn>
           <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
             <FileUploadBox onFileChange={handleFileChange} />
