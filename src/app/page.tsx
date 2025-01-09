@@ -8,6 +8,7 @@ import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import Testimonials from "@/app/_components/Testimonials";
 import Video from "@/components/Video";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default function Home() {
       <ScrollUp />
       <Hero />
       <section id="prototype" className="my-8 text-center">
-        <h2 className="mb-4 text-3xl font-bold">Our Front-End Prototype</h2>
+        <h2 className="mb-4 text-3xl font-bold">Our Physician Dashboard Gives You Full Control Over Your Billing</h2>
         <img
           src="/images/frontend-prototype.png"
           alt="Front-End Prototype"

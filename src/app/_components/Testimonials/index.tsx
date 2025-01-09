@@ -15,28 +15,28 @@ export type Testimonial = {
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Musharof Chy",
-    designation: "Founder @TailGrids",
+    name: "Dr. Musharof Chy",
+    designation: "Infectious Disease Specialist",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Kyron Medical offers software that's seamless, accurate, and saves staff countless hours of administrative work.",
     image: "/images/testimonials/auth-01.png",
     star: 5,
   },
   {
     id: 2,
-    name: "Devid Weilium",
-    designation: "Founder @UIdeck",
+    name: "Dr. Devid Weilium",
+    designation: "Cardiologist",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Kyron's denial management system is a game changer.",
     image: "/images/testimonials/auth-02.png",
     star: 5,
   },
   {
     id: 3,
-    name: "Lethium Frenci",
-    designation: "Founder @Lineicons",
+    name: "Dr. Lethium Frenci",
+    designation: "Primary Care Provider",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "This platform simplifies the entire billing workflow. With Kyron Medical, doctors can finally focus on patient care without worrying about claim submissions or insurance follow-ups.",
     image: "/images/testimonials/auth-03.png",
     star: 5,
   },
@@ -48,7 +48,7 @@ const Testimonials = () => {
       <div className="container">
         <SectionTitle
           title="What Our Users Say"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          paragraph=""
           center
         />
 

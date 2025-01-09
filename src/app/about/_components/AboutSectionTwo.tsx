@@ -42,6 +42,11 @@ const teamMembers = [
     title: "Technical Consultant",
     image: "/images/team/alejandro-jackson.jpg",
   },
+  {
+    name: "Jeffrey Mu",
+    title: "Product Consultant",
+    image: "/images/team/jeffrey-mu.jpg",
+  },
 ];
 
 const AboutSectionTwo = () => {

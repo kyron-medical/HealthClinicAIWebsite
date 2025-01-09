@@ -1,4 +1,6 @@
 // src/components/Demo/FileUpload.tsx
+"use client";
+
 import React, { useState } from "react";
 
 interface FileUploadBoxProps {

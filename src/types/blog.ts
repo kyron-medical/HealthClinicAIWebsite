@@ -1,7 +1,7 @@
 type Author = {
   name: string;
-  image: string;
-  designation: string;
+  //image: string;
+  //designation: string;
 };
 
 export type Blog = {
@@ -10,6 +10,7 @@ export type Blog = {
   paragraph: string;
   image: string;
   author: Author;
-  tags: string[];
+  //tags: string[];
   publishDate: string;
+  link: string;
 };

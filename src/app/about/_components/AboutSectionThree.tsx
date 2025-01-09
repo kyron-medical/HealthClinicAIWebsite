@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const advisors = [
   {
-    name: "Ainsley MacLean",
+    name: "Ainsley MacLean, MD",
     title: "Brown Class of 2001, MD 2005 Healthcare Technology Executive",
     image: "/images/advisors/ainsley-maclean.jpg",
   },
