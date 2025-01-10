@@ -76,8 +76,16 @@ module.exports = {
         three: "0px 5px 15px rgba(6, 8, 15, 0.05)",
       },
       textShadow: {
-        "outline-black":
-          "-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000",
+        "outline-black": `
+          -1px -1px 0 #000, 
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000,
+          0px -1px 0 #000,
+          0px 1px 0 #000,
+          -1px 0px 0 #000,
+          1px 0px 0 #000
+        `,
       },
     },
   },
@@ -85,8 +93,16 @@ module.exports = {
     function ({ addUtilities }) {
       const newUtilities = {
         ".text-shadow-outline-black": {
-          textShadow:
-            "-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000",
+          textShadow: `
+            -1px -1px 0 #000, 
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000,
+            0px -1px 0 #000,
+            0px 1px 0 #000,
+            -1px 0px 0 #000,
+            1px 0px 0 #000
+          `,
         },
       };
       addUtilities(newUtilities, ["responsive", "hover"]);
