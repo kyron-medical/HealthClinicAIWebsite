@@ -19,14 +19,6 @@ CORS(app)
 
 logging.basicConfig(level=logging.DEBUG)
 
-def verify_token(token):
-    # Implement token verification logic with Clerk
-    response = requests.get(
-        'https://api.clerk.dev/v1/verifications',
-        headers={'Authorization': f'Bearer {token}'}
-    )
-    return response.status_code == 200
-
 
 # sending the email 
 def send_email(subject, body, sender, recipients):
