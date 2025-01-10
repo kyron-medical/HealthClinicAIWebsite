@@ -15,14 +15,16 @@ const advisors = [
   },
   {
     name: "Abigail Kohler",
-    title: "Co-Founder & CEO, ResusciTech \n " + 
-    "Adjunct Lecturer, Brown University",
+    title:
+      "Co-Founder & CEO, ResusciTech \n " +
+      "Adjunct Lecturer, Brown University",
     image: "/images/advisors/abby-kohler.jpg",
   },
   {
     name: "Corey Keller, MD, PhD",
-    title: "Principal Investigator, Stanford Precision Neurotherapeutics Lab. \n" +
-    "Assistant Professor, Stanford University School of Medicine",
+    title:
+      "Principal Investigator, Stanford Precision Neurotherapeutics Lab. \n" +
+      "Assistant Professor, Stanford University School of Medicine",
     image: "/images/advisors/corey-keller.jpg",
   },
   {
@@ -33,21 +35,34 @@ const advisors = [
   },
   {
     name: "Neil J. Wimmer, MD",
-    title: "Cardiologist, ChristianaCare Health System. \n" + 
-    "Brown Class of 2001",
+    title:
+      "Cardiologist, ChristianaCare Health System. \n" + "Brown Class of 2001",
     image: "/images/advisors/neil-wimmer.jpg",
   },
   {
     name: "Robbie Felton",
-    title: "Co-Founder & CEO, IntusCare. Forbes 30 Under 30. Brown Class of 2021 \n",
+    title:
+      "Co-Founder & CEO, IntusCare. Forbes 30 Under 30. Brown Class of 2021 \n",
     image: "/images/advisors/robbie-felton.jpg",
   },
   {
     name: "David Ronick",
     title:
-      "Co-Founded Minded, Stash, WinWin \n" + 
+      "Co-Founded Minded, Stash, WinWin \n" +
       "Mentor at TechStars, Harvard Business School, Brown University",
     image: "/images/advisors/david-ronick.jpg",
+  },
+  {
+    name: "Andy Beck, MD and PhD",
+    title: "Co-Founder & CEO, PathAI \n" + "Brown Class of 2002, MD 2006 ",
+    image: "/images/advisors/andy-beck.jpg",
+  },
+  {
+    name: "Yuhao Huang, MD",
+    title:
+      "Post-Doctoral Researcher, Stanford School of Medicine \n" +
+      "Multiple Papers in Nature Journals",
+    image: "/images/advisors/yuhao-huang.jpg",
   },
 ];
 
@@ -63,7 +78,7 @@ const AboutSectionThree = () => {
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {advisors.map((member, index) => (
-            <div key={index} className="flex flex-col text-center items-center">
+            <div key={index} className="flex flex-col items-center text-center">
               <div className="relative mx-auto mb-4 aspect-square h-32 w-32">
                 <Image
                   src={member.image}
@@ -73,7 +88,9 @@ const AboutSectionThree = () => {
                 />
               </div>
               <h3 className="text-xl font-bold">{member.name}</h3>
-              <p className="text-base text-body-color w-8/12 flex self-center">{member.title}</p>
+              <p className="flex w-8/12 self-center text-base text-body-color">
+                {member.title}
+              </p>
             </div>
           ))}
         </div>
