@@ -63,10 +63,6 @@ const DemoForm = () => {
     // Define the fetch promise
     const fetchPromise = fetch("/api/generate-appeal", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        
-      },
       body: formData,
     }).then(async (response) => {
       if (response.ok) {
