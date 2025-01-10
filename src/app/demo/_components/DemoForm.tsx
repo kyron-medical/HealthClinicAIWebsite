@@ -6,7 +6,7 @@ import { toast } from "react-toastify"; // Assuming you're using react-toastify 
 import { useUser, useAuth } from "@clerk/nextjs";
 import { get } from "http";
 
-const DemoForm = async () => {
+const DemoForm = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -39,7 +39,24 @@ const DemoForm = async () => {
     );
   }
 
-  const token = await getToken();
+
+
+  let userToken : string = "";
+  getToken().then((token) => {
+    if (!token) {
+      throw new Error("Authentication token not found.");
+    } else {
+      userToken = token;
+    }
+  });
+
+  if (userToken.length === 0) {
+    return (
+      <div className="text-center text-3xl font-bold text-dark dark:text-white">
+        Sign in to generate your letter of appeal
+      </div>
+    );
+  }
 
 
 
@@ -47,7 +64,7 @@ const DemoForm = async () => {
     setFiles(selectedFiles);
   };
 
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (
     event,
   ) => {
     event.preventDefault();
@@ -66,7 +83,7 @@ const DemoForm = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${userToken}`,
       },
       body: formData,
     }).then(async (response) => {
@@ -109,7 +126,7 @@ const DemoForm = async () => {
 
   };
 
-  const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
+  const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = (
     event,
   ) => {
     event.preventDefault();
@@ -127,7 +144,7 @@ const DemoForm = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${userToken}`,
       },
       body: formData,
     }).then(async (response) => {
