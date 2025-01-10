@@ -1,6 +1,6 @@
 [Your Name]
 [Your Title/Position]
-[Healthcare Organization]
+[Medical Facility/Clinic]
 [Date]
 
 Claims Department
@@ -9,18 +9,21 @@ HealthFirst Insurance
 
 Dear Claims Department,
 
-I am writing to appeal the claim denial for the procedure CPT code 99214 (Office/Outpatient Visit) on behalf of my patient, John Doe. After reviewing his health plan and clinical documentation, I strongly disagree with the reason for this denial.
+Re: Appeal of Denial of CPT Code 99214 (Office/Outpatient Visit) for John Doe
 
-Upon review of the denial reason, "The service provided has been determined to be Not Medically Necessary based on the information submitted," we believe that the procedure meets our criteria for medical necessity at this time. The patient's history of persistent lower back pain for six months warrants a follow-up visit to assess and manage his condition.
+I am writing to appeal the denial of my claim for office visit services provided on October 3, 2024, for patient John Doe. As per our facility's review and analysis, the procedure in question did not meet our criteria for medical necessity at this time.
 
-We have thoroughly reviewed John's medical history, including his recent imaging results (lumbar MRI) ordered to rule out disc herniation, which suggests that he is not in an acute phase of his condition. Additionally, his symptoms, including chronic lower back pain, radicular symptoms in the right leg, and decreased sensation noted in the right leg, indicate a need for further evaluation.
+After reviewing the relevant documentation, including the patient's history, examination results, and treatment plan, we determined that a lumbar MRI was ordered to rule out disc herniation as the cause of John Doe's chronic lower back pain. The lack of conclusive evidence supporting the need for the procedure and the absence of a significant change in his medical condition render this treatment medically unnecessary.
 
-We respectfully request that you reconsider this denial decision and approve the claim for the procedure as currently billed. We would be happy to provide any additional information or clarification regarding John's medical condition and treatment plan.
+I would like to highlight that John Doe has been experiencing persistent lower back pain, which he reports has been ongoing for six months. Despite our efforts to address this through physical therapy and conservative management strategies, the symptoms have not improved significantly. Our clinical judgment suggests that the procedure is unlikely to provide substantial benefit in this case.
 
-Please find attached our patient's visit notes and medical records for your review and consideration. We appreciate your attention to this matter, and we look forward to a prompt response.
+In accordance with HealthFirst Insurance's appeal process, I respectfully request that you review this decision and reconsider our initial determination. Please find attached my patient visit notes, which provide a detailed account of John Doe's condition, treatment plan, and medical history.
+
+I would appreciate the opportunity to discuss this matter further with your team and answer any questions you may have. If there is any additional information or documentation required to support our appeal, please let me know promptly.
+
+Thank you for considering our appeal. I look forward to hearing from you soon.
 
 Sincerely,
 
 [Your Name]
-Provider
-[Healthcare Organization]
+Medical Director

@@ -7,10 +7,15 @@ import smtplib
 from email.mime.text import MIMEText
 from langchain_ollama import ChatOllama
 import logging
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 # ... rest of your code
+
+logging.basicConfig(level=logging.DEBUG)
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -44,7 +49,6 @@ def generate_appeal(denial_content, patient_notes_content):
     return response.content
 
 
-logging.basicConfig(level=logging.DEBUG)
 
 
 @app.route('/api/generate-appeal', methods=['POST'])
@@ -53,9 +57,7 @@ def generate_appeal_route():
         return jsonify({'error': 'No files part in the request'}), 400
 
     files = request.files.getlist('files')
-    email = request.form.get('email')
-    subject = request.form.get('subject')
-    message = request.form.get('message')
+
 
     print(files)
 
@@ -100,3 +102,53 @@ def generate_appeal_route():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+
+
+
+# sending the email 
+def send_email(subject, body, sender, recipients):
+
+    app_password = os.getenv('GMAIL_APP_PASSWORD')
+    if not app_password:
+        logging.error("GMAIL_APP_PASSWORD not found in environment variables.")
+        raise ValueError("Email credentials are not configured properly.")
+
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = ', '.join(recipients)
+
+    # Connect to the Gmail SMTP server
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        smtp_server.login(sender, app_password)
+        smtp_server.sendmail(sender, recipients, msg.as_string())
+    print("Message sent!")
+
+
+
+    # # Save the appeal letter to a .txt file, this is optional 
+    # def save_appeal_letter(appeal_letter):
+    #     with open('appeal_letter.txt', 'w') as file:
+    #         file.write(appeal_letter)
+    #     print("Appeal Letter generated and saved!")
+    # save_appeal_letter(appeal_letter)
+
+    # schedule sending the email 
+    # schedule_time = "09:54"
+    # schedule.every().day.at(schedule_time).do(send_email, subject, appeal_letter, sender, recipients, password)
+    # print(f"Scheduled email to be sent at {schedule_time}.")
+
+    # while True:
+    #     schedule.run_pending()
+
+
+@app.route('/api/email-send', methods=['POST'])
+def send_email_route():
+    sender_email = request.form.get('sender_email')
+    recipient_email = request.form.get('recipient_email')
+    subject = request.form.get('subject')
+    appeal_letter = request.form.get('appeal_letter')
+
+    send_email(subject, appeal_letter, sender_email, recipient_email)
+    return jsonify({'message': 'Email sent!'}), 200

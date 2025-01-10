@@ -1,7 +1,8 @@
 // src/components/Demo/FileUpload.tsx
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify"; // Assuming you're using react-toastify for notifications
 
 interface FileUploadBoxProps {
   onFileChange: (files: File[]) => void;
@@ -16,6 +17,8 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange }) => {
     const droppedFiles = Array.from(event.dataTransfer.files);
     setFiles(droppedFiles);
     onFileChange(droppedFiles);
+    // Trigger success toast
+    toast.success("Files selected successfully!");
     setIsDragOver(false);
   };
 
@@ -33,6 +36,8 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange }) => {
     const selectedFiles = Array.from(event.target.files || []);
     setFiles(selectedFiles);
     onFileChange(selectedFiles);
+    // Trigger success toast
+    toast.success("Files selected successfully!");
   };
 
   return (

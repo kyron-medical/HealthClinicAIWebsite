@@ -58,7 +58,7 @@ const DemoForm = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("http://127.0.0.1:5328/api/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -84,14 +84,13 @@ const DemoForm = () => {
         throw new Error(errorData.error || "Failed to generate appeal.");
       }
     });
-
     // Use toast.promise to handle notifications
     toast.promise(
       fetchPromise,
       {
-        loading: "Generating your appeal letter...",
+        pending: "Generating your appeal letter...",
         success: "Appeal letter generated successfully!",
-        error: (err) => `Error: ${err.message}`,
+        error: "Failed to generate appeal letter."
       },
       {
         style: {
@@ -99,6 +98,7 @@ const DemoForm = () => {
         },
       },
     );
+
   };
 
   const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
@@ -115,7 +115,7 @@ const DemoForm = () => {
 
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/email-send", {
+    const fetchPromise = fetch("http://127.0.0.1:5328/api/email-send", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -131,9 +131,9 @@ const DemoForm = () => {
     toast.promise(
       fetchPromise,
       {
-        loading: "Sending your appeal letter...",
+        pending: "Sending your appeal letter...",
         success: "Appeal letter sent successfully!",
-        error: (err) => `Error: ${err.message}`,
+        error: "Failed to send appeal letter.",
       },
       {
         style: {
@@ -144,7 +144,7 @@ const DemoForm = () => {
   };
 
   return (
-    <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
+    <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle ">
       <FileUploadBox onFileChange={handleFileChange} />
 
       <button

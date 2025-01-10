@@ -2,13 +2,15 @@
 
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "react-hot-toast";
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <ThemeProvider attribute="class" enableSystem={false} defaultTheme="light">
-        <Toaster position="bottom-center" reverseOrder={false} />
+        <ToastContainer 
+        position="bottom-center" autoClose={5000} hideProgressBar={false} />
         {children}
       </ThemeProvider>
     </ClerkProvider>
