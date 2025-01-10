@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import FileUploadBox from "./FileUpload";
 import { toast } from "react-toastify"; // Assuming you're using react-toastify for notifications
-import { useUser } from "@clerk/nextjs";
+import { useUser, useAuth } from "@clerk/nextjs";
+import { get } from "http";
 
-const DemoForm = () => {
+const DemoForm = async () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -28,6 +29,7 @@ const DemoForm = () => {
 
 
   const {user, isLoaded } = useUser();
+  const { getToken } = useAuth();
 
   if (!user) {
     return (
@@ -36,6 +38,8 @@ const DemoForm = () => {
       </div>
     );
   }
+
+  const token = await getToken();
 
 
 
@@ -58,8 +62,12 @@ const DemoForm = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://127.0.0.1:5328/api/generate-appeal", {
+    const fetchPromise = fetch("/api/generate-appeal", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
       body: formData,
     }).then(async (response) => {
       if (response.ok) {
@@ -115,8 +123,12 @@ const DemoForm = () => {
 
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://127.0.0.1:5328/api/email-send", {
+    const fetchPromise = fetch("/api/email-send", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
       body: formData,
     }).then(async (response) => {
       if (response.ok) {
