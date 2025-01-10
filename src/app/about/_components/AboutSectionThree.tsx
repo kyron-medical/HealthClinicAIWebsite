@@ -7,6 +7,11 @@ const advisors = [
     image: "/images/advisors/ainsley-maclean.jpg",
   },
   {
+    name: "Andy Beck, MD and PhD",
+    title: "Co-Founder & CEO, PathAI \n" + "Brown Class of 2002, MD 2006 ",
+    image: "/images/advisors/andy-beck.jpg",
+  },
+  {
     name: "Jacob Joseph, MD",
     title:
       "Chief of Cardiology, VA Providence Healthcare System. \n" +
@@ -52,11 +57,7 @@ const advisors = [
       "Mentor at TechStars, Harvard Business School, Brown University",
     image: "/images/advisors/david-ronick.jpg",
   },
-  {
-    name: "Andy Beck, MD and PhD",
-    title: "Co-Founder & CEO, PathAI \n" + "Brown Class of 2002, MD 2006 ",
-    image: "/images/advisors/andy-beck.jpg",
-  },
+
   {
     name: "Yuhao Huang, MD",
     title:
