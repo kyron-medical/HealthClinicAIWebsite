@@ -29,7 +29,7 @@ const DemoForm = () => {
 
 
   const {user, isLoaded } = useUser();
-  const { getToken } = useAuth();
+
 
   if (!user) {
     return (
@@ -39,24 +39,6 @@ const DemoForm = () => {
     );
   }
 
-
-
-  let userToken : string = "";
-  getToken().then((token) => {
-    if (!token) {
-      throw new Error("Authentication token not found.");
-    } else {
-      userToken = token;
-    }
-  });
-
-  if (userToken.length === 0) {
-    return (
-      <div className="text-center text-3xl font-bold text-dark dark:text-white">
-        Sign in to generate your letter of appeal
-      </div>
-    );
-  }
 
 
 
@@ -83,7 +65,7 @@ const DemoForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${userToken}`,
+        
       },
       body: formData,
     }).then(async (response) => {
@@ -144,7 +126,7 @@ const DemoForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${userToken}`,
+        
       },
       body: formData,
     }).then(async (response) => {
