@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SingleBlog = ({ blog }: { blog: Blog }) => {
-  const { title, image, paragraph, author, publishDate, link } = blog;
+  const { title, image, paragraph, author, publishDate, link, logoUrl } = blog;
   return (
     <>
       <div className="group relative overflow-hidden rounded-sm bg-white shadow-one duration-300 hover:shadow-two dark:bg-dark dark:hover:shadow-gray-dark">
@@ -25,6 +25,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
               {title}
             </Link>
           </h3>
+
           <p className="mb-6 border-b border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
             {paragraph}
           </p>
@@ -42,6 +43,13 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
                 Date
               </h4>
               <p className="text-xs text-body-color">{publishDate}</p>
+            </div>
+            <div className="ml-auto">
+              <img
+                src={logoUrl} // The logo URL you want to use
+                alt="Logo"
+                className="h-8 w-auto" // Adjust size as needed
+              />
             </div>
           </div>
         </div>

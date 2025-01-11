@@ -7,6 +7,9 @@ const nextConfig = {
       "snworksceo.imgix.net",
       "www.browndailyherald.com",
       "americanbazaaronline.com",
+      "www.browndailyherald.com",
+      "medical.brown.edu",
+      "media.licdn.com",
     ],
     remotePatterns: [
       {

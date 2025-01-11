@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./NewsPage.module.css";
 import SectionTitle from "@/components/Common/SectionTitle";
 import SingleBlog from "@/components/Blog/SingleBlog";
-import newsData from "@/components/News/newsData"; // Replace this with the relevant data for news articles
+import newsData from "@/components/News/newsData"; // Import the news data
 
 import { Metadata } from "next";
 
@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 };
 
 const NewsPage = () => {
+  // Sort the news data by publishDate in descending order (most recent first)
+  const sortedNewsData = useMemo(() => {
+    return [...newsData].sort((a, b) => {
+      const dateA = new Date(a.publishDate); // Convert publishDate to Date
+      const dateB = new Date(b.publishDate); // Convert publishDate to Date
+      return dateB.getTime() - dateA.getTime(); // Sort in descending order
+    });
+  }, [newsData]);
+
   return (
     <section
       id="news"
@@ -26,7 +35,7 @@ const NewsPage = () => {
         />
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3">
-          {newsData.map((newsItem) => (
+          {sortedNewsData.map((newsItem) => (
             <div key={newsItem.id} className="w-full">
               <SingleBlog blog={newsItem} />
             </div>
