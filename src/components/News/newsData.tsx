@@ -48,7 +48,7 @@ const newsData: Blog[] = [
       "https://scontent-lax3-2.xx.fbcdn.net/v/t39.30808-1/243994626_268570588604439_8988422661648473408_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=JAJAArMQOOsQ7kNvgEmwnLb&_nc_zt=24&_nc_ht=scontent-lax3-2.xx&_nc_gid=AlLQO-zjS79c_ZnPzRjRLYm&oh=00_AYAFisw7ORkRRxgjfIb8S-gUT1AlTzHeiJrO2Ffd-qtnjQ&oe=6787919D",
     link: "https://americanbazaaronline.com/2024/11/06/brown-students-launch-kyron-medical-startup-medical-billing-93372/",
   },
-  /*{
+  {
     id: 4,
     title:
       "Winners Announced for the Rhode Island Business Competition Pitch Contest",
@@ -107,7 +107,7 @@ const newsData: Blog[] = [
     logoUrl:
       "https://indonewyork.com/wp-content/uploads/2024/06/indonewyorktheme.png",
     link: "https://indonewyork.com/breaking/revolutionizing-medical-billing-with-ai-brown-university-students-launch-kyron-medical.html",
-  },*/
+  },
 ];
 
 export default newsData;
