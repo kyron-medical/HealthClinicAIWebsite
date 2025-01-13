@@ -6,7 +6,7 @@ import styles from "@/styles/InfiniteCarousel.module.css";
 
 
 interface Props {
-  children: JSX.Element[];
+  children: React.ReactNode;
   width?: "fit-content" | "100%";
 }
 
@@ -41,9 +41,7 @@ export const InfiniteCarousel = ({ children, width = "fit-content" }: Props) => 
   return (
     <div className={styles.scroller} ref={scrollerRef}>
       <ul className={styles.scroller__inner}>
-        {children.map((child, index) => (
-          <li key={index}>{child}</li>
-        ))}
+      {children}
       </ul>
     </div>
   );

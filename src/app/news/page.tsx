@@ -2,7 +2,7 @@ import styles from "./NewsPage.module.css";
 import SectionTitle from "@/components/Common/SectionTitle";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import newsData from "@/components/News/newsData"; // Replace this with the relevant data for news articles
-
+import Image from "next/image";
 import { Metadata } from "next";
 import { InfiniteCarousel } from "../_components/InfiniteCarousel";
 
@@ -26,8 +26,71 @@ const NewsPage = () => {
           paragraph="Stay up to date with the latest news and updates for Kyron!"
           center
         />
+    
+        <InfiniteCarousel>
+          <Image
+            src={"/logos/news/brown-university.png"}
+            className="border-2"
+            alt={""}
+            height={200}
+            width={300}
+          />
+          <Image
+            src={"/logos/news/warren-alpert.png"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
 
-      
+          <Image
+            src={"/logos/news/bdh.png"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
+
+          <Image
+            src={"/logos/news/american-bazaar.jpg"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
+
+          <Image
+            src={"/logos/news/providence-journal.png"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
+
+          <Image
+            src={"/logos/news/usa-today.png"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
+
+          <Image
+            src={"/logos/news/boston-globe.png"}
+            className="border-2 "
+            alt={""}
+            height={200}
+            width={300}
+          />
+
+          <Image
+            src={"/logos/news/new-england-council.png"}
+            className="border-2"
+            alt={""}
+            height={200}
+            width={300}
+          />
+        </InfiniteCarousel>
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3">
           {newsData.map((newsItem) => (
