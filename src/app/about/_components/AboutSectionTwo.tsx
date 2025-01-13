@@ -47,6 +47,16 @@ const teamMembers = [
     title: "Product Consultant",
     image: "/images/team/jeffrey-mu.jpg",
   },
+  {
+    name: "Raymond Hu",
+    title: "Intern",
+    image: "/images/team/raymond-hu.jpg",
+  },
+  {
+    name: "Ananya Uddanti",
+    title: "Intern",
+    image: "/images/team/ananya-uddanti.jpg",
+  },
 ];
 
 const AboutSectionTwo = () => {

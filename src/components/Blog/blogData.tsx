@@ -11,6 +11,7 @@ const blogData: Blog[] = [
       name: "Samuyl Joshi",
     },
     publishDate: "2025",
+    logoUrl: "/images/logo/kyron_mdeical.png",
     link: "https://www.google.com",
   },
 ];
