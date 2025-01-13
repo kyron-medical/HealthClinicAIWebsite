@@ -7,7 +7,7 @@ const advisors = [
     image: "/images/advisors/ainsley-maclean.jpg",
   },
   {
-    name: "Andy Beck, MD and PhD",
+    name: "Andy Beck, MD, PhD",
     title: "Co-Founder & CEO, PathAI \n" + "Brown Class of 2002, MD 2006 ",
     image: "/images/advisors/andy-beck.jpg",
   },
