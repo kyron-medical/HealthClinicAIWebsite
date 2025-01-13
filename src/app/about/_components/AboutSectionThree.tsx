@@ -38,6 +38,15 @@ const advisors = [
       "Founded Panjo (acquired by Tapatalk), Founded Foresite Solutions (acquired by Nelnet). Brown Class of 2001",
     image: "/images/advisors/chad-billmyer.jpg",
   },
+
+  {
+    name: "Yuhao Huang, MD",
+    title:
+      "Post-Doctoral Researcher, Stanford School of Medicine \n" +
+      "Multiple Papers in Nature Journals",
+    image: "/images/advisors/yuhao-huang.jpg",
+  },
+  
   {
     name: "Neil J. Wimmer, MD",
     title:
@@ -56,15 +65,7 @@ const advisors = [
       "Co-Founded Minded, Stash, WinWin \n" +
       "Mentor at TechStars, Harvard Business School, Brown University",
     image: "/images/advisors/david-ronick.jpg",
-  },
-
-  {
-    name: "Yuhao Huang, MD",
-    title:
-      "Post-Doctoral Researcher, Stanford School of Medicine \n" +
-      "Multiple Papers in Nature Journals",
-    image: "/images/advisors/yuhao-huang.jpg",
-  },
+  }
 ];
 
 const AboutSectionThree = () => {
