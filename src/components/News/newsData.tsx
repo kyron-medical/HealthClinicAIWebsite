@@ -105,7 +105,7 @@ const newsData: Blog[] = [
     },
     publishDate: "November 8, 2024",
     logoUrl:
-      "https://indonewyork.com/wp-content/uploads/2024/06/indonewyorktheme.png",
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAUVBMVEVHcEzFKDmpRWbBHjDCITLAGy3BHS7AGSvBGizAITTAGy3DJDW3Nk++IDTAHC7BJjjEKzzBIzXAGixFecJFc746dsc8csE4csI3csM3ccJWZaiAjnW2AAAAG3RSTlMAMAd9SsOP/t9r0jwQnbIlG1vvK0V2m9Ho/clc9VdcAAABO0lEQVR4AXXSB3LFIAwEUIsuEALkmtz/oAHn97LT/WZl2vQUgOlrlNbqKxprzdei8wG/FmNw6YtRZiRV1MehKRtVm06flBoQOJFMbzVFtZJh732Ae1X1zPOyrjMZ203smKvOTOu27ftxHPt8msVKfQyYhojTdvyMHFvpFjTQBJhtDD15WrYT98WJ50bUnA3ieyT3Pc+je+wtiINqXBwyzMHUM/TYOOgKOl4kRFeGnbrnbollfLecNZp60tD1l11tvRZsRqCxlwsNxVxQvDAWRbWkOj2EIKGIbZVq0hwF6QFVxRB0IdBWxmp1fcQWrKF020eGB0zMqbcGSbScsTygcaZxX5DNupkEparHXxqMPrI2hVQyxjwtt+oQL7Nq4xhtu1cJIze6TCnIwbt7NbmntZNhd18uvD4qaCf+Aez6Ef6rR1PRAAAAAElFTkSuQmCC",
     link: "https://indonewyork.com/breaking/revolutionizing-medical-billing-with-ai-brown-university-students-launch-kyron-medical.html",
   },
 ];
