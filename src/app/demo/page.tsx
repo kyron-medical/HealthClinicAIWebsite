@@ -62,7 +62,7 @@ const DemoPage = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://98.85.146.154:5000/generate-appeal", {
+    const fetchPromise = fetch("https://api.kyronmedical.com/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -115,7 +115,7 @@ const DemoPage = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://98.85.146.154:5000/generate-appeal", {
+    const fetchPromise = fetch("https://api.kyronmedical.com/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
