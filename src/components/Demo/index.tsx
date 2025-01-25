@@ -34,7 +34,11 @@ const Demo = () => {
   }, [subject]);
 
   const handleFileChange = (selectedFiles: File[]) => {
-    setFiles(selectedFiles);
+    // Check file names
+    const validFiles = selectedFiles.filter(
+      (file) => file.name === "denial.txt" || file.name === "patientnotes.txt"
+    );
+    setFiles(validFiles);
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
@@ -52,7 +56,7 @@ const Demo = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("http://98.85.146.154:5000/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -105,7 +109,7 @@ const Demo = () => {
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("http://98.85.146.154:5000/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
