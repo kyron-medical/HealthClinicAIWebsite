@@ -33,12 +33,12 @@ const Demo = () => {
     setIsSubjectFilled(subject.trim() !== "");
   }, [subject]);
 
-  const handleFileChange = (selectedFiles: File[]) => {
-    // Check file names
-    const validFiles = selectedFiles.filter(
-      (file) => file.name === "denial.txt" || file.name === "patientnotes.txt"
-    );
-    setFiles(validFiles);
+  const handlePatientNotesChange = (file: File | null) => {
+    setPatientNotesFile(file); // Update the state for patient notes file
+  };
+  
+  const handleInsuranceDenialChange = (file: File | null) => {
+    setInsuranceDenialFile(file); // Update the state for insurance denial file
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
@@ -148,8 +148,19 @@ const Demo = () => {
         </SignedOut>
         
         <SignedIn>
+
+            
           <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
-            <FileUploadBox onFileChange={handleFileChange} />
+            <div className="flex flex-row gap-8">
+              <FileUploadBox
+                label="Patient Note(s)"
+                onFileChange={handlePatientNotesChange} // For patient notes
+              />
+              <FileUploadBox
+                label="Insurance Denial"
+                onFileChange={handleInsuranceDenialChange} // For insurance denial
+              />
+            </div>
 
             <button
               type="button"
