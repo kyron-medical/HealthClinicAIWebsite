@@ -16,6 +16,18 @@ const Demo = () => {
   const [isTextareaFilled, setIsTextareaFilled] = useState<boolean>(false);
   const [isEmailFilled, setIsEmailFilled] = useState<boolean>(false);
   const [isSubjectFilled, setIsSubjectFilled] = useState<boolean>(false);
+  
+
+  const [patientNotesFile, setPatientNotesFile] = useState<File | null>(null);
+  const [insuranceDenialFile, setInsuranceDenialFile] = useState<File | null>(null);
+
+  const handlePatientNotesChange = (file: File | null) => {
+    setPatientNotesFile(file); // Update the state for patient notes file
+  };
+
+  const handleInsuranceDenialChange = (file: File | null) => {
+    setInsuranceDenialFile(file); // Update the state for insurance denial file
+  };
 
   useEffect(() => {
     if (appealLetter.trim().length > 0) {
@@ -32,14 +44,6 @@ const Demo = () => {
   useEffect(() => {
     setIsSubjectFilled(subject.trim() !== "");
   }, [subject]);
-
-  const handlePatientNotesChange = (file: File | null) => {
-    setPatientNotesFile(file); // Update the state for patient notes file
-  };
-  
-  const handleInsuranceDenialChange = (file: File | null) => {
-    setInsuranceDenialFile(file); // Update the state for insurance denial file
-  };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
     event,
