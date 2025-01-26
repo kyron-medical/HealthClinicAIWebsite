@@ -46,10 +46,6 @@ const DemoPage = () => {
     setIsSubjectFilled(subject.trim() !== "");
   }, [subject]);
 
-  const handleFileChange = (selectedFiles: File[]) => {
-    setFiles(selectedFiles);
-  };
-
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
     event,
   ) => {
