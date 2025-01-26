@@ -105,43 +105,7 @@ const DemoPage = () => {
     );
   };
 
-  const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
-    event,
-  ) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    files.forEach((file) => formData.append("files", file));
-    console.log(formData);
-
-    // Define the fetch promise
-    const fetchPromise = fetch("https://api.kyronmedical.com/generate-appeal", {
-      method: "POST",
-      body: formData,
-    }).then(async (response) => {
-      if (response.ok) {
-        const data = await response.json(); // Parse the JSON response
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send email.");
-      }
-    });
-
-    // Use toast.promise to handle notifications
-    toast.promise(
-      fetchPromise,
-      {
-        loading: "Generating your appeal letter...",
-        success: "Appeal letter generated successfully!",
-        error: (err) => `Error: ${err.message}`,
-      },
-      {
-        style: {
-          minWidth: "250px",
-        },
-      },
-    );
-  };
+  
 
   return (
     <section id="demo" className="overflow-hidden py-16 md:py-20 lg:py-28">
