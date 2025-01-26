@@ -19,13 +19,16 @@ const DemoPage = () => {
   
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
-  const [files, setFiles] = useState<File[]>([]);
+
+  const [patientNotesFile, setPatientNotesFile] = useState<File | null>(null);
+  const [insuranceDenialFile, setInsuranceDenialFile] = useState<File | null>(null);
 
   const [appealLetter, setAppealLetter] = useState<string>("");
   // New state to check if textarea is filled
   const [isTextareaFilled, setIsTextareaFilled] = useState<boolean>(false);
   const [isEmailFilled, setIsEmailFilled] = useState<boolean>(false);
   const [isSubjectFilled, setIsSubjectFilled] = useState<boolean>(false);
+  
 
   useEffect(() => {
     if (appealLetter.trim().length > 0) {
@@ -52,13 +55,14 @@ const DemoPage = () => {
   ) => {
     event.preventDefault();
 
-    if (files.length === 0) {
-      alert("Please fill in all fields and upload at least one file.");
+    if (!patientNotesFile || !insuranceDenialFile) {
+      alert("Please upload both Patient Note(s) and Insurance Denial files.");
       return;
     }
-
+    
     const formData = new FormData();
-    files.forEach((file) => formData.append("files", file));
+    formData.append("files", patientNotesFile);
+    formData.append("files", insuranceDenialFile);
     console.log(formData);
 
     // Define the fetch promise
@@ -154,15 +158,29 @@ const DemoPage = () => {
         </SignedOut>
         <SignedIn>
           <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
-            <FileUploadBox onFileChange={handleFileChange} />
+          <div className="flex flex-row gap-8">
+            <FileUploadBox
+              label="Patient Note(s)"
+              onFileChange={(file) => setPatientNotesFile(file)}
+            />
+            <FileUploadBox
+              label="Insurance Denial"
+              onFileChange={(file) => setInsuranceDenialFile(file)}
+            />
+          </div>
 
-            <button
-              type="button"
-              className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
-              onClick={handleSubmit}
-            >
-              Generate Letter of Appeal
-            </button>
+          <button
+            type="button"
+            className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
+              patientNotesFile && insuranceDenialFile
+                ? "bg-primary text-white hover:bg-primary/90 dark:shadow-submit-dark"
+                : "cursor-not-allowed bg-gray-300 text-gray-700"
+            }`}
+            onClick={handleSubmit}
+            disabled={!patientNotesFile || !insuranceDenialFile}
+          >
+            Generate Letter of Appeal
+          </button>
 
             {isTextareaFilled && (
               <div className="w-full px-4 md:w-1/2">

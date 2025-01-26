@@ -2,18 +2,19 @@
 import React, { useState } from "react";
 
 interface FileUploadBoxProps {
-  onFileChange: (files: File[]) => void;
+  onFileChange: (file: File | null) => void;
+  label: string;
 }
 
-const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange }) => {
-  const [files, setFiles] = useState<File[]>([]);
+const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange, label }) => {
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const droppedFiles = Array.from(event.dataTransfer.files);
-    setFiles(droppedFiles);
-    onFileChange(droppedFiles);
+    const file = event.dataTransfer.files[0];
+    setUploadedFile(file);
+    onFileChange(file);
     setIsDragOver(false);
   };
 
@@ -28,13 +29,16 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange }) => {
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(event.target.files || []);
-    setFiles(selectedFiles);
-    onFileChange(selectedFiles);
+    const file = event.target.files ? event.target.files[0] : null;
+    setUploadedFile(file);
+    onFileChange(file);
   };
 
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full max-w-md flex flex-col items-center">
+      <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
+        {label}
+      </label>
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -49,17 +53,21 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange }) => {
           justify-center rounded-lg bg-[#f8f8f8] p-8 text-center transition-colors
           duration-300 dark:bg-[#2C303B]
         `}
-        onClick={() => document.getElementById("fileInput")?.click()}
+        onClick={() => document.getElementById(label.replace(/\s+/g, "-"))?.click()}
       >
-        Drag and drop files here or click to select files
+        Drag and drop a file here or click to select a file
         <input
-          id="fileInput"
+          id={label.replace(/\s+/g, "-")}
           type="file"
-          multiple
           onChange={handleFileSelect}
           style={{ display: "none" }}
         />
       </div>
+      {uploadedFile && (
+        <p className="mt-2 text-sm text-body-color">
+          Uploaded: {uploadedFile.name}
+        </p>
+      )}
     </div>
   );
 };
