@@ -44,7 +44,7 @@ const teamMembers = [
   },
   {
     name: "Jeffrey Mu",
-    title: "Product Consultant",
+    title: "Developer",
     image: "/images/team/jeffrey-mu.jpg",
   },
   {
