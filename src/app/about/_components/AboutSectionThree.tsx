@@ -19,6 +19,13 @@ const advisors = [
     image: "/images/advisors/jacob-joseph.jpg",
   },
   {
+    name: "Cliff Weitzman",
+    title:
+      "Founder & CEO, Speechify \n" +
+      "Brown Class of 2016",
+    image: "/images/advisors/cliff-weitzman.jpg",
+  },
+  {
     name: "Abigail Kohler",
     title:
       "Co-Founder & CEO, ResusciTech \n " +
@@ -65,6 +72,20 @@ const advisors = [
       "Co-Founded Minded, Stash, WinWin \n" +
       "Mentor at TechStars, Harvard Business School, Brown University",
     image: "/images/advisors/david-ronick.jpg",
+  },
+  {
+    name: "Charlie Maddock",
+    title:
+      "Co-Founder & CEO, INO ARMOR \n" +
+      "Brown Class of 2004",
+    image: "/images/advisors/charlie-maddock.jpg",
+  },
+  {
+    name: "Julie Pilitsis, MD, PhD, MBA",
+    title:
+      "Chair of Neurosurgery, University of Arizona College of Medicine \n" +
+      "Physician Executive",
+    image: "/images/advisors/julie-pilitsis.jpg",
   }
 ];
 
