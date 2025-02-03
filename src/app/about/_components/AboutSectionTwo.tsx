@@ -18,11 +18,6 @@ const teamMembers = [
     image: "/images/team/lisa-duan.jpg",
   },
   {
-    name: "Yen Chu",
-    title: "Technical Consultant",
-    image: "/images/team/yen-chu.jpg",
-  },
-  {
     name: "Maguire Anuszewski",
     title: "Medical Consultant",
     image: "/images/team/maguire-anuszewski.jpg",
