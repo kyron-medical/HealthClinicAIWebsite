@@ -1,19 +1,16 @@
-"use client";
-
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import Demo from "@/components/Demo";
-import React, { useEffect, useState } from "react";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import FileUploadBox from "../../app/demo/_components/FileUpload";
-import { toast } from "react-hot-toast";
 
 import { Metadata } from "next";
+import DemoForm from "./_components/DemoForm";
+import SectionTitle from "@/components/Common/SectionTitle";
 
-// export const metadata: Metadata = {
-//   title: "Demo Page | Kyron",
-//   description: "Demo Page for Kyron",
-//   // other metadata
-// };
+export const metadata: Metadata = {
+  title: "Demo Page | Kyron",
+  description: "Demo Page for Kyron",
+  // other metadata
+};
 
 const DemoPage = () => {
   
@@ -108,7 +105,7 @@ const DemoPage = () => {
   
 
   return (
-    <section id="demo" className="overflow-hidden py-16 md:py-20 lg:py-28">
+    <>
       <div className="container">
         <SignedOut>
           <h2 className="text-center text-3xl font-bold text-dark dark:text-white">
@@ -116,6 +113,7 @@ const DemoPage = () => {
           </h2>
           <SignInButton />
         </SignedOut>
+
         <SignedIn>
           <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
           <div className="flex flex-row gap-8">
@@ -204,10 +202,8 @@ const DemoPage = () => {
           </div>
         </SignedIn>
       </div>
-    </section>
+    </>
   );
 };
-
-
 
 export default DemoPage;
