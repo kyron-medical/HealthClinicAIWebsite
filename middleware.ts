@@ -9,6 +9,7 @@ const isPublicRoute = createRouteMatcher([
   "/videos(.*)",
   "/animations(.*)",
   "/images(.*)",
+  "/logos(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
 ]);
