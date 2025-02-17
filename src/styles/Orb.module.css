@@ -1,0 +1,24 @@
+.orbContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 256px; /* Updated width */
+  height: 256px; /* Updated height */
+  border-radius: 50%;
+  overflow: hidden;
+  background: none;
+}
+
+.orbVideoContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.orbVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import FileUploadBox from "./FileUpload";
 import { toast } from "react-toastify"; // Assuming you're using react-toastify for notifications
 import { useUser } from "@clerk/nextjs";
@@ -8,57 +9,51 @@ import { useUser } from "@clerk/nextjs";
 const DemoForm = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
-  const [files, setFiles] = useState<File[]>([]);
+
+  const [patientNotesFile, setPatientNotesFile] = useState<File | null>(null);
+  const [insuranceDenialFile, setInsuranceDenialFile] = useState<File | null>(
+    null,
+  );
+
   const [appealLetter, setAppealLetter] = useState<string>("");
+  // New state to check if textarea is filled
   const [isTextareaFilled, setIsTextareaFilled] = useState<boolean>(false);
   const [isEmailFilled, setIsEmailFilled] = useState<boolean>(false);
   const [isSubjectFilled, setIsSubjectFilled] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsTextareaFilled(appealLetter.trim().length > 0);
+    if (appealLetter.trim().length > 0) {
+      setIsTextareaFilled(true);
+    } else {
+      setIsTextareaFilled(false);
+    }
   }, [appealLetter]);
 
   useEffect(() => {
-    setIsEmailFilled(email.trim().length > 0);
+    setIsEmailFilled(email.trim() !== "");
   }, [email]);
 
   useEffect(() => {
-    setIsSubjectFilled(subject.trim().length > 0);
+    setIsSubjectFilled(subject.trim() !== "");
   }, [subject]);
-
-
-  const {user, isLoaded } = useUser();
-
-  if (!user) {
-    return (
-      <div className="text-center text-3xl font-bold text-dark dark:text-white">
-        Sign in to generate your letter of appeal
-      </div>
-    );
-  }
-
-
-
-  const handleFileChange = (selectedFiles: File[]) => {
-    setFiles(selectedFiles);
-  };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
     event,
   ) => {
     event.preventDefault();
 
-    if (files.length === 0) {
-      alert("Please fill in all fields and upload at least one file.");
+    if (!patientNotesFile || !insuranceDenialFile) {
+      alert("Please upload both Patient Note(s) and Insurance Denial files.");
       return;
     }
 
     const formData = new FormData();
-    files.forEach((file) => formData.append("files", file));
+    formData.append("files", patientNotesFile);
+    formData.append("files", insuranceDenialFile);
     console.log(formData);
 
     // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/generate-appeal", {
+    const fetchPromise = fetch("https://api.kyronmedical.com/generate-appeal", {
       method: "POST",
       body: formData,
     }).then(async (response) => {
@@ -86,54 +81,13 @@ const DemoForm = () => {
     });
 
     // Use toast.promise to handle notifications
-    toast.promise(
-      fetchPromise,
-      {
-        loading: "Generating your appeal letter...",
-        success: "Appeal letter generated successfully!",
-        error: (err) => `Error: ${err.message}`,
-      },
-      {
-        style: {
-          minWidth: "250px",
-        },
-      },
-    );
-  };
-
-  const handleEmailSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
-    event,
-  ) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("sender_email", user.emailAddresses[0].emailAddress);
-    // formData.append("password", user.pass)
-    formData.append("recipient_email", email);
-    formData.append("subject", subject);
-    formData.append("appeal_letter", appealLetter);
-
-
-    // Define the fetch promise
-    const fetchPromise = fetch("http://localhost:5000/email-send", {
-      method: "POST",
-      body: formData,
-    }).then(async (response) => {
-      if (response.ok) {
-        const data = await response.json(); // Parse the JSON response
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send email.");
-      }
-    });
-
     // Use toast.promise to handle notifications
     toast.promise(
       fetchPromise,
       {
-        loading: "Sending your appeal letter...",
-        success: "Appeal letter sent successfully!",
-        error: (err) => `Error: ${err.message}`,
+        pending: "Generating your appeal letter...",
+        success: "Appeal letter generated successfully!",
+        error: "Failed to generate appeal letter.",
       },
       {
         style: {
@@ -144,77 +98,104 @@ const DemoForm = () => {
   };
 
   return (
-    <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
-      <FileUploadBox onFileChange={handleFileChange} />
+    <>
+      <div className="container">
+        <SignedOut>
+          <h2 className="text-center text-3xl font-bold text-dark dark:text-white">
+            Sign in to generate your letter of appeal
+          </h2>
+          <SignInButton />
+        </SignedOut>
 
-      <button
-        type="button"
-        className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
-        onClick={handleSubmit}
-      >
-        Generate Letter of Appeal
-      </button>
+        <SignedIn>
+          <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
+            <div className="flex flex-row gap-8">
+              <FileUploadBox
+                label="Patient Note(s)"
+                onFileChange={(file) => setPatientNotesFile(file)}
+              />
+              <FileUploadBox
+                label="Insurance Denial"
+                onFileChange={(file) => setInsuranceDenialFile(file)}
+              />
+            </div>
 
-      {isTextareaFilled && (
-        <div className="w-full px-4 md:w-1/2">
-          <div className="mb-8">
-            <label
-              htmlFor="email"
-              className="mb-3 block text-sm font-medium text-dark dark:text-white"
+            <button
+              type="button"
+              className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
+                patientNotesFile && insuranceDenialFile
+                  ? "bg-primary text-white hover:bg-primary/90 dark:shadow-submit-dark"
+                  : "cursor-not-allowed bg-gray-300 text-gray-700"
+              }`}
+              onClick={handleSubmit}
+              disabled={!patientNotesFile || !insuranceDenialFile}
             >
-              Recipient&apos;s Email
-            </label>
-            <input
-              type="email"
-              placeholder="Enter recipient's email"
-              className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-8">
-            <label
-              htmlFor="subject"
-              className="mb-3 block text-sm font-medium text-dark dark:text-white"
-            >
-              Subject
-            </label>
-            <input
-              type="text"
-              placeholder="Enter subject"
-              className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-            />
-          </div>
-          {/* Updated Textarea Container */}
-          <div className="w-full max-w-3xl">
-            {" "}
-            {/* Increased max-width */}
-            {/* Letter of appeal from fetch request */}
-            <textarea
-              className="border-stroke h-96 w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-              value={appealLetter}
-              readOnly
-              rows={15} // Increased number of visible text lines
-            ></textarea>
-          </div>
+              Generate Letter of Appeal
+            </button>
 
-          <button
-            type="button"
-            className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
-              isEmailFilled && isSubjectFilled
-                ? "bg-primary text-white hover:bg-primary/90 dark:shadow-submit-dark"
-                : "cursor-not-allowed bg-gray-300 text-gray-700"
-            }`}
-            onClick={handleEmailSubmit}
-            disabled={!isEmailFilled || !isSubjectFilled}
-          >
-            Send Email
-          </button>
-        </div>
-      )}
-    </div>
+            {isTextareaFilled && (
+              <div className="w-full px-4 md:w-1/2">
+                <div className="mb-8">
+                  <label
+                    htmlFor="email"
+                    className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                  >
+                    Recipient&apos;s Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter recipient's email"
+                    className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-8">
+                  <label
+                    htmlFor="subject"
+                    className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter subject"
+                    className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                </div>
+                {/* Updated Textarea Container */}
+                <div className="w-full max-w-3xl">
+                  {" "}
+                  {/* Increased max-width */}
+                  {/* Letter of appeal from fetch request */}
+                  <textarea
+                    className="border-stroke h-96 w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
+                    value={appealLetter}
+                    readOnly
+                    rows={15} // Increased number of visible text lines
+                  ></textarea>
+                </div>
+
+                <button
+                  type="button"
+                  className={`rounded-sm px-9 py-4 text-base font-medium shadow-submit duration-300 ${
+                    isEmailFilled && isSubjectFilled
+                      ? "bg-primary text-white hover:bg-primary/90 dark:shadow-submit-dark"
+                      : "cursor-not-allowed bg-gray-300 text-gray-700"
+                  }`}
+                  onClick={handleSubmit}
+                  disabled={!isEmailFilled || !isSubjectFilled}
+                >
+                  Send Email
+                </button>
+              </div>
+            )}
+          </div>
+        </SignedIn>
+      </div>
+    </>
   );
 };
 

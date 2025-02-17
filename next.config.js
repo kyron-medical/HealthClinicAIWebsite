@@ -10,6 +10,9 @@ const nextConfig = {
       "www.browndailyherald.com",
       "medical.brown.edu",
       "media.licdn.com",
+      "encrypted-tbn0.gstatic.com",
+      "www.bostonglobe.com",
+      "scontent-lax3-2.xx.fbcdn.net",
     ],
     remotePatterns: [
       {

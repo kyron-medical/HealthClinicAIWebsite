@@ -1,12 +1,28 @@
 .scroller {
   max-width: 5200px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
 }
 
 .scroller__inner {
-  padding: 1rem 0;
   display: flex;
   gap: 4rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+   animation: scroll var(--_animation-duration, 20s) linear infinite; /* Apply animation */
+}
+
+
+.scroller__inner li {
+  flex: 0 0 auto; 
+}
+
+.scroller__inner img {
+  max-width: 200px; /* or any desired width */
+  height: auto;
 }
 
 .scroller[data-animated="true"] {
@@ -38,7 +54,10 @@
 }
 
 @keyframes scroll {
-  to {
-    transform: translate(-200%);
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

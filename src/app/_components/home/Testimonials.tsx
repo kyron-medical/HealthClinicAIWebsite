@@ -1,6 +1,10 @@
+"use client"
+
 import { Testimonial } from "@/types/testimonial";
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../../../components/Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const testimonialData: Testimonial[] = [
   {
@@ -16,8 +20,7 @@ const testimonialData: Testimonial[] = [
     id: 2,
     name: "Dr. Devid Weilium",
     designation: "Cardiologist",
-    content:
-      "Kyron's denial management system is a game changer.",
+    content: "Kyron's denial management system is a game changer.",
     image: "/images/testimonials/auth-02.png",
     star: 5,
   },
@@ -33,20 +36,36 @@ const testimonialData: Testimonial[] = [
 ];
 
 const Testimonials = () => {
-  return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
-      <div className="container">
-        <SectionTitle
-          title="What Our Users Say"
-          paragraph=""
-          center
-        />
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          {testimonialData.map((testimonial) => (
-            <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
-          ))}
-        </div>
+
+  return (
+    <section className="relative z-10  py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
+      <div className="container">
+        <SectionTitle title="What Our Users Say" paragraph="" center />
+
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+            {testimonialData.map((testimonial) => (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.5, delay: testimonial.id * 0.2 }}
+              >
+                <SingleTestimonial testimonial={testimonial} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
       <div className="absolute right-0 top-5 z-[-1]">
         <svg

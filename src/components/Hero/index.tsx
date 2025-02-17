@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
-import RequestDemoButton from "../Common/RequestDemoButton";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
@@ -10,30 +12,11 @@ const Hero = () => {
         id="home"
         className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
       >
-        {/* Video Background */}
-        <div className="absolute inset-0 z-[-2] overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="h-full w-full object-cover"
-          >
-            <source src="/videos/cofounders-background.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="absolute inset-0 bg-black opacity-30"></div>{" "}
-          {/* Overlay for text readability */}
-        </div>
-
         <div className="container relative z-10">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[800px] text-center">
-                <h1
-                  id=""
-                  className="mb-5 rounded text-3xl font-bold leading-tight text-white text-shadow-outline-black sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
-                >
+          <div className="flex flex-wrap justify-center">
+            <div className="w-full px-4 text-center">
+              <div className="flex flex-col items-center justify-center">
+                <h1 className="mb-5 rounded text-3xl font-bold leading-tight text-slate-900 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
                   Spend more time with your patients. We&#39;ll handle
                   everything else.
                 </h1>
@@ -42,39 +25,44 @@ const Hero = () => {
                   billing, patient appointment scheduling, insurance
                   verification, managing patient follow-ups, and more.
                 </p>
-                <div className="flex justify-center">
-                  <RequestDemoButton />
+
+                <div className="flex flex-row justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => console.log("hover started!")}
+                  >
+                    <a
+                      href="/contact"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+                    >
+                      Get Started
+                    </a>
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => console.log("hover started!")}
+                  >
+                    <a
+                      href="/about"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-4 rounded-lg border border-white bg-transparent px-4 py-2 font-bold text-blue-500 hover:bg-white hover:text-blue-500"
+                    >
+                      Learn More
+                    </a>
+                  </motion.button>
                 </div>
               </div>
+
+              <div className="mx-auto max-w-[800px] text-center"></div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Updated Demo Section with Only GUI Video */}
-      {/*
-      <section
-        id="demo-section"
-        className="relative z-10 overflow-hidden bg-white pb-16 pt-16 dark:bg-gray-dark md:pb-[120px] md:pt-[120px]"
-      >
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-3xl font-bold mb-12">Behind the Scenes</h2>
-          <div className="flex justify-center items-center">
-            {/* GUI Demo Video 
-            <video
-              autoPlay
-              loop
-              controls
-              className="max-w-full w-[800px] h-[450px] rounded-lg shadow-lg object-cover"
-              poster="/images/video-poster.png" /* Placeholder image before the video loads 
-            >
-              <source src="/videos/gui-demo.mov" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </section>
-      */}
     </>
   );
 };

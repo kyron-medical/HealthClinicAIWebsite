@@ -38,18 +38,19 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
                 </h4>
               </div>
             </div>
-            <div className="inline-block">
-              <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
-                Date
-              </h4>
-              <p className="text-xs text-body-color">{publishDate}</p>
-            </div>
-            <div className="ml-auto">
-              <img
-                src={logoUrl} // The logo URL you want to use
-                alt="Logo"
-                className="h-8 w-auto" // Adjust size as needed
-              />
+            <div className="flex items-center gap-2">
+              <div className="inline-block">
+                <p className="text-xs text-body-color">{publishDate}</p>
+              </div>
+              <div className="ml-auto">
+                <Image
+                  src={logoUrl} // The logo URL you want to use
+                  alt="Logo"
+                  className="h-8 w-auto" // Adjust size as needed
+                  width={32}
+                  height={32}
+                  />
+              </div>
             </div>
           </div>
         </div>

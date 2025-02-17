@@ -1,4 +1,4 @@
-import SingleBlog from "@/components/Blog/SingleBlog";
+import SingleBlog from "@/app/news/_components/SingleBlog";
 import blogData from "@/components/Blog/blogData";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 

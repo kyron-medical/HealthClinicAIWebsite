@@ -1,6 +1,5 @@
 import AboutSectionTwo from "@/app/about/_components/AboutSectionTwo";
 import { Metadata } from "next";
-import RequestDemoButton from "@/components/Common/RequestDemoButton";
 import AboutSectionThree from "@/app/about/_components/AboutSectionThree";
 
 export const metadata: Metadata = {
@@ -24,7 +23,14 @@ const AboutPage = () => {
       </section>
       <section className="text-center">
         <div className="container">
-          <RequestDemoButton />
+          <a
+            href="/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            Get Started
+          </a>
         </div>
       </section>
       <AboutSectionTwo />

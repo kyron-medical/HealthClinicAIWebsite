@@ -5,7 +5,9 @@ import Header from "@/app/_components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
-import "../styles/index.css";
+import "../styles/global.css";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 

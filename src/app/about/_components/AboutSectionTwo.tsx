@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const teamMembers = [
   { name: "Jay Gopal", title: "CEO", image: "/images/team/jay-gopal.jpg" },
@@ -62,14 +64,18 @@ const AboutSectionTwo = () => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member, index) => (
             <div key={index} className="text-center">
-              <div className="relative mx-auto mb-4 aspect-square h-32 w-32">
+              <motion.div
+                className="relative mx-auto mb-4 aspect-square h-32 w-32"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="rounded-full object-cover"
                 />
-              </div>
+              </motion.div>
               <h3 className="text-xl font-bold">{member.name}</h3>
               <p className="text-base text-body-color">{member.title}</p>
             </div>
