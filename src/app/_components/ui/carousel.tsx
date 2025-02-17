@@ -3,8 +3,6 @@ import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 
 import { Card, CardContent } from "@/app/_components/ui/card";
-import Orb from "@/app/_components/orbs/Orb"; // Correct the import path
-
 
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -271,8 +269,6 @@ export function CarouselPlugin() {
     Autoplay({ delay: 2000, stopOnInteraction: true }),
   );
 
-  const orbColors = ["pink", "green", "pearl",]; // Define the colors for each orb
-
   return (
     <Carousel
       plugins={[plugin.current]}
@@ -286,23 +282,10 @@ export function CarouselPlugin() {
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                  {orbColors.map((color, index) => (
-                    <CarouselItem key={index}>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-square items-center justify-center p-6">
-                            <div className="flex flex-col items-center justify-center ">
-                              <Orb color={color} />{" "}
-                              {/* Pass the color prop to the Orb component */}
-                              <span className="text-4xl font-semibold">
-                                {index + 1}
-                              </span>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
+                  <div className="flex flex-col justify-center items-center ">  
+                    
+                    <span className="text-4xl font-semibold">{index + 1}</span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
