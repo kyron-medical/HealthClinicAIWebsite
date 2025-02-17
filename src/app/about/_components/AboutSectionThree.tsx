@@ -3,12 +3,12 @@ import Image from "next/image";
 const advisors = [
   {
     name: "Ainsley MacLean, MD",
-    title: "Brown Class of 2001, MD 2005 Healthcare Technology Executive",
+    title: "Brown Class of 2001, MD 2005. Healthcare Technology Executive",
     image: "/images/advisors/ainsley-maclean.jpg",
   },
   {
     name: "Andy Beck, MD, PhD",
-    title: "Co-Founder & CEO, PathAI \n" + "Brown Class of 2002, MD 2006 ",
+    title: "Co-Founder & CEO, PathAI. \n" + "Brown Class of 2002, MD 2006 ",
     image: "/images/advisors/andy-beck.jpg",
   },
   {
@@ -21,14 +21,14 @@ const advisors = [
   {
     name: "Cliff Weitzman",
     title:
-      "Founder & CEO, Speechify \n" +
+      "Founder & CEO, Speechify. \n" +
       "Brown Class of 2016",
     image: "/images/advisors/cliff-weitzman.jpg",
   },
   {
     name: "Abigail Kohler",
     title:
-      "Co-Founder & CEO, ResusciTech \n " +
+      "Co-Founder & CEO, ResusciTech. \n " +
       "Adjunct Lecturer, Brown University",
     image: "/images/advisors/abby-kohler.jpg",
   },
@@ -49,16 +49,9 @@ const advisors = [
   {
     name: "Yuhao Huang, MD",
     title:
-      "Post-Doctoral Researcher, Stanford School of Medicine \n" +
+      "Post-Doctoral Researcher, Stanford School of Medicine. \n" +
       "Multiple Papers in Nature Journals",
     image: "/images/advisors/yuhao-huang.jpg",
-  },
-  
-  {
-    name: "Neil J. Wimmer, MD",
-    title:
-      "Cardiologist, ChristianaCare Health System. \n" + "Brown Class of 2001",
-    image: "/images/advisors/neil-wimmer.jpg",
   },
   {
     name: "Robbie Felton",
