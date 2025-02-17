@@ -6,9 +6,8 @@ import { Metadata } from "next";
 import Landing from "./_components/home/Landing";
 import Testimonials from "./_components/home/Testimonials";
 import Image from "next/image";
-import Orb from "@/app/_components/orbs/orb";
-import PinkOrb from "@/app/_components/orbs/pink-orb";
-import GreenOrb from "@/app/_components/orbs/green-orb";
+import Orb from "@/app/_components/ui/orb";
+
 import { InfiniteCarousel } from "./news/_components/InfiniteCarousel";
 import { CarouselPlugin } from "@/app/_components/ui/carousel";
 
