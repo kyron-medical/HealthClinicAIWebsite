@@ -10,11 +10,6 @@ const teamMembers = [
     image: "/images/team/lucas-lieberman.jpg",
   },
   {
-    name: "Jo Jojo",
-    title: "Technical Consultant",
-    image: "/images/team/jo-jojo.jpg",
-  },
-  {
     name: "Lisa Duan",
     title: "Technical Consultant",
     image: "/images/team/lisa-duan.jpg",
@@ -43,11 +38,6 @@ const teamMembers = [
     name: "Jeffrey Mu",
     title: "Product Developer",
     image: "/images/team/jeffrey-mu.jpg",
-  },
-  {
-    name: "Raymond Hu",
-    title: "Intern",
-    image: "/images/team/raymond-hu.jpg",
   }
 ];
 
