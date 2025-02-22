@@ -1,4 +1,7 @@
+"use client"; 
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const advisors = [
   {
@@ -96,12 +99,18 @@ const AboutSectionThree = () => {
           {advisors.map((member, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="relative mx-auto mb-4 aspect-square h-32 w-32">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="rounded-full object-cover"
-                />
+                <motion.div
+                  className="relative mx-auto mb-4 aspect-square h-32 w-32"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="rounded-full object-cover"
+                  />
+                </motion.div>
               </div>
               <h3 className="text-xl font-bold">{member.name}</h3>
               <p className="flex w-8/12 self-center text-base text-body-color">

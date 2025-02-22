@@ -5,7 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
+import { motion } from "framer-motion";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import "./../../../styles/navbar.css";
 
 const Header = () => {
   // Navbar toggle
@@ -45,11 +47,11 @@ const Header = () => {
         className={`header left-0 top-0 z-40 flex w-full items-center ${
           sticky
             ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
-            : "absolute bg-transparent bg-opacity-90 h-20"
+            : "absolute h-20 bg-transparent bg-opacity-90"
         }`}
       >
-        <div className="container">
-          <div className="relative -mx-4 flex items-center justify-between">
+        <div className="container mx-auto px-4">
+          <div className="relative flex items-center justify-between">
             <div className="w-60 max-w-full px-4 xl:mr-12">
               <Link
                 href="/"
@@ -100,7 +102,7 @@ const Header = () => {
 
                 <nav
                   id="navbarCollapse"
-                  className={`navbar absolute right-0  z-30 flex w-[250px] flex-row rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
+                  className={`navbar absolute right-0 z-30 flex w-[250px] flex-col rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:flex-row lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
                     navbarOpen
                       ? "visibility top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
@@ -112,9 +114,9 @@ const Header = () => {
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                            className={`nav-link flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
                               usePathName === menuItem.path
-                                ? "text-primary dark:text-white"
+                                ? "active text-primary underline-offset-2 dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
                           >
@@ -162,16 +164,29 @@ const Header = () => {
                   </ul>
                 </nav>
               </div>
-            <SignedOut>
-              <div className="flex justify-end">
-                <SignInButton />
-              </div>
-            </SignedOut>
-            <SignedIn>
-              <div className="flex justify-end">
-                <UserButton />
-              </div>
-            </SignedIn>
+              <SignedOut>
+                <div className="flex flex-row gap-4 justify-end ">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => console.log("hover started!")}
+                  >
+                    <a
+                      href="/contact"
+                      rel="noopener noreferrer"
+                      className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
+                    >
+                      Get Started
+                    </a>
+                  </motion.button>
+                  <SignInButton>Login</SignInButton>
+                </div>
+              </SignedOut>
+              <SignedIn>
+                <div className="flex justify-end">
+                  <UserButton />
+                </div>
+              </SignedIn>
             </div>{" "}
             {/*<div className="flex items-center justify-end pr-16 lg:pr-0">
                 <Link

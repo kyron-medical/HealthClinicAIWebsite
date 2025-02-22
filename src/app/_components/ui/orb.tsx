@@ -25,8 +25,8 @@ const Orb = ({ color }) => {
     <div
       ref={ref}
       style={{
-        width: "100%",
-        height: "100%",
+        width: "220%",
+        height: "120%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -37,7 +37,7 @@ const Orb = ({ color }) => {
           src={orbSrc[color]}
           loop
           autoplay
-          speed={1.5}
+          speed={3}
           style={{ width: "100%", height: "100%" }} // Adjust the size here
         />
       ) : (

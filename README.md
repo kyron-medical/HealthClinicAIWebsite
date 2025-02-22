@@ -65,7 +65,29 @@ If you like the template, please star this repository to inspire the team to cre
 
 - [] Adjust to phone
 - [] News page updating
-- [] Clicking on the carousel links to news
-- [] Advisor photos animation
-- [] Add Advisor
 - [] 
+- [x] Clicking on the carousel links to news
+- [x] Advisor photos animation
+- [] Add Advisor
+- [] Add medicine @ brown article
+- [] Vercel x Google Sitemap
+- [x] Move Typing component up slighty.
+- [x] Make Orbs Bigger, Speed Up
+- [] Add payment posting and coding notes and review 
+- [x] Underline on Navbar
+- [] Move navbar more to the left
+- [x] Change navbar names
+    - [x] Home
+    - [x] About
+    - [x] Remove Demo from the navbar
+    - [x] Request Demo to Get Started
+    - [x] Login/Get Started
+- [] Emulate Ember
+- [] Alternating colors of background of the about page
+- [] Why leading providers partner with
+- [x] Get rid of mouse on home
+- [] Request demo collection of information
+- [] Typeform, basic information
+  - [] Email
+  - [] Descriptor, physican, billing company
+  - [] Is there any other info you would like to share?

@@ -9,7 +9,7 @@ import { InfiniteCarousel } from "./_components/InfiniteCarousel";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "News Page | Kyron",
+  title: "News | Kyron",
   description: "News Page for Kyron",
   // other metadata
 };

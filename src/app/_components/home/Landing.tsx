@@ -57,17 +57,7 @@ const Landing = () => {
                     </motion.button>
                 </div>
 
-                {/* Sign that there is more content. */}
-                {/* pl-20 is a temporary solution */}
-                <div className="mt-8 pl-20 flex justify-center items-center">
-                  <div className={styles.mouse}>
-                    <Link href={"#about"}>
-                      <div className={styles.mouseIcon}>
-                        <span className={styles.mouseWheel}></span>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>

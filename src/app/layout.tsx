@@ -1,4 +1,4 @@
-"use client";
+
 
 import Footer from "@/components/Footer";
 import Header from "@/app/_components/Header";
@@ -10,6 +10,8 @@ import "../styles/global.css";
 
 
 const inter = Inter({ subsets: ["latin"] });
+
+
 
 export default function RootLayout({
   children,

@@ -7,7 +7,7 @@ import DemoForm from "./_components/DemoForm";
 import SectionTitle from "@/components/Common/SectionTitle";
 
 export const metadata: Metadata = {
-  title: "Demo Page | Kyron",
+  title: "Demo | Kyron",
   description: "Demo Page for Kyron",
   // other metadata
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
@@ -28,7 +30,7 @@ export default function ScrollToTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-[99]">
+    <div className="fixed bottom-8 right-8 z-[99] md:bottom-4 md:right-4">
       {isVisible && (
         <div
           onClick={scrollToTop}

@@ -1,15 +1,14 @@
 "use client";
 
 import ScrollUp from "@/components/Common/ScrollUp";
-
 import { Metadata } from "next";
 import Landing from "./_components/home/Landing";
 import Testimonials from "./_components/home/Testimonials";
 import Image from "next/image";
 import Orb from "@/app/_components/ui/orb";
-
 import { InfiniteCarousel } from "./news/_components/InfiniteCarousel";
 import { CarouselPlugin } from "@/app/_components/ui/carousel";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -42,89 +41,80 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="Features" className="py-16 text-center md:py-20 lg:py-28">
+      <section className="py-16 text-center md:py-20 lg:py-28">
         <div className="container">
           <h3>
             <span className="text-2xl text-slate-700">As featured in...</span>
           </h3>
 
           <div className="mt-24 flex">
-            <InfiniteCarousel>
-              <Image
-                src={"/logos/news/brown-university.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-              <Image
-                src={"/logos/news/warren-alpert.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/bdh.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/american-bazaar.jpg"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/providence-journal.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/usa-today.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/boston-globe.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-
-              <Image
-                src={"/logos/news/new-england-council.png"}
-                className=""
-                alt={""}
-                height={200}
-                width={300}
-              />
-            </InfiniteCarousel>
+            <Link href="/news"> 
+              <InfiniteCarousel>
+                <Image
+                  src={"/logos/news/brown-university.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/warren-alpert.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/bdh.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/american-bazaar.jpg"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/providence-journal.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/usa-today.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/boston-globe.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+                <Image
+                  src={"/logos/news/new-england-council.png"}
+                  className=""
+                  alt={""}
+                  height={200}
+                  width={300}
+                />
+              </InfiniteCarousel>
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="py-16 text-center md:py-20 lg:py-28">
         <div className="container">
-          <h2 className="text-2xl font-bold">About Kyron</h2>
-          <p className="text-lg text-body-color">
-            We help your medical practice automate every repetitive task you do
-            not want to do. No more insurance verification, appointment
-            rescheduling, or back-and-forth to pull records from another system!
-          </p>
+          
 
           <div className="mt-8 grid grid-cols-2 gap-4 pt-24">
             <div className="hover:scale-102 flex transform flex-row items-center rounded-lg border p-3 shadow-lg transition-transform">
