@@ -17,7 +17,7 @@ const advisors = [
   {
     name: "Jacob Joseph, MD",
     title:
-      "Chief of Cardiology, VA Providence Healthcare System. \n" +
+      "Cardiologist, Translational Data Science Expert, \n" +
       "Professor of Medicine, The Warren Alpert Medical School",
     image: "/images/advisors/jacob-joseph.jpg",
   },
