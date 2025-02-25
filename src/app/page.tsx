@@ -41,7 +41,7 @@ const Pipeline = () => {
             Access an Interactive Demo of Kyron
           </h2>
           <p className="text-base text-body-color md:text-lg">
-            Experience Kyron's tailored solutions with our interactive demo.
+            Experience Kyron&#39;s tailored solutions with our interactive demo.
           </p>
 
           <span className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color">
