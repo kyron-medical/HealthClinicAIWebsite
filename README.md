@@ -73,6 +73,7 @@ If you like the template, please star this repository to inspire the team to cre
 - [x] Add payment posting and coding notes and review
 - [x] Why leading providers partner with...
 
+
 - [x] Request demo collection of information -> Typeform, basic information
   - [x] Email
   - [x] Descriptor, physican, billing company
