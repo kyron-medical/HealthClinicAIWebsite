@@ -38,6 +38,11 @@ const teamMembers = [
     name: "Jeffrey Mu",
     title: "Product Developer",
     image: "/images/team/jeffrey-mu.jpg",
+  },
+  {
+    name: "Daniel Choi",
+    title: "Intern",
+    image: "/images/team/daniel-choi.jpg",
   }
 ];
 
