@@ -12,13 +12,17 @@ import Link from "next/link";
 import TestDrive from "./_components/ui/drive-button";
 import SectionTitle from "@/components/Common/SectionTitle";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const Pipeline = () => {
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    // Logic to handle email submission
-    console.log("Submitted email:", email);
+  const handleSubmit = async () => {
+    window.location.href = `https://form.typeform.com/to/zstMkPH7?email=${email}`;
+    toast.success("Email submitted successfully!");
+    setEmail("");
+    setSubmitted(true);
   };
 
   return (
@@ -85,7 +89,7 @@ export default function Home() {
           <Image
             src="/images/frontend-prototype.png"
             alt="Front-End Prototype"
-            className="mx-auto w-full self-center transform rounded-md shadow-lg transition-transform duration-500 hover:scale-105 md:w-1/2"
+            className="mx-auto w-full transform self-center rounded-md shadow-lg transition-transform duration-500 hover:scale-105 md:w-1/2"
             width={500}
             height={400}
           />
@@ -250,8 +254,8 @@ export default function Home() {
                 ROI Obsessed
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Adding millions to your bottom line with performance-based
-                contracting
+                Adding millions in revenue with our performance-driven
+                contracts.
               </p>
               <div className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-purple-500/10 transition-transform duration-300 group-hover:rotate-45"></div>
             </div>
@@ -271,7 +275,8 @@ export default function Home() {
                 Vendor Consolidation
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                One platform, all departments, reduce tool and vendor spend
+                One unified platform for every department—cutting your tool and
+                vendor expenses.
               </p>
               <div className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-blue-500/10 transition-transform duration-300 group-hover:rotate-45"></div>
             </div>
@@ -295,7 +300,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 text-center -pt-24 md:py-16 md:py-20 lg:py-4">
+      <section className="-pt-24 py-8 text-center md:py-16 md:py-20 lg:py-4">
         <div className="container">
           <div className="mt-8 grid grid-cols-1 gap-4 pt-12 md:grid-cols-2 md:pt-24">
             <div className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row">
