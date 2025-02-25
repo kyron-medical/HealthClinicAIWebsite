@@ -8,7 +8,10 @@ interface FileUploadBoxProps {
   label: string;
 }
 
-const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange, label }) => {
+const FileUploadBox: React.FC<FileUploadBoxProps> = ({
+  onFileChange,
+  label,
+}) => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -55,7 +58,9 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({ onFileChange, label }) =>
           justify-center rounded-lg bg-[#f8f8f8] p-8 text-center transition-colors
           duration-300 dark:bg-[#2C303B]
         `}
-        onClick={() => document.getElementById(label.replace(/\s+/g, "-"))?.click()}
+        onClick={() =>
+          document.getElementById(label.replace(/\s+/g, "-"))?.click()
+        }
       >
         Drag and drop a file here or click to select a file
         <input

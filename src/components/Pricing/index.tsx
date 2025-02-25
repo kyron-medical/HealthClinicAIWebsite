@@ -65,10 +65,15 @@ const Pricing = () => {
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
           >
             <OfferList text="All UI Components" status="active" />
+
             <OfferList text="Use with Unlimited Projects" status="active" />
+
             <OfferList text="Commercial Use" status="active" />
+
             <OfferList text="Email Support" status="active" />
+
             <OfferList text="Lifetime Access" status="inactive" />
+
             <OfferList text="Free Lifetime Updates" status="inactive" />
           </PricingBox>
           <PricingBox
@@ -78,10 +83,15 @@ const Pricing = () => {
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
           >
             <OfferList text="All UI Components" status="active" />
+
             <OfferList text="Use with Unlimited Projects" status="active" />
+
             <OfferList text="Commercial Use" status="active" />
+
             <OfferList text="Email Support" status="active" />
+
             <OfferList text="Lifetime Access" status="active" />
+
             <OfferList text="Free Lifetime Updates" status="inactive" />
           </PricingBox>
           <PricingBox
@@ -91,10 +101,15 @@ const Pricing = () => {
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
           >
             <OfferList text="All UI Components" status="active" />
+
             <OfferList text="Use with Unlimited Projects" status="active" />
+
             <OfferList text="Commercial Use" status="active" />
+
             <OfferList text="Email Support" status="active" />
+
             <OfferList text="Lifetime Access" status="active" />
+
             <OfferList text="Free Lifetime Updates" status="active" />
           </PricingBox>
         </div>
@@ -118,6 +133,7 @@ const Pricing = () => {
             transform="rotate(-128.7 -184.451 600.973)"
             fill="url(#paint0_linear_93:235)"
           />
+
           <rect
             opacity="0.3"
             x="-188.201"
@@ -128,6 +144,7 @@ const Pricing = () => {
             transform="rotate(-128.7 -188.201 385.272)"
             fill="url(#paint1_linear_93:235)"
           />
+
           <defs>
             <linearGradient
               id="paint0_linear_93:235"

@@ -282,8 +282,7 @@ export function CarouselPlugin() {
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <div className="flex flex-col justify-center items-center ">  
-                    
+                  <div className="flex flex-col justify-center items-center ">
                     <span className="text-4xl font-semibold">{index + 1}</span>
                   </div>
                 </CardContent>

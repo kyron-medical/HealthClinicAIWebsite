@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -23,9 +23,7 @@ const advisors = [
   },
   {
     name: "Cliff Weitzman",
-    title:
-      "Founder & CEO, Speechify. \n" +
-      "Brown Class of 2016",
+    title: "Founder & CEO, Speechify. \n" + "Brown Class of 2016",
     image: "/images/advisors/cliff-weitzman.jpg",
   },
   {
@@ -71,9 +69,7 @@ const advisors = [
   },
   {
     name: "Charlie Maddock",
-    title:
-      "Co-Founder & CEO, INO ARMOR \n" +
-      "Brown Class of 2004",
+    title: "Co-Founder & CEO, INO ARMOR \n" + "Brown Class of 2004",
     image: "/images/advisors/charlie-maddock.jpg",
   },
   {
@@ -82,7 +78,12 @@ const advisors = [
       "Chair of Neurosurgery, University of Arizona College of Medicine \n" +
       "Physician Executive",
     image: "/images/advisors/julie-pilitsis.jpg",
-  }
+  },
+  {
+    name: "Nicholas Grumbach, MD",
+    title: "Assistant Professor of Medicine and Pediatrics, Brown University",
+    image: "/images/advisors/nicholas-grumbach.jpg",
+  },
 ];
 
 const AboutSectionThree = () => {

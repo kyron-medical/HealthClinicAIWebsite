@@ -5,35 +5,34 @@ Startup free, open-source, and premium-quality startup website template for Next
 If you're looking for a high-quality and visually appealing, feature-rich Next.js Template for your next startup, SaaS, or business website, this is the perfect choice and starting point for you!
 
 ### ✨ Key Features
+
 - Crafted for Startup and SaaS Business
 - Next.js and Tailwind CSS
 - All Essential Business Sections and Pages
 - High-quality and Clean Design
 - Dark and Light Version
 - TypeScript Support
-and Much More ...
+  and Much More ...
 
 ### 🙌 Detailed comparison between the Free and Pro versions of Startup
 
-| Feature             | Free | Pro |
-|---------------------|------------|----------|
-| Next.js Landing Page             | ✅ Yes      | ✅ Yes      |
-| All The Integrations - Auth, DB, Payments, Blog and many more ...             | ❌ No      | ✅ Yes |
-| Homepage Variations             | 1      | 2 |
-| Additional SaaS Pages and Components             | ❌ No      | ✅ Yes |
-| Functional Blog with Sanity       | ❌ No      | ✅ Yes | ✅ Yes |
-| Use with Commercial Projects            | ✅ Yes      | ✅ Yes      |
-| Lifetime Free Updates             | ✅ Yes      | ✅ Yes |
-| Email Support       | ❌ No         | ✅ Yes       |
-| Community Support         | ✅ Yes         | ✅ Yes       |
-
+| Feature                                                           | Free   | Pro    |
+| ----------------------------------------------------------------- | ------ | ------ | ------ |
+| Next.js Landing Page                                              | ✅ Yes | ✅ Yes |
+| All The Integrations - Auth, DB, Payments, Blog and many more ... | ❌ No  | ✅ Yes |
+| Homepage Variations                                               | 1      | 2      |
+| Additional SaaS Pages and Components                              | ❌ No  | ✅ Yes |
+| Functional Blog with Sanity                                       | ❌ No  | ✅ Yes | ✅ Yes |
+| Use with Commercial Projects                                      | ✅ Yes | ✅ Yes |
+| Lifetime Free Updates                                             | ✅ Yes | ✅ Yes |
+| Email Support                                                     | ❌ No  | ✅ Yes |
+| Community Support                                                 | ✅ Yes | ✅ Yes |
 
 ### [🔥 Get Startup Pro](https://nextjstemplates.com/templates/saas-starter-startup)
 
 [![Startup Pro](https://raw.githubusercontent.com/NextJSTemplates/startup-nextjs/main/startup-pro.webp)](https://nextjstemplates.com/templates/saas-starter-startup)
 
 Startup Pro - Expertly crafted for fully-functional, high-performing SaaS startup websites. Comes with with Authentication, Database, Blog, and all the essential integrations necessary for SaaS business sites.
-
 
 ### [🚀 View Free Demo](https://startup.nextjstemplates.com/)
 
@@ -51,43 +50,45 @@ Startup Pro - Expertly crafted for fully-functional, high-performing SaaS startu
 
 [![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/NextJSTemplates/startup-nextjs)
 
-
 ### 📄 License
+
 Startup is 100% free and open-source, feel free to use with your personal and commercial projects.
 
 ### 💜 Support
+
 If you like the template, please star this repository to inspire the team to create more stuff like this and reach more users like you!
 
 ### ✨ Explore and Download - Free [Next.js Templates](https://nextjstemplates.com)
 
-
 ## TODO
 
-- [] Adjust to phone
-- [] News page updating
-- [] 
+- [x] Add Advisor
+- [] Upon Submitting, "We'll be in touch to schedule a demo"
+- [x] Adjust to phone
+- [] Instagram 
+- [x] Emulate Ember mobile nav
+- [x] Move the links more to the left
+- [x] News page updating
+- [x] Add medicine @ brown article
+- [x] Add payment posting and coding notes and review
+- [x] Why leading providers partner with...
+
+- [x] Request demo collection of information -> Typeform, basic information
+  - [x] Email
+  - [x] Descriptor, physican, billing company
+  - [x] Is there any other info you would like to share?
+- [x] Logik.io emulation, access to an interactive demo page on the home page; test drive button
+- [] Vercel x Google Sitemap
+
 - [x] Clicking on the carousel links to news
 - [x] Advisor photos animation
-- [] Add Advisor
-- [] Add medicine @ brown article
-- [] Vercel x Google Sitemap
 - [x] Move Typing component up slighty.
 - [x] Make Orbs Bigger, Speed Up
-- [] Add payment posting and coding notes and review 
 - [x] Underline on Navbar
-- [] Move navbar more to the left
 - [x] Change navbar names
-    - [x] Home
-    - [x] About
-    - [x] Remove Demo from the navbar
-    - [x] Request Demo to Get Started
-    - [x] Login/Get Started
-- [] Emulate Ember
-- [] Alternating colors of background of the about page
-- [] Why leading providers partner with
+  - [x] Home
+  - [x] About
+  - [x] Remove Demo from the navbar
+  - [x] Request Demo to Get Started
+  - [x] Login/Get Started
 - [x] Get rid of mouse on home
-- [] Request demo collection of information
-- [] Typeform, basic information
-  - [] Email
-  - [] Descriptor, physican, billing company
-  - [] Is there any other info you would like to share?

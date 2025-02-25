@@ -1,16 +1,15 @@
 .nav-link {
   position: relative;
   display: inline-block;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 1.5px;
   display: block;
-  margin-top: 5px;
   right: 0;
   background: currentColor;
   transition: width 0.4s ease;

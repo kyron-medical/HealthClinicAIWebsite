@@ -12,8 +12,7 @@ const newsData: Blog[] = [
       name: "Alexa Coultoff",
     },
     publishDate: "November 18, 2024",
-    logoUrl:
-      "https://www.bostonglobe.com/pf/resources/images/bg-logo--bug-medium.svg?d=526",
+    logoUrl: "/logos/news/boston-globe-icon.png",
     link: "https://www.bostonglobe.com/2024/11/18/metro/rhode-island-business-innovator-ai/",
   },
   {
@@ -28,8 +27,7 @@ const newsData: Blog[] = [
       name: "Roma Shah",
     },
     publishDate: "November 3, 2024",
-    logoUrl:
-      "https://scontent-lax3-2.xx.fbcdn.net/v/t39.30808-1/294637814_462216169244257_7517846241755123629_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=101&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=sd6DIDryiFcQ7kNvgHWhD5O&_nc_zt=24&_nc_ht=scontent-lax3-2.xx&_nc_gid=AAV7P1LVEoB3k9m79Zgrhae&oh=00_AYCs6kICstGtTqI0GGNzHBgfrajqWkMhlP-jmmHnzjvHJg&oe=6787A445",
+    logoUrl: "/logos/news/bdh.png",
     link: "https://www.browndailyherald.com/article/2024/11/brown-student-founded-startup-uses-ai-to-streamline-medical-billing-processes",
   },
   {
@@ -44,16 +42,14 @@ const newsData: Blog[] = [
       name: "Rumaisa Khusru",
     },
     publishDate: "November 6, 2024",
-    logoUrl:
-      "https://scontent-lax3-2.xx.fbcdn.net/v/t39.30808-1/243994626_268570588604439_8988422661648473408_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=JAJAArMQOOsQ7kNvgEmwnLb&_nc_zt=24&_nc_ht=scontent-lax3-2.xx&_nc_gid=AlLQO-zjS79c_ZnPzRjRLYm&oh=00_AYAFisw7ORkRRxgjfIb8S-gUT1AlTzHeiJrO2Ffd-qtnjQ&oe=6787919D",
+    logoUrl: "/logos/news/american-bazaar-icon.jpg",
     link: "https://americanbazaaronline.com/2024/11/06/brown-students-launch-kyron-medical-startup-medical-billing-93372/",
   },
   {
     id: 4,
     title:
       "Winners Announced for the Rhode Island Business Competition Pitch Contest",
-    image:
-      "https://snworksceo.imgix.net/bdh/a6fc6171-d00b-458e-8e12-e9b337bdc366.sized-1000x1000.jpg?w=1000",
+    image: "/logos/news/ribc-social-poster.png",
     paragraph:
       "The first-place winner who received $500 was Jay Gopal, founder of Kyron Medical and a student at Brown University. His business streamlines medical billing through automated claim submissions, denial handling, and real-time insights resulting in maximizing revenues for physicians.",
     author: {
@@ -66,8 +62,7 @@ const newsData: Blog[] = [
   {
     id: 6,
     title: "AI fuels new medical billing startup created by Brown students",
-    image:
-      "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/AB5MTQRJTM3Z4K22D3W7DZFSMI.jpeg?auth=4c3bb2bfe4c8d0574dc0a96bd0956fae2beafccf5f4b763a90c1260f71e43722&width=1440",
+    image: "/logos/news/new-england-council.png",
     paragraph:
       "Jay Gopal and Lucas Lieberman were inspired by the discovery that human-driven medical billing causes lost revenue and delayed income, which their online portal would eliminate. So far, they have closed pre-sales and signed letters of intent with several customers who plan to use their platform, Kyron Medical.",
     author: {
@@ -107,6 +102,20 @@ const newsData: Blog[] = [
     logoUrl:
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAUVBMVEVHcEzFKDmpRWbBHjDCITLAGy3BHS7AGSvBGizAITTAGy3DJDW3Nk++IDTAHC7BJjjEKzzBIzXAGixFecJFc746dsc8csE4csI3csM3ccJWZaiAjnW2AAAAG3RSTlMAMAd9SsOP/t9r0jwQnbIlG1vvK0V2m9Ho/clc9VdcAAABO0lEQVR4AXXSB3LFIAwEUIsuEALkmtz/oAHn97LT/WZl2vQUgOlrlNbqKxprzdei8wG/FmNw6YtRZiRV1MehKRtVm06flBoQOJFMbzVFtZJh732Ae1X1zPOyrjMZ203smKvOTOu27ftxHPt8msVKfQyYhojTdvyMHFvpFjTQBJhtDD15WrYT98WJ50bUnA3ieyT3Pc+je+wtiINqXBwyzMHUM/TYOOgKOl4kRFeGnbrnbollfLecNZp60tD1l11tvRZsRqCxlwsNxVxQvDAWRbWkOj2EIKGIbZVq0hwF6QFVxRB0IdBWxmp1fcQWrKF020eGB0zMqbcGSbScsTygcaZxX5DNupkEparHXxqMPrI2hVQyxjwtt+oQL7Nq4xhtu1cJIze6TCnIwbt7NbmntZNhd18uvD4qaCf+Aez6Ef6rR1PRAAAAAElFTkSuQmCC",
     link: "https://indonewyork.com/breaking/revolutionizing-medical-billing-with-ai-brown-university-students-launch-kyron-medical.html",
+  },
+  {
+    id: 9,
+    title: "Student Entrepreneurs Fight Burnout With AI",
+    image: "/images/logo/kyron_medical.png",
+    paragraph:
+      "New tools in development tackle insurance denials, assist with patient documentation and translation.",
+    author: {
+      name: "Phoebe Hall",
+    },
+    publishDate: "February 20, 2025",
+    logoUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMXcU172emhh7d5RZMfGyereNuAl1xqoJRTw&s",
+    link: "https://medicine.at.brown.edu/student-entrepreneurs-fight-burnout-with-ai/",
   },
 ];
 

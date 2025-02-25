@@ -15,4 +15,5 @@ const blogData: Blog[] = [
     link: "https://www.google.com",
   },
 ];
+
 export default blogData;

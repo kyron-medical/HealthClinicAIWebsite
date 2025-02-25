@@ -16,10 +16,11 @@ const Demo = () => {
   const [isTextareaFilled, setIsTextareaFilled] = useState<boolean>(false);
   const [isEmailFilled, setIsEmailFilled] = useState<boolean>(false);
   const [isSubjectFilled, setIsSubjectFilled] = useState<boolean>(false);
-  
 
   const [patientNotesFile, setPatientNotesFile] = useState<File | null>(null);
-  const [insuranceDenialFile, setInsuranceDenialFile] = useState<File | null>(null);
+  const [insuranceDenialFile, setInsuranceDenialFile] = useState<File | null>(
+    null,
+  );
 
   const handlePatientNotesChange = (file: File | null) => {
     setPatientNotesFile(file); // Update the state for patient notes file
@@ -150,16 +151,15 @@ const Demo = () => {
           </h2>
           <SignInButton />
         </SignedOut>
-        
-        <SignedIn>
 
-            
+        <SignedIn>
           <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
             <div className="flex flex-row gap-8">
               <FileUploadBox
                 label="Patient Note(s)"
                 onFileChange={handlePatientNotesChange} // For patient notes
               />
+
               <FileUploadBox
                 label="Insurance Denial"
                 onFileChange={handleInsuranceDenialChange} // For insurance denial

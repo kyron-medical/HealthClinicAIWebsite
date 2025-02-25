@@ -29,11 +29,11 @@ const Landing = () => {
                 </div>
 
                 <div className="flex flex-row justify-cente items-center">
-                    <motion.button
+                  <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
-                    >
+                  >
                     <a
                       href="/contact"
                       rel="noopener noreferrer"
@@ -41,12 +41,12 @@ const Landing = () => {
                     >
                       Get Started
                     </a>
-                    </motion.button>
-                    <motion.button
+                  </motion.button>
+                  <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
-                    >
+                  >
                     <a
                       href="/about"
                       rel="noopener noreferrer"
@@ -54,10 +54,8 @@ const Landing = () => {
                     >
                       Learn More
                     </a>
-                    </motion.button>
+                  </motion.button>
                 </div>
-
-                
               </div>
             </div>
           </div>

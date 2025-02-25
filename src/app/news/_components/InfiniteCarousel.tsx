@@ -4,13 +4,15 @@ import { useEffect, useRef } from "react";
 
 import styles from "../styles/InfiniteCarousel.module.css";
 
-
 interface Props {
   children: JSX.Element[];
   width?: "fit-content" | "100%";
 }
 
-export const InfiniteCarousel = ({ children, width = "fit-content" }: Props) => {
+export const InfiniteCarousel = ({
+  children,
+  width = "fit-content",
+}: Props) => {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

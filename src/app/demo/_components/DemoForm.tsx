@@ -114,6 +114,7 @@ const DemoForm = () => {
                 label="Patient Note(s)"
                 onFileChange={(file) => setPatientNotesFile(file)}
               />
+
               <FileUploadBox
                 label="Insurance Denial"
                 onFileChange={(file) => setInsuranceDenialFile(file)}

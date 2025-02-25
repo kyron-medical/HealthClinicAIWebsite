@@ -49,7 +49,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
                   className="h-8 w-auto" // Adjust size as needed
                   width={32}
                   height={32}
-                  />
+                />
               </div>
             </div>
           </div>

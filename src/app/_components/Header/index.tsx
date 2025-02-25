@@ -8,6 +8,7 @@ import menuData from "./menuData";
 import { motion } from "framer-motion";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import "./../../../styles/navbar.css";
+import GetStarted from "../ui/started-button";
 
 const Header = () => {
   // Navbar toggle
@@ -50,8 +51,9 @@ const Header = () => {
             : "absolute h-20 bg-transparent bg-opacity-90"
         }`}
       >
-        <div className="container mx-auto px-4">
-          <div className="relative flex items-center justify-between">
+        <div className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
+          <div className="relative flex w-full flex-col items-center justify-between lg:flex-row">
+            {/* Logo */}
             <div className="w-60 max-w-full px-4 xl:mr-12">
               <Link
                 href="/"
@@ -66,6 +68,7 @@ const Header = () => {
                   height={30}
                   className="w-full dark:hidden"
                 />
+
                 <Image
                   src="/images/logo/kyron_medical.png"
                   alt="Kyron Logo"
@@ -75,7 +78,7 @@ const Header = () => {
                 />
               </Link>
             </div>
-            <div className="flex w-full items-center justify-between px-4">
+            <div className="flex w-full flex-col items-center justify-between px-4 lg:flex-row">
               <div>
                 <button
                   onClick={navbarToggleHandler}
@@ -88,11 +91,13 @@ const Header = () => {
                       navbarOpen ? " top-[7px] rotate-45" : " "
                     }`}
                   />
+
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? "opacity-0 " : " "
                     }`}
                   />
+
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[-8px] -rotate-45" : " "
@@ -102,13 +107,13 @@ const Header = () => {
 
                 <nav
                   id="navbarCollapse"
-                  className={`navbar absolute right-0 z-30 flex w-[250px] flex-col rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:flex-row lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
+                  className={`navbar absolute right-0 z-30 flex w-[250px] flex-col rounded border-[.5px] border-body-color/50 bg-white px-6  duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:flex-row lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
                     navbarOpen
                       ? "visibility top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
                   }`}
                 >
-                  <ul className="block lg:flex lg:space-x-12">
+                  <ul className="mb-5 block lg:flex lg:space-x-12">
                     {menuData.map((menuItem, index) => (
                       <li key={index} className="group relative">
                         {menuItem.path ? (
@@ -162,49 +167,35 @@ const Header = () => {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Mobile-only login and signup */}
+                  <div className="mb-5 block lg:hidden">
+                    <SignedOut>
+                      <div className="flex flex-col items-center justify-between gap-4">
+                        <SignInButton>Login</SignInButton>
+                        <GetStarted />
+                      </div>
+                    </SignedOut>
+                    <SignedIn>
+                      <div className="flex flex-col items-center justify-between">
+                        <UserButton />
+                      </div>
+                    </SignedIn>
+                  </div>
                 </nav>
               </div>
-              <SignedOut>
-                <div className="flex flex-row gap-4 justify-end ">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onHoverStart={() => console.log("hover started!")}
-                  >
-                    <a
-                      href="/contact"
-                      rel="noopener noreferrer"
-                      className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
-                    >
-                      Get Started
-                    </a>
-                  </motion.button>
+
+              {/* Large screen login and signup */}
+              <div className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex">
+                <SignedOut>
                   <SignInButton>Login</SignInButton>
-                </div>
-              </SignedOut>
-              <SignedIn>
-                <div className="flex justify-end">
+                  <GetStarted />
+                </SignedOut>
+                <SignedIn>
                   <UserButton />
-                </div>
-              </SignedIn>
+                </SignedIn>
+              </div>
             </div>{" "}
-            {/*<div className="flex items-center justify-end pr-16 lg:pr-0">
-                <Link
-                  href="/signin"
-                  className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
-                >
-                  Sign Up
-                </Link>
-                <div>
-                  <ThemeToggler />
-                </div>
-              </div>*/}
           </div>
         </div>
       </header>

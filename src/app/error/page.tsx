@@ -30,12 +30,14 @@ const ErrorPage = () => {
                       stroke="url(#paint0_linear_116:1137)"
                       strokeWidth="3"
                     />
+
                     <path
                       opacity="0.5"
                       d="M307 133.051H383.211V161H415.308V133.051H435V106.111H415.308V2H373.287L307 106.577V133.051ZM383.831 106.111H340.803V104.869L382.591 38.6445H383.831V106.111Z"
                       stroke="url(#paint1_linear_116:1137)"
                       strokeWidth="3"
                     />
+
                     <circle
                       opacity="0.8"
                       cx="227.5"
@@ -43,6 +45,7 @@ const ErrorPage = () => {
                       r="68.5"
                       fill="#4A6CF7"
                     />
+
                     <mask
                       id="mask0_116:1137"
                       style={{ maskType: "alpha" }}
@@ -68,6 +71,7 @@ const ErrorPage = () => {
                         r="68.5"
                         fill="url(#paint2_radial_116:1137)"
                       />
+
                       <g opacity="0.8" filter="url(#filter0_f_116:1137)">
                         <circle
                           cx="233.543"
@@ -83,6 +87,7 @@ const ErrorPage = () => {
                       strokeOpacity="0.08"
                       strokeWidth="2"
                     />
+
                     <defs>
                       <filter
                         id="filter0_f_116:1137"
@@ -94,12 +99,14 @@ const ErrorPage = () => {
                         colorInterpolationFilters="sRGB"
                       >
                         <feFlood floodOpacity="0" result="BackgroundImageFix" />
+
                         <feBlend
                           mode="normal"
                           in="SourceGraphic"
                           in2="BackgroundImageFix"
                           result="shape"
                         />
+
                         <feGaussianBlur
                           stdDeviation="15"
                           result="effect1_foregroundBlur_116:1137"
@@ -114,6 +121,7 @@ const ErrorPage = () => {
                         gradientUnits="userSpaceOnUse"
                       >
                         <stop stopColor="#4A6CF7" stopOpacity="0" />
+
                         <stop offset="1" stopColor="#4A6CF7" />
                       </linearGradient>
                       <linearGradient
@@ -125,6 +133,7 @@ const ErrorPage = () => {
                         gradientUnits="userSpaceOnUse"
                       >
                         <stop stopColor="#4A6CF7" stopOpacity="0" />
+
                         <stop offset="1" stopColor="#4A6CF7" />
                       </linearGradient>
                       <radialGradient
@@ -176,6 +185,7 @@ const ErrorPage = () => {
                 height="116.438"
                 stroke="url(#paint0_linear_116:1140)"
               />
+
               <rect
                 opacity="0.1"
                 x="56.25"
@@ -184,26 +194,31 @@ const ErrorPage = () => {
                 height="116.438"
                 fill="url(#paint1_linear_116:1140)"
               />
+
               <path
                 opacity="0.5"
                 d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z"
                 stroke="url(#paint2_linear_116:1140)"
               />
+
               <path
                 opacity="0.1"
                 d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z"
                 fill="url(#paint3_linear_116:1140)"
               />
+
               <path
                 opacity="0.5"
                 d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z"
                 stroke="url(#paint4_linear_116:1140)"
               />
+
               <path
                 opacity="0.1"
                 d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z"
                 fill="url(#paint5_linear_116:1140)"
               />
+
               <rect
                 opacity="0.5"
                 x="228.938"
@@ -212,6 +227,7 @@ const ErrorPage = () => {
                 height="116.438"
                 stroke="url(#paint6_linear_116:1140)"
               />
+
               <rect
                 opacity="0.1"
                 x="228.938"
@@ -220,11 +236,13 @@ const ErrorPage = () => {
                 height="116.438"
                 fill="url(#paint7_linear_116:1140)"
               />
+
               <path
                 opacity="0.5"
                 d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z"
                 stroke="url(#paint8_linear_116:1140)"
               />
+
               <path
                 opacity="0.1"
                 d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z"
@@ -362,6 +380,7 @@ const ErrorPage = () => {
                 height="116.438"
                 stroke="url(#paint0_linear_116:1151)"
               />
+
               <rect
                 opacity="0.1"
                 x="57.25"
@@ -370,26 +389,31 @@ const ErrorPage = () => {
                 height="116.438"
                 fill="url(#paint1_linear_116:1151)"
               />
+
               <path
                 opacity="0.5"
                 d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z"
                 stroke="url(#paint2_linear_116:1151)"
               />
+
               <path
                 opacity="0.1"
                 d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z"
                 fill="url(#paint3_linear_116:1151)"
               />
+
               <path
                 opacity="0.5"
                 d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z"
                 stroke="url(#paint4_linear_116:1151)"
               />
+
               <path
                 opacity="0.1"
                 d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z"
                 fill="url(#paint5_linear_116:1151)"
               />
+
               <rect
                 opacity="0.5"
                 x="229.938"
@@ -398,6 +422,7 @@ const ErrorPage = () => {
                 height="116.438"
                 stroke="url(#paint6_linear_116:1151)"
               />
+
               <rect
                 opacity="0.1"
                 x="229.938"
@@ -406,11 +431,13 @@ const ErrorPage = () => {
                 height="116.438"
                 fill="url(#paint7_linear_116:1151)"
               />
+
               <path
                 opacity="0.5"
                 d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z"
                 stroke="url(#paint8_linear_116:1151)"
               />
+
               <path
                 opacity="0.1"
                 d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z"

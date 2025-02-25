@@ -13,10 +13,7 @@ export const metadata: Metadata = {
 };
 
 const DemoPage = () => {
-  
-  return(
-    <DemoForm />
-  );
+  return <DemoForm />;
 };
 
 export default DemoPage;

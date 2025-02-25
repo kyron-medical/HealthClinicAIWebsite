@@ -11,6 +11,7 @@ const Typing = () => {
             "prior authorization.",
             "everything else.",
           ],
+
           autoStart: true,
           loop: true,
           delay: 20,

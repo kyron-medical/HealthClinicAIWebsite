@@ -8,7 +8,6 @@ const starIcon = (
 
 const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
   const { star, name, image, content, designation } = testimonial;
-  
 
   let ratingIcons: JSX.Element[] = [];
   for (let index = 0; index < star; index++) {

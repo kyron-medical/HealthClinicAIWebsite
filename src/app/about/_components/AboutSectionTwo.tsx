@@ -38,12 +38,13 @@ const teamMembers = [
     name: "Jeffrey Mu",
     title: "Product Developer",
     image: "/images/team/jeffrey-mu.jpg",
-  }
+  },
 ];
 
 const AboutSectionTwo = () => {
   return (
-    <section className="py-16 md:py-20 lg:py-28">
+    <section className=" py-8 md:py-20 lg:py-28">
+      {" "}
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-2xl font-bold">Meet Our Team</h2>

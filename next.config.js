@@ -13,6 +13,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "www.bostonglobe.com",
       "scontent-lax3-2.xx.fbcdn.net",
+      "medicine.at.brown.edu",
     ],
     remotePatterns: [
       {
