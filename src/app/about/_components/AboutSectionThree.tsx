@@ -22,11 +22,6 @@ const advisors = [
     image: "/images/advisors/jacob-joseph.jpg",
   },
   {
-    name: "Cliff Weitzman",
-    title: "Founder & CEO, Speechify. \n" + "Brown Class of 2016",
-    image: "/images/advisors/cliff-weitzman.jpg",
-  },
-  {
     name: "Abigail Kohler",
     title:
       "Co-Founder & CEO, ResusciTech. \n " +
