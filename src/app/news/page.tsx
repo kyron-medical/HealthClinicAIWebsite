@@ -69,7 +69,9 @@ const NewsPage = () => {
                         ).toLocaleDateString()}
                       </span>
                       <a
-                        href={`/news/${sortedNewsData[0].id}`}
+                        href={sortedNewsData[0].link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group/link inline-flex items-center gap-2 text-white hover:text-blue-400"
                       >
                         Read More
