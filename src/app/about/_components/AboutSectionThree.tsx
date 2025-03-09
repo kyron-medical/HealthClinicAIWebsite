@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 const advisors = [
   {
     name: "Ainsley MacLean, MD",
-    title: "Brown Class of 2001, MD 2005. Healthcare Technology Executive",
+    title: "Founding Partner, Ainsley Advisory Group. Former Chief AI Officer, Kaiser Permanente. Brown Class of 2001, MD 2005",
     image: "/images/advisors/ainsley-maclean.jpg",
   },
   {
     name: "Andy Beck, MD, PhD",
-    title: "Co-Founder & CEO, PathAI. \n" + "Brown Class of 2002, MD 2006 ",
+    title: "Co-Founder & CEO, PathAI. \n" + "Brown Class of 2002, MD 2006",
     image: "/images/advisors/andy-beck.jpg",
   },
   {
