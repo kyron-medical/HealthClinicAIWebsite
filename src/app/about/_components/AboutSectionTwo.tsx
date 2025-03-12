@@ -36,7 +36,7 @@ const teamMembers = [
   },
   {
     name: "Daniel Choi",
-    title: "Intern",
+    title: "Product Developer",
     image: "/images/team/daniel-choi.jpg",
   }
 ];
