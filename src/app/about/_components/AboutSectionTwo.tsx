@@ -25,11 +25,6 @@ const teamMembers = [
     image: "/images/team/henry-harary.jpg",
   },
   {
-    name: "Samuel Latzman",
-    title: "Sales",
-    image: "/images/team/sam-latzman.jpg",
-  },
-  {
     name: "Alejandro Jackson",
     title: "Technical Consultant",
     image: "/images/team/alejandro-jackson.jpg",
