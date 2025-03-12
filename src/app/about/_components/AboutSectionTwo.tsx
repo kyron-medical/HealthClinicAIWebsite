@@ -21,7 +21,7 @@ const teamMembers = [
   },
   {
     name: "Henry Harary",
-    title: "Sales",
+    title: "Director of Sales",
     image: "/images/team/henry-harary.jpg",
   },
   {
