@@ -38,6 +38,16 @@ const teamMembers = [
     name: "Daniel Choi",
     title: "Product Developer",
     image: "/images/team/daniel-choi.jpg",
+  },
+  {
+    name: "Juliana Escuti",
+    title: "Marketing",
+    image: "/images/team/juliana-escuti.jpg",
+  },
+  {
+    name: "Lita Crichton",
+    title: "Sales",
+    image: "/images/team/lita-crichton.jpg",
   }
 ];
 
