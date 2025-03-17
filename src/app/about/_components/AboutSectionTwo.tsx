@@ -48,6 +48,11 @@ const teamMembers = [
     name: "Lita Crichton",
     title: "Sales",
     image: "/images/team/lita-crichton.jpg",
+  },
+  {
+    name: "Anika Sinha",
+    title: "Sales & HIPAA Compliance",
+    image: "/images/team/anika-sinha.jpg",
   }
 ];
 
