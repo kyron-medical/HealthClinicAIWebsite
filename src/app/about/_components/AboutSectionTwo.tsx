@@ -21,13 +21,8 @@ const teamMembers = [
   },
   {
     name: "Henry Harary",
-    title: "Sales",
+    title: "Director of Sales",
     image: "/images/team/henry-harary.jpg",
-  },
-  {
-    name: "Samuel Latzman",
-    title: "Sales",
-    image: "/images/team/sam-latzman.jpg",
   },
   {
     name: "Alejandro Jackson",
@@ -41,9 +36,24 @@ const teamMembers = [
   },
   {
     name: "Daniel Choi",
-    title: "Intern",
+    title: "Product Developer",
     image: "/images/team/daniel-choi.jpg",
   },
+  {
+    name: "Juliana Escuti",
+    title: "Marketing",
+    image: "/images/team/juliana-escuti.jpg",
+  },
+  {
+    name: "Lita Crichton",
+    title: "Sales",
+    image: "/images/team/lita-crichton.jpg",
+  },
+  {
+    name: "Anika Sinha",
+    title: "Sales & HIPAA Compliance",
+    image: "/images/team/anika-sinha.jpg",
+  }
 ];
 
 const AboutSectionTwo = () => {

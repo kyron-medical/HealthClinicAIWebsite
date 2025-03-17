@@ -69,7 +69,9 @@ const NewsPage = () => {
                         ).toLocaleDateString()}
                       </span>
                       <a
-                        href={`/news/${sortedNewsData[0].id}`}
+                        href={sortedNewsData[0].link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group/link inline-flex items-center gap-2 text-white hover:text-blue-400"
                       >
                         Read More
@@ -131,14 +133,9 @@ const NewsPage = () => {
                 <p className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300">
                   {newsItem.paragraph}
                 </p>
-                <a
-                  href={`/news/${newsItem.id}`}
-                  className="group/link inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                >
+                <a href={newsItem.link} target="_blank" rel="noopener noreferrer" className="group/link inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
                   Read Article
-                  <span className="transition-transform duration-300 group-hover/link:translate-x-1">
-                    →
-                  </span>
+                  <span className="transition-transform duration-300 group-hover/link:translate-x-1">→</span>
                 </a>
               </div>
             </div>
