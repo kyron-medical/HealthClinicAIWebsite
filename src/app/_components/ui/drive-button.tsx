@@ -13,13 +13,11 @@ const TestDrive: React.FC<TestDriveProps> = ({ handleSubmit }) => {
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => console.log("hover started!")}
       onClick={handleSubmit}
-      data-oid="il7hasf"
     >
       <a
         href="https://form.typeform.com/to/zstMkPH7"
         rel="noopener noreferrer"
         className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
-        data-oid="h.t0vo4"
       >
         Test Drive Kyron
       </a>

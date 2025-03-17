@@ -4,6 +4,10 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/global.css";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,22 +17,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en" data-oid="uaug93l">
+    <html suppressHydrationWarning lang="en">
       {/*
-                   <head /> will contain the components returned by the nearest parent
-                   head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-                  */}
-      <head data-oid="jta1b.q" />
+                    <head /> will contain the components returned by the nearest parent
+                    head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+                   */}
+      <head />
 
-      <body
-        className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}
-        data-oid="p2qe1g."
-      >
-        <Providers data-oid="c1zmdxx">
-          <Header data-oid="4otd0lr" />
+      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+        <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
+        <Providers>
+          <Header />
           {children}
-          <Footer data-oid="fi1h3g:" />
-          <ScrollToTop data-oid="dr-5wcq" />
+          <Footer />
+          <ScrollToTop />
         </Providers>
       </body>
     </html>
