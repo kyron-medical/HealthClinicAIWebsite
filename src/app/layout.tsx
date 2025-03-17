@@ -13,19 +13,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="en" data-oid="uaug93l">
       {/*
-             <head /> will contain the components returned by the nearest parent
-             head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-            */}
-      <head />
+                   <head /> will contain the components returned by the nearest parent
+                   head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+                  */}
+      <head data-oid="jta1b.q" />
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
-        <Providers>
-          <Header />
+      <body
+        className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}
+        data-oid="p2qe1g."
+      >
+        <Providers data-oid="c1zmdxx">
+          <Header data-oid="4otd0lr" />
           {children}
-          <Footer />
-          <ScrollToTop />
+          <Footer data-oid="fi1h3g:" />
+          <ScrollToTop data-oid="dr-5wcq" />
         </Providers>
       </body>
     </html>

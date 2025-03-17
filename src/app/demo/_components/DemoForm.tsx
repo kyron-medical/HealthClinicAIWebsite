@@ -99,25 +99,33 @@ const DemoForm = () => {
 
   return (
     <>
-      <div className="container">
-        <SignedOut>
-          <h2 className="text-center text-3xl font-bold text-dark dark:text-white">
+      <div className="container" data-oid="y3c:fe7">
+        <SignedOut data-oid="f1ps1wa">
+          <h2
+            className="text-center text-3xl font-bold text-dark dark:text-white"
+            data-oid="vn1fmeo"
+          >
             Sign in to generate your letter of appeal
           </h2>
-          <SignInButton />
+          <SignInButton data-oid="6m_ohc4" />
         </SignedOut>
 
-        <SignedIn>
-          <div className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle">
-            <div className="flex flex-row gap-8">
+        <SignedIn data-oid="p6bx4wg">
+          <div
+            className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle"
+            data-oid="vr9doft"
+          >
+            <div className="flex flex-row gap-8" data-oid="nvg_eb2">
               <FileUploadBox
                 label="Patient Note(s)"
                 onFileChange={(file) => setPatientNotesFile(file)}
+                data-oid="kklfxvc"
               />
 
               <FileUploadBox
                 label="Insurance Denial"
                 onFileChange={(file) => setInsuranceDenialFile(file)}
+                data-oid="ozqq3rl"
               />
             </div>
 
@@ -130,16 +138,18 @@ const DemoForm = () => {
               }`}
               onClick={handleSubmit}
               disabled={!patientNotesFile || !insuranceDenialFile}
+              data-oid="t1:62j4"
             >
               Generate Letter of Appeal
             </button>
 
             {isTextareaFilled && (
-              <div className="w-full px-4 md:w-1/2">
-                <div className="mb-8">
+              <div className="w-full px-4 md:w-1/2" data-oid="xq-x9n_">
+                <div className="mb-8" data-oid="vb9vist">
                   <label
                     htmlFor="email"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    data-oid="i57k5yk"
                   >
                     Recipient&apos;s Email
                   </label>
@@ -149,12 +159,14 @@ const DemoForm = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    data-oid="fm28g-5"
                   />
                 </div>
-                <div className="mb-8">
+                <div className="mb-8" data-oid="hjc1fb7">
                   <label
                     htmlFor="subject"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    data-oid=".vhto-5"
                   >
                     Subject
                   </label>
@@ -164,10 +176,11 @@ const DemoForm = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
+                    data-oid="dg0xp3z"
                   />
                 </div>
                 {/* Updated Textarea Container */}
-                <div className="w-full max-w-3xl">
+                <div className="w-full max-w-3xl" data-oid=".pbxcln">
                   {" "}
                   {/* Increased max-width */}
                   {/* Letter of appeal from fetch request */}
@@ -176,6 +189,7 @@ const DemoForm = () => {
                     value={appealLetter}
                     readOnly
                     rows={15} // Increased number of visible text lines
+                    data-oid="._610yw"
                   ></textarea>
                 </div>
 
@@ -188,6 +202,7 @@ const DemoForm = () => {
                   }`}
                   onClick={handleSubmit}
                   disabled={!isEmailFilled || !isSubjectFilled}
+                  data-oid="l_r1e.u"
                 >
                   Send Email
                 </button>
