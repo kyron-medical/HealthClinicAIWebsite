@@ -43,7 +43,7 @@ const teamMembers = [
     name: "Daniel Choi",
     title: "Intern",
     image: "/images/team/daniel-choi.jpg",
-  }
+  },
 ];
 
 const AboutSectionTwo = () => {

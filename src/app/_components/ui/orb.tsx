@@ -15,10 +15,9 @@ const Orb = ({ color }) => {
       "https://lottie.host/0c03f5fd-e348-4cd6-9f20-6bf57fc7dd80/b89501powc.lottie",
     orange:
       "https://lottie.host/b639843a-b338-400e-bbb3-022293593ec3/g7mJDTauqH.lottie",
-    gold: 
-    "https://lottie.host/5c5c0afe-f428-400b-85db-15c05820be89/smH8qBJsPE.lottie",
+    gold: "https://lottie.host/5c5c0afe-f428-400b-85db-15c05820be89/smH8qBJsPE.lottie",
     copper:
-    "https://lottie.host/48de4269-4881-4fc5-aaed-84a0994a93d9/mdr1YRsV9K.lottie",
+      "https://lottie.host/48de4269-4881-4fc5-aaed-84a0994a93d9/mdr1YRsV9K.lottie",
 
     // Add more colors as needed
   };
@@ -56,4 +55,3 @@ const Orb = ({ color }) => {
 };
 
 export default Orb;
-
