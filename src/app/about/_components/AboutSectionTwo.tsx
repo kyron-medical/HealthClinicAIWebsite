@@ -54,6 +54,11 @@ const teamMembers = [
     title: "Sales & HIPAA Compliance",
     image: "/images/team/anika-sinha.jpg",
   },
+  {
+    name: "Tobias Lederberg",
+    title: "General Counsel",
+    image: "/images/team/tobias-lederberg.jpg",
+  },
 ];
 
 const AboutSectionTwo = () => {
