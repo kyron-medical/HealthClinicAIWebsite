@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
 import { redirect } from "next/navigation";
 
@@ -28,12 +28,12 @@ export async function createBlogPost(data: {
   content: string;
   mainImage: string;
 }) {
-  const user = await currentUser();
+  const user = await auth();
 
   if (!user) throw new Error("Unauthorized");
-  if (!user.id) throw new Error("Unauthorized");
+  if (!user.userId) throw new Error("Unauthorized");
 
-  const isAdmin = user?.publicMetadata?.role === "admin";
+  const isAdmin = user.sessionClaims?.role === "admin";
   if (!isAdmin) throw new Error("Unauthorized");
 
   const blogPost = await prisma.blogPost.create({
@@ -51,13 +51,13 @@ export async function createBlogPost(data: {
 }
 
 export async function deleteBlogPost(id: string) {
-  const user = await currentUser();
+  const user = await auth();
 
   if (!user) throw new Error("Unauthorized");
 
-  if (!user.id) throw new Error("Unauthorized");
+  if (!user.userId) throw new Error("Unauthorized");
 
-  const isAdmin = user?.publicMetadata?.role === "admin";
+  const isAdmin = user.sessionClaims?.role === "admin";
 
   if (!isAdmin) throw new Error("Unauthorized");
 
