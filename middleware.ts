@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher, currentUser } from "@clerk/nextjs/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -13,15 +13,27 @@ const isPublicRoute = createRouteMatcher([
   "/logos(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
+  "/resources(.*)",
   "/robots(.*)",
   "/robots.txt(.*)",
   "/sitemap(.*)",
   "/sitemap.xml(.*)",
+  "/api/uploadthing(.*)",
 ]);
+
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
+  } else if (isAdminRoute(request)) {
+    const user = await currentUser();
+    if (!user || !user.publicMetadata.role) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+    if (user.publicMetadata.role !== "admin") {
+      return new Response("Unauthorized", { status: 401 });
+    }
   }
 });
 

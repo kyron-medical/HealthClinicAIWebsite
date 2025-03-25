@@ -79,7 +79,12 @@ If you like the template, please star this repository to inspire the team to cre
   - [x] Descriptor, physican, billing company
   - [x] Is there any other info you would like to share?
 - [x] Logik.io emulation, access to an interactive demo page on the home page; test drive button
-- [] Vercel x Google Sitemap
+- [] Vercel x Google Sitemap (Sitemap to Google)
+- [] Moving to AWS 
+- [] Add NBC, Providence News, Providence Journal
+- [] Blog 
+- [x] Typeform and Clerk Access
+
 
 - [x] Clicking on the carousel links to news
 - [x] Advisor photos animation

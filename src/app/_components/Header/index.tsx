@@ -50,16 +50,24 @@ const Header = () => {
             ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "absolute h-20 bg-transparent bg-opacity-90"
         }`}
+        data-oid="-wryqbx"
       >
-        <div className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
-          <div className="relative flex w-full flex-col items-center justify-between lg:flex-row">
+        <div
+          className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row"
+          data-oid=":2_5q:6"
+        >
+          <div
+            className="relative flex w-full flex-col items-center justify-between lg:flex-row"
+            data-oid="z7okg.m"
+          >
             {/* Logo */}
-            <div className="w-60 max-w-full px-4 xl:mr-12">
+            <div className="w-60 max-w-full px-4 xl:mr-12" data-oid="krkry9q">
               <Link
                 href="/"
                 className={`header-logo block w-full ${
                   sticky ? "py-5 lg:py-2" : "py-8"
                 } `}
+                data-oid="48y_8yj"
               >
                 <Image
                   src="/images/logo/kyron_medical.png"
@@ -67,6 +75,7 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
+                  data-oid="5epxbhg"
                 />
 
                 <Image
@@ -75,33 +84,41 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="hidden w-full dark:block"
+                  data-oid="1pnll8_"
                 />
               </Link>
             </div>
-            <div className="flex w-full flex-col items-center justify-between px-4 lg:flex-row">
-              <div>
+            <div
+              className="flex w-full flex-col items-center justify-between px-4 lg:flex-row"
+              data-oid="95:bcd5"
+            >
+              <div data-oid="iso51ld">
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
                   aria-label="Mobile Menu"
                   className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                  data-oid="ya65-:a"
                 >
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[7px] rotate-45" : " "
                     }`}
+                    data-oid=".6d:oe8"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? "opacity-0 " : " "
                     }`}
+                    data-oid="._4_r06"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[-8px] -rotate-45" : " "
                     }`}
+                    data-oid="u:lftr8"
                   />
                 </button>
 
@@ -112,10 +129,18 @@ const Header = () => {
                       ? "visibility top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
                   }`}
+                  data-oid="x82343t"
                 >
-                  <ul className="mb-5 block lg:flex lg:space-x-12">
+                  <ul
+                    className="mb-5 block lg:flex lg:space-x-12"
+                    data-oid="3ct7t-5"
+                  >
                     {menuData.map((menuItem, index) => (
-                      <li key={index} className="group relative">
+                      <li
+                        key={index}
+                        className="group relative"
+                        data-oid="28p-btr"
+                      >
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
@@ -124,6 +149,7 @@ const Header = () => {
                                 ? "active text-primary underline-offset-2 dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
+                            data-oid="v5v26uu"
                           >
                             {menuItem.title}
                           </Link>
@@ -132,15 +158,22 @@ const Header = () => {
                             <p
                               onClick={() => handleSubmenu(index)}
                               className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
+                              data-oid="_t:zfsd"
                             >
                               {menuItem.title}
-                              <span className="pl-3">
-                                <svg width="25" height="24" viewBox="0 0 25 24">
+                              <span className="pl-3" data-oid="-ii5:yl">
+                                <svg
+                                  width="25"
+                                  height="24"
+                                  viewBox="0 0 25 24"
+                                  data-oid="9s0i69g"
+                                >
                                   <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
                                     d="M6.29289 8.8427C6.68342 8.45217 7.31658 8.45217 7.70711 8.8427L12 13.1356L16.2929 8.8427C16.6834 8.45217 17.3166 8.45217 17.7071 8.8427C18.0976 9.23322 18.0976 9.86639 17.7071 10.2569L12 15.964L6.29289 10.2569C5.90237 9.86639 5.90237 9.23322 6.29289 8.8427Z"
                                     fill="currentColor"
+                                    data-oid="7z6_oek"
                                   />
                                 </svg>
                               </span>
@@ -149,6 +182,7 @@ const Header = () => {
                               className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
                                 openIndex === index ? "block" : "hidden"
                               }`}
+                              data-oid="nuch8fy"
                             >
                               {menuItem.submenu?.map((submenuItem, index) =>
                                 submenuItem.path ? (
@@ -156,6 +190,7 @@ const Header = () => {
                                     href={submenuItem.path}
                                     key={index}
                                     className="block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3"
+                                    data-oid=".t58hxf"
                                   >
                                     {submenuItem.title}
                                   </Link>
@@ -169,16 +204,22 @@ const Header = () => {
                   </ul>
 
                   {/* Mobile-only login and signup */}
-                  <div className="mb-5 block lg:hidden">
-                    <SignedOut>
-                      <div className="flex flex-col items-center justify-between gap-4">
-                        <SignInButton>Login</SignInButton>
-                        <GetStarted />
+                  <div className="mb-5 block lg:hidden" data-oid="2vbxos3">
+                    <SignedOut data-oid="40zw.b2">
+                      <div
+                        className="flex flex-col items-center justify-between gap-4"
+                        data-oid="zxc4krp"
+                      >
+                        <SignInButton data-oid="gvwi94.">Login</SignInButton>
+                        <GetStarted data-oid=".ukqzxe" />
                       </div>
                     </SignedOut>
-                    <SignedIn>
-                      <div className="flex flex-col items-center justify-between">
-                        <UserButton />
+                    <SignedIn data-oid="ae.rst8">
+                      <div
+                        className="flex flex-col items-center justify-between"
+                        data-oid="mp-1l5n"
+                      >
+                        <UserButton data-oid="fnf_2f6" />
                       </div>
                     </SignedIn>
                   </div>
@@ -186,13 +227,16 @@ const Header = () => {
               </div>
 
               {/* Large screen login and signup */}
-              <div className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex">
-                <SignedOut>
-                  <SignInButton>Login</SignInButton>
-                  <GetStarted />
+              <div
+                className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex"
+                data-oid="a2mmjmw"
+              >
+                <SignedOut data-oid="4i9z87z">
+                  <SignInButton data-oid="db-0u9u">Login</SignInButton>
+                  <GetStarted data-oid="vy5syzb" />
                 </SignedOut>
-                <SignedIn>
-                  <UserButton />
+                <SignedIn data-oid="wicp2xi">
+                  <UserButton data-oid="jxhmp20" />
                 </SignedIn>
               </div>
             </div>{" "}

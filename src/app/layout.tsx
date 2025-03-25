@@ -7,9 +7,16 @@ import "../styles/global.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
-
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Kyron Medical",
+  description:
+    "Kyron is a creative agency that specializes in branding, web design, and digital marketing.",
+  // other metadata
+};
 
 export default function RootLayout({
   children,
@@ -17,14 +24,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="en" data-oid="qh0uh7v">
       {/*
-                    <head /> will contain the components returned by the nearest parent
-                    head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-                   */}
-      <head />
+                     <head /> will contain the components returned by the nearest parent
+                     head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+                    */}
+      <head data-oid="633x2tw" />
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body
+        className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}
+        data-oid="38qhk3t"
+      >
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -33,12 +43,14 @@ export default function RootLayout({
            * as if you were to fetch `/api/uploadthing` directly.
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
+          data-oid="v6sqjyl"
         />
-        <Providers>
-          <Header />
+
+        <Providers data-oid="2zw:8-q">
+          <Header data-oid="j:cfmrd" />
           {children}
-          <Footer />
-          <ScrollToTop />
+          <Footer data-oid=":g66a8g" />
+          <ScrollToTop data-oid="lf4tebk" />
         </Providers>
       </body>
     </html>

@@ -12,7 +12,19 @@ const blogData: Blog[] = [
     },
     publishDate: "2025",
     logoUrl: "/images/logo/kyron_mdeical.png",
-    link: "https://www.google.com",
+    link: "/resources/blog/1",
+  },
+  {
+    id: 2,
+    title: "",
+    paragraph: "A",
+    image: "/images/blog/blog-01.jpg",
+    author: {
+      name: "Joshi Samuyl",
+    },
+    publishDate: "March 25, 2025",
+    logoUrl: "/images/logo/kyron_mdeical.png",
+    link: "/resources/blog/2",
   },
 ];
 

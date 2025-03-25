@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev --skip-generate",
+    "db:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.2.26",
     "@clerk/nextjs": "^6.3.0",
     "@lottiefiles/dotlottie-react": "^0.13.0",
+    "@prisma/client": "^6.5.0",
+    "@prisma/extension-accelerate": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@rive-app/webgl": "^2.23.10",
     "@sendgrid/mail": "^8.1.4",
@@ -38,6 +43,7 @@
     "react-intersection-observer": "^9.15.1",
     "react-modal-video": "^2.0.1",
     "react-toastify": "^10.0.6",
+    "sonner": "^2.0.1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "typewriter-effect": "^2.21.0",
@@ -54,6 +60,7 @@
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "prisma": "^6.5.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.24.0"

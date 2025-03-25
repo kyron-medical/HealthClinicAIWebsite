@@ -117,6 +117,42 @@ const newsData: Blog[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMXcU172emhh7d5RZMfGyereNuAl1xqoJRTw&s",
     link: "https://medicine.at.brown.edu/student-entrepreneurs-fight-burnout-with-ai/",
   },
+  {
+    id: 10,
+    title: "",
+    image: "",
+    paragraph: "",
+    author: {
+      name: "",
+    },
+    publishDate: "",
+    logoUrl: "",
+    link: "",
+  },
+  {
+    id: 11,
+    title: "",
+    image: "",
+    paragraph: "",
+    author: {
+      name: "",
+    },
+    publishDate: "",
+    logoUrl: "",
+    link: "",
+  },
+  {
+    id: 12,
+    title: "",
+    image: "",
+    paragraph: "",
+    author: {
+      name: "",
+    },
+    publishDate: "",
+    logoUrl: "",
+    link: "",
+  },
 ];
 
 export default newsData;
