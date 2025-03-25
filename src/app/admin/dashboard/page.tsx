@@ -16,12 +16,9 @@ export default function Dashboard() {
   }
 
   return (
-    <section
-      className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-      data-oid="cdl0o41"
-    >
-      <div className="container" data-oid="o7sey4z">
-        <DashboardContent data-oid="djasg.p" />;
+    <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
+      <div className="container">
+        <DashboardContent />;
       </div>
     </section>
   );

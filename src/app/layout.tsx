@@ -24,17 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en" data-oid="u_xub_a">
+    <html suppressHydrationWarning lang="en">
       {/*
-                            <head /> will contain the components returned by the nearest parent
-                            head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-                           */}
-      <head data-oid="i-59tm:" />
+                             <head /> will contain the components returned by the nearest parent
+                             head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+                            */}
+      <head />
 
-      <body
-        className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}
-        data-oid="huok8py"
-      >
+      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -43,14 +40,13 @@ export default function RootLayout({
            * as if you were to fetch `/api/uploadthing` directly.
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
-          data-oid="kbi1wk6"
         />
 
-        <Providers data-oid="2-w.fje">
-          <Header data-oid="3xnnvt9" />
+        <Providers>
+          <Header />
           {children}
-          <Footer data-oid="k5u-lir" />
-          <ScrollToTop data-oid="344:jy:" />
+          <Footer />
+          <ScrollToTop />
         </Providers>
       </body>
     </html>

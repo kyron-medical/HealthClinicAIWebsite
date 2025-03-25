@@ -63,43 +63,32 @@ const teamMembers = [
 
 const AboutSectionTwo = () => {
   return (
-    <section className=" py-8 md:py-20 lg:py-28" data-oid="uxvluz8">
+    <section className=" py-8 md:py-20 lg:py-28">
       {" "}
-      <div className="container" data-oid="nd06ey.">
-        <div className="mb-12 text-center" data-oid="mfh49fa">
-          <h2 className="text-2xl font-bold" data-oid="joht-:m">
-            Meet Our Team
-          </h2>
-          <p className="text-lg text-body-color" data-oid=":--alv9">
+      <div className="container">
+        <div className="mb-12 text-center">
+          <h2 className="text-2xl font-bold">Meet Our Team</h2>
+          <p className="text-lg text-body-color">
             We are a group of passionate individuals dedicated to excellence.
           </p>
         </div>
-        <div
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-          data-oid="s6d:sg3"
-        >
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member, index) => (
-            <div key={index} className="text-center" data-oid="ez9_mcj">
+            <div key={index} className="text-center">
               <motion.div
                 className="relative mx-auto mb-4 aspect-square h-32 w-32"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
-                data-oid="wqidc6z"
               >
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="rounded-full object-cover"
-                  data-oid="-4r0uhy"
                 />
               </motion.div>
-              <h3 className="text-xl font-bold" data-oid="73c0f25">
-                {member.name}
-              </h3>
-              <p className="text-base text-body-color" data-oid="x5hju4n">
-                {member.title}
-              </p>
+              <h3 className="text-xl font-bold">{member.name}</h3>
+              <p className="text-base text-body-color">{member.title}</p>
             </div>
           ))}
         </div>

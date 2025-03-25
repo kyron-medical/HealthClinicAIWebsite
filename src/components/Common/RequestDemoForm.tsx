@@ -28,18 +28,13 @@ function RequestDemoForm() {
   }
 
   return (
-    <form
-      onSubmit={sendEmail}
-      className="my-4 p-4 border rounded-md shadow-lg"
-      data-oid="h14fm07"
-    >
+    <form onSubmit={sendEmail} className="my-4 p-4 border rounded-md shadow-lg">
       <input
         type="text"
         name="from_name"
         placeholder="Your Name"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid="_zka-np"
       />
 
       <input
@@ -48,7 +43,6 @@ function RequestDemoForm() {
         placeholder="Your Email"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid="l1pqr55"
       />
 
       <textarea
@@ -56,12 +50,10 @@ function RequestDemoForm() {
         placeholder="Your Message"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid=":w2r6vj"
       ></textarea>
       <button
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-        data-oid="k0g0ayn"
       >
         Request Demo
       </button>

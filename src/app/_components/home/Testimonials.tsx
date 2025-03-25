@@ -40,29 +40,17 @@ const Testimonials = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section
-      className="relative z-10  py-16 dark:bg-bg-color-dark md:py-20 lg:py-28"
-      data-oid="f9f:mzj"
-    >
-      <div className="container" data-oid="oe72wcd">
-        <SectionTitle
-          title="What Our Users Say"
-          paragraph=""
-          center
-          data-oid="658_z.9"
-        />
+    <section className="relative z-10  py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
+      <div className="container">
+        <SectionTitle title="What Our Users Say" paragraph="" center />
 
         <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1 }}
-          data-oid="coxvsym"
         >
-          <div
-            className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3"
-            data-oid="j1y5l7q"
-          >
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {testimonialData.map((testimonial) => (
               <motion.div
                 key={testimonial.id}
@@ -71,25 +59,20 @@ const Testimonials = () => {
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
                 }
                 transition={{ duration: 0.5, delay: testimonial.id * 0.2 }}
-                data-oid="zy1jc07"
               >
-                <SingleTestimonial
-                  testimonial={testimonial}
-                  data-oid="zb.r--j"
-                />
+                <SingleTestimonial testimonial={testimonial} />
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
-      <div className="absolute right-0 top-5 z-[-1]" data-oid="c:gn4k-">
+      <div className="absolute right-0 top-5 z-[-1]">
         <svg
           width="238"
           height="531"
           viewBox="0 0 238 531"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          data-oid="fchkh3s"
         >
           <rect
             opacity="0.3"
@@ -100,7 +83,6 @@ const Testimonials = () => {
             rx="2"
             transform="rotate(51.2997 422.819 -70.8145)"
             fill="url(#paint0_linear_83:2)"
-            data-oid="zeiqwpq"
           />
 
           <rect
@@ -112,10 +94,9 @@ const Testimonials = () => {
             rx="2"
             transform="rotate(51.2997 426.568 144.886)"
             fill="url(#paint1_linear_83:2)"
-            data-oid="60j:r58"
           />
 
-          <defs data-oid="5kxfoco">
+          <defs>
             <linearGradient
               id="paint0_linear_83:2"
               x1="517.152"
@@ -123,15 +104,9 @@ const Testimonials = () => {
               x2="517.152"
               y2="459.865"
               gradientUnits="userSpaceOnUse"
-              data-oid="t89ap_2"
             >
-              <stop stopColor="#4A6CF7" data-oid="eua6lsp" />
-              <stop
-                offset="1"
-                stopColor="#4A6CF7"
-                stopOpacity="0"
-                data-oid="guxl0cw"
-              />
+              <stop stopColor="#4A6CF7" />
+              <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="paint1_linear_83:2"
@@ -140,54 +115,43 @@ const Testimonials = () => {
               x2="455.327"
               y2="675.565"
               gradientUnits="userSpaceOnUse"
-              data-oid="ke4wnfy"
             >
-              <stop stopColor="#4A6CF7" data-oid="pia.siu" />
-              <stop
-                offset="1"
-                stopColor="#4A6CF7"
-                stopOpacity="0"
-                data-oid="-vsgmwn"
-              />
+              <stop stopColor="#4A6CF7" />
+              <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
       </div>
-      <div className="absolute bottom-5 left-0 z-[-1]" data-oid="jrsnrvf">
+      <div className="absolute bottom-5 left-0 z-[-1]">
         <svg
           width="279"
           height="106"
           viewBox="0 0 279 106"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          data-oid="hyg-t02"
         >
-          <g opacity="0.5" data-oid="yds7gh7">
+          <g opacity="0.5">
             <path
               d="M-57 12L50.0728 74.8548C55.5501 79.0219 70.8513 85.7589 88.2373 79.3692C109.97 71.3821 116.861 60.9642 156.615 63.7423C178.778 65.291 195.31 69.2985 205.911 62.3533C216.513 55.408 224.994 47.7682 243.016 49.1572C255.835 50.1453 265.278 50.8936 278 45.3373"
               stroke="url(#paint0_linear_72:302)"
-              data-oid="oqv_elu"
             />
 
             <path
               d="M-57 1L50.0728 63.8548C55.5501 68.0219 70.8513 74.7589 88.2373 68.3692C109.97 60.3821 116.861 49.9642 156.615 52.7423C178.778 54.291 195.31 58.2985 205.911 51.3533C216.513 44.408 224.994 36.7682 243.016 38.1572C255.835 39.1453 265.278 39.8936 278 34.3373"
               stroke="url(#paint1_linear_72:302)"
-              data-oid="b5wnkbi"
             />
 
             <path
               d="M-57 23L50.0728 85.8548C55.5501 90.0219 70.8513 96.7589 88.2373 90.3692C109.97 82.3821 116.861 71.9642 156.615 74.7423C178.778 76.291 195.31 80.2985 205.911 73.3533C216.513 66.408 224.994 58.7682 243.016 60.1572C255.835 61.1453 265.278 61.8936 278 56.3373"
               stroke="url(#paint2_linear_72:302)"
-              data-oid="7arahrm"
             />
 
             <path
               d="M-57 35L50.0728 97.8548C55.5501 102.022 70.8513 108.759 88.2373 102.369C109.97 94.3821 116.861 83.9642 156.615 86.7423C178.778 88.291 195.31 92.2985 205.911 85.3533C216.513 78.408 224.994 70.7682 243.016 72.1572C255.835 73.1453 265.278 73.8936 278 68.3373"
               stroke="url(#paint3_linear_72:302)"
-              data-oid="v92e_4z"
             />
           </g>
-          <defs data-oid="-98ct75">
+          <defs>
             <linearGradient
               id="paint0_linear_72:302"
               x1="256.267"
@@ -195,10 +159,9 @@ const Testimonials = () => {
               x2="-40.8688"
               y2="8.15715"
               gradientUnits="userSpaceOnUse"
-              data-oid="_ccb5pj"
             >
-              <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="mc96jzw" />
-              <stop offset="1" stopColor="#4A6CF7" data-oid="z_plug:" />
+              <stop stopColor="#4A6CF7" stopOpacity="0" />
+              <stop offset="1" stopColor="#4A6CF7" />
             </linearGradient>
             <linearGradient
               id="paint1_linear_72:302"
@@ -207,10 +170,9 @@ const Testimonials = () => {
               x2="-40.8688"
               y2="-2.84285"
               gradientUnits="userSpaceOnUse"
-              data-oid="caju.or"
             >
-              <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="x:t9gk2" />
-              <stop offset="1" stopColor="#4A6CF7" data-oid="tal-abv" />
+              <stop stopColor="#4A6CF7" stopOpacity="0" />
+              <stop offset="1" stopColor="#4A6CF7" />
             </linearGradient>
             <linearGradient
               id="paint2_linear_72:302"
@@ -219,10 +181,9 @@ const Testimonials = () => {
               x2="-40.8688"
               y2="19.1572"
               gradientUnits="userSpaceOnUse"
-              data-oid="nnb3msv"
             >
-              <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="_c:3e9n" />
-              <stop offset="1" stopColor="#4A6CF7" data-oid="lj8-n78" />
+              <stop stopColor="#4A6CF7" stopOpacity="0" />
+              <stop offset="1" stopColor="#4A6CF7" />
             </linearGradient>
             <linearGradient
               id="paint3_linear_72:302"
@@ -231,10 +192,9 @@ const Testimonials = () => {
               x2="-40.8688"
               y2="31.1572"
               gradientUnits="userSpaceOnUse"
-              data-oid="z46qiyw"
             >
-              <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="nuj4-:v" />
-              <stop offset="1" stopColor="#4A6CF7" data-oid=":2p3if:" />
+              <stop stopColor="#4A6CF7" stopOpacity="0" />
+              <stop offset="1" stopColor="#4A6CF7" />
             </linearGradient>
           </defs>
         </svg>

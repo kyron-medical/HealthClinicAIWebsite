@@ -40,14 +40,8 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   };
 
   return (
-    <div
-      className="w-full max-w-md flex flex-col items-center"
-      data-oid="ovw19hi"
-    >
-      <label
-        className="mb-2 block text-sm font-medium text-dark dark:text-white"
-        data-oid="mzm0m80"
-      >
+    <div className="w-full max-w-md flex flex-col items-center">
+      <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
         {label}
       </label>
       <div
@@ -67,7 +61,6 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
         onClick={() =>
           document.getElementById(label.replace(/\s+/g, "-"))?.click()
         }
-        data-oid=".mqlzod"
       >
         Drag and drop a file here or click to select a file
         <input
@@ -75,11 +68,10 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
           type="file"
           onChange={handleFileSelect}
           style={{ display: "none" }}
-          data-oid="6s-sp2j"
         />
       </div>
       {uploadedFile && (
-        <p className="mt-2 text-sm text-body-color" data-oid="ep:171k">
+        <p className="mt-2 text-sm text-body-color">
           Uploaded: {uploadedFile.name}
         </p>
       )}
