@@ -6,17 +6,17 @@ import { Toaster } from "react-hot-toast";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider data-oid="af168rg">
+    <ClerkProvider data-oid="t8nle_v">
       <ThemeProvider
         attribute="class"
         enableSystem={false}
         defaultTheme="light"
-        data-oid="po95d_k"
+        data-oid="i:lo6hh"
       >
         <Toaster
           position="bottom-center"
           reverseOrder={false}
-          data-oid="n4m1aig"
+          data-oid="bufbqtt"
         />
 
         {children}

@@ -13,30 +13,30 @@ const ErrorPage = () => {
     <>
       <section
         className="relative z-10 pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-        data-oid="tc_xd4b"
+        data-oid="jrhhoew"
       >
-        <div className="container" data-oid="7newc4m">
-          <div className="-mx-4 flex flex-wrap" data-oid="5t.2n_z">
-            <div className="w-full px-4" data-oid="t08rtki">
+        <div className="container" data-oid="2vvlmvv">
+          <div className="-mx-4 flex flex-wrap" data-oid="9x71w_7">
+            <div className="w-full px-4" data-oid="7s03nkx">
               <div
                 className="mx-auto max-w-[530px] text-center"
-                data-oid="fk.m9pb"
+                data-oid="t7rju7p"
               >
-                <div className="mx-auto mb-9 text-center" data-oid="56zhb1i">
+                <div className="mx-auto mb-9 text-center" data-oid="82kr0vh">
                   <svg
                     className="mx-auto w-full text-center"
                     height="210"
                     viewBox="0 0 474 210"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    data-oid="p164.n5"
+                    data-oid=".xl9eyc"
                   >
                     <path
                       opacity="0.5"
                       d="M25 163.051H101.211V191H133.308V163.051H153V136.111H133.308V32H91.2871L25 136.577V163.051ZM101.831 136.111H58.8025V134.869L100.591 68.6445H101.831V136.111Z"
                       stroke="url(#paint0_linear_116:1137)"
                       strokeWidth="3"
-                      data-oid="gk-kgad"
+                      data-oid="4-gdo74"
                     />
 
                     <path
@@ -44,7 +44,7 @@ const ErrorPage = () => {
                       d="M307 133.051H383.211V161H415.308V133.051H435V106.111H415.308V2H373.287L307 106.577V133.051ZM383.831 106.111H340.803V104.869L382.591 38.6445H383.831V106.111Z"
                       stroke="url(#paint1_linear_116:1137)"
                       strokeWidth="3"
-                      data-oid="e7.evu8"
+                      data-oid="wq2rb6e"
                     />
 
                     <circle
@@ -53,7 +53,7 @@ const ErrorPage = () => {
                       cy="81.5"
                       r="68.5"
                       fill="#4A6CF7"
-                      data-oid="52te-51"
+                      data-oid=".6u.ss."
                     />
 
                     <mask
@@ -64,7 +64,7 @@ const ErrorPage = () => {
                       y="13"
                       width="137"
                       height="137"
-                      data-oid="ug12-33"
+                      data-oid="2udwf4j"
                     >
                       <circle
                         opacity="0.8"
@@ -72,30 +72,30 @@ const ErrorPage = () => {
                         cy="81.5"
                         r="68.5"
                         fill="#4A6CF7"
-                        data-oid=".pnk:ao"
+                        data-oid="39mm-ow"
                       />
                     </mask>
-                    <g mask="url(#mask0_116:1137)" data-oid="rnk46:q">
+                    <g mask="url(#mask0_116:1137)" data-oid="r7jz5fl">
                       <circle
                         opacity="0.8"
                         cx="227.5"
                         cy="81.5"
                         r="68.5"
                         fill="url(#paint2_radial_116:1137)"
-                        data-oid="wx.d.2u"
+                        data-oid="d:r73:f"
                       />
 
                       <g
                         opacity="0.8"
                         filter="url(#filter0_f_116:1137)"
-                        data-oid="86bx7pp"
+                        data-oid="cut07.m"
                       >
                         <circle
                           cx="233.543"
                           cy="49.2645"
                           r="28.2059"
                           fill="white"
-                          data-oid="t45jick"
+                          data-oid="3q-1wqv"
                         />
                       </g>
                     </g>
@@ -104,10 +104,10 @@ const ErrorPage = () => {
                       stroke="white"
                       strokeOpacity="0.08"
                       strokeWidth="2"
-                      data-oid="36pcz-r"
+                      data-oid="b5w.yxc"
                     />
 
-                    <defs data-oid=".x-l.ap">
+                    <defs data-oid="yj3xpxc">
                       <filter
                         id="filter0_f_116:1137"
                         x="175.337"
@@ -116,12 +116,12 @@ const ErrorPage = () => {
                         height="116.412"
                         filterUnits="userSpaceOnUse"
                         colorInterpolationFilters="sRGB"
-                        data-oid="2c14315"
+                        data-oid="r8g3v-i"
                       >
                         <feFlood
                           floodOpacity="0"
                           result="BackgroundImageFix"
-                          data-oid="zuzs:zz"
+                          data-oid="wc6qqu:"
                         />
 
                         <feBlend
@@ -129,13 +129,13 @@ const ErrorPage = () => {
                           in="SourceGraphic"
                           in2="BackgroundImageFix"
                           result="shape"
-                          data-oid="k-t2bh9"
+                          data-oid="6:ovtjh"
                         />
 
                         <feGaussianBlur
                           stdDeviation="15"
                           result="effect1_foregroundBlur_116:1137"
-                          data-oid="4qt12xx"
+                          data-oid="5mknui0"
                         />
                       </filter>
                       <linearGradient
@@ -145,18 +145,18 @@ const ErrorPage = () => {
                         x2="126.155"
                         y2="27.0837"
                         gradientUnits="userSpaceOnUse"
-                        data-oid="n5zm7um"
+                        data-oid="ixfvbly"
                       >
                         <stop
                           stopColor="#4A6CF7"
                           stopOpacity="0"
-                          data-oid="vtn3j6i"
+                          data-oid="8vjn:uo"
                         />
 
                         <stop
                           offset="1"
                           stopColor="#4A6CF7"
-                          data-oid="85dp_sz"
+                          data-oid="5p.c49z"
                         />
                       </linearGradient>
                       <linearGradient
@@ -166,18 +166,18 @@ const ErrorPage = () => {
                         x2="408.155"
                         y2="-2.91631"
                         gradientUnits="userSpaceOnUse"
-                        data-oid="-w1_xb8"
+                        data-oid="pft8izv"
                       >
                         <stop
                           stopColor="#4A6CF7"
                           stopOpacity="0"
-                          data-oid="lc4e-ly"
+                          data-oid="2dxzr.8"
                         />
 
                         <stop
                           offset="1"
                           stopColor="#4A6CF7"
-                          data-oid="s_7y6_u"
+                          data-oid="ebzy84p"
                         />
                       </linearGradient>
                       <radialGradient
@@ -187,23 +187,23 @@ const ErrorPage = () => {
                         r="1"
                         gradientUnits="userSpaceOnUse"
                         gradientTransform="translate(227.5 81.5) rotate(90) scale(73.5368)"
-                        data-oid="o94b2h7"
+                        data-oid="2c93ffd"
                       >
-                        <stop stopOpacity="0.47" data-oid="pmgo.rn" />
-                        <stop offset="1" stopOpacity="0" data-oid="a08rfvg" />
+                        <stop stopOpacity="0.47" data-oid="3le7fw4" />
+                        <stop offset="1" stopOpacity="0" data-oid="9z4_2:h" />
                       </radialGradient>
                     </defs>
                   </svg>
                 </div>
                 <h3
                   className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl"
-                  data-oid="lul7z1s"
+                  data-oid=".ud021x"
                 >
                   Sorry, the page cannot be found
                 </h3>
                 <p
                   className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed"
-                  data-oid="h3c6n33"
+                  data-oid="qs.187p"
                 >
                   The page you were looking for appears to have been moved,
                   deleted or doesn&apos;t exist. If you think this is a mistake,
@@ -212,7 +212,7 @@ const ErrorPage = () => {
                 <Link
                   href="/"
                   className="rounded-md bg-primary px-8 py-3 text-base font-bold text-white shadow-signUp duration-300 hover:bg-white hover:text-primary md:px-9 lg:px-8 xl:px-9"
-                  data-oid="nu2eg70"
+                  data-oid="jwme7cm"
                 >
                   Back to Homepage
                 </Link>
@@ -222,7 +222,7 @@ const ErrorPage = () => {
         </div>
         <div
           className="absolute bottom-0 left-0 z-[-1] hidden sm:block"
-          data-oid="td-wash"
+          data-oid="kc3.ipv"
         >
           <svg
             width="406"
@@ -230,9 +230,9 @@ const ErrorPage = () => {
             viewBox="0 0 406 286"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="unifhi4"
+            data-oid="1opkacc"
           >
-            <g opacity="0.5" data-oid="ym23a8v">
+            <g opacity="0.5" data-oid="41ft4-a">
               <rect
                 opacity="0.5"
                 x="56.25"
@@ -240,7 +240,7 @@ const ErrorPage = () => {
                 width="116.719"
                 height="116.438"
                 stroke="url(#paint0_linear_116:1140)"
-                data-oid="1ggwjox"
+                data-oid="zf8303y"
               />
 
               <rect
@@ -250,35 +250,35 @@ const ErrorPage = () => {
                 width="116.719"
                 height="116.438"
                 fill="url(#paint1_linear_116:1140)"
-                data-oid="gxg_0r-"
+                data-oid="_wldf5_"
               />
 
               <path
                 opacity="0.5"
                 d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z"
                 stroke="url(#paint2_linear_116:1140)"
-                data-oid="m6k4lhx"
+                data-oid="--d:nk9"
               />
 
               <path
                 opacity="0.1"
                 d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z"
                 fill="url(#paint3_linear_116:1140)"
-                data-oid="k_dgaw_"
+                data-oid="97j40qq"
               />
 
               <path
                 opacity="0.5"
                 d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z"
                 stroke="url(#paint4_linear_116:1140)"
-                data-oid="tgu1_ie"
+                data-oid="evfgo7u"
               />
 
               <path
                 opacity="0.1"
                 d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z"
                 fill="url(#paint5_linear_116:1140)"
-                data-oid="19ccss0"
+                data-oid="yjabef1"
               />
 
               <rect
@@ -288,7 +288,7 @@ const ErrorPage = () => {
                 width="119.25"
                 height="116.438"
                 stroke="url(#paint6_linear_116:1140)"
-                data-oid="6xj0:va"
+                data-oid="7ay9.03"
               />
 
               <rect
@@ -298,24 +298,24 @@ const ErrorPage = () => {
                 width="119.25"
                 height="116.438"
                 fill="url(#paint7_linear_116:1140)"
-                data-oid="egl2uox"
+                data-oid="bkwct-3"
               />
 
               <path
                 opacity="0.5"
                 d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z"
                 stroke="url(#paint8_linear_116:1140)"
-                data-oid="q6tadi_"
+                data-oid="eti3s15"
               />
 
               <path
                 opacity="0.1"
                 d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z"
                 fill="url(#paint9_linear_116:1140)"
-                data-oid="so_gsl7"
+                data-oid="ww9xbe5"
               />
             </g>
-            <defs data-oid="o:wxy18">
+            <defs data-oid="a7egq-b">
               <linearGradient
                 id="paint0_linear_116:1140"
                 x1="49.0781"
@@ -323,10 +323,10 @@ const ErrorPage = () => {
                 x2="148.922"
                 y2="131.859"
                 gradientUnits="userSpaceOnUse"
-                data-oid="qwgx33r"
+                data-oid="2.31zg-"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="zdmhvjg" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="omj0f88" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="9edu5.e" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="9m722is" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_116:1140"
@@ -335,14 +335,14 @@ const ErrorPage = () => {
                 x2="32.6026"
                 y2="145.47"
                 gradientUnits="userSpaceOnUse"
-                data-oid="-szusce"
+                data-oid="vk3_1d9"
               >
-                <stop stopColor="#4A6CF7" data-oid="9ff1gor" />
+                <stop stopColor="#4A6CF7" data-oid="1cnrl_h" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="x7o-df9"
+                  data-oid="6ijk9yw"
                 />
               </linearGradient>
               <linearGradient
@@ -352,10 +352,10 @@ const ErrorPage = () => {
                 x2="217.542"
                 y2="125.507"
                 gradientUnits="userSpaceOnUse"
-                data-oid="o-sc7a3"
+                data-oid="gc9s41b"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="os0a_b_" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid=":gt4p8d" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="4h3vpd9" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="43qomt_" />
               </linearGradient>
               <linearGradient
                 id="paint3_linear_116:1140"
@@ -364,14 +364,14 @@ const ErrorPage = () => {
                 x2="146.509"
                 y2="143.95"
                 gradientUnits="userSpaceOnUse"
-                data-oid="qc0vkct"
+                data-oid="3x2n_8u"
               >
-                <stop stopColor="#4A6CF7" data-oid="dh_el5w" />
+                <stop stopColor="#4A6CF7" data-oid="m:bdm4t" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="398-qde"
+                  data-oid="pqrs281"
                 />
               </linearGradient>
               <linearGradient
@@ -381,10 +381,10 @@ const ErrorPage = () => {
                 x2="46.311"
                 y2="116.426"
                 gradientUnits="userSpaceOnUse"
-                data-oid="q6ozag:"
+                data-oid="8r:c-84"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="ophn3ri" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="piz7izs" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="pbv5r.b" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="tx4g5n9" />
               </linearGradient>
               <linearGradient
                 id="paint5_linear_116:1140"
@@ -393,14 +393,14 @@ const ErrorPage = () => {
                 x2="84.0124"
                 y2="249.947"
                 gradientUnits="userSpaceOnUse"
-                data-oid="wqmszl4"
+                data-oid=".w7.a4y"
               >
-                <stop stopColor="#4A6CF7" data-oid="fy9:tog" />
+                <stop stopColor="#4A6CF7" data-oid="fe.a09l" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="w3eko4j"
+                  data-oid="pm4t.g3"
                 />
               </linearGradient>
               <linearGradient
@@ -410,10 +410,10 @@ const ErrorPage = () => {
                 x2="330.261"
                 y2="148.369"
                 gradientUnits="userSpaceOnUse"
-                data-oid="4j1-lwo"
+                data-oid="65m9gpa"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="a2z39a5" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="z6pf088" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="87.3es6" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="nw0m3:u" />
               </linearGradient>
               <linearGradient
                 id="paint7_linear_116:1140"
@@ -422,14 +422,14 @@ const ErrorPage = () => {
                 x2="280.112"
                 y2="168.552"
                 gradientUnits="userSpaceOnUse"
-                data-oid="87.mv96"
+                data-oid="m.27h99"
               >
-                <stop stopColor="#4A6CF7" data-oid="uw6fkq8" />
+                <stop stopColor="#4A6CF7" data-oid="w8sa5t7" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="gizoq35"
+                  data-oid="ice6jq:"
                 />
               </linearGradient>
               <linearGradient
@@ -439,10 +439,10 @@ const ErrorPage = () => {
                 x2="369.525"
                 y2="-29.8829"
                 gradientUnits="userSpaceOnUse"
-                data-oid="89p6q7y"
+                data-oid="0o4a:xw"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="8n_biht" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="vrv-z6w" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="yr8n.a6" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="w8xfx6g" />
               </linearGradient>
               <linearGradient
                 id="paint9_linear_116:1140"
@@ -451,14 +451,14 @@ const ErrorPage = () => {
                 x2="331.729"
                 y2="34.2741"
                 gradientUnits="userSpaceOnUse"
-                data-oid="29un6_a"
+                data-oid="dvkgj9q"
               >
-                <stop stopColor="#4A6CF7" data-oid="umlv-qo" />
+                <stop stopColor="#4A6CF7" data-oid="vwf9crk" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="3tcoku5"
+                  data-oid="q9pmq5w"
                 />
               </linearGradient>
             </defs>
@@ -466,7 +466,7 @@ const ErrorPage = () => {
         </div>
         <div
           className="absolute right-0 top-0 z-[-1] hidden sm:block"
-          data-oid="ggcck3f"
+          data-oid="h9azfwt"
         >
           <svg
             width="406"
@@ -474,9 +474,9 @@ const ErrorPage = () => {
             viewBox="0 0 406 286"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="x7k2bq4"
+            data-oid="-mob_4_"
           >
-            <g opacity="0.5" data-oid="jtqszhc">
+            <g opacity="0.5" data-oid="kax9iil">
               <rect
                 opacity="0.5"
                 x="57.25"
@@ -484,7 +484,7 @@ const ErrorPage = () => {
                 width="116.719"
                 height="116.438"
                 stroke="url(#paint0_linear_116:1151)"
-                data-oid="9avk4ud"
+                data-oid="o_3uhx0"
               />
 
               <rect
@@ -494,35 +494,35 @@ const ErrorPage = () => {
                 width="116.719"
                 height="116.438"
                 fill="url(#paint1_linear_116:1151)"
-                data-oid="502dwc5"
+                data-oid="-9qkibw"
               />
 
               <path
                 opacity="0.5"
                 d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z"
                 stroke="url(#paint2_linear_116:1151)"
-                data-oid="c8yduj."
+                data-oid="bpurxe8"
               />
 
               <path
                 opacity="0.1"
                 d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z"
                 fill="url(#paint3_linear_116:1151)"
-                data-oid="pa-.jj3"
+                data-oid="joebiv:"
               />
 
               <path
                 opacity="0.5"
                 d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z"
                 stroke="url(#paint4_linear_116:1151)"
-                data-oid="g7h8g88"
+                data-oid="8pgzc-x"
               />
 
               <path
                 opacity="0.1"
                 d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z"
                 fill="url(#paint5_linear_116:1151)"
-                data-oid="6bov-hx"
+                data-oid="an185xj"
               />
 
               <rect
@@ -532,7 +532,7 @@ const ErrorPage = () => {
                 width="119.25"
                 height="116.438"
                 stroke="url(#paint6_linear_116:1151)"
-                data-oid="g1aungu"
+                data-oid="qhzk26a"
               />
 
               <rect
@@ -542,24 +542,24 @@ const ErrorPage = () => {
                 width="119.25"
                 height="116.438"
                 fill="url(#paint7_linear_116:1151)"
-                data-oid="y7iipjx"
+                data-oid="0xsycij"
               />
 
               <path
                 opacity="0.5"
                 d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z"
                 stroke="url(#paint8_linear_116:1151)"
-                data-oid="2gaz89m"
+                data-oid="engk-x-"
               />
 
               <path
                 opacity="0.1"
                 d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z"
                 fill="url(#paint9_linear_116:1151)"
-                data-oid="3wjy-kn"
+                data-oid="d35le:3"
               />
             </g>
-            <defs data-oid="y6osrc:">
+            <defs data-oid="bgffunh">
               <linearGradient
                 id="paint0_linear_116:1151"
                 x1="50.0781"
@@ -567,10 +567,10 @@ const ErrorPage = () => {
                 x2="149.922"
                 y2="129.859"
                 gradientUnits="userSpaceOnUse"
-                data-oid="b06vsrs"
+                data-oid="w_:xr4:"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="qk23cr3" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="g_mv2:i" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="s5j0ntt" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="rmtl988" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_116:1151"
@@ -579,14 +579,14 @@ const ErrorPage = () => {
                 x2="33.6026"
                 y2="143.47"
                 gradientUnits="userSpaceOnUse"
-                data-oid="0ae0jsm"
+                data-oid="r8pswe0"
               >
-                <stop stopColor="#4A6CF7" data-oid="no6zld1" />
+                <stop stopColor="#4A6CF7" data-oid="lg2cavb" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid=".mc9elm"
+                  data-oid="vrcvwcs"
                 />
               </linearGradient>
               <linearGradient
@@ -596,10 +596,10 @@ const ErrorPage = () => {
                 x2="218.542"
                 y2="123.507"
                 gradientUnits="userSpaceOnUse"
-                data-oid="0u_58uf"
+                data-oid="kuinuif"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="k5g7buy" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="y-8.ip6" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="its2ny:" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="s_u8uz." />
               </linearGradient>
               <linearGradient
                 id="paint3_linear_116:1151"
@@ -608,14 +608,14 @@ const ErrorPage = () => {
                 x2="147.509"
                 y2="141.95"
                 gradientUnits="userSpaceOnUse"
-                data-oid="od0uh1c"
+                data-oid="rt.4sl4"
               >
-                <stop stopColor="#4A6CF7" data-oid="5lki.-j" />
+                <stop stopColor="#4A6CF7" data-oid="r9idtps" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid=".hrj1xc"
+                  data-oid="d3h3a5w"
                 />
               </linearGradient>
               <linearGradient
@@ -625,10 +625,10 @@ const ErrorPage = () => {
                 x2="100.174"
                 y2="270.716"
                 gradientUnits="userSpaceOnUse"
-                data-oid="uuisg8s"
+                data-oid="es05uzd"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="6pbsyns" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="dvu46y." />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="rkcq-nc" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="kythge5" />
               </linearGradient>
               <linearGradient
                 id="paint5_linear_116:1151"
@@ -637,14 +637,14 @@ const ErrorPage = () => {
                 x2="85.0124"
                 y2="247.947"
                 gradientUnits="userSpaceOnUse"
-                data-oid="8ffj607"
+                data-oid="88s8d6l"
               >
-                <stop stopColor="#4A6CF7" data-oid="uov49c-" />
+                <stop stopColor="#4A6CF7" data-oid="-_0ocuv" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="1by0-ic"
+                  data-oid="twjhyu0"
                 />
               </linearGradient>
               <linearGradient
@@ -654,10 +654,10 @@ const ErrorPage = () => {
                 x2="331.261"
                 y2="146.369"
                 gradientUnits="userSpaceOnUse"
-                data-oid="jm.nvcv"
+                data-oid="_mhu3-q"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid=".ammdhd" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="8f5f:uj" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="-ic21:o" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="18x2x20" />
               </linearGradient>
               <linearGradient
                 id="paint7_linear_116:1151"
@@ -666,14 +666,14 @@ const ErrorPage = () => {
                 x2="281.112"
                 y2="166.552"
                 gradientUnits="userSpaceOnUse"
-                data-oid="evqqy-p"
+                data-oid="g6s4cot"
               >
-                <stop stopColor="#4A6CF7" data-oid="rj9zrw3" />
+                <stop stopColor="#4A6CF7" data-oid="59q28yw" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="i:s:_sv"
+                  data-oid="6n_r6uf"
                 />
               </linearGradient>
               <linearGradient
@@ -683,10 +683,10 @@ const ErrorPage = () => {
                 x2="409.531"
                 y2="110.901"
                 gradientUnits="userSpaceOnUse"
-                data-oid=".-zjb8b"
+                data-oid="kjsley0"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="ye1e7dy" />
-                <stop offset="1" stopColor="#4A6CF7" data-oid="_j3wwxo" />
+                <stop stopColor="#4A6CF7" stopOpacity="0" data-oid="h55uhgi" />
+                <stop offset="1" stopColor="#4A6CF7" data-oid="fla:wz1" />
               </linearGradient>
               <linearGradient
                 id="paint9_linear_116:1151"
@@ -695,14 +695,14 @@ const ErrorPage = () => {
                 x2="332.729"
                 y2="32.2741"
                 gradientUnits="userSpaceOnUse"
-                data-oid="k19.9v5"
+                data-oid="_q9neaw"
               >
-                <stop stopColor="#4A6CF7" data-oid=":gqe5dz" />
+                <stop stopColor="#4A6CF7" data-oid="_ufxia1" />
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="f2cyxkl"
+                  data-oid="cr5ugw-"
                 />
               </linearGradient>
             </defs>

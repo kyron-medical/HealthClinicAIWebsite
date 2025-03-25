@@ -8,25 +8,25 @@ const Features = () => {
       <section
         id="features"
         className="py-16 md:py-20 lg:py-28"
-        data-oid="x8qaa-2"
+        data-oid="ec6w-u-"
       >
-        <div className="container" data-oid="s1jhn4k">
+        <div className="container" data-oid="p:58v9:">
           <SectionTitle
             title="Main Features"
             paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
             center
-            data-oid="8xzqxi9"
+            data-oid="aiea2na"
           />
 
           <div
             className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3"
-            data-oid="xdof4v3"
+            data-oid="v:2asat"
           >
             {featuresData.map((feature) => (
               <SingleFeature
                 key={feature.id}
                 feature={feature}
-                data-oid="l3cadkt"
+                data-oid="jau5r7h"
               />
             ))}
           </div>

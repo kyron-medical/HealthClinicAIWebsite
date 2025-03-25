@@ -15,47 +15,47 @@ export default async function ProtectedPage() {
     <>
       <section
         className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-        data-oid="r8_.odz"
+        data-oid="gn51ugq"
       >
-        <div className="container" data-oid="jgp60.h">
-          <div className="w-full px-4" data-oid="n5r9gha">
+        <div className="container" data-oid="89ixxlb">
+          <div className="w-full px-4" data-oid="kjbpohk">
             <div
               className="mx-auto max-w-[800px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
-              data-oid="pvvq79n"
+              data-oid="ee_xe48"
             >
               <h1
                 className="mb-8 text-3xl font-bold text-black dark:text-white"
-                data-oid="dat-.28"
+                data-oid="pns8igx"
               >
                 Welcome, {user?.firstName}
               </h1>
 
-              <div className="mb-12" data-oid=":g4t61o">
+              <div className="mb-12" data-oid="mv:-dxh">
                 <h2
                   className="mb-6 text-2xl font-semibold text-black dark:text-white"
-                  data-oid="ihrj243"
+                  data-oid="7kdko59"
                 >
                   Recent Blog Posts
                 </h2>
                 <div
                   className="grid grid-cols-1 gap-6 md:grid-cols-2"
-                  data-oid="g5njv4."
+                  data-oid="ke41k.j"
                 >
                   {blogPosts.map((post) => (
                     <div
                       key={post.id}
                       className="rounded-lg border border-gray-200 p-6 dark:border-gray-700"
-                      data-oid="nopbspb"
+                      data-oid="zxp.u.z"
                     >
                       <h3
                         className="mb-3 text-xl font-semibold text-black dark:text-white"
-                        data-oid="_pc1m2a"
+                        data-oid="cqst0tj"
                       >
                         {post.title}
                       </h3>
                       <p
                         className="text-body-color dark:text-body-color-dark"
-                        data-oid="o:htji0"
+                        data-oid="6j293o9"
                       >
                         {post.tagline}
                       </p>
@@ -66,15 +66,15 @@ export default async function ProtectedPage() {
 
               <div
                 className="border-t border-gray-200 pt-8 dark:border-gray-700"
-                data-oid="ik2p9qv"
+                data-oid="ndt_ju4"
               >
                 <h2
                   className="mb-6 text-2xl font-semibold text-black dark:text-white"
-                  data-oid="k_nbwcl"
+                  data-oid="dg9ktmj"
                 >
                   Create New Blog Post
                 </h2>
-                <BlogPostForm data-oid="hxo2sk_" />
+                <BlogPostForm data-oid="vkha0h." />
               </div>
             </div>
           </div>

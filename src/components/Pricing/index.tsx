@@ -11,21 +11,21 @@ const Pricing = () => {
     <section
       id="pricing"
       className="relative z-10 py-16 md:py-20 lg:py-28"
-      data-oid="gfeaw0g"
+      data-oid="ufy1h7h"
     >
-      <div className="container" data-oid="fg4i90e">
+      <div className="container" data-oid="b4b0:3u">
         <SectionTitle
           title="Simple and Affordable Pricing"
           paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
           center
           width="665px"
-          data-oid="drdxs_5"
+          data-oid="yoxht:c"
         />
 
-        <div className="w-full" data-oid="g1gr3x9">
+        <div className="w-full" data-oid="o535bhu">
           <div
             className="mb-8 flex justify-center md:mb-12 lg:mb-16"
-            data-oid="d:baghf"
+            data-oid=".las7km"
           >
             <span
               onClick={() => setIsMonthly(true)}
@@ -34,29 +34,29 @@ const Pricing = () => {
                   ? "pointer-events-none text-primary"
                   : "text-dark dark:text-white"
               } mr-4 cursor-pointer text-base font-semibold`}
-              data-oid="peuyrxq"
+              data-oid="iam9pro"
             >
               Monthly
             </span>
             <div
               onClick={() => setIsMonthly(!isMonthly)}
               className="flex cursor-pointer items-center"
-              data-oid="or1yvc2"
+              data-oid="cy3ya1i"
             >
-              <div className="relative" data-oid="14zyrmg">
+              <div className="relative" data-oid="m73y3bw">
                 <div
                   className="h-5 w-14 rounded-full bg-[#1D2144] shadow-inner"
-                  data-oid="ld9w42x"
+                  data-oid="8or1p:a"
                 ></div>
                 <div
                   className={`${
                     isMonthly ? "" : "translate-x-full"
                   } shadow-switch-1 absolute left-0 top-[-4px] flex h-7 w-7 items-center justify-center rounded-full bg-primary transition`}
-                  data-oid="6t3q-3f"
+                  data-oid="z0.f0.2"
                 >
                   <span
                     className="active h-4 w-4 rounded-full bg-white"
-                    data-oid="99o:q86"
+                    data-oid="z0npc71"
                   ></span>
                 </div>
               </div>
@@ -68,7 +68,7 @@ const Pricing = () => {
                   ? "text-dark dark:text-white"
                   : "pointer-events-none text-primary"
               } ml-4 cursor-pointer text-base font-semibold`}
-              data-oid="uvi9:-e"
+              data-oid="iffsyi6"
             >
               Yearly
             </span>
@@ -77,49 +77,49 @@ const Pricing = () => {
 
         <div
           className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3"
-          data-oid="1b7mq-c"
+          data-oid="m27sq4i"
         >
           <PricingBox
             packageName="Lite"
             price={isMonthly ? "40" : "120"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-            data-oid="ezk04zl"
+            data-oid="plsriy1"
           >
             <OfferList
               text="All UI Components"
               status="active"
-              data-oid="xp-dt1w"
+              data-oid="j646po0"
             />
 
             <OfferList
               text="Use with Unlimited Projects"
               status="active"
-              data-oid="91i56sc"
+              data-oid="19e:hea"
             />
 
             <OfferList
               text="Commercial Use"
               status="active"
-              data-oid="2-e-zd1"
+              data-oid="x177gl1"
             />
 
             <OfferList
               text="Email Support"
               status="active"
-              data-oid="wnh3o2e"
+              data-oid="vg477qi"
             />
 
             <OfferList
               text="Lifetime Access"
               status="inactive"
-              data-oid="y6970r7"
+              data-oid="mi:hbtl"
             />
 
             <OfferList
               text="Free Lifetime Updates"
               status="inactive"
-              data-oid=":yt-m-7"
+              data-oid="-hkh9lo"
             />
           </PricingBox>
           <PricingBox
@@ -127,42 +127,42 @@ const Pricing = () => {
             price={isMonthly ? "399" : "789"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-            data-oid=".om.8-7"
+            data-oid="a4st6tj"
           >
             <OfferList
               text="All UI Components"
               status="active"
-              data-oid="nf4lsa7"
+              data-oid="eumclu9"
             />
 
             <OfferList
               text="Use with Unlimited Projects"
               status="active"
-              data-oid="cg6yenl"
+              data-oid="_i1t8-:"
             />
 
             <OfferList
               text="Commercial Use"
               status="active"
-              data-oid="_-ajel9"
+              data-oid="yr9-ims"
             />
 
             <OfferList
               text="Email Support"
               status="active"
-              data-oid="9841sdr"
+              data-oid="yi76n_r"
             />
 
             <OfferList
               text="Lifetime Access"
               status="active"
-              data-oid="59w7vrl"
+              data-oid="jgl_3o6"
             />
 
             <OfferList
               text="Free Lifetime Updates"
               status="inactive"
-              data-oid="w0y2:m2"
+              data-oid="lt6xn5t"
             />
           </PricingBox>
           <PricingBox
@@ -170,55 +170,55 @@ const Pricing = () => {
             price={isMonthly ? "589" : "999"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-            data-oid="ebxc_xe"
+            data-oid="tlv23um"
           >
             <OfferList
               text="All UI Components"
               status="active"
-              data-oid="lfehcae"
+              data-oid="c3rp3jo"
             />
 
             <OfferList
               text="Use with Unlimited Projects"
               status="active"
-              data-oid="r4w1j7x"
+              data-oid=".ox32hr"
             />
 
             <OfferList
               text="Commercial Use"
               status="active"
-              data-oid="2xvsfug"
+              data-oid="ul8p9wn"
             />
 
             <OfferList
               text="Email Support"
               status="active"
-              data-oid="ntvu0zl"
+              data-oid="pkqm-yv"
             />
 
             <OfferList
               text="Lifetime Access"
               status="active"
-              data-oid="opz9tru"
+              data-oid="c64jw9_"
             />
 
             <OfferList
               text="Free Lifetime Updates"
               status="active"
-              data-oid="fbqwo44"
+              data-oid="h0cyyv6"
             />
           </PricingBox>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 z-[-1]" data-oid="96z76zb">
+      <div className="absolute bottom-0 left-0 z-[-1]" data-oid="w5qnkfr">
         <svg
           width="239"
           height="601"
           viewBox="0 0 239 601"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          data-oid="jkbbi8i"
+          data-oid="gsvmt__"
         >
           <rect
             opacity="0.3"
@@ -229,7 +229,7 @@ const Pricing = () => {
             rx="2"
             transform="rotate(-128.7 -184.451 600.973)"
             fill="url(#paint0_linear_93:235)"
-            data-oid="x6r-qpz"
+            data-oid="zw8_xmr"
           />
 
           <rect
@@ -241,10 +241,10 @@ const Pricing = () => {
             rx="2"
             transform="rotate(-128.7 -188.201 385.272)"
             fill="url(#paint1_linear_93:235)"
-            data-oid="_g4wshx"
+            data-oid="lhea1ph"
           />
 
-          <defs data-oid="d.7icek">
+          <defs data-oid="y9okju3">
             <linearGradient
               id="paint0_linear_93:235"
               x1="-90.1184"
@@ -252,14 +252,14 @@ const Pricing = () => {
               x2="-90.1184"
               y2="1131.65"
               gradientUnits="userSpaceOnUse"
-              data-oid="_tquvel"
+              data-oid="jssac9f"
             >
-              <stop stopColor="#4A6CF7" data-oid="964_f64" />
+              <stop stopColor="#4A6CF7" data-oid="-q6c-ve" />
               <stop
                 offset="1"
                 stopColor="#4A6CF7"
                 stopOpacity="0"
-                data-oid="hfofno5"
+                data-oid="maexbin"
               />
             </linearGradient>
             <linearGradient
@@ -269,14 +269,14 @@ const Pricing = () => {
               x2="-159.441"
               y2="915.952"
               gradientUnits="userSpaceOnUse"
-              data-oid="5wzi1.m"
+              data-oid="m.6dddx"
             >
-              <stop stopColor="#4A6CF7" data-oid="rl_evbn" />
+              <stop stopColor="#4A6CF7" data-oid="nxi-ksx" />
               <stop
                 offset="1"
                 stopColor="#4A6CF7"
                 stopOpacity="0"
-                data-oid="t960kae"
+                data-oid="6ihl_-8"
               />
             </linearGradient>
           </defs>

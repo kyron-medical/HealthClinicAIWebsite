@@ -31,20 +31,19 @@ export async function createBlogPost(data: {
   const user = await currentUser();
 
   if (!user) throw new Error("Unauthorized");
-
   if (!user.id) throw new Error("Unauthorized");
 
   const isAdmin = user?.publicMetadata?.role === "admin";
-
   if (!isAdmin) throw new Error("Unauthorized");
 
   const blogPost = await prisma.blogPost.create({
     data: {
       title: data.title,
+      tagline: data.tagline,
       author: data.author,
       content: data.content,
-      tagline: data.tagline,
       mainImage: data.mainImage,
+      imageUrls: [], // Initialize with empty array as per schema
     },
   });
 

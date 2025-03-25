@@ -14,6 +14,7 @@ const nextConfig = {
       "www.bostonglobe.com",
       "scontent-lax3-2.xx.fbcdn.net",
       "medicine.at.brown.edu",
+      "utfs.io",
     ],
     remotePatterns: [
       {

@@ -26,7 +26,7 @@ const Orb = ({ color }) => {
     <div
       ref={ref}
       style={{ display: "flex", justifyContent: "center" }}
-      data-oid="nktx4-a"
+      data-oid="dcfro4p"
     >
       {
         inView ? (
@@ -39,7 +39,7 @@ const Orb = ({ color }) => {
               alignItems: "center",
               justifyContent: "center",
             }}
-            data-oid="go8om48"
+            data-oid="s95k6kf"
           >
             <DotLottieReact
               src={orbSrc[color]}
@@ -47,11 +47,11 @@ const Orb = ({ color }) => {
               autoplay
               speed={2}
               style={{ width: "100%", height: "100%" }}
-              data-oid="vnou4lb"
+              data-oid="u96zd6."
             />
           </div>
         ) : (
-          <div data-oid="bl-3j_7">Loading...</div>
+          <div data-oid="2186xko">Loading...</div>
         )
 
         // Placeholder while the animation is not in view

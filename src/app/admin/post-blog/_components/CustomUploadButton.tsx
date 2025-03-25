@@ -6,6 +6,10 @@ import { toast } from "react-hot-toast";
 
 type Input = Parameters<typeof useUploadThing>;
 
+interface CustomUploadButtonProps {
+  onUploadComplete: (url: string) => void;
+}
+
 const useUploadThingInputProps = (...args: Input) => {
   const $ut = useUploadThing(...args);
 
@@ -44,13 +48,13 @@ function AddPostIcon() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="size-6"
-      data-oid=".skacon"
+      data-oid="92i0c0a"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        data-oid="nqir918"
+        data-oid="x-wp_ju"
       />
     </svg>
   );
@@ -64,32 +68,34 @@ function LoadingSpinnerSVG() {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="white"
-      data-oid="dgczyin"
+      data-oid="jd.3k9m"
     >
       <path
         d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
         opacity=".25"
-        data-oid="v6ha-dp"
+        data-oid="tyvhyyq"
       />
 
       <path
         d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
         className="spinner_ajPY"
-        data-oid="xt:lulr"
+        data-oid="_l3:9sd"
       />
     </svg>
   );
 }
 
-export function CustomUploadButton() {
+export function CustomUploadButton({
+  onUploadComplete,
+}: CustomUploadButtonProps) {
   const router = useRouter();
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast.loading(
-        <div className="flex items-center gap-2" data-oid="uf.77km">
-          <LoadingSpinnerSVG data-oid="0noqgah" />
-          <span className="text-lg" data-oid="gnrp9n0">
+        <div className="flex items-center gap-2" data-oid="oq-eyq.">
+          <LoadingSpinnerSVG data-oid="o45.2ei" />
+          <span className="text-lg" data-oid="_a9bris">
             Uploading image...
           </span>
         </div>,
@@ -103,24 +109,27 @@ export function CustomUploadButton() {
       toast.error("Failed to upload image");
       toast.dismiss("upload-begin");
     },
-    onClientUploadComplete(res) {
+    onClientUploadComplete: (res) => {
       if (res && res[0]) {
-        console.log("Upload complete:", res);
-        toast.dismiss("upload-begin");
-        toast.success("Image uploaded successfully!");
+        const uploadedUrl = res[0].url;
+        console.log("Upload complete:", uploadedUrl);
+        toast.success("Image uploaded successfully!", {
+          id: "upload-toast",
+        });
+        onUploadComplete(uploadedUrl);
         router.refresh();
       }
     },
   });
 
   return (
-    <div data-oid="-.pr38e">
+    <div data-oid="w_dw2mw">
       <label
         htmlFor="upload-button"
         className="cursor-pointer"
-        data-oid="t05h-ue"
+        data-oid="82rhi_q"
       >
-        <AddPostIcon data-oid="w28ntqx" />
+        <AddPostIcon data-oid="n-tswin" />
       </label>
       <input
         id="upload-button"
@@ -128,7 +137,7 @@ export function CustomUploadButton() {
         value=""
         className="sr-only"
         {...inputProps}
-        data-oid="6s._nhv"
+        data-oid="c6vxn7_"
       />
     </div>
   );

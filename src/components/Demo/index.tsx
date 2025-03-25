@@ -146,35 +146,35 @@ const Demo = () => {
     <section
       id="demo"
       className="overflow-hidden py-16 md:py-20 lg:py-28"
-      data-oid="c_.kf.p"
+      data-oid="3gqb::5"
     >
-      <div className="container" data-oid="sydlcr6">
-        <SignedOut data-oid=":gtesg0">
+      <div className="container" data-oid="bx1125e">
+        <SignedOut data-oid="xi3f5t_">
           <h2
             className="text-center text-3xl font-bold text-dark dark:text-white"
-            data-oid=".cl7ll9"
+            data-oid="kpa2qg9"
           >
             Sign in to generate your letter of appeal
           </h2>
-          <SignInButton data-oid="rditi9t" />
+          <SignInButton data-oid="lqih4_y" />
         </SignedOut>
 
-        <SignedIn data-oid=".p9oco6">
+        <SignedIn data-oid="71ogjlx">
           <div
             className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle"
-            data-oid="4t7ggm0"
+            data-oid="1t1nsvp"
           >
-            <div className="flex flex-row gap-8" data-oid="xpgowcr">
+            <div className="flex flex-row gap-8" data-oid=":x4d:ql">
               <FileUploadBox
                 label="Patient Note(s)"
                 onFileChange={handlePatientNotesChange} // For patient notes
-                data-oid="kt_9.ag"
+                data-oid="wjp8t.5"
               />
 
               <FileUploadBox
                 label="Insurance Denial"
                 onFileChange={handleInsuranceDenialChange} // For insurance denial
-                data-oid="7.p3d:y"
+                data-oid="csnlxp."
               />
             </div>
 
@@ -182,18 +182,18 @@ const Demo = () => {
               type="button"
               className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
               onClick={handleSubmit}
-              data-oid="pge7.vn"
+              data-oid="1m3atke"
             >
               Generate Letter of Appeal
             </button>
 
             {isTextareaFilled && (
-              <div className="w-full px-4 md:w-1/2" data-oid=":-3un-d">
-                <div className="mb-8" data-oid="5guw_f6">
+              <div className="w-full px-4 md:w-1/2" data-oid="y:dbh4x">
+                <div className="mb-8" data-oid="mtw2i95">
                   <label
                     htmlFor="email"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                    data-oid="u3wa:uc"
+                    data-oid="svn3hg4"
                   >
                     Recipient&apos;s Email
                   </label>
@@ -203,14 +203,14 @@ const Demo = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    data-oid="ld8.t66"
+                    data-oid="y2:h937"
                   />
                 </div>
-                <div className="mb-8" data-oid="vd9oygt">
+                <div className="mb-8" data-oid="mlj4iv3">
                   <label
                     htmlFor="subject"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                    data-oid="1cu2p-u"
+                    data-oid="arxtz07"
                   >
                     Subject
                   </label>
@@ -220,11 +220,11 @@ const Demo = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    data-oid="hzni2wt"
+                    data-oid=".x3rpwl"
                   />
                 </div>
                 {/* Updated Textarea Container */}
-                <div className="w-full max-w-3xl" data-oid=":q8:9-a">
+                <div className="w-full max-w-3xl" data-oid="1o9pjk3">
                   {" "}
                   {/* Increased max-width */}
                   {/* Letter of appeal from fetch request */}
@@ -233,7 +233,7 @@ const Demo = () => {
                     value={appealLetter}
                     readOnly
                     rows={15} // Increased number of visible text lines
-                    data-oid=":w9c:ne"
+                    data-oid=":gcgeid"
                   ></textarea>
                 </div>
 
@@ -246,7 +246,7 @@ const Demo = () => {
                   }`}
                   onClick={handleSubmit}
                   disabled={!isEmailFilled || !isSubjectFilled}
-                  data-oid="b:swnd:"
+                  data-oid="6rq6zp0"
                 >
                   Send Email
                 </button>

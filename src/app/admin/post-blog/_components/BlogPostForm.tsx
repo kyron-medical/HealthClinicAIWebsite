@@ -68,12 +68,12 @@ export function BlogPostForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" data-oid="164jain">
+    <form onSubmit={handleSubmit} className="space-y-6" data-oid="_3vknr6">
       {/* Title Input */}
-      <div data-oid="bj3xpmx">
+      <div data-oid="a5itdg2">
         <label
           className="mb-2.5 block font-medium text-black dark:text-white"
-          data-oid="kxu4:c-"
+          data-oid="18q020n"
         >
           Title
         </label>
@@ -86,15 +86,15 @@ export function BlogPostForm() {
           placeholder="Enter blog title"
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
-          data-oid="__6yqzm"
+          data-oid="-li2m19"
         />
       </div>
 
       {/* Author Input */}
-      <div data-oid="jxiz7ub">
+      <div data-oid="ivs6u0t">
         <label
           className="mb-2.5 block font-medium text-black dark:text-white"
-          data-oid="at37s4h"
+          data-oid="hqnh.jk"
         >
           Author
         </label>
@@ -107,15 +107,15 @@ export function BlogPostForm() {
           placeholder="Enter author name"
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
-          data-oid="g-gn-97"
+          data-oid="-.i:taa"
         />
       </div>
 
       {/* Tagline Input */}
-      <div data-oid="8v08z5x">
+      <div data-oid="3gnr5em">
         <label
           className="mb-2.5 block font-medium text-black dark:text-white"
-          data-oid="f_bmg3z"
+          data-oid="6of6gdq"
         >
           Tagline
         </label>
@@ -128,15 +128,15 @@ export function BlogPostForm() {
           rows={4}
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
-          data-oid="t.6im7x"
+          data-oid="t5y2psw"
         />
       </div>
 
       {/* Content Input */}
-      <div data-oid="y8fqsa4">
+      <div data-oid="1k994ze">
         <label
           className="mb-2.5 block font-medium text-black dark:text-white"
-          data-oid="4r:1.ja"
+          data-oid="b95dvuv"
         >
           Content
         </label>
@@ -149,25 +149,26 @@ export function BlogPostForm() {
           rows={8}
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
-          data-oid="5y72upw"
+          data-oid="rdze9cy"
         />
       </div>
 
       {/* Upload Image */}
-      <div className="flex flex-col gap-2" data-oid="dmyv1gg">
+      <div className="flex flex-col gap-2" data-oid="58fnjk-">
         <label
           className="mb-2.5 block font-medium text-black dark:text-white"
-          data-oid="ttf57s3"
+          data-oid="os2xns3"
         >
           Upload Image
         </label>
-        <div className="flex items-center gap-2" data-oid="e2ko7s-">
+        <div className="flex items-center gap-2" data-oid="f3lh544">
           <CustomUploadButton
             onUploadComplete={handleImageUpload}
-            data-oid=".2zc0x2"
+            data-oid="6cg0c75"
           />
+
           {formData.mainImage && (
-            <span className="text-sm text-green-600" data-oid="i_rwhs.">
+            <span className="text-sm text-green-600" data-oid="3y9q3d8">
               Image uploaded successfully!
             </span>
           )}
@@ -175,16 +176,17 @@ export function BlogPostForm() {
       </div>
 
       {/* Submit Button */}
-      <div data-oid="cyley1u">
+      <div data-oid="c.64ety">
         <button
           type="submit"
+          onClick={handleSubmit}
           disabled={!isFormValid}
           className={`w-full rounded-md border px-6 py-3 text-base font-medium transition duration-300 ease-in-out ${
             isFormValid
               ? "cursor-pointer border-primary bg-primary text-white hover:bg-opacity-80 hover:shadow-signUp"
               : "cursor-not-allowed border-gray-300 bg-gray-300 text-gray-500"
           }`}
-          data-oid="c_5ev0:"
+          data-oid="ezc:a_j"
         >
           Create Blog Post
         </button>
