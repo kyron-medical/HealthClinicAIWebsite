@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import ogs from "open-graph-scraper";
+import { scrapeOpenGraph } from "@/lib/openGraph";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,21 +10,12 @@ export async function GET(request: Request) {
   }
 
   try {
-    const { error, result } = await ogs({ url: url });
-
-   if (error) {
-     // Handle the boolean error flag
-     return NextResponse.json(
-       { error: "Failed to extract Open Graph data" },
-       { status: 500 },
-     );
-   }
-
-    // Return the Open Graph metadata
+    const metadata = await scrapeOpenGraph(url);
+    
     return NextResponse.json({
-      ogTitle: result.ogTitle,
-      ogDescription: result.ogDescription,
-      ogImage: result.ogImage?.[0]?.url || null,
+      ogTitle: metadata.ogTitle,
+      ogDescription: metadata.ogDescription,
+      ogImage: metadata.ogImage,
     });
   } catch (err) {
     return NextResponse.json(
