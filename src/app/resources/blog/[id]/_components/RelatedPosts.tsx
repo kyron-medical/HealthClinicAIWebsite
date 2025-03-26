@@ -1,5 +1,3 @@
-"use client";
-
 import { getBlogPosts } from "@/server/db";
 import Image from "next/image";
 import Link from "next/link";
