@@ -1,17 +1,38 @@
-import { getBlogPosts } from "@/server/db";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { BlogPost } from "@prisma/client"
 
 interface RelatedPostsProps {
   currentPostId: string;
 }
 
-export const RelatedPosts = async ({ currentPostId }: RelatedPostsProps) => {
-  const relatedPosts = (await getBlogPosts())
-    .filter((post) => post.id !== currentPostId)
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 3);
+export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchRelatedPosts() {
+      try {
+        const response = await fetch(
+          `/api/blog/public?excludeId=${currentPostId}`,
+        );
+        if (!response.ok) throw new Error("Failed to fetch related posts");
+        const data = await response.json();
+        setRelatedPosts(data);
+      } catch (error) {
+        console.error("Error fetching related posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchRelatedPosts();
+  }, [currentPostId]);
+
+  if (loading) return <div>Loading related articles...</div>;
 
   return (
     <div className="mt-16">
@@ -38,7 +59,7 @@ export const RelatedPosts = async ({ currentPostId }: RelatedPostsProps) => {
               <h4 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                 {post.title}
               </h4>
-              <p className="text-sm text-gray-600 line-clamp-2 dark:text-gray-300">
+              <p className="line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
                 {post.tagline}
               </p>
             </div>
