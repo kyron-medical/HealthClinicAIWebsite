@@ -1,6 +1,7 @@
 import { createBlogPost } from "@/server/db";
 import { NextResponse } from "next/server";
 
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
@@ -16,10 +17,11 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(blogPost, { status: 201 });
-  } catch (error) {
+  } catch (error: any) { // Type assertion to handle unknown error type
+    const status = error.message === "Unauthorized" ? 401 : 500;
     return NextResponse.json(
-      { error: error.message },
-      { status: error.message === "Unauthorized" ? 401 : 500 },
+      { error: error.message || "Internal Server Error" },
+      { status }
     );
   }
 }
@@ -27,4 +29,5 @@ export async function POST(request: Request) {
 export async function GET() {
   return NextResponse.json({ message: "Method not implemented" }, { status: 501 });
 }
+
 
