@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 
 // Prevent this route from being statically generated
 export const dynamic = "force-dynamic";
-export const runtime = "edge"; // Optional: Use edge runtime for faster responses
+export const runtime = "nodejs"; // Optional: Use edge runtime for faster responses
 
 export async function GET(request: Request) {
   try {
