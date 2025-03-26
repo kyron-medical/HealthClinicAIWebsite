@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher, currentUser } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -21,25 +21,10 @@ const isPublicRoute = createRouteMatcher([
   "/api/uploadthing(.*)",
 ]);
 
-// const isAdminRoute = createRouteMatcher(["/admin/(.*)"]);
-
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
-  } 
-  // else if (isAdminRoute(request)) {
-  //   await auth.protect();
-
-  //   const user = await auth();
-
-  //   if (!user) {
-  //     return new Response("Unauthorized", { status: 401 });
-  //   }
-
-  //   if (user.sessionClaims?.role !== "admin") {
-  //     return new Response("Unauthorized", { status: 401 });
-  //   }
-  // }
+  }
 });
 
 export const config = {

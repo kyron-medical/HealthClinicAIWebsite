@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { DashboardContent } from "./_components/DashboardContent";
-import { auth } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
@@ -9,13 +9,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
-  const user = await auth();
+  const user = await currentUser();
 
   if (!user) {
     redirect("/sign-in");
   }
 
-  if (user.sessionClaims?.role !== "admin") {
+  // Check if user is admin using publicMetadata
+  if (user.publicMetadata.role !== "admin") {
     redirect("/");
   }
 
