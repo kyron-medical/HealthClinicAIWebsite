@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { CustomUploadButton } from "./CustomUploadButton";
 import { toast } from "react-hot-toast";
+import { createBlogPost } from "@/server/actions/blog";
 
 export function BlogPostForm() {
   const [formData, setFormData] = useState({
@@ -40,18 +41,7 @@ export function BlogPostForm() {
     }
 
     try {
-      const response = await fetch("/api/blog", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create blog post");
-      }
-
+      await createBlogPost(formData);
       toast.success("Blog post created successfully!");
       // Reset form
       setFormData({
@@ -171,3 +161,4 @@ export function BlogPostForm() {
     </form>
   );
 }
+

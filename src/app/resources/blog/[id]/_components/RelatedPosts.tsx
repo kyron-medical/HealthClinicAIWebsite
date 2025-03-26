@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BlogPost } from "@prisma/client"
+import { BlogPost } from "@prisma/client";
+import { getRelatedPosts } from "@/server/actions/blog";
 
 interface RelatedPostsProps {
   currentPostId: string;
@@ -16,12 +17,14 @@ export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
   useEffect(() => {
     async function fetchRelatedPosts() {
       try {
-        const response = await fetch(
-          `/api/blog/public?excludeId=${currentPostId}`,
-        );
-        if (!response.ok) throw new Error("Failed to fetch related posts");
-        const data = await response.json();
-        setRelatedPosts(data);
+        const data = await getRelatedPosts(currentPostId);
+        setRelatedPosts(data.map(post => ({
+          ...post,
+          author: '',
+          content: '',
+          imageUrls: [],
+          updatedAt: post.createdAt // Using createdAt as fallback for updatedAt
+        })));
       } catch (error) {
         console.error("Error fetching related posts:", error);
       } finally {
@@ -42,7 +45,7 @@ export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {relatedPosts.map((post) => (
           <Link
-            href={`/resources/blog/${post.id}`}
+            href={`/blog/${post.id}`}
             key={post.id}
             className="group block overflow-hidden rounded-xl bg-white shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-gray-800"
           >
@@ -69,3 +72,5 @@ export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
     </div>
   );
 };
+
+
