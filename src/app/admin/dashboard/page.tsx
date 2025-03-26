@@ -15,7 +15,6 @@ export default async function Dashboard() {
     redirect("/sign-in");
   }
 
-  // Check if user is admin using publicMetadata
   if (user.publicMetadata.role !== "admin") {
     redirect("/");
   }
@@ -23,8 +22,9 @@ export default async function Dashboard() {
   return (
     <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
       <div className="container">
-        <DashboardContent />;
+        <DashboardContent />
       </div>
     </section>
   );
 }
+

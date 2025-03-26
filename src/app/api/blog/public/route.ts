@@ -9,12 +9,13 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const currentId = searchParams.get("excludeId");
+    const limit = parseInt(searchParams.get("limit") || "3");
 
     // Only run this query when actually called, not during build
     const blogPosts = await prisma.blogPost.findMany({
       where: currentId ? { id: { not: currentId } } : {},
       orderBy: { createdAt: "desc" },
-      take: 3,
+      take: Math.min(limit, 10), // Limit to max 10 posts
       // Include only the fields you need for better performance
       select: {
         id: true,
@@ -25,7 +26,13 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json(blogPosts);
+    // Add cache headers for better performance (5 minutes)
+    const response = NextResponse.json(blogPosts);
+    response.headers.set(
+      "Cache-Control",
+      "public, s-maxage=300, stale-while-revalidate",
+    );
+    return response;
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return NextResponse.json(
