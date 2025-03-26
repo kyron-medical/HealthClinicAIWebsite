@@ -7,6 +7,9 @@ import { AuthorInfo } from "./_components/AuthorInfo";
 import { RelatedPosts } from "./_components/RelatedPosts";
 import { NewsletterSignup } from "./_components/NewsletterSignup";
 import { TableOfContents } from "./_components/TableOfContents";
+import { notFound } from "next/navigation";
+
+export const dynamic = 'force-dynamic';
 
 const sampleHeadings = [
   "Introduction",
@@ -23,30 +26,21 @@ const author = {
   avatar: "/images/blog/author.jpg",
 };
 
-export default async function BlogPost({
-  params: { id: blogPostId },
-}: {
+interface BlogPostPageProps {
   params: { id: string };
-}) {
-  const post = await getBlogPost(blogPostId);
+}
+
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  let post;
+  
+  try {
+    post = await getBlogPost(params.id);
+  } catch (error) {
+    notFound();
+  }
 
   if (!post) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-          Blog Post Not Found
-        </h1>
-        <p className="mb-8 text-gray-600 dark:text-gray-400">
-          The blog post you`&apos;`re looking for doesn`&apos;`t exist.
-        </p>
-        <Link
-          href="/resources/blog"
-          className="rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700"
-        >
-          Back to Blog
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
   return (
@@ -67,6 +61,7 @@ export default async function BlogPost({
                 width={1200}
                 height={675}
                 className="h-auto w-full object-cover"
+                priority
               />
             </div>
 
@@ -78,7 +73,7 @@ export default async function BlogPost({
                     Healthcare
                   </span>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {post.createdAt.toLocaleDateString("en-US", {
+                    {new Date(post.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
@@ -107,11 +102,10 @@ export default async function BlogPost({
             <div className="lg:col-span-3">
               <article className="prose prose-lg max-w-none dark:prose-invert">
                 <p>{post.content}</p>
-                {/* Add more content sections as needed */}
               </article>
 
               {/* Related Posts */}
-              <RelatedPosts currentPostId={blogPostId} />
+              <RelatedPosts currentPostId={params.id} />
 
               {/* Newsletter Signup */}
               <NewsletterSignup />
@@ -121,5 +115,10 @@ export default async function BlogPost({
       </section>
     </>
   );
+}
+
+// Generate static params for common blog posts
+export async function generateStaticParams() {
+  return [];
 }
 
