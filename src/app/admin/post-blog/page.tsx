@@ -1,20 +1,25 @@
 import { getBlogPosts } from "@/server/db";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser, auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { BlogPostForm } from "./_components/BlogPostForm";
 
 export const dynamic = 'force-dynamic';
 
 export default async function PostBlogPage() {
+  const data = await auth();
   const user = await currentUser();
 
-  if (!user) {
+  if (!data) {
     redirect("/sign-in");
   }
 
   // Check if user is admin
-  if (user.publicMetadata.role !== "admin") {
+  if (data.sessionClaims?.role !== "admin") {
     redirect("/");
+  }
+
+  if (!user) {
+    redirect("/sign-in");
   }
 
   return (

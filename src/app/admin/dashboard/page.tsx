@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { DashboardContent } from "./_components/DashboardContent";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
@@ -8,11 +8,15 @@ export const metadata: Metadata = {
   description: "Dashboard Page for Kyron",
 };
 
-export default function Dashboard() {
-  const user = currentUser();
+export default async function Dashboard() {
+  const user = await auth();
 
   if (!user) {
     redirect("/sign-in");
+  }
+
+  if (user.sessionClaims?.role !== "admin") {
+    redirect("/");
   }
 
   return (
