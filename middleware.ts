@@ -21,17 +21,21 @@ const isPublicRoute = createRouteMatcher([
   "/api/uploadthing(.*)",
 ]);
 
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+const isAdminRoute = createRouteMatcher(["/admin/(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   } else if (isAdminRoute(request)) {
-    const user = await currentUser();
-    if (!user || !user.publicMetadata.role) {
+    await auth.protect();
+
+    const user = await auth();
+
+    if (!user) {
       return new Response("Unauthorized", { status: 401 });
     }
-    if (user.publicMetadata.role !== "admin") {
+
+    if (user.sessionClaims?.role !== "admin") {
       return new Response("Unauthorized", { status: 401 });
     }
   }
