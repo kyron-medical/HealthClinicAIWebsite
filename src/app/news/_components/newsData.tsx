@@ -143,16 +143,20 @@ const newsData: Blog[] = [
   },
   {
     id: 12,
-    title: "",
-    image: "",
-    paragraph: "",
+    title:
+      "Kyron Medical's AI tool speeds insurance claims, focusing more on patient care",
+    image:
+      "https://turnto10.com/resources/media2/16x9/1920/648/center/90/9dee961f-6eb1-44dc-8e78-3744aa9c69f2-KYRONMEDICALPKG.transfer_frame_817.jpeg",
+    paragraph:
+      "A group of Brown University students have developed a software program aimed at making medical billing more efficient.",
     author: {
-      name: "",
+      name: "Barbara Morse",
     },
-    publishDate: "",
-    logoUrl: "",
-    link: "",
-  },
+    publishDate: "February 25th, 2025",
+    logoUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlEAgf-KVZ6j5MUqegZTkwJkXUhKHn7cA--g&s",
+    link: "https://turnto10.com/features/health-landing-page/kyron-medicals-ai-tool-speeds-insurance-claims-focusing-more-on-patient-care-artificial-intelligence-medical-professionals-february-25-2025",
+  }
 ];
 
 export default newsData;

@@ -12,7 +12,7 @@ const Breadcrumb = ({
       <section className="relative z-10 overflow-hidden bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container py-16 lg:py-24">
           <div className="flex flex-col items-center text-center">
-            <div className="relative mb-6 inline-block">
+            {/* <div className="relative mb-6 inline-block">
               <span className="absolute -left-6 -top-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
               <span className="absolute -bottom-6 -right-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
               <ul className="flex items-center rounded-full bg-white px-4 py-2 shadow-md dark:bg-gray-800">
@@ -27,9 +27,9 @@ const Breadcrumb = ({
                 </li>
                 <li className="text-sm font-medium text-primary">{pageName}</li>
               </ul>
-            </div>
+            </div> */}
 
-            <h1 className="mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl">
+            <h1 className="mb-6 pb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl">
               {pageName}
             </h1>
 
