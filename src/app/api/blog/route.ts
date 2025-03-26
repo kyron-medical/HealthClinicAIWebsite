@@ -2,6 +2,7 @@ import { createBlogPost } from "@/server/db";
 import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic';
+export const runtime = "nodejs"; // Optional: Use edge runtime for faster responses
 
 export async function POST(request: Request) {
   try {
