@@ -6,28 +6,32 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-
-    const blogPost = await createBlogPost({
-      title: body.title,
-      tagline: body.tagline,
-      author: body.author,
-      content: body.content,
-      mainImage: body.mainImage,
-    });
-
+    const blogPost = await createBlogPost(body);
     return NextResponse.json(blogPost, { status: 201 });
   } catch (error: any) {
-    const status = error.message === "Unauthorized" ? 401 : 500;
+    console.error('API Error:', error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status }
+      { status: error.message === "Unauthorized" ? 401 : 500 }
     );
   }
 }
 
 export async function GET() {
-  return NextResponse.json({ message: "Method not implemented" }, { status: 501 });
+  try {
+    return NextResponse.json(
+      { message: "Use server actions instead of this endpoint" },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
+
+
 
 
 
