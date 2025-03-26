@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
+
     const blogPost = await createBlogPost({
       title: body.title,
       tagline: body.tagline,
@@ -15,15 +15,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(blogPost, { status: 201 });
   } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: error.message === "Unauthorized" ? 401 : 500 }
-      );
-    }
     return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
+      { error: error.message },
+      { status: error.message === "Unauthorized" ? 401 : 500 },
     );
   }
 }
