@@ -20,33 +20,33 @@ export const StatCard = ({
   return (
     <div
       className="rounded-xl bg-white p-6 shadow-md dark:bg-gray-800"
-      data-oid="d.zrb7n"
+      data-oid="h47lcq1"
     >
-      <div className="flex items-center justify-between" data-oid="7l.sysj">
-        <div data-oid="t5v88tj">
+      <div className="flex items-center justify-between" data-oid="usl5jjw">
+        <div data-oid="auvkcsq">
           <p
             className="text-sm font-medium text-gray-500 dark:text-gray-400"
-            data-oid="8zjr--3"
+            data-oid="l2.s-85"
           >
             {title}
           </p>
           <h3
             className="mt-1 text-2xl font-bold text-gray-900 dark:text-white"
-            data-oid="wsmlnu-"
+            data-oid="34g8u8d"
           >
             {value}
           </h3>
         </div>
-        <div className={`rounded-full p-3 ${color}`} data-oid="3obhy4h">
+        <div className={`rounded-full p-3 ${color}`} data-oid="m38h0lf">
           {icon}
         </div>
       </div>
-      <div className="mt-4 flex items-center" data-oid=".b4m.1b">
+      <div className="mt-4 flex items-center" data-oid="zudwfn-">
         <span
           className={`flex items-center text-sm ${
             isPositive ? "text-green-500" : "text-red-500"
           }`}
-          data-oid="3mh:u2m"
+          data-oid="nna4.lw"
         >
           {isPositive ? (
             <svg
@@ -55,14 +55,14 @@ export const StatCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="d_pg1qz"
+              data-oid="jxai31e"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M5 10l7-7m0 0l7 7m-7-7v18"
-                data-oid="bkcn7as"
+                data-oid="oktip8z"
               ></path>
             </svg>
           ) : (
@@ -72,14 +72,14 @@ export const StatCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="gwdc0ol"
+              data-oid="0sjx8:o"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                data-oid="mvyt2.x"
+                data-oid=":ystaeq"
               ></path>
             </svg>
           )}
@@ -87,7 +87,7 @@ export const StatCard = ({
         </span>
         <span
           className="ml-2 text-sm text-gray-500 dark:text-gray-400"
-          data-oid="uvv.uo9"
+          data-oid="3u:5131"
         >
           from last month
         </span>

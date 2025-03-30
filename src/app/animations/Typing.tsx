@@ -4,7 +4,7 @@ const Typing = () => {
   return (
     <div
       className="mb-5 -mt-5 rounded text-3xl font-bold leading-tight text-slate-900 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
-      data-oid="gdcno33"
+      data-oid="r0p65mw"
     >
       <Typewriter
         options={{
@@ -20,7 +20,7 @@ const Typing = () => {
           delay: 20,
           deleteSpeed: 10,
         }}
-        data-oid="3xc1xup"
+        data-oid="ol_m4rg"
       />
     </div>
   );

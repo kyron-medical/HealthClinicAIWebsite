@@ -48,13 +48,13 @@ function AddPostIcon() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="size-6"
-      data-oid=".34vl:n"
+      data-oid="_jatwra"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        data-oid="a26wfi3"
+        data-oid="xcusuig"
       />
     </svg>
   );
@@ -68,18 +68,18 @@ function LoadingSpinnerSVG() {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="white"
-      data-oid="muun71s"
+      data-oid="7pyzavw"
     >
       <path
         d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
         opacity=".25"
-        data-oid="c6_imcf"
+        data-oid="w85rvm9"
       />
 
       <path
         d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
         className="spinner_ajPY"
-        data-oid=":48a_e:"
+        data-oid="b9123on"
       />
     </svg>
   );
@@ -93,9 +93,9 @@ export function CustomUploadButton({
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast.loading(
-        <div className="flex items-center gap-2" data-oid="hjddnfw">
-          <LoadingSpinnerSVG data-oid="wqo1spy" />
-          <span className="text-lg" data-oid="-82ix_z">
+        <div className="flex items-center gap-2" data-oid="gdf17vl">
+          <LoadingSpinnerSVG data-oid="a1ihx3v" />
+          <span className="text-lg" data-oid="sa87-6o">
             Uploading image...
           </span>
         </div>,
@@ -123,13 +123,13 @@ export function CustomUploadButton({
   });
 
   return (
-    <div data-oid="8ukbeut">
+    <div data-oid=":gpo918">
       <label
         htmlFor="upload-button"
         className="cursor-pointer"
-        data-oid="r4if8gf"
+        data-oid="5pgk8w3"
       >
-        <AddPostIcon data-oid="hzgtm8u" />
+        <AddPostIcon data-oid="hj71hmc" />
       </label>
       <input
         id="upload-button"
@@ -137,7 +137,7 @@ export function CustomUploadButton({
         value=""
         className="sr-only"
         {...inputProps}
-        data-oid="l.nvcy5"
+        data-oid="dgz677h"
       />
     </div>
   );
