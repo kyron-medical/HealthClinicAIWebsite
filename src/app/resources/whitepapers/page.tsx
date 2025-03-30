@@ -1,0 +1,32 @@
+import Breadcrumb from "@/components/Common/Breadcrumb";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Whitepapers | Kyron",
+  description: "Whitepapers Page for Kyron",
+};
+
+const Whitepapers = async () => {
+  return (
+    <>
+      <Breadcrumb
+        pageName="Insights & Resources"
+        description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
+        data-oid="mi6f85."
+      />
+
+      <section className="pb-[120px] pt-[120px]" data-oid="we7cfs2">
+        <div className="container" data-oid="h:mzf3z">
+          <h2
+            className="self-centerleading-tight mb-8 flex items-center justify-center text-3xl font-bold text-black dark:text-white sm:text-4xl sm:leading-tight"
+            data-oid="k9.8wa5"
+          >
+            Coming soon...
+          </h2>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Whitepapers;

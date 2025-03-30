@@ -33,28 +33,40 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="overflow-hidden py-16 md:py-20 lg:py-28">
-      <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
+    <section
+      id="contact"
+      className="overflow-hidden py-16 md:py-20 lg:py-28"
+      data-oid="_zoa8ox"
+    >
+      <div className="container" data-oid="qlob1qv">
+        <div className="-mx-4 flex flex-wrap" data-oid="2y98xwe">
+          <div className="w-full px-4 lg:w-7/12 xl:w-8/12" data-oid="68kapkj">
             <div
               className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
               data-wow-delay=".15s
               "
+              data-oid="v5o.-_5"
             >
-              <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
+              <h2
+                className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl"
+                data-oid="ncp2.9f"
+              >
                 Request a Demo
               </h2>
-              <p className="mb-12 text-base font-medium text-body-color">
+              <p
+                className="mb-12 text-base font-medium text-body-color"
+                data-oid="e:p6-:p"
+              >
                 Our support team will get back to you ASAP via email.
               </p>
-              <form>
-                <div className="-mx-4 flex flex-wrap">
-                  <div className="w-full px-4 md:w-1/2">
-                    <div className="mb-8">
+              <form data-oid="udp8diq">
+                <div className="-mx-4 flex flex-wrap" data-oid=".2v0uas">
+                  <div className="w-full px-4 md:w-1/2" data-oid="ka1v1z5">
+                    <div className="mb-8" data-oid=".xrmeto">
                       <label
                         htmlFor="name"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                        data-oid="9teklr."
                       >
                         Your Name
                       </label>
@@ -64,14 +76,16 @@ const Contact = () => {
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        data-oid=":z5hp.1"
                       />
                     </div>
                   </div>
-                  <div className="w-full px-4 md:w-1/2">
-                    <div className="mb-8">
+                  <div className="w-full px-4 md:w-1/2" data-oid="x2n5f:j">
+                    <div className="mb-8" data-oid="0bng7ab">
                       <label
                         htmlFor="subject"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                        data-oid=".xdg1lw"
                       >
                         Subject
                       </label>
@@ -81,14 +95,16 @@ const Contact = () => {
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
+                        data-oid=":u-z:60"
                       />
                     </div>
                   </div>
-                  <div className="w-full px-4">
-                    <div className="mb-8">
+                  <div className="w-full px-4" data-oid="9::.ndy">
+                    <div className="mb-8" data-oid="e68m7g-">
                       <label
                         htmlFor="message"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                        data-oid="5saz38u"
                       >
                         Your Message
                       </label>
@@ -99,14 +115,16 @@ const Contact = () => {
                         className="border-stroke w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        data-oid="33wl4fg"
                       ></textarea>
                     </div>
                   </div>
-                  <div className="w-full px-4">
+                  <div className="w-full px-4" data-oid="dlb8eig">
                     <button
                       type="button"
                       className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
                       onClick={handleSubmit}
+                      data-oid="41cqamv"
                     >
                       Submit Ticket
                     </button>

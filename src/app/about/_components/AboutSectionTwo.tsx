@@ -63,32 +63,43 @@ const teamMembers = [
 
 const AboutSectionTwo = () => {
   return (
-    <section className=" py-8 md:py-20 lg:py-28">
+    <section className=" py-8 md:py-20 lg:py-28" data-oid="s4dcbtu">
       {" "}
-      <div className="container">
-        <div className="mb-12 text-center">
-          <h2 className="text-2xl font-bold">Meet Our Team</h2>
-          <p className="text-lg text-body-color">
+      <div className="container" data-oid=":-p6908">
+        <div className="mb-12 text-center" data-oid="c9-vk9c">
+          <h2 className="text-2xl font-bold" data-oid="pfnfi7k">
+            Meet Our Team
+          </h2>
+          <p className="text-lg text-body-color" data-oid="7.sa91t">
             We are a group of passionate individuals dedicated to excellence.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          data-oid="n3f.yss"
+        >
           {teamMembers.map((member, index) => (
-            <div key={index} className="text-center">
+            <div key={index} className="text-center" data-oid=".w_wgd5">
               <motion.div
                 className="relative mx-auto mb-4 aspect-square h-32 w-32"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
+                data-oid="d7j9sgf"
               >
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="rounded-full object-cover"
+                  data-oid="6m:fv7i"
                 />
               </motion.div>
-              <h3 className="text-xl font-bold">{member.name}</h3>
-              <p className="text-base text-body-color">{member.title}</p>
+              <h3 className="text-xl font-bold" data-oid="86a_yd4">
+                {member.name}
+              </h3>
+              <p className="text-base text-body-color" data-oid="kphivfi">
+                {member.title}
+              </p>
             </div>
           ))}
         </div>

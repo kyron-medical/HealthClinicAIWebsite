@@ -136,6 +136,7 @@ const Carousel = React.forwardRef<
           canScrollPrev,
           canScrollNext,
         }}
+        data-oid="p.erdt-"
       >
         <div
           ref={ref}
@@ -144,6 +145,7 @@ const Carousel = React.forwardRef<
           role="region"
           aria-roledescription="carousel"
           {...props}
+          data-oid="8xyn--k"
         >
           {children}
         </div>
@@ -160,7 +162,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className="overflow-hidden" data-oid="gb.pq.z">
       <div
         ref={ref}
         className={cn(
@@ -169,6 +171,7 @@ const CarouselContent = React.forwardRef<
           className,
         )}
         {...props}
+        data-oid="svkiel1"
       />
     </div>
   );
@@ -192,6 +195,7 @@ const CarouselItem = React.forwardRef<
         className,
       )}
       {...props}
+      data-oid="atnc22x"
     />
   );
 });
@@ -218,9 +222,12 @@ const CarouselPrevious = React.forwardRef<
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
+      data-oid="4w.1une"
     >
-      <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
+      <ArrowLeft className="h-4 w-4" data-oid="igfozjx" />
+      <span className="sr-only" data-oid="m0tsxe9">
+        Previous slide
+      </span>
     </Button>
   );
 });
@@ -247,9 +254,12 @@ const CarouselNext = React.forwardRef<
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
+      data-oid="4w-d:as"
     >
-      <ArrowRight className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
+      <ArrowRight className="h-4 w-4" data-oid="poaxk00" />
+      <span className="sr-only" data-oid="aqwn54d">
+        Next slide
+      </span>
     </Button>
   );
 });
@@ -275,15 +285,24 @@ export function CarouselPlugin() {
       className="w-full max-w-xs"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
+      data-oid="dm9rwbe"
     >
-      <CarouselContent>
+      <CarouselContent data-oid="392ry.w">
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <div className="flex flex-col justify-center items-center ">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
+          <CarouselItem key={index} data-oid="kp1765:">
+            <div className="p-1" data-oid="_i7iocu">
+              <Card data-oid="jiyd3et">
+                <CardContent
+                  className="flex aspect-square items-center justify-center p-6"
+                  data-oid="d7jpo_a"
+                >
+                  <div
+                    className="flex flex-col justify-center items-center "
+                    data-oid="8bl-upd"
+                  >
+                    <span className="text-4xl font-semibold" data-oid=".03tl1.">
+                      {index + 1}
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -291,8 +310,8 @@ export function CarouselPlugin() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious data-oid="-z6w6tj" />
+      <CarouselNext data-oid="lngjc94" />
     </Carousel>
   );
 }

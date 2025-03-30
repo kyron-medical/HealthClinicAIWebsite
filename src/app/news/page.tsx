@@ -29,41 +29,62 @@ const NewsPage = () => {
     <section
       id="news"
       className="bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28"
+      data-oid="2eh4waw"
     >
-      <div className="container">
+      <div className="container" data-oid=".2pz9q4">
         <SectionTitle
           title="Latest News"
           paragraph="Stay up to date with the latest news and updates for Kyron!"
           center
+          data-oid="n44ikwj"
         />
 
         {/* Featured Article */}
-        <div className="mb-16">
+        <div className="mb-16" data-oid=":7cyvmj">
           {sortedNewsData.length > 0 && (
-            <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl">
-              <div className="group relative">
-                <div className="aspect-[16/9] w-full overflow-hidden">
+            <div
+              className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl"
+              data-oid="u80-h6t"
+            >
+              <div className="group relative" data-oid="o47di8s">
+                <div
+                  className="aspect-[16/9] w-full overflow-hidden"
+                  data-oid="92:301a"
+                >
                   <Image
                     src={sortedNewsData[0].image}
                     alt={sortedNewsData[0].title}
                     className="w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                     width={1200}
                     height={675}
+                    data-oid="f2wqb53"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/20 to-transparent">
-                  <div className="absolute bottom-0 p-8">
-                    <span className="mb-3 inline-block rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white">
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/20 to-transparent"
+                  data-oid="862oixt"
+                >
+                  <div className="absolute bottom-0 p-8" data-oid=":xogskh">
+                    <span
+                      className="mb-3 inline-block rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white"
+                      data-oid="wtsmppd"
+                    >
                       Featured
                     </span>
-                    <h2 className="mb-4 text-3xl font-bold text-white">
+                    <h2
+                      className="mb-4 text-3xl font-bold text-white"
+                      data-oid="yj99-2g"
+                    >
                       {sortedNewsData[0].title}
                     </h2>
-                    <p className="mb-4 text-gray-200">
+                    <p className="mb-4 text-gray-200" data-oid=":asp187">
                       {sortedNewsData[0].paragraph.substring(0, 150)}...
                     </p>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-gray-300">
+                    <div className="flex items-center gap-4" data-oid=":xfijty">
+                      <span
+                        className="text-sm text-gray-300"
+                        data-oid="oy7eyiv"
+                      >
                         {new Date(
                           sortedNewsData[0].publishDate,
                         ).toLocaleDateString()}
@@ -73,9 +94,13 @@ const NewsPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group/link inline-flex items-center gap-2 text-white hover:text-blue-400"
+                        data-oid="50u2vmg"
                       >
                         Read More
-                        <span className="transition-transform duration-300 group-hover/link:translate-x-1">
+                        <span
+                          className="transition-transform duration-300 group-hover/link:translate-x-1"
+                          data-oid="9vi_:2y"
+                        >
                           →
                         </span>
                       </a>
@@ -88,32 +113,46 @@ const NewsPage = () => {
         </div>
 
         {/* News Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          data-oid="-p26it5"
+        >
           {sortedNewsData.slice(1).map((newsItem) => (
             <div
               key={newsItem.id}
               className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800"
+              data-oid="__1.mny"
             >
-              <div className="aspect-[16/9] overflow-hidden">
+              <div className="aspect-[16/9] overflow-hidden" data-oid="owf8n5b">
                 <Image
                   src={newsItem.image}
                   alt={newsItem.title}
                   width={400}
                   height={225}
                   className="w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  data-oid="j_-e3na"
                 />
               </div>
-              <div className="p-6">
-                <div className="mb-4 flex items-center gap-4">
+              <div className="p-6" data-oid="rv6lzxp">
+                <div
+                  className="mb-4 flex items-center gap-4"
+                  data-oid="65q93f_"
+                >
                   {/* <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                   {newsItem.tags?.[0] || "News"}
                   </span> */}
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span
+                    className="text-sm text-gray-500 dark:text-gray-400"
+                    data-oid="22sgyf:"
+                  >
                     {new Date(newsItem.publishDate).toLocaleDateString()}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span
+                    className="text-xs text-gray-500 dark:text-gray-400"
+                    data-oid="wdhgru8"
+                  >
                     by{" "}
-                    <span className="font-semibold ">
+                    <span className="font-semibold " data-oid="f84tg9_">
                       {newsItem.author.name}
                     </span>
                   </span>
@@ -123,14 +162,21 @@ const NewsPage = () => {
                     className="h-8 w-auto" // Adjust size as needed
                     width={32}
                     height={32}
+                    data-oid="e1nsxf8"
                   />
                 </div>
-                <Link href={newsItem.link}>
-                  <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                <Link href={newsItem.link} data-oid="843x3s_">
+                  <h3
+                    className="mb-3 text-xl font-bold text-gray-900 dark:text-white"
+                    data-oid="63dmuvu"
+                  >
                     {newsItem.title}
                   </h3>
                 </Link>
-                <p className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300">
+                <p
+                  className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300"
+                  data-oid="bovgmt3"
+                >
                   {newsItem.paragraph}
                 </p>
                 <a
@@ -138,9 +184,13 @@ const NewsPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/link inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  data-oid="1cp.h7c"
                 >
                   Read Article
-                  <span className="transition-transform duration-300 group-hover/link:translate-x-1">
+                  <span
+                    className="transition-transform duration-300 group-hover/link:translate-x-1"
+                    data-oid="7ux2kzp"
+                  >
                     →
                   </span>
                 </a>

@@ -156,7 +156,7 @@ const newsData: Blog[] = [
     logoUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlEAgf-KVZ6j5MUqegZTkwJkXUhKHn7cA--g&s",
     link: "https://turnto10.com/features/health-landing-page/kyron-medicals-ai-tool-speeds-insurance-claims-focusing-more-on-patient-care-artificial-intelligence-medical-professionals-february-25-2025",
-  }
+  },
 ];
 
 export default newsData;
