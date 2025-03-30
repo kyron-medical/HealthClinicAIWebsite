@@ -10,12 +10,12 @@ export const DashboardContent = () => {
   return (
     <div
       className="min-h-screen bg-gray-50 px-4 py-8 dark:bg-gray-900 md:px-8"
-      data-oid=":j9g3ob"
+      data-oid="o6thz6p"
     >
-      <DashboardHeader userName="Dr. Smith" data-oid="lmic6s9" />
+      <DashboardHeader userName="Dr. Smith" data-oid="yta1zzx" />
 
       {/* Tab Navigation */}
-      <div className="mb-8" data-oid="5tnuda0">
+      <div className="mb-8" data-oid="n_1aq1o">
         {/* Add your tab navigation here */}
       </div>
 
@@ -25,7 +25,7 @@ export const DashboardContent = () => {
           {/* Stats Section */}
           <div
             className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-            data-oid="lt_474x"
+            data-oid="p27zg7h"
           >
             <StatCard
               title="Total Patients"
@@ -33,7 +33,7 @@ export const DashboardContent = () => {
               change={12.5}
               icon={/* Your SVG icon */ ""}
               color="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-              data-oid="4m2xkt3"
+              data-oid="ueqm-3b"
             />
 
             {/* Add other stat cards */}
@@ -42,7 +42,7 @@ export const DashboardContent = () => {
           {/* Quick Actions & Recent Activity */}
           <div
             className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-3"
-            data-oid="h0lanuh"
+            data-oid="nnsjx4:"
           >
             {/* Add Quick Actions and Recent Activity sections */}
           </div>
@@ -52,7 +52,7 @@ export const DashboardContent = () => {
       {activeTab === "analytics" && (
         <div
           className="grid grid-cols-1 gap-8 lg:grid-cols-2"
-          data-oid="ti2lufo"
+          data-oid="yf:5eid"
         >
           {/* Add analytics content */}
         </div>
@@ -61,7 +61,7 @@ export const DashboardContent = () => {
       {activeTab === "admin" && (
         <div
           className="grid grid-cols-1 gap-6 md:grid-cols-2"
-          data-oid="gmj5n.c"
+          data-oid="6wd-h08"
         >
           {/* Add admin content */}
         </div>

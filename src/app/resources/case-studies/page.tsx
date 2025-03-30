@@ -12,14 +12,14 @@ const CaseStudies = async () => {
       <Breadcrumb
         pageName="Insights & Resources"
         description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
-        data-oid="45w6i-g"
+        data-oid="z44e6uk"
       />
 
-      <section className="pb-[120px] pt-[120px]" data-oid="res_7q1">
-        <div className="container" data-oid="37kwva5">
+      <section className="pb-[120px] pt-[120px]" data-oid="vc79ern">
+        <div className="container" data-oid="_ar2y-q">
           <h2
             className="mb-8 text-3xl flex justify-center items-center self-center font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight"
-            data-oid="ptcm_gy"
+            data-oid="z-t52j-"
           >
             Coming soon...
           </h2>

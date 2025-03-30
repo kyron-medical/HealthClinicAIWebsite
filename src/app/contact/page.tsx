@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const ContactPage = () => {
   return (
     <>
-      <Contact data-oid="zf-he_w" />
+      <Contact data-oid="1z0yrzz" />
     </>
   );
 };

@@ -54,6 +54,12 @@ newTab: false,
         path: "/resources/whitepapers",
         newTab: false,
       },
+      {
+        id: 54,
+        title: "FAQs",
+        path: "/resources/faqs",
+        newTab: false,
+      },
     ],
   },
 ];

@@ -37,44 +37,44 @@ export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
     fetchRelatedPosts();
   }, [currentPostId]);
 
-  if (loading) return <div data-oid="v-7-nem">Loading related articles...</div>;
+  if (loading) return <div data-oid="uf3_rq-">Loading related articles...</div>;
 
   return (
-    <div className="mt-16" data-oid="hpjtben">
+    <div className="mt-16" data-oid=".1cjyak">
       <h3
         className="mb-8 text-2xl font-bold text-gray-900 dark:text-white"
-        data-oid="7pqk2ji"
+        data-oid="ayyahon"
       >
         Related Articles
       </h3>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-3" data-oid="qcu.ik9">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3" data-oid="npory0h">
         {relatedPosts.map((post) => (
           <Link
             href={`/blog/${post.id}`}
             key={post.id}
             className="group block overflow-hidden rounded-xl bg-white shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-gray-800"
-            data-oid="e.pms80"
+            data-oid="nncvuue"
           >
-            <div className="aspect-[16/9] overflow-hidden" data-oid="9scisrl">
+            <div className="aspect-[16/9] overflow-hidden" data-oid="01va3-7">
               <Image
                 src={post.mainImage}
                 alt={post.title}
                 width={400}
                 height={225}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                data-oid="x6j56zp"
+                data-oid="iqd.b02"
               />
             </div>
-            <div className="p-4" data-oid=":_d12ec">
+            <div className="p-4" data-oid="lxb1.wv">
               <h4
                 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white"
-                data-oid="8:-g.vf"
+                data-oid="-5xj:r4"
               >
                 {post.title}
               </h4>
               <p
                 className="line-clamp-2 text-sm text-gray-600 dark:text-gray-300"
-                data-oid="731.l59"
+                data-oid="-an1ofd"
               >
                 {post.tagline}
               </p>
