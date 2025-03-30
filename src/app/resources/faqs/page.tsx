@@ -185,8 +185,8 @@ export default function FAQPage() {
                       </li>
                       <li data-oid="0hxrm.l">
                         <strong data-oid=":piohyd">Adaptive Learning:</strong>{" "}
-                        Our AI continuously learns from your practice's data,
-                        becoming more effective over time.
+                        Our AI continuously learns from your practice`&apos;`s
+                        data, becoming more effective over time.
                       </li>
                       <li data-oid="r4v_o3-">
                         <strong data-oid="n43ooig">
@@ -238,8 +238,8 @@ export default function FAQPage() {
                       className="mb-4 text-gray-600 dark:text-gray-400"
                       data-oid="pzcbr45"
                     >
-                      Kyron's solutions are designed to benefit a wide range of
-                      healthcare providers, including:
+                      Kyron`&apos;`s solutions are designed to benefit a wide
+                      range of healthcare providers, including:
                     </p>
                     <ul
                       className="list-inside list-disc space-y-1 text-gray-600 dark:text-gray-400"
@@ -281,7 +281,7 @@ export default function FAQPage() {
                       className="text-lg font-medium text-gray-900 dark:text-white"
                       data-oid="t1rsz8g"
                     >
-                      How does Kyron's AI technology work?
+                      How does Kyron`&apos;`s AI technology work?
                     </h3>
                     <svg
                       className="h-5 w-5 text-gray-500 dark:text-gray-400"
@@ -307,7 +307,7 @@ export default function FAQPage() {
                       className="mb-4 text-gray-600 dark:text-gray-400"
                       data-oid="251475z"
                     >
-                      Kyron's AI technology works through a sophisticated
+                      Kyron`&apos;`s AI technology works through a sophisticated
                       combination of machine learning algorithms, natural
                       language processing, and predictive analytics. Our system:
                     </p>
@@ -455,7 +455,7 @@ export default function FAQPage() {
                     >
                       Our implementation process is designed to be thorough yet
                       efficient, typically taking 4-6 weeks from start to
-                      finish. Here's what you can expect:
+                      finish. Here`&apos;`s what you can expect:
                     </p>
                     <ol
                       className="list-inside list-decimal space-y-2 text-gray-600 dark:text-gray-400"
@@ -555,9 +555,9 @@ export default function FAQPage() {
                       className="mt-4 text-gray-600 dark:text-gray-400"
                       data-oid="p:fyd6f"
                     >
-                      The full benefits of Kyron's AI-driven optimization
+                      The full benefits of Kyron`&apos;`s AI-driven optimization
                       continue to grow over time as our system learns from your
-                      practice's specific patterns and challenges.
+                      practice`&apos;`s specific patterns and challenges.
                     </p>
                   </div>
                 </div>
@@ -612,7 +612,7 @@ export default function FAQPage() {
                       data-oid="qv2uk7p"
                     >
                       Kyron offers flexible pricing models designed to align
-                      with your practice's needs and goals:
+                      with your practice`&apos;`s needs and goals:
                     </p>
                     <ul
                       className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-400"
