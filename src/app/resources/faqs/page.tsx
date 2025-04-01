@@ -281,7 +281,7 @@ export default function FAQPage() {
                       className="text-lg font-medium text-gray-900 dark:text-white"
                       data-oid="t1rsz8g"
                     >
-                      How does Kyron`&apos;`s AI technology work?
+                      How does Kyron's AI technology work?
                     </h3>
                     <svg
                       className="h-5 w-5 text-gray-500 dark:text-gray-400"
