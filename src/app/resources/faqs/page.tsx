@@ -665,7 +665,7 @@ export default function FAQPage() {
                 healthcare practice.
               </p>
               <Link
-                href="/contact"
+                href="https://form.typeform.com/to/zstMkPH7"
                 className="inline-block rounded-lg bg-white px-6 py-3 font-medium text-blue-600 transition hover:bg-blue-50"
                 data-oid="1gdspxw"
               >
