@@ -80,11 +80,11 @@ const FormattedArticleContent: React.FC<{ content: string }> = ({
   );
 };
 
-const BlogPost: NextPage<{ id: string }> = async ({ id }) => {
+export default async function BlogPost({ params }: { params: { id: string } }) {
   let post;
 
   try {
-    post = await getBlogPost(id);
+    post = await getBlogPost(params.id);
   } catch (error) {
     notFound();
   }
@@ -173,7 +173,7 @@ const BlogPost: NextPage<{ id: string }> = async ({ id }) => {
               <FormattedArticleContent content={post.content} />
 
               {/* Related Posts */}
-              <RelatedPosts currentPostId={id} data-oid="za0y6q9" />
+              <RelatedPosts currentPostId={params.id} data-oid="za0y6q9" />
 
               {/* Newsletter Signup */}
               <NewsletterSignup data-oid="0_pc3dd" />
