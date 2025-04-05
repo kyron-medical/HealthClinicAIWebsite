@@ -99,33 +99,33 @@ const DemoForm = () => {
 
   return (
     <>
-      <div className="container" data-oid="fy3x9vs">
-        <SignedOut data-oid="n:05n.g">
+      <div className="container" data-oid="_qi524w">
+        <SignedOut data-oid="1u-7mlp">
           <h2
             className="text-center text-3xl font-bold text-dark dark:text-white"
-            data-oid="dtgokj-"
+            data-oid="gq4hat1"
           >
             Sign in to generate your letter of appeal
           </h2>
-          <SignInButton data-oid="6soy.yv" />
+          <SignInButton data-oid="jeqwq1v" />
         </SignedOut>
 
-        <SignedIn data-oid="y:vb7qs">
+        <SignedIn data-oid="2144560">
           <div
             className="mx-4 mt-32 flex flex-col flex-wrap items-center justify-center gap-8 align-middle"
-            data-oid="a2b2e9o"
+            data-oid="q::ybtd"
           >
-            <div className="flex flex-row gap-8" data-oid="gn8y4ce">
+            <div className="flex flex-row gap-8" data-oid="l3gp3k8">
               <FileUploadBox
                 label="Patient Note(s)"
                 onFileChange={(file) => setPatientNotesFile(file)}
-                data-oid="g4j6sc0"
+                data-oid="-bj9fje"
               />
 
               <FileUploadBox
                 label="Insurance Denial"
                 onFileChange={(file) => setInsuranceDenialFile(file)}
-                data-oid="8bud3c-"
+                data-oid="lsmh24s"
               />
             </div>
 
@@ -138,18 +138,18 @@ const DemoForm = () => {
               }`}
               onClick={handleSubmit}
               disabled={!patientNotesFile || !insuranceDenialFile}
-              data-oid="36:9eb9"
+              data-oid="-fl:8qk"
             >
               Generate Letter of Appeal
             </button>
 
             {isTextareaFilled && (
-              <div className="w-full px-4 md:w-1/2" data-oid="e7r6:xt">
-                <div className="mb-8" data-oid="13we6lc">
+              <div className="w-full px-4 md:w-1/2" data-oid=".yih6o3">
+                <div className="mb-8" data-oid="9mj:iwj">
                   <label
                     htmlFor="email"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                    data-oid="_-msfj9"
+                    data-oid="-96-931"
                   >
                     Recipient&apos;s Email
                   </label>
@@ -159,14 +159,14 @@ const DemoForm = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    data-oid="bq8co-a"
+                    data-oid="1d8:n4q"
                   />
                 </div>
-                <div className="mb-8" data-oid="4bxz1w4">
+                <div className="mb-8" data-oid=":-dcqcy">
                   <label
                     htmlFor="subject"
                     className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                    data-oid="8fkkqq:"
+                    data-oid="qy3hgs:"
                   >
                     Subject
                   </label>
@@ -176,11 +176,11 @@ const DemoForm = () => {
                     className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    data-oid="-4:gdlq"
+                    data-oid="8bv2qxx"
                   />
                 </div>
                 {/* Updated Textarea Container */}
-                <div className="w-full max-w-3xl" data-oid="3iql6pv">
+                <div className="w-full max-w-3xl" data-oid="pd9jtct">
                   {" "}
                   {/* Increased max-width */}
                   {/* Letter of appeal from fetch request */}
@@ -189,7 +189,7 @@ const DemoForm = () => {
                     value={appealLetter}
                     readOnly
                     rows={15} // Increased number of visible text lines
-                    data-oid="z68wkdw"
+                    data-oid="4avae_m"
                   ></textarea>
                 </div>
 
@@ -202,7 +202,7 @@ const DemoForm = () => {
                   }`}
                   onClick={handleSubmit}
                   disabled={!isEmailFilled || !isSubjectFilled}
-                  data-oid="gwmn32f"
+                  data-oid="m.wxtpr"
                 >
                   Send Email
                 </button>

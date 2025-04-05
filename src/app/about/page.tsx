@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <>
-      <AboutSectionOne data-oid="5evuc8b" />
-      <AboutSectionTwo data-oid="a5d0ssz" />
-      <AboutSectionThree data-oid="riv-0d2" />
+      <AboutSectionOne data-oid="5n5oox5" />
+      <AboutSectionTwo data-oid="olppha." />
+      <AboutSectionThree data-oid="o538aud" />
     </>
   );
 };

@@ -7,7 +7,9 @@ import { AuthorInfo } from "./_components/AuthorInfo";
 import { RelatedPosts } from "./_components/RelatedPosts";
 import { NewsletterSignup } from "./_components/NewsletterSignup";
 import { TableOfContents } from "./_components/TableOfContents";
+import { TextFormattingMenu } from "./_components/TextFormattingMenu";
 import { notFound } from "next/navigation";
+import React from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +32,56 @@ interface BlogPostPageProps {
   params: { id: string };
 }
 
+
+const FormattedArticleContent: React.FC<{ content: string }> = ({
+  content,
+}) => {
+  const [isBold, setIsBold] = React.useState(false);
+  const [fontSize, setFontSize] = React.useState("medium");
+
+  const handleBoldToggle = () => {
+    setIsBold(!isBold);
+  };
+
+  const handleFontSizeChange = (size: string) => {
+    setFontSize(size);
+  };
+
+  // Generate dynamic styles based on formatting options
+  const contentStyle = {
+    fontWeight: isBold ? "bold" : "normal",
+    fontSize: fontSize,
+  };
+
+  return (
+    <>
+      <div className="mb-4 flex justify-end">
+        <TextFormattingMenu
+          onBoldToggle={handleBoldToggle}
+          onFontSizeChange={handleFontSizeChange}
+          isBold={isBold}
+          currentFontSize={fontSize}
+        />
+      </div>
+      <article
+        className="prose prose-lg dark:prose-invert max-w-none"
+        data-oid="hn85zjx"
+      >
+        <p data-oid="2ecz7vp" style={contentStyle}>
+          {content.split("\n").map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              {i !== content.split("\n").length - 1 && (
+                <br data-oid="z1rt8nh" />
+              )}
+            </React.Fragment>
+          ))}
+        </p>
+      </article>
+    </>
+  );
+};
+
 export default async function BlogPost({ params }: BlogPostPageProps) {
   let post;
 
@@ -48,16 +100,16 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <Breadcrumb
         pageName={post.title}
         description="Insights and perspectives on healthcare technology and innovation"
-        data-oid="-yil76n"
+        data-oid="itc_d0j"
       />
 
-      <section className="py-16 lg:py-24" data-oid="2ejske-">
-        <div className="container" data-oid="p.5e62q">
-          <div className="mx-auto max-w-4xl" data-oid="vsdlvzh">
+      <section className="py-16 lg:py-24" data-oid="ttrs-ji">
+        <div className="container" data-oid="2t90z_e">
+          <div className="mx-auto max-w-4xl" data-oid="h41q:pk">
             {/* Featured Image */}
             <div
               className="mb-8 overflow-hidden rounded-2xl"
-              data-oid="8wp9b5l"
+              data-oid="du_a8m2"
             >
               <Image
                 src={post.mainImage}
@@ -66,26 +118,26 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 height={675}
                 className="h-auto w-full object-cover"
                 priority
-                data-oid="ft:g56_"
+                data-oid="4ol6ays"
               />
             </div>
 
             {/* Post Header */}
-            <div className="mb-12" data-oid=":vwenw0">
+            <div className="mb-12" data-oid="-v-ahz3">
               <div
                 className="mb-6 flex flex-wrap items-center justify-between gap-4"
-                data-oid="y71jbhu"
+                data-oid="zv_bcwj"
               >
-                <div className="flex items-center gap-4" data-oid="uaenbvq">
+                <div className="flex items-center gap-4" data-oid="xfnutyc">
                   <span
                     className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                    data-oid="lxm7wyg"
+                    data-oid="gjz106-"
                   >
                     Healthcare
                   </span>
                   <span
                     className="text-sm text-gray-500 dark:text-gray-400"
-                    data-oid="v0z5pvo"
+                    data-oid="66-uici"
                   >
                     {new Date(post.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -94,44 +146,39 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     })}
                   </span>
                 </div>
-                <SocialShareButtons data-oid="p.a.ln-" />
+                <SocialShareButtons data-oid="p32b1qu" />
               </div>
 
               <h1
                 className="mb-6 text-3xl font-bold leading-tight text-gray-900 dark:text-white md:text-4xl lg:text-5xl"
-                data-oid="hjg.ioy"
+                data-oid="rbwllmo"
               >
                 {post.title}
               </h1>
 
-              <AuthorInfo author={author} data-oid="plb3krm" />
+              <AuthorInfo author={author} data-oid=".0mml0t" />
             </div>
           </div>
 
           {/* Content Area with Sidebar */}
           <div
             className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-4"
-            data-oid="5.dnnpq"
+            data-oid="qv6qmg5"
           >
             {/* Table of Contents Sidebar */}
-            <div className="hidden lg:block" data-oid="gb.gqa6">
-              <TableOfContents headings={sampleHeadings} data-oid="i..gerg" />
+            <div className="hidden lg:block" data-oid=".8854vq">
+              <TableOfContents headings={sampleHeadings} data-oid="x_fha3k" />
             </div>
 
             {/* Main Content */}
-            <div className="lg:col-span-3" data-oid="q1rxbxu">
-              <article
-                className="prose prose-lg max-w-none dark:prose-invert"
-                data-oid="p5-ttro"
-              >
-                <p data-oid="yd128qk">{post.content}</p>
-              </article>
+            <div className="lg:col-span-3" data-oid="oclvu5e">
+              <FormattedArticleContent content={post.content} />
 
               {/* Related Posts */}
-              <RelatedPosts currentPostId={params.id} data-oid="i_bpoie" />
+              <RelatedPosts currentPostId={params.id} data-oid="za0y6q9" />
 
               {/* Newsletter Signup */}
-              <NewsletterSignup data-oid="i9zit3w" />
+              <NewsletterSignup data-oid="0_pc3dd" />
             </div>
           </div>
         </div>

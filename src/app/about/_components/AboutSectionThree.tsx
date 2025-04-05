@@ -84,51 +84,51 @@ const advisors = [
 
 const AboutSectionThree = () => {
   return (
-    <section className="py-16 md:py-20 lg:py-28" data-oid="3cbh5pw">
-      <div className="container" data-oid=":kmnjgj">
-        <div className="mb-12 text-center" data-oid="k_bc6si">
-          <h2 className="text-2xl font-bold" data-oid="8sifvyy">
+    <section className="py-16 md:py-20 lg:py-28" data-oid="n_8ghgx">
+      <div className="container" data-oid="tixq.9t">
+        <div className="mb-12 text-center" data-oid="n01l43.">
+          <h2 className="text-2xl font-bold" data-oid="m8ipv7x">
             Meet Our Advisors
           </h2>
-          <p className="text-lg text-body-color" data-oid=".oac1g9">
+          <p className="text-lg text-body-color" data-oid="qlk2nmh">
             A group of compassionate individuals dedicated to mentorship.
           </p>
         </div>
         <div
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-          data-oid="ag8i8_."
+          data-oid="smot760"
         >
           {advisors.map((member, index) => (
             <div
               key={index}
               className="flex flex-col items-center text-center"
-              data-oid="t73exkz"
+              data-oid="arims62"
             >
               <div
                 className="relative mx-auto mb-4 aspect-square h-32 w-32"
-                data-oid="vl7sbzc"
+                data-oid="u65_yf4"
               >
                 <motion.div
                   className="relative mx-auto mb-4 aspect-square h-32 w-32"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
-                  data-oid="-nod0ts"
+                  data-oid="0k5takf"
                 >
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     className="rounded-full object-cover"
-                    data-oid="-dkjj60"
+                    data-oid="wysxwtk"
                   />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-bold" data-oid=":.c63pl">
+              <h3 className="text-xl font-bold" data-oid="gs.jhj4">
                 {member.name}
               </h3>
               <p
                 className="flex w-8/12 self-center text-base text-body-color"
-                data-oid="1ol2kzk"
+                data-oid="8p861c5"
               >
                 {member.title}
               </p>

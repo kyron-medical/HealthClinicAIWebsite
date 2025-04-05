@@ -26,10 +26,10 @@ const Pipeline = () => {
   };
 
   return (
-    <section id="prototype" className="my-8 text-center" data-oid="ogg69ij">
+    <section id="prototype" className="my-8 text-center" data-oid="xyjm6k8">
       <div
         className="flex flex-col items-center justify-center md:flex-row"
-        data-oid="4lyd2ja"
+        data-oid="q4msu8v"
       >
         <Image
           src="/images/demo.png"
@@ -37,32 +37,32 @@ const Pipeline = () => {
           className="mx-auto w-full transform rounded-md shadow-lg transition-transform duration-500 hover:scale-105 md:w-1/2"
           width={500}
           height={400}
-          data-oid=":1t_3.a"
+          data-oid="n.48l4a"
         />
 
         <div
           className="mx-auto w-full pl-4 text-left md:w-1/3 md:pl-16"
-          data-oid="p4v52m9"
+          data-oid="oxw_o4h"
         >
           <h2
             className="mb-4 text-2xl font-bold md:text-4xl"
-            data-oid="30ri9v."
+            data-oid="b9:0ja-"
           >
             Access an Interactive Demo of Kyron
           </h2>
           <p
             className="text-base text-body-color md:text-lg"
-            data-oid="s-kt-u9"
+            data-oid="lc-fan2"
           >
             Experience Kyron&#39;s tailored solutions with our interactive demo.
           </p>
 
           <span
             className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
-            data-oid="7.b9n2y"
+            data-oid="qmsxjpk"
           >
             Email
-            <span className="text-sm text-red-700" data-oid="gp.87ph">
+            <span className="text-sm text-red-700" data-oid="sgxgpxc">
               *
             </span>
           </span>
@@ -72,11 +72,11 @@ const Pipeline = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="mt-4 w-full rounded-md border border-gray-300 p-2 text-base text-body-color focus:border-blue-500 focus:outline-none md:text-lg"
-            data-oid="1t7svl8"
+            data-oid="i9_px7q"
           />
 
-          <div className="mt-8" data-oid="l089-jm">
-            <TestDrive handleSubmit={handleSubmit} data-oid="d03iihi" />
+          <div className="mt-8" data-oid="r.m--hx">
+            <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
           </div>
         </div>
       </div>
@@ -87,25 +87,25 @@ const Pipeline = () => {
 export default function Home() {
   return (
     <>
-      <ScrollUp data-oid="g:bz9q-" />
-      <Landing data-oid="bpymt-8" />
-      <section id="prototype" className="my-8 text-center" data-oid="m6c2967">
+      <ScrollUp data-oid="3slxy0l" />
+      <Landing data-oid="3f.5-hd" />
+      <section id="prototype" className="my-8 text-center" data-oid="7dbq_53">
         <div
           className="flex flex-col items-center justify-center md:flex-row "
-          data-oid="f-qayko"
+          data-oid="8p672uu"
         >
           <div
             className="mx-auto w-full pl-4 text-left md:w-1/3 md:pl-16"
-            data-oid="k88kdp."
+            data-oid="n4tpck6"
           >
             <h2
               className="mb-4 text-2xl font-bold md:text-4xl"
-              data-oid="f_ofqbd"
+              data-oid=":pricz."
             >
               Our Physician Dashboard Gives You{" "}
               <span
                 className="bg-gradient-to-b from-[#4A6CF7] to-[#3628d2] bg-clip-text text-transparent"
-                data-oid="g-bq:ic"
+                data-oid="hf0zrmz"
               >
                 Full Control
               </span>{" "}
@@ -113,7 +113,7 @@ export default function Home() {
             </h2>
             <p
               className="text-base text-body-color md:text-lg"
-              data-oid="8okhu2x"
+              data-oid="7e8ixnp"
             >
               Our physician dashboard is designed to give you full control over
               your billing, scheduling, and patient records. You can easily
@@ -126,20 +126,20 @@ export default function Home() {
             className="mx-auto w-full transform self-center rounded-md shadow-lg transition-transform duration-500 hover:scale-105 md:w-1/2"
             width={500}
             height={400}
-            data-oid="9qpf298"
+            data-oid=":w0gcyw"
           />
         </div>
       </section>
 
       <section
         className="py-8 text-center md:py-16 md:py-20 lg:py-28"
-        data-oid="tyyt_ov"
+        data-oid=":p8at38"
       >
-        <div className="container" data-oid="yn-7q3h">
-          <h3 data-oid="wj1cbw3">
+        <div className="container" data-oid="c50bn.i">
+          <h3 data-oid="3rzz9ze">
             <span
               className="text-xl text-slate-700 md:text-2xl"
-              data-oid="28djt2-"
+              data-oid="h.lg2t1"
             >
               As featured in...
             </span>
@@ -147,17 +147,17 @@ export default function Home() {
 
           <div
             className="mt-12 flex flex-wrap justify-center md:mt-24 "
-            data-oid="yd_10oa"
+            data-oid=".frhx6x"
           >
-            <Link href="/news" data-oid="-jrugy5">
-              <InfiniteCarousel data-oid="hce.52d">
+            <Link href="/news" data-oid="y.fydln">
+              <InfiniteCarousel data-oid="_xjbrlg">
                 <Image
                   src={"/logos/news/brown-university.png"}
                   className=""
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="xsxhjjj"
+                  data-oid="6630xnj"
                 />
 
                 <Image
@@ -166,7 +166,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="z.:759o"
+                  data-oid="um2qwuw"
                 />
 
                 <Image
@@ -175,7 +175,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="w86-wf6"
+                  data-oid="9z1r:qz"
                 />
 
                 <Image
@@ -184,7 +184,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="7uwzl1i"
+                  data-oid="6_0j_e1"
                 />
 
                 <Image
@@ -193,7 +193,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="ds:ufle"
+                  data-oid="3c:x7d6"
                 />
 
                 <Image
@@ -202,7 +202,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="6vbx-gt"
+                  data-oid="ddi2zkx"
                 />
 
                 <Image
@@ -211,7 +211,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="fu:-79l"
+                  data-oid="ahrdv12"
                 />
 
                 <Image
@@ -220,7 +220,7 @@ export default function Home() {
                   alt={""}
                   height={200}
                   width={300}
-                  data-oid="63r-.nn"
+                  data-oid="upv:yu:"
                 />
               </InfiniteCarousel>
             </Link>
@@ -230,192 +230,192 @@ export default function Home() {
 
       <section
         className="py-8 text-center md:py-16 md:py-20 lg:py-4"
-        data-oid="a_xa1hy"
+        data-oid="y:c0r27"
       >
-        <div className="container" data-oid="2k72l_a">
+        <div className="container" data-oid="44l389r">
           <SectionTitle
             title="Why leading providers partner with Kyron Medical"
             paragraph="Trusted by healthcare leaders for comprehensive solutions that deliver results"
             center
-            data-oid="sbnxaw4"
+            data-oid="s6di3fs"
           />
 
           <div
             className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
-            data-oid="lvq1j2f"
+            data-oid="ku7:-0f"
           >
             {/* World Class Team */}
             <div
               className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:bg-gray-800"
-              data-oid="6_ljh2y"
+              data-oid="v4z-4mo"
             >
-              <div className="mb-6" data-oid="l2zwdyq">
+              <div className="mb-6" data-oid="aurfnt.">
                 <Image
                   src="/images/logo/kyron_medical.png"
                   alt="World Class Team"
                   width={60}
                   height={60}
                   className="mx-auto"
-                  data-oid="t:bdfil"
+                  data-oid="1h3.t:y"
                 />
               </div>
               <h3
                 className="mb-4 text-xl font-bold text-gray-900 dark:text-white"
-                data-oid="za487iw"
+                data-oid="fni3drp"
               >
                 World Class Team
               </h3>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="7k.d5su"
+                data-oid="bl109hw"
               >
                 A white glove service team dedicated to your success
               </p>
               <div
                 className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-blue-500/10 transition-transform duration-300 group-hover:rotate-45"
-                data-oid="l-75jmw"
+                data-oid="me_tcif"
               ></div>
             </div>
 
             {/* Seamless Integration */}
             <div
               className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:bg-gray-800"
-              data-oid="p7ag828"
+              data-oid="nsya4l1"
             >
-              <div className="mb-6 grid grid-cols-3 gap-2" data-oid="udlh5ms">
+              <div className="mb-6 grid grid-cols-3 gap-2" data-oid="9q8u9-0">
                 <div
                   className="flex h-8 w-8 items-center justify-center rounded bg-blue-100 dark:bg-blue-900/30"
-                  data-oid="fvhxlrp"
+                  data-oid="-rd:mpb"
                 >
                   <Image
                     src="/images/icons/webpt.png"
                     alt="WebPT"
                     width={20}
                     height={20}
-                    data-oid="wzublul"
+                    data-oid="j345yxy"
                   />
                 </div>
                 <div
                   className="flex h-8 w-8 items-center justify-center rounded bg-blue-100 dark:bg-blue-900/30"
-                  data-oid="bzopqpz"
+                  data-oid="h5icqdx"
                 >
                   <Image
                     src="/images/icons/athena.png"
                     alt="Athena"
                     width={20}
                     height={20}
-                    data-oid="z-ve39:"
+                    data-oid="jl:_z0p"
                   />
                 </div>
                 <div
                   className="flex h-8 w-8 items-center justify-center rounded bg-blue-100 dark:bg-blue-900/30"
-                  data-oid="ywgpzrf"
+                  data-oid="jrscb4e"
                 >
                   <Image
                     src="/images/icons/epic.png"
                     alt="Epic"
                     width={20}
                     height={20}
-                    data-oid="ie_d0xz"
+                    data-oid="ura62i."
                   />
                 </div>
               </div>
               <h3
                 className="mb-4 text-xl font-bold text-gray-900 dark:text-white"
-                data-oid="l.u5mou"
+                data-oid="gbvtyei"
               >
                 Seamless Integration
               </h3>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="wqp5_h:"
+                data-oid="4h0vd5b"
               >
                 Integrating with all healthcare applications in the cloud and
                 on-prem
               </p>
               <div
                 className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-green-500/10 transition-transform duration-300 group-hover:rotate-45"
-                data-oid=".szt2.r"
+                data-oid="inkrw6l"
               ></div>
             </div>
 
             {/* ROI Obsessed */}
             <div
               className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:bg-gray-800"
-              data-oid="fhs0bph"
+              data-oid="l3ade6z"
             >
-              <div className="mb-6" data-oid="v_amttp">
+              <div className="mb-6" data-oid="aa-s-ly">
                 <div
                   className="mx-auto h-16 w-16 overflow-hidden rounded-full bg-blue-100 p-3 dark:bg-blue-900/30"
-                  data-oid="isbn93n"
+                  data-oid="ixhms_i"
                 >
                   <div
                     className="h-full w-full rounded-full bg-gradient-to-tr from-blue-500 to-purple-500"
-                    data-oid="z4jd24i"
+                    data-oid="aru6mkv"
                   ></div>
                 </div>
               </div>
               <h3
                 className="mb-4 text-xl font-bold text-gray-900 dark:text-white"
-                data-oid="ijm3-br"
+                data-oid="d66izyb"
               >
                 ROI Obsessed
               </h3>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="pxgtgvx"
+                data-oid="5eyvu2z"
               >
                 Adding millions in revenue with our performance-driven
                 contracts.
               </p>
               <div
                 className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-purple-500/10 transition-transform duration-300 group-hover:rotate-45"
-                data-oid="6bot.l8"
+                data-oid="1fg4lig"
               ></div>
             </div>
 
             {/* Vendor Consolidation */}
             <div
               className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:bg-gray-800"
-              data-oid="sb2xln5"
+              data-oid="84qd7bz"
             >
-              <div className="mb-6" data-oid=":t1m-7.">
+              <div className="mb-6" data-oid="mmt-iy5">
                 <div
                   className="mx-auto flex h-16 w-16 items-center justify-center"
-                  data-oid="37q-vn9"
+                  data-oid="o74vg.v"
                 >
-                  <div className="relative h-12 w-12" data-oid="ucn0.1u">
+                  <div className="relative h-12 w-12" data-oid="8_slyem">
                     <div
                       className="absolute bottom-0 h-8 w-8 rounded bg-blue-200 dark:bg-blue-900/30"
-                      data-oid="tj3p76d"
+                      data-oid="ms4808j"
                     ></div>
                     <div
                       className="absolute bottom-2 right-2 h-8 w-8 rounded bg-blue-300 dark:bg-blue-800/30"
-                      data-oid="qz-y3ll"
+                      data-oid="p7ntw-f"
                     ></div>
                     <div
                       className="absolute bottom-4 right-4 h-8 w-8 rounded bg-blue-400 dark:bg-blue-700/30"
-                      data-oid="b:b5_2p"
+                      data-oid="vtxxfv7"
                     ></div>
                   </div>
                 </div>
               </div>
               <h3
                 className="mb-4 text-xl font-bold text-gray-900 dark:text-white"
-                data-oid="7glsrds"
+                data-oid="a26mdft"
               >
                 Vendor Consolidation
               </h3>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="7g7et3o"
+                data-oid="zl03-en"
               >
                 One unified platform for every department—cutting your tool and
                 vendor expenses.
               </p>
               <div
                 className="absolute -right-12 -top-12 h-24 w-24 rotate-12 transform bg-blue-500/10 transition-transform duration-300 group-hover:rotate-45"
-                data-oid="nz5wrep"
+                data-oid="3boz_.y"
               ></div>
             </div>
           </div>
@@ -423,29 +423,29 @@ export default function Home() {
           {/* Stats Section */}
           <div
             className="mt-20 grid grid-cols-1 gap-8 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 p-8 md:grid-cols-3"
-            data-oid="igh--jv"
+            data-oid="cy..zl0"
           >
-            <div className="text-center text-white" data-oid="g9ad:wd">
-              <h4 className="mb-2 text-4xl font-bold" data-oid="bfd204a">
+            <div className="text-center text-white" data-oid="-ex_t2d">
+              <h4 className="mb-2 text-4xl font-bold" data-oid="x2dtl18">
                 98%
               </h4>
-              <p className="text-blue-100" data-oid=".c6g3.q">
+              <p className="text-blue-100" data-oid="gwz2po2">
                 First Pass Resolution Rate
               </p>
             </div>
-            <div className="text-center text-white" data-oid="gfoyv4p">
-              <h4 className="mb-2 text-4xl font-bold" data-oid=":ygunto">
+            <div className="text-center text-white" data-oid="u9_c_so">
+              <h4 className="mb-2 text-4xl font-bold" data-oid="-7d6.jv">
                 3x
               </h4>
-              <p className="text-blue-100" data-oid="pfrrtx6">
+              <p className="text-blue-100" data-oid="zsjql0p">
                 Faster Processing Time
               </p>
             </div>
-            <div className="text-center text-white" data-oid="skb981o">
-              <h4 className="mb-2 text-4xl font-bold" data-oid="h:mcboz">
+            <div className="text-center text-white" data-oid="7x5707o">
+              <h4 className="mb-2 text-4xl font-bold" data-oid="63h026p">
                 $2.1M
               </h4>
-              <p className="text-blue-100" data-oid="8xnnys_">
+              <p className="text-blue-100" data-oid="yv_y98y">
                 Average Annual Savings
               </p>
             </div>
@@ -455,27 +455,27 @@ export default function Home() {
 
       <section
         className="-pt-24 py-8 text-center md:py-16 md:py-20 lg:py-4"
-        data-oid="zjrl1pe"
+        data-oid="yhx4jyu"
       >
-        <div className="container" data-oid="ic3rhcv">
+        <div className="container" data-oid="d6:w:sx">
           <div
             className="mt-8 grid grid-cols-1 gap-4 pt-12 md:grid-cols-2 md:pt-24"
-            data-oid="fdm2zm1"
+            data-oid="tv09xoc"
           >
             <div
               className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="6fsp0bl"
+              data-oid="4t4qe:."
             >
-              <Orb color="pink" data-oid="gns99h6" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="fk21q61">
+              <Orb color="pink" data-oid="o6hmo_b" />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="fpjcugx">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid="48o:zbz"
+                  data-oid="5vu7k30"
                 >
                   Denials Management
                 </h3>
-                <p className="text-left text-body-color" data-oid="4gwrm1f">
-                  <span className="text-left font-bold" data-oid="p48gcpz">
+                <p className="text-left text-body-color" data-oid="x.mjukc">
+                  <span className="text-left font-bold" data-oid="53w_dib">
                     Turn denials into approvals.
                   </span>{" "}
                   Proactively identify, analyze, and resolve claim denials with
@@ -486,18 +486,18 @@ export default function Home() {
             </div>
             <div
               className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="v5_1ang"
+              data-oid="wtx6dsn"
             >
-              <Orb color="green" data-oid="z24_s6o" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="am:f74f">
+              <Orb color="green" data-oid="4s5zrls" />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="g98heiu">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid="gzmdzm_"
+                  data-oid="y4b1kv1"
                 >
                   Claims Management
                 </h3>
-                <p className="text-left text-body-color" data-oid="h7nq:3b">
-                  <span className="font-bold" data-oid="qs8eo6n">
+                <p className="text-left text-body-color" data-oid="4vm030o">
+                  <span className="font-bold" data-oid="q_uppeg">
                     Faster claims, fewer errors, higher revenue.
                   </span>{" "}
                   AI-powered claims processing ensures accuracy, accelerates
@@ -507,18 +507,18 @@ export default function Home() {
             </div>
             <div
               className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="kka.y1n"
+              data-oid="tqe4t5b"
             >
-              <Orb color="pearl" data-oid="y_me59u" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="1a6b:ch">
+              <Orb color="pearl" data-oid="dzp-ds2" />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="u1mqror">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid="58ei4n_"
+                  data-oid="8ec.llr"
                 >
                   Prior Authorization
                 </h3>
-                <p className="text-left text-body-color" data-oid="u.yge1p">
-                  <span className="font-bold" data-oid="tfnpr95">
+                <p className="text-left text-body-color" data-oid="bd_ksgt">
+                  <span className="font-bold" data-oid="v8v4t_p">
                     Instant approvals, fewer delays.
                   </span>{" "}
                   AI streamlines prior authorizations by automating
@@ -529,18 +529,18 @@ export default function Home() {
             </div>
             <div
               className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row "
-              data-oid=".4dm-af"
+              data-oid="3jtt4-3"
             >
-              <Orb color="orange" data-oid="p32gogr" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="-l1o:s9">
+              <Orb color="orange" data-oid="4h-dtx." />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="8p4bj.i">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid="ggayrgm"
+                  data-oid="v37rr7k"
                 >
                   Eligibility Verification
                 </h3>
-                <p className="text-left text-body-color" data-oid=":jv:2il">
-                  <span className="font-bold" data-oid="7wg7fc8">
+                <p className="text-left text-body-color" data-oid="f984kl-">
+                  <span className="font-bold" data-oid=".boalr7">
                     Verify in seconds, reduce rejections.
                   </span>{" "}
                   AI-driven eligibility checks instantly confirm patient
@@ -551,18 +551,18 @@ export default function Home() {
             </div>
             <div
               className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="ls5lqnl"
+              data-oid="sih6m0a"
             >
-              <Orb color="gold" data-oid="ark4_rs" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="29m5owb">
+              <Orb color="gold" data-oid="cy.gagb" />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="z2wg9gk">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid="flwc1xc"
+                  data-oid="11s6az9"
                 >
                   Payment Posting
                 </h3>
-                <p className="text-left text-body-color" data-oid="et8wz_z">
-                  <span className="font-bold" data-oid="jpwvprp">
+                <p className="text-left text-body-color" data-oid="my_5x7p">
+                  <span className="font-bold" data-oid="9g_kuq4">
                     Experience flawless financial reconciliation
                   </span>{" "}
                   Our system automates payment posting with unparalleled
@@ -573,18 +573,18 @@ export default function Home() {
             </div>
             <div
               className=" flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="95.x6n:"
+              data-oid="vv.jzlq"
             >
-              <Orb color="copper" data-oid="4eh9ofq" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="j6bqssw">
+              <Orb color="copper" data-oid="lfrdikg" />
+              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="ezlvddp">
                 <h3
                   className="text-lg font-semibold md:text-xl"
-                  data-oid=":npswe0"
+                  data-oid="xnmf:ui"
                 >
                   Coding Notes and Review
                 </h3>
-                <p className="text-left text-body-color" data-oid="j9lqose">
-                  <span className="font-bold" data-oid="-xonpwm">
+                <p className="text-left text-body-color" data-oid="wq0vvra">
+                  <span className="font-bold" data-oid="vlgog4.">
                     Transform your medical records with precision.
                   </span>{" "}
                   Our AI-powered tool analyzes and refines coding notes,
@@ -596,7 +596,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Pipeline data-oid="74xjv9k" />
+      <Pipeline data-oid="w_m8eb7" />
       {/* <Testimonials /> */}
     </>
   );

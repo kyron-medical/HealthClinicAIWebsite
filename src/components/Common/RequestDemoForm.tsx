@@ -31,7 +31,7 @@ function RequestDemoForm() {
     <form
       onSubmit={sendEmail}
       className="my-4 p-4 border rounded-md shadow-lg"
-      data-oid="6z7700p"
+      data-oid="qkn8m7g"
     >
       <input
         type="text"
@@ -39,7 +39,7 @@ function RequestDemoForm() {
         placeholder="Your Name"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid="v7oa-8x"
+        data-oid="zr060i1"
       />
 
       <input
@@ -48,7 +48,7 @@ function RequestDemoForm() {
         placeholder="Your Email"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid="34157._"
+        data-oid="_j6l5z1"
       />
 
       <textarea
@@ -56,12 +56,12 @@ function RequestDemoForm() {
         placeholder="Your Message"
         required
         className="block w-full mb-2 p-2 border rounded"
-        data-oid="5s5f4pc"
+        data-oid="69aub:p"
       ></textarea>
       <button
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-        data-oid="x3fzpgw"
+        data-oid="g_wdyui"
       >
         Request Demo
       </button>

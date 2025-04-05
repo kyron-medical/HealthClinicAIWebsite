@@ -29,27 +29,27 @@ const NewsPage = () => {
     <section
       id="news"
       className="bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28"
-      data-oid="fbuao6i"
+      data-oid="t0wbhs-"
     >
-      <div className="container" data-oid="i3j75bm">
+      <div className="container" data-oid="mym7.72">
         <SectionTitle
           title="Latest News"
           paragraph="Stay up to date with the latest news and updates for Kyron!"
           center
-          data-oid="195.n2s"
+          data-oid="vj-niy0"
         />
 
         {/* Featured Article */}
-        <div className="mb-16" data-oid="wmup68z">
+        <div className="mb-16" data-oid="46t03eq">
           {sortedNewsData.length > 0 && (
             <div
               className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl"
-              data-oid="buweqru"
+              data-oid="5f8w313"
             >
-              <div className="group relative" data-oid="kl8d2v0">
+              <div className="group relative" data-oid="zl3my0-">
                 <div
                   className="aspect-[16/9] w-full overflow-hidden"
-                  data-oid="-ndz:xj"
+                  data-oid="ngcmvvs"
                 >
                   <Image
                     src={sortedNewsData[0].image}
@@ -57,33 +57,33 @@ const NewsPage = () => {
                     className="w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                     width={1200}
                     height={675}
-                    data-oid="2iz_dnh"
+                    data-oid="wgx6379"
                   />
                 </div>
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/20 to-transparent"
-                  data-oid="soh:f1q"
+                  data-oid="akaav27"
                 >
-                  <div className="absolute bottom-0 p-8" data-oid="fnr7im9">
+                  <div className="absolute bottom-0 p-8" data-oid="4n6s.bp">
                     <span
                       className="mb-3 inline-block rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white"
-                      data-oid="5puesum"
+                      data-oid="jeo6rzb"
                     >
                       Featured
                     </span>
                     <h2
                       className="mb-4 text-3xl font-bold text-white"
-                      data-oid="0fiow8u"
+                      data-oid="9--8atg"
                     >
                       {sortedNewsData[0].title}
                     </h2>
-                    <p className="mb-4 text-gray-200" data-oid="gw.381v">
+                    <p className="mb-4 text-gray-200" data-oid="gyxe91t">
                       {sortedNewsData[0].paragraph.substring(0, 150)}...
                     </p>
-                    <div className="flex items-center gap-4" data-oid="byori6s">
+                    <div className="flex items-center gap-4" data-oid="oxom40p">
                       <span
                         className="text-sm text-gray-300"
-                        data-oid="jafg2v3"
+                        data-oid="580a0ve"
                       >
                         {new Date(
                           sortedNewsData[0].publishDate,
@@ -94,12 +94,12 @@ const NewsPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group/link inline-flex items-center gap-2 text-white hover:text-blue-400"
-                        data-oid="2u833ng"
+                        data-oid="p:64q3m"
                       >
                         Read More
                         <span
                           className="transition-transform duration-300 group-hover/link:translate-x-1"
-                          data-oid="9sv6xq6"
+                          data-oid="ps1pyy4"
                         >
                           →
                         </span>
@@ -115,44 +115,44 @@ const NewsPage = () => {
         {/* News Grid */}
         <div
           className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-          data-oid="3wjdz:g"
+          data-oid="7s0lprk"
         >
           {sortedNewsData.slice(1).map((newsItem) => (
             <div
               key={newsItem.id}
               className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800"
-              data-oid="7oyhj0k"
+              data-oid="81jk218"
             >
-              <div className="aspect-[16/9] overflow-hidden" data-oid="s17razh">
+              <div className="aspect-[16/9] overflow-hidden" data-oid=".7sazt4">
                 <Image
                   src={newsItem.image}
                   alt={newsItem.title}
                   width={400}
                   height={225}
                   className="w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                  data-oid="jmmbtnn"
+                  data-oid="4l4lllv"
                 />
               </div>
-              <div className="p-6" data-oid="5p80b_f">
+              <div className="p-6" data-oid="pcccapk">
                 <div
                   className="mb-4 flex items-center gap-4"
-                  data-oid="4sb:pbq"
+                  data-oid="rtt2mvd"
                 >
                   {/* <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                   {newsItem.tags?.[0] || "News"}
                   </span> */}
                   <span
                     className="text-sm text-gray-500 dark:text-gray-400"
-                    data-oid="y_.l:d3"
+                    data-oid=".e_r8du"
                   >
                     {new Date(newsItem.publishDate).toLocaleDateString()}
                   </span>
                   <span
                     className="text-xs text-gray-500 dark:text-gray-400"
-                    data-oid="ckcd:of"
+                    data-oid="h1l6.29"
                   >
                     by{" "}
-                    <span className="font-semibold " data-oid="0u-7j:y">
+                    <span className="font-semibold " data-oid="amtw5eh">
                       {newsItem.author.name}
                     </span>
                   </span>
@@ -162,20 +162,20 @@ const NewsPage = () => {
                     className="h-8 w-auto" // Adjust size as needed
                     width={32}
                     height={32}
-                    data-oid="udx2q4:"
+                    data-oid="zro.-b5"
                   />
                 </div>
-                <Link href={newsItem.link} data-oid="wyyvwcb">
+                <Link href={newsItem.link} data-oid="i3vu5cj">
                   <h3
                     className="mb-3 text-xl font-bold text-gray-900 dark:text-white"
-                    data-oid="0u6l1i-"
+                    data-oid="mr-d0p:"
                   >
                     {newsItem.title}
                   </h3>
                 </Link>
                 <p
                   className="mb-4 line-clamp-2 text-gray-600 dark:text-gray-300"
-                  data-oid="9wyp4g3"
+                  data-oid="sc57i8_"
                 >
                   {newsItem.paragraph}
                 </p>
@@ -184,12 +184,12 @@ const NewsPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/link inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                  data-oid="nq0a-sw"
+                  data-oid="ibtp9oq"
                 >
                   Read Article
                   <span
                     className="transition-transform duration-300 group-hover/link:translate-x-1"
-                    data-oid="b2qa4:q"
+                    data-oid="5q8:jm1"
                   >
                     →
                   </span>

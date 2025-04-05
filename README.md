@@ -98,3 +98,17 @@ If you like the template, please star this repository to inspire the team to cre
   - [x] Request Demo to Get Started
   - [x] Login/Get Started
 - [x] Get rid of mouse on home
+- [x] AG Grid
+
+- [] ability to bold/unbold text
+- [] font size of text
+- [] ensuring newlines translate from tool onto website
+
+- Dashboard is a list of patients
+  - Each patient has a log attached
+    - Big picture aggregation
+
+
+- API calls
+- Database
+- 

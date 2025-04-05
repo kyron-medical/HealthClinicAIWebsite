@@ -50,24 +50,24 @@ const Header = () => {
             ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "absolute h-20 bg-transparent bg-opacity-90"
         }`}
-        data-oid="vf30lsy"
+        data-oid="tmmqwqb"
       >
         <div
           className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row"
-          data-oid="q2iz73s"
+          data-oid="ejsb0kq"
         >
           <div
             className="relative flex w-full flex-col items-center justify-between lg:flex-row"
-            data-oid="k81_g8v"
+            data-oid="lv_9jo:"
           >
             {/* Logo */}
-            <div className="w-60 max-w-full px-4 xl:mr-12" data-oid="m:jnum7">
+            <div className="w-60 max-w-full px-4 xl:mr-12" data-oid="3n4bxi2">
               <Link
                 href="/"
                 className={`header-logo block w-full ${
                   sticky ? "py-5 lg:py-2" : "py-8"
                 } `}
-                data-oid="i3g1bvt"
+                data-oid="4kikte-"
               >
                 <Image
                   src="/images/logo/kyron_medical.png"
@@ -75,7 +75,7 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
-                  data-oid="rqykgqp"
+                  data-oid="34yp_-s"
                 />
 
                 <Image
@@ -84,41 +84,41 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="hidden w-full dark:block"
-                  data-oid="n-xp26l"
+                  data-oid="m2glvr8"
                 />
               </Link>
             </div>
             <div
               className="flex w-full flex-col items-center justify-between px-4 lg:flex-row"
-              data-oid="ltpp7uy"
+              data-oid="39ohw6."
             >
-              <div data-oid="g1uzanr">
+              <div data-oid="yg8w6ve">
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
                   aria-label="Mobile Menu"
                   className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
-                  data-oid="mdswvs0"
+                  data-oid="22n-is_"
                 >
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[7px] rotate-45" : " "
                     }`}
-                    data-oid="0tmk6gr"
+                    data-oid="3mkhecx"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? "opacity-0 " : " "
                     }`}
-                    data-oid="3z5ryqx"
+                    data-oid=".d.k1g8"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[-8px] -rotate-45" : " "
                     }`}
-                    data-oid="26fo5cq"
+                    data-oid="yu_y1oo"
                   />
                 </button>
 
@@ -129,17 +129,17 @@ const Header = () => {
                       ? "visibility top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
                   }`}
-                  data-oid="k4uel.b"
+                  data-oid="rfuo2zu"
                 >
                   <ul
                     className="mb-5 block lg:flex lg:space-x-12"
-                    data-oid="of6oyto"
+                    data-oid="3mg5jmu"
                   >
                     {menuData.map((menuItem, index) => (
                       <li
                         key={index}
                         className="group relative"
-                        data-oid="ylac44a"
+                        data-oid="::ry4:_"
                       >
                         {menuItem.path ? (
                           <Link
@@ -149,7 +149,7 @@ const Header = () => {
                                 ? "active text-primary underline-offset-2 dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
-                            data-oid="9z149y-"
+                            data-oid="c_h7et2"
                           >
                             {menuItem.title}
                           </Link>
@@ -158,22 +158,22 @@ const Header = () => {
                             <p
                               onClick={() => handleSubmenu(index)}
                               className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
-                              data-oid="ab6ntl:"
+                              data-oid="8qedx3v"
                             >
                               {menuItem.title}
-                              <span className="pl-3" data-oid="yx_0b_w">
+                              <span className="pl-3" data-oid="pjuqsr_">
                                 <svg
                                   width="25"
                                   height="24"
                                   viewBox="0 0 25 24"
-                                  data-oid="37z86p6"
+                                  data-oid=".06ys9:"
                                 >
                                   <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
                                     d="M6.29289 8.8427C6.68342 8.45217 7.31658 8.45217 7.70711 8.8427L12 13.1356L16.2929 8.8427C16.6834 8.45217 17.3166 8.45217 17.7071 8.8427C18.0976 9.23322 18.0976 9.86639 17.7071 10.2569L12 15.964L6.29289 10.2569C5.90237 9.86639 5.90237 9.23322 6.29289 8.8427Z"
                                     fill="currentColor"
-                                    data-oid="wuikj_9"
+                                    data-oid="9-m6gyj"
                                   />
                                 </svg>
                               </span>
@@ -182,7 +182,7 @@ const Header = () => {
                               className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
                                 openIndex === index ? "block" : "hidden"
                               }`}
-                              data-oid=":jry05r"
+                              data-oid="otxjv4p"
                             >
                               {menuItem.submenu?.map((submenuItem, index) =>
                                 submenuItem.path ? (
@@ -190,7 +190,7 @@ const Header = () => {
                                     href={submenuItem.path}
                                     key={index}
                                     className="block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3"
-                                    data-oid="zdg7am9"
+                                    data-oid="3z7nr3u"
                                   >
                                     {submenuItem.title}
                                   </Link>
@@ -204,22 +204,22 @@ const Header = () => {
                   </ul>
 
                   {/* Mobile-only login and signup */}
-                  <div className="mb-5 block lg:hidden" data-oid="f5_htvz">
-                    <SignedOut data-oid="smga7fg">
+                  <div className="mb-5 block lg:hidden" data-oid="7z3hn_8">
+                    <SignedOut data-oid="n3ib3j-">
                       <div
                         className="flex flex-col items-center justify-between gap-4"
-                        data-oid="tad0cb2"
+                        data-oid="igmi_5a"
                       >
-                        <SignInButton data-oid="880w-mh">Login</SignInButton>
-                        <GetStarted data-oid="9vc7e._" />
+                        <SignInButton data-oid="j:x1b91">Login</SignInButton>
+                        <GetStarted data-oid="6j93kne" />
                       </div>
                     </SignedOut>
-                    <SignedIn data-oid="3njqwwv">
+                    <SignedIn data-oid="_k1tnys">
                       <div
                         className="flex flex-col items-center justify-between"
-                        data-oid="d7437qz"
+                        data-oid="96rgjxw"
                       >
-                        <UserButton data-oid="0nuvbv5" />
+                        <UserButton data-oid="sp.:c2f" />
                       </div>
                     </SignedIn>
                   </div>
@@ -229,14 +229,14 @@ const Header = () => {
               {/* Large screen login and signup */}
               <div
                 className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex"
-                data-oid="40p06ph"
+                data-oid="l:tkdx8"
               >
-                <SignedOut data-oid="q8nyue7">
-                  <SignInButton data-oid="civ.t8u">Login</SignInButton>
-                  <GetStarted data-oid="625reyi" />
+                <SignedOut data-oid="dok_4jv">
+                  <SignInButton data-oid="-smhsb9">Login</SignInButton>
+                  <GetStarted data-oid="voa9nkt" />
                 </SignedOut>
-                <SignedIn data-oid="bg2-9_t">
-                  <UserButton data-oid="1:xsvlg" />
+                <SignedIn data-oid="z2cj0-p">
+                  <UserButton data-oid="a2jqren" />
                 </SignedIn>
               </div>
             </div>{" "}

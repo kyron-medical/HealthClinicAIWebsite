@@ -13,7 +13,7 @@ const Card = React.forwardRef<
       className,
     )}
     {...props}
-    data-oid="-do4i9u"
+    data-oid="va3pmgs"
   />
 ));
 Card.displayName = "Card";
@@ -26,7 +26,7 @@ const CardHeader = React.forwardRef<
     ref={ref}
     className={cn("flex flex-col space-y-1.5 p-6", className)}
     {...props}
-    data-oid="55s4yug"
+    data-oid="hniq:g."
   />
 ));
 CardHeader.displayName = "CardHeader";
@@ -39,7 +39,7 @@ const CardTitle = React.forwardRef<
     ref={ref}
     className={cn("font-semibold leading-none tracking-tight", className)}
     {...props}
-    data-oid="dzehji_"
+    data-oid="v2_33d9"
   />
 ));
 CardTitle.displayName = "CardTitle";
@@ -52,7 +52,7 @@ const CardDescription = React.forwardRef<
     ref={ref}
     className={cn("text-muted-foreground text-sm", className)}
     {...props}
-    data-oid="wt_2ook"
+    data-oid="o54862k"
   />
 ));
 CardDescription.displayName = "CardDescription";
@@ -65,7 +65,7 @@ const CardContent = React.forwardRef<
     ref={ref}
     className={cn("p-6 pt-0", className)}
     {...props}
-    data-oid="ykkvmt8"
+    data-oid="2so.df."
   />
 ));
 CardContent.displayName = "CardContent";
@@ -78,7 +78,7 @@ const CardFooter = React.forwardRef<
     ref={ref}
     className={cn("flex items-center p-6 pt-0", className)}
     {...props}
-    data-oid="iw:7zv0"
+    data-oid="di6dzju"
   />
 ));
 CardFooter.displayName = "CardFooter";

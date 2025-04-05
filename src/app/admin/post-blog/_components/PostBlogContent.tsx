@@ -1,10 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { DashboardHeader } from "./DashboardHeader";
-import { StatCard } from "./StatCard";
-import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { BlogPostForm } from "./BlogPostForm";
 import { useUser } from "@clerk/nextjs";
+import { redirect, useRouter } from "next/navigation";
+
 
 export const DashboardContent = () => {
   const { user, isLoaded } = useUser();
@@ -24,17 +22,26 @@ export const DashboardContent = () => {
 
     // Role check - REVERSED from your original code
     // Only allow physicians on this page
-    if (user.publicMetadata.role !== "admin") {
+    if (user.publicMetadata.role !== "physician") {
       console.log(user.publicMetadata.role);
       router.push("/");
     }
   }, [user, isLoaded, router]);
 
+  if(!user) {
+    redirect("/sign-in");
+  }
+
   return (
     <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
       <div className="container">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          
+        <div className="w-full px-4">
+          <div className="mx-auto max-w-[800px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]">
+            <h1 className="mb-8 text-3xl font-bold text-black dark:text-white">
+              Welcome, {user.firstName}
+            </h1>
+            <BlogPostForm />
+          </div>
         </div>
       </div>
     </section>
