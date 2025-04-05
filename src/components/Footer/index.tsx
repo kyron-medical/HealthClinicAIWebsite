@@ -43,7 +43,7 @@ const Footer = () => {
                   className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark"
                   data-oid="38y-gj5"
                 >
-                  © 2024 Kyron, Inc All rights reserved.
+                  © 2025 Kyron, Inc All rights reserved.
                 </p>
                 <div
                   className="footer-social flex flex-wrap items-center justify-center gap-8 md:justify-start"
