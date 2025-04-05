@@ -29,17 +29,19 @@ function extractTitle(html: string): string | undefined {
   return match ? match[1] : undefined;
 }
 
+
+
 export async function scrapeOpenGraph(url: string): Promise<OpenGraphData> {
   try {
     const response = await axios.get(url);
-    const html = response.data;
+    const html = response.data as string;
     
     const ogData: OpenGraphData = {
-      ogTitle: extractMetaContent(html, 'og:title') || 
-               extractTitle(html),
-      ogDescription: extractMetaContent(html, 'og:description') || 
-                    extractMetaContent(html, 'description'),
-      ogImage: extractMetaContent(html, 'og:image')
+      ogTitle: extractMetaContent(html, "og:title") ?? extractTitle(html),
+      ogDescription:
+        extractMetaContent(html, "og:description") ??
+        extractMetaContent(html, "description"),
+      ogImage: extractMetaContent(html, "og:image"),
     };
 
     return ogData;
