@@ -80,11 +80,19 @@ const FormattedArticleContent: React.FC<{ content: string }> = ({
   );
 };
 
-export default async function BlogPost({ params }: { params: { id: string } }) {
+interface Props {
+  params: Promise<{ id: string }>;
+}
+
+export default async function BlogPost({ params }: Props) {
+  const { id } = await params;
+  
   let post;
 
+
+
   try {
-    post = await getBlogPost(params.id);
+    post = await getBlogPost(id);
   } catch (error) {
     notFound();
   }
@@ -173,7 +181,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
               <FormattedArticleContent content={post.content} />
 
               {/* Related Posts */}
-              <RelatedPosts currentPostId={params.id} data-oid="za0y6q9" />
+              <RelatedPosts currentPostId={id} data-oid="za0y6q9" />
 
               {/* Newsletter Signup */}
               <NewsletterSignup data-oid="0_pc3dd" />
