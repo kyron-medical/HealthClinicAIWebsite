@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BlogPost } from "@prisma/client";
+import type { BlogPost } from "@prisma/client";
 import { getRelatedPosts } from "@/server/actions/blog";
 
 interface RelatedPostsProps {
@@ -34,7 +34,7 @@ export const RelatedPosts = ({ currentPostId }: RelatedPostsProps) => {
       }
     }
 
-    fetchRelatedPosts();
+    void fetchRelatedPosts();
   }, [currentPostId]);
 
   if (loading) return <div data-oid="1x7oti9">Loading related articles...</div>;

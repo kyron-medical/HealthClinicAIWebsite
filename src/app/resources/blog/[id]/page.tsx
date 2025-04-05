@@ -1,6 +1,5 @@
 import { getBlogPost } from "@/server/db";
 import Image from "next/image";
-import Link from "next/link";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { SocialShareButtons } from "./_components/SocialShareButtons";
 import { AuthorInfo } from "./_components/AuthorInfo";
@@ -10,8 +9,15 @@ import { TableOfContents } from "./_components/TableOfContents";
 import { TextFormattingMenu } from "./_components/TextFormattingMenu";
 import { notFound } from "next/navigation";
 import React from "react";
-import { NextPage } from "next";
 
+// Define a type for blog post data
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  mainImage: string;
+  createdAt: string | Date;
+}
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +35,6 @@ const author = {
   role: "Healthcare Technology Specialist",
   avatar: "/images/blog/author.jpg",
 };
-
 
 const FormattedArticleContent: React.FC<{ content: string }> = ({
   content,
@@ -86,13 +91,11 @@ interface Props {
 
 export default async function BlogPost({ params }: Props) {
   const { id } = await params;
-  
-  let post;
 
-
+  let post: BlogPost | null = null;
 
   try {
-    post = await getBlogPost(id);
+    post = (await getBlogPost(id)) as BlogPost;
   } catch (error) {
     notFound();
   }

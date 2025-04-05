@@ -110,8 +110,9 @@ export function CustomUploadButton({
       toast.dismiss("upload-begin");
     },
     onClientUploadComplete: (res) => {
-      if (res && res[0]) {
-        const uploadedUrl = res[0].url;
+      const uploadedUrl = res?.[0]?.ufsUrl;
+      if (uploadedUrl) {
+        const uploadedUrl = res[0].ufsUrl;
         console.log("Upload complete:", uploadedUrl);
         toast.success("Image uploaded successfully!", {
           id: "upload-toast",

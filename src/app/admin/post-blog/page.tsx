@@ -1,6 +1,3 @@
-import { getBlogPosts } from "@/server/db";
-
-import { redirect } from "next/navigation";
 import { BlogPostForm } from "./_components/BlogPostForm";
 
 export const dynamic = "force-dynamic";

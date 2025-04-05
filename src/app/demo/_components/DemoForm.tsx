@@ -4,7 +4,16 @@ import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import FileUploadBox from "./FileUpload";
 import { toast } from "react-toastify"; // Assuming you're using react-toastify for notifications
-import { useUser } from "@clerk/nextjs";
+
+// Define type for API response
+interface AppealResponse {
+  appeal_letter: string;
+}
+
+// Define error response type
+interface ErrorResponse {
+  error: string;
+}
 
 const DemoForm = () => {
   const [email, setEmail] = useState("");
@@ -37,9 +46,7 @@ const DemoForm = () => {
     setIsSubjectFilled(subject.trim() !== "");
   }, [subject]);
 
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
-    event,
-  ) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (!patientNotesFile || !insuranceDenialFile) {
@@ -52,49 +59,57 @@ const DemoForm = () => {
     formData.append("files", insuranceDenialFile);
     console.log(formData);
 
-    // Define the fetch promise
-    const fetchPromise = fetch("https://api.kyronmedical.com/generate-appeal", {
-      method: "POST",
-      body: formData,
-    }).then(async (response) => {
-      if (response.ok) {
-        const data = await response.json(); // Parse the JSON response
-        const appealLetter = data.appeal_letter; // Extract the appeal_letter field
+    try {
+      // Define the fetch promise with proper error handling
+      const fetchPromise = async () => {
+        const response = await fetch(
+          "https://api.kyronmedical.com/generate-appeal",
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
 
-        // Update the state to display the appeal letter
-        setAppealLetter(appealLetter);
+        if (response.ok) {
+          const data = (await response.json()) as AppealResponse;
+          const appealLetter = data.appeal_letter;
 
-        // Create a blob from the appeal letter text for download
-        const blob = new Blob([appealLetter], { type: "text/plain" });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "appeal_letter.txt";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url); // Clean up the URL object
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to generate appeal.");
-      }
-    });
+          // Update the state to display the appeal letter
+          setAppealLetter(appealLetter);
 
-    // Use toast.promise to handle notifications
-    // Use toast.promise to handle notifications
-    toast.promise(
-      fetchPromise,
-      {
-        pending: "Generating your appeal letter...",
-        success: "Appeal letter generated successfully!",
-        error: "Failed to generate appeal letter.",
-      },
-      {
-        style: {
-          minWidth: "250px",
+          // Create a blob from the appeal letter text for download
+          const blob = new Blob([appealLetter], { type: "text/plain" });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "appeal_letter.txt";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url); // Clean up the URL object
+        } else {
+          const errorData = (await response.json()) as ErrorResponse;
+          throw new Error(errorData.error || "Failed to generate appeal.");
+        }
+      };
+
+      // Use toast.promise with proper promise handling
+      void toast.promise(
+        fetchPromise(),
+        {
+          pending: "Generating your appeal letter...",
+          success: "Appeal letter generated successfully!",
+          error: "Failed to generate appeal letter.",
         },
-      },
-    );
+        {
+          style: {
+            minWidth: "250px",
+          },
+        },
+      );
+    } catch (error) {
+      console.error("Error during appeal generation:", error);
+    }
   };
 
   return (

@@ -1,13 +1,21 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useInView } from "react-intersection-observer";
 
-const Orb = ({ color }) => {
+// Define color types based on available orb colors
+type OrbColor = "pink" | "green" | "pearl" | "orange" | "gold" | "copper";
+
+// Define props interface with proper typing
+interface OrbProps {
+  color: OrbColor;
+}
+
+const Orb = ({ color }: OrbProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const orbSrc = {
+  const orbSrc: Record<OrbColor, string> = {
     pink: "https://lottie.host/543493c1-96a0-40bc-b052-40869ea7932b/xgY0fP4RXr.lottie",
     green:
       "https://lottie.host/95858cc5-ddaf-45ff-98b5-984c3e28c89e/4lJRkL0W1n.lottie",

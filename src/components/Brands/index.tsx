@@ -1,4 +1,4 @@
-import { Brand } from "@/types/brand";
+import type { Brand } from "@/types/brand";
 import Image from "next/image";
 import brandsData from "./brandsData";
 

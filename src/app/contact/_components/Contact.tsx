@@ -1,16 +1,25 @@
 "use client";
 
-import NewsLatterBox from "./NewsLatterBox";
 import React, { useState } from "react";
+
+// Define a type for the API response
+interface EmailResponse {
+  url: string;
+}
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (
-    event,
-  ) => {
+
+  // Use a regular function that calls the async function internally
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
+    void sendEmail(); // 'void' operator to explicitly ignore the promise
+  };
+
+  // Separate async function to handle the API call
+  const sendEmail = async (): Promise<void> => {
     try {
       const response = await fetch("/api/sendEmail", {
         method: "POST",
@@ -21,9 +30,11 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        window.location.href = data.url; // Redirect to Gmail
-        console.log("Email sent successfully");
+        const data = (await response.json()) as EmailResponse;
+        if (data && typeof data.url === "string") {
+          window.location.href = data.url; // Now safely typed
+          console.log("Email sent successfully");
+        }
       } else {
         console.error("Failed to send email", response.statusText);
       }

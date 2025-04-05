@@ -62,7 +62,7 @@ export async function deleteBlogPost(id: string) {
 
   if (!isAdmin) throw new Error("Unauthorized");
 
-  const blogPost = await prisma.blogPost.delete({
+   await prisma.blogPost.delete({
     where: { id, },
   });
 

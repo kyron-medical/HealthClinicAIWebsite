@@ -4,7 +4,7 @@ import TagButton from "@/components/Blog/TagButton";
 import NewsLatterBox from "@/app/contact/_components/NewsLatterBox";
 import Image from "next/image";
 
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Blog Details Page | Kyron",

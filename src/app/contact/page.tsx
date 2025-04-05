@@ -1,7 +1,6 @@
-import Breadcrumb from "@/components/Common/Breadcrumb";
 import Contact from "@/app/contact/_components/Contact";
 
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Page | Kyron",

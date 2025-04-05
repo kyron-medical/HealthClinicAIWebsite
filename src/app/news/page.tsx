@@ -4,8 +4,7 @@ import SectionTitle from "@/components/Common/SectionTitle";
 import SingleBlog from "@/app/_components/SingleBlog";
 import newsData from "./_components/newsData"; // Import the news data
 
-import { Metadata } from "next";
-import { InfiniteCarousel } from "./_components/InfiniteCarousel";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 

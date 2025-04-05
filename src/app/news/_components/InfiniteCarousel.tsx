@@ -28,7 +28,7 @@ export const InfiniteCarousel = ({
           // Duplicate the first eight items
           for (let i = 0; i < 8; i++) {
             const item = scrollerInnerContent[i];
-            const duplicatedItem = item!.cloneNode(true) as HTMLElement;
+            const duplicatedItem = item.cloneNode(true) as HTMLElement;
             duplicatedItem.setAttribute("aria-hidden", "true");
 
             scrollerInner.appendChild(duplicatedItem);

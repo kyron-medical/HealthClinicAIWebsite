@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import { motion } from "framer-motion";
 

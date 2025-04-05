@@ -1,5 +1,3 @@
-import Image from "next/image";
-import SectionTitle from "../../../components/Common/SectionTitle";
 import GetStarted from "@/app/_components/ui/started-button";
 
 const checkIcon = (

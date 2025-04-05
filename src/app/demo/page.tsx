@@ -1,10 +1,6 @@
-import Breadcrumb from "@/components/Common/Breadcrumb";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import FileUploadBox from "../../app/demo/_components/FileUpload";
-
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import DemoForm from "./_components/DemoForm";
-import SectionTitle from "@/components/Common/SectionTitle";
+
 
 export const metadata: Metadata = {
   title: "Demo | Kyron",

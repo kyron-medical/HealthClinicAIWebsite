@@ -1,4 +1,4 @@
-import { Feature } from "@/types/feature";
+import type { Feature } from "@/types/feature";
 
 const SingleFeature = ({ feature }: { feature: Feature }) => {
   const { icon, title, paragraph } = feature;

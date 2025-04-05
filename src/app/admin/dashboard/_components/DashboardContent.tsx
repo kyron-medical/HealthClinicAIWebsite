@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { DashboardHeader } from "./DashboardHeader";
-import { StatCard } from "./StatCard";
-import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+import {  useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 
 export const DashboardContent = () => {
@@ -34,7 +33,7 @@ export const DashboardContent = () => {
     <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
       <div className="container">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          
+
         </div>
       </div>
     </section>

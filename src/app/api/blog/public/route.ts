@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const currentId = searchParams.get("excludeId");
-    const limit = parseInt(searchParams.get("limit") || "3");
+    const limit = parseInt(searchParams.get("limit") ?? "3");
 
     // Only run this query when actually called, not during build
     const blogPosts = await prisma.blogPost.findMany({
