@@ -10,6 +10,8 @@ import { TableOfContents } from "./_components/TableOfContents";
 import { TextFormattingMenu } from "./_components/TextFormattingMenu";
 import { notFound } from "next/navigation";
 import React from "react";
+import { NextPage } from "next";
+
 
 export const dynamic = "force-dynamic";
 
@@ -27,10 +29,6 @@ const author = {
   role: "Healthcare Technology Specialist",
   avatar: "/images/blog/author.jpg",
 };
-
-interface BlogPostPageProps {
-  params: { id: string };
-}
 
 
 const FormattedArticleContent: React.FC<{ content: string }> = ({
@@ -82,11 +80,11 @@ const FormattedArticleContent: React.FC<{ content: string }> = ({
   );
 };
 
-export default async function BlogPost({ params }: BlogPostPageProps) {
+const BlogPost: NextPage<{ id: string }> = async ({ id }) => {
   let post;
 
   try {
-    post = await getBlogPost(params.id);
+    post = await getBlogPost(id);
   } catch (error) {
     notFound();
   }
@@ -175,7 +173,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               <FormattedArticleContent content={post.content} />
 
               {/* Related Posts */}
-              <RelatedPosts currentPostId={params.id} data-oid="za0y6q9" />
+              <RelatedPosts currentPostId={id} data-oid="za0y6q9" />
 
               {/* Newsletter Signup */}
               <NewsletterSignup data-oid="0_pc3dd" />
