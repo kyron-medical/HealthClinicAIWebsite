@@ -5,21 +5,6 @@ import { motion } from "framer-motion";
 const teamMembers = [
   { name: "Jay Gopal", title: "CEO", image: "/images/team/jay-gopal.jpg" },
   {
-    name: "Lucas Lieberman",
-    title: "COO",
-    image: "/images/team/lucas-lieberman.jpg",
-  },
-  {
-    name: "Lisa Duan",
-    title: "Technical Consultant",
-    image: "/images/team/lisa-duan.jpg",
-  },
-  {
-    name: "Maguire Anuszewski",
-    title: "Medical Consultant",
-    image: "/images/team/maguire-anuszewski.jpg",
-  },
-  {
     name: "Henry Harary",
     title: "Director of Sales",
     image: "/images/team/henry-harary.jpg",
@@ -38,6 +23,11 @@ const teamMembers = [
     name: "Daniel Choi",
     title: "Product Developer",
     image: "/images/team/daniel-choi.jpg",
+  },
+  {
+    name: "Maguire Anuszewski",
+    title: "Medical Consultant",
+    image: "/images/team/maguire-anuszewski.jpg",
   },
   {
     name: "Juliana Escuti",
@@ -59,6 +49,16 @@ const teamMembers = [
     title: "General Counsel",
     image: "/images/team/tobias-lederberg.jpg",
   },
+  {
+    name: "Siddhant Karmali",
+    title: "Sales & Marketing",
+    image: "/images/team/siddhant-karmali.jpg",
+  },
+  {
+    name: "Thanmay Kumar",
+    title: "Sales & Marketing",
+    image: "/images/team/thanmay-kumar.jpg",
+  }
 ];
 
 const AboutSectionTwo = () => {
