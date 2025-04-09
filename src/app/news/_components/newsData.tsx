@@ -119,30 +119,6 @@ const newsData: Blog[] = [
   },
   {
     id: 10,
-    title: "",
-    image: "",
-    paragraph: "",
-    author: {
-      name: "",
-    },
-    publishDate: "",
-    logoUrl: "",
-    link: "",
-  },
-  {
-    id: 11,
-    title: "",
-    image: "",
-    paragraph: "",
-    author: {
-      name: "",
-    },
-    publishDate: "",
-    logoUrl: "",
-    link: "",
-  },
-  {
-    id: 12,
     title:
       "Kyron Medical's AI tool speeds insurance claims, focusing more on patient care",
     image:
@@ -152,7 +128,7 @@ const newsData: Blog[] = [
     author: {
       name: "Barbara Morse",
     },
-    publishDate: "February 25th, 2025",
+    publishDate: "February 25, 2025",
     logoUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlEAgf-KVZ6j5MUqegZTkwJkXUhKHn7cA--g&s",
     link: "https://turnto10.com/features/health-landing-page/kyron-medicals-ai-tool-speeds-insurance-claims-focusing-more-on-patient-care-artificial-intelligence-medical-professionals-february-25-2025",

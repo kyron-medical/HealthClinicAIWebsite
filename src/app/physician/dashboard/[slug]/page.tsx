@@ -1,4 +1,4 @@
-import { DashboardContent } from "@/app/physician/dashboard/_components/DashboardContent";
+import { DashboardContent } from "@/app/physician/dashboard/[slug]/_components/DashboardContent";
 
 const Dashboard = () => {
   // This leverages Next.js automatic promise unwrapping for data fetching
