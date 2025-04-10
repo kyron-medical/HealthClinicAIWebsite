@@ -9,9 +9,10 @@ const Typing = () => {
       <Typewriter
         options={{
           strings: [
-            "denials management.",
-            "claims management.",
-            "prior authorization.",
+            "denial management.",
+            "finding lost revenue.",
+            "appeals.",
+            "calling insurance.",
             "everything else.",
           ],
 
