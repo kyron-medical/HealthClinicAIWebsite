@@ -24,7 +24,7 @@ const Landing = () => {
                   className="mb-5 rounded text-3xl font-bold leading-tight text-slate-900 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
                   data-oid="nt4-j4v"
                 >
-                  Spend more time with your patients. We&#39;ll handle
+                  Spend more time with your patients. We&#39;ll help you handle
                 </h1>
                 <Typing data-oid="k5fwdsz" />
                 <div className="w-2/3" data-oid="64.u9o9">
@@ -32,9 +32,7 @@ const Landing = () => {
                     className="mb-12 rounded text-base !leading-relaxed text-slate-500  sm:text-lg md:text-xl"
                     data-oid="nd42cbw"
                   >
-                    Kyron is an online tool you can use to automate medical
-                    billing, patient appointment scheduling, insurance
-                    verification, managing patient follow-ups, and more.
+                    Kyron provides a suite of proprietary AI agents to help your staff automate your denial management process. 
                   </p>
                 </div>
 
