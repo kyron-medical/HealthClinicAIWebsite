@@ -7,9 +7,11 @@ type OrbColor = "pink" | "green" | "pearl" | "orange" | "gold" | "copper";
 // Define props interface with proper typing
 interface OrbProps {
   color: OrbColor;
+  width?: number;
+  height?: number;
 }
 
-const Orb = ({ color }: OrbProps) => {
+const Orb = ({ color, width, height }: OrbProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -40,8 +42,8 @@ const Orb = ({ color }: OrbProps) => {
         inView ? (
           <div
             style={{
-              width: "300px", // Adjust to desired size
-              height: "300px",
+              width: width ?? "300px", // Adjust to desired size
+              height: height ?? "300px",
               margin: 0,
               display: "flex",
               alignItems: "center",

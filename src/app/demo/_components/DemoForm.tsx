@@ -122,7 +122,10 @@ const DemoForm = () => {
           >
             Sign in to generate your letter of appeal
           </h2>
+          <div className="flex justify-center items-center pt-8">
+
           <SignInButton data-oid="jeqwq1v" />
+          </div>
         </SignedOut>
 
         <SignedIn data-oid="2144560">

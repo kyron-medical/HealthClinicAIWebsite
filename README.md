@@ -103,12 +103,64 @@ If you like the template, please star this repository to inspire the team to cre
 - [] ability to bold/unbold text
 - [] font size of text
 - [] ensuring newlines translate from tool onto website
+- [x] Our physician dashboard gives you control over your claim denials
 
-- Dashboard is a list of patients
-  - Each patient has a log attached
-    - Big picture aggregation
+- [] Blurb
+- [] Server-side render orb/orb video
+
+< 10s
+time for appeal drafting
+
+> 99%
+of possible 
 
 
-- API calls
-- Database
-- 
+>100
+___ per biller saved
+
+
+- [x] Get Started or Figure out Typeform API
+
+4 orbs, 
+- [x] remove the bottom two, 
+- [x] make all of them denial tools - ai agent, letter of appeal, denial management in general, and keep prior auth
+
+
+
+- [x] Click on a 'resource' that opens a pdf means that it opens a modal that 
+      prompts the user for their email.
+
+- [] 
+
+Modal over the blog page
+Input box for email, submit button,
+Send them an email with a standard template
+Kyron logo, access this resource, click here
+
+
+Individual dashboard pages
+
+Mocked data for dashboard pages
+
+
+Dashboard
+  - Independent dashboard page for every biller
+  - Mocked version
+  - Transcript 
+  - Generating synthetic 
+  
+
+News page - phone
+
+
+## Dashboard Todos
+- [] Transfer from Vercel to EC2 HIPAA compliant deployment
+- [] Put data in S3 HIPAA compliant database
+- [] tRPC and API Calls
+
+- [] Voice Agent Modal Page
+- [] Ability to delete files
+- [] Ability to add patients en masse
+- [x] Find icons for the arrows
+- [] Fix borders of AG Grid
+- [] Fix styling of the chatbot

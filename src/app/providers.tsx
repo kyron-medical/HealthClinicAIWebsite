@@ -2,7 +2,9 @@
 
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
+
 import { Toaster } from "react-hot-toast";
+import { TRPCProvider } from "@/../trpc/client"; // <-- Import your TRPCProvider
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,12 +16,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
         data-oid="m92c2p3"
       >
         <Toaster
-          position="bottom-center"
-          reverseOrder={false}
-          data-oid="llye599"
+          toastOptions={{
+            duration: 3000,
+            position: "bottom-center",
+            className: "z-[9999]",
+          }}
+          containerStyle={{
+            top: 70,
+          }}
         />
 
-        {children}
+        <TRPCProvider>{children}</TRPCProvider>
       </ThemeProvider>
     </ClerkProvider>
   );

@@ -24,3 +24,52 @@ model BlogPost {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+/*
+export type Patient = {
+  name: string;
+  insurer: string;
+  moneyCollected: number;
+};
+
+export type PatientEvent = {
+  date: string;
+  type: string;
+  content?: string;
+  transcript?: string;
+  summary?: string;
+};
+*/
+
+model Patient {
+  id            String   @id @default(cuid())
+  name          String
+  name_iv       String   
+  name_tag      String   
+  insurer       String
+  insurer_iv    String   
+  insurer_tag   String   
+  moneyCollected Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  patientEvents PatientEvent[]
+  billerId      String
+  }
+
+
+model PatientEvent {
+  id        String   @id @default(cuid())
+  patientId String
+  date      DateTime
+  type      String
+  content   String?
+  transcript String?
+  summary   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // Add an array of file urls
+  fileUrls  String[]
+  // Add a relation to the Patient model
+
+  patient Patient @relation(fields: [patientId], references: [id])
+}

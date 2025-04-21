@@ -4,9 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import "./../../../styles/navbar.css";
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import "@/styles/navbar.css";
 import GetStarted from "../ui/started-button";
+import DashboardButton from "../ui/dashboard-button";
 
 const Header = () => {
   // Navbar toggle
@@ -39,6 +40,11 @@ const Header = () => {
   };
 
   const usePathName = usePathname();
+
+  const { user } = useUser();
+  // Assume role is stored in user.publicMetadata.role
+  const isBiller = user?.publicMetadata?.role === "biller";
+
 
   return (
     <>
@@ -187,7 +193,9 @@ const Header = () => {
                                   <Link
                                     href={submenuItem.path}
                                     key={index}
-                                    className="block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3"
+                                    className={`block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3
+        ${usePathName === submenuItem.path ? "active text-primary underline underline-offset-2" : ""}
+      `}
                                     data-oid="3z7nr3u"
                                   >
                                     {submenuItem.title}
@@ -214,11 +222,11 @@ const Header = () => {
                     </SignedOut>
                     <SignedIn data-oid="_k1tnys">
                       <div
-                        className="flex flex-col items-center justify-between"
+                        className="flex flex-col items-center justify-between gap-4"
                         data-oid="96rgjxw"
-                      >
-                        <UserButton data-oid="sp.:c2f" />
-                      </div>
+                      ></div>
+                      {isBiller && <DashboardButton />}
+                      <UserButton data-oid="sp.:c2f" />
                     </SignedIn>
                   </div>
                 </nav>
@@ -234,6 +242,7 @@ const Header = () => {
                   <GetStarted data-oid="voa9nkt" />
                 </SignedOut>
                 <SignedIn data-oid="z2cj0-p">
+                  {isBiller && <DashboardButton />}
                   <UserButton data-oid="a2jqren" />
                 </SignedIn>
               </div>

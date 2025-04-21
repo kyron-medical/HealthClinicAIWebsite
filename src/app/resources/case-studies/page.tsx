@@ -1,31 +1,34 @@
+"use client";
+
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { Metadata } from "next";
+
 import Link from "next/link";
-import caseStudiesData from "./data/case-studies-data";
+import resourcesData from "../data/resource-data";
 import { FaFilePdf } from "react-icons/fa6";
+import ResourceModal from "../_components/ui/resource-modal";
+import { useState } from "react";
 
-const metadata: Metadata = {
-  title: "Case Studies | Kyron",
-  description: "Case Studies Page for Kyron",
-};
+const CaseStudies = () => {
+  // Add state for the modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentResource, setCurrentResource] = useState({
+    url: "",
+    title: "",
+  });
 
-const CaseStudies = async () => {
+  const caseStudiesData = resourcesData.filter((resource) => {
+    return resource.resourceType === "Case Study";
+  });
   return (
     <>
       <Breadcrumb
-        pageName="Insights & Resources"
+        pageName="Case Studies"
         description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
         data-oid="9.jqsql"
       />
 
       <section className="pb-[120px] pt-[120px]" data-oid="oq5_5g2">
         <div className="container" data-oid=".pu5iw:">
-          <h2
-            className="self-centerleading-tight mb-8 flex items-center justify-center text-3xl font-bold text-black dark:text-white sm:text-4xl sm:leading-tight"
-            data-oid="9r5azi-"
-          >
-            Case Studies
-          </h2>
           {/* Make a grid of whitepapers, 3 col  */}
           <div
             className="grid grid-cols-1 gap-8 md:grid-cols-3"
@@ -61,15 +64,30 @@ const CaseStudies = async () => {
                   {/* Footer */}
                   <div className="mt-4">
                     <hr className="mb-4" />
-                    <Link href={caseStudy.link}>
-                      <button className="inline-block rounded-full bg-blue-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
-                        View
-                      </button>
-                    </Link>
+                    <button
+                      onClick={() => {
+                        setCurrentResource({
+                          url: caseStudy.link,
+                          title: caseStudy.title,
+                        });
+                        setModalOpen(true);
+                      }}
+                      className="inline-block rounded-full bg-blue-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                    >
+                      View
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
+
+            {/* Add the modal at the bottom of your component */}
+            <ResourceModal
+              isOpen={modalOpen}
+              onClose={() => setModalOpen(false)}
+              resourceUrl={currentResource.url}
+              resourceTitle={currentResource.title}
+            />
           </div>
         </div>
       </section>

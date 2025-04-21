@@ -1,24 +1,32 @@
+"use client";
+
 import SingleBlog from "@/app/_components/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { Metadata } from "next";
+
 import { getBlogPosts } from "@/server/db";
 import Link from "next/link";
 import { TbLogs } from "react-icons/tb";
-import blogData from "./data/blog-data";
+import resourcesData from "../data/resource-data";
 import Image from "next/image";
+import { useState } from "react";
+import ResourceModal from "../_components/ui/resource-modal";
 
-export const metadata: Metadata = {
-  title: "Blog | Kyron",
-  description: "Blog Page for Kyron",
-};
+const Blog = () => {
+  // Add state for the modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentResource, setCurrentResource] = useState({
+    url: "",
+    title: "",
+  });
 
-const Blog = async () => {
- 
+  const blogData = resourcesData.filter((resource) => {
+    return resource.resourceType === "Blog";
+  });
 
   return (
     <>
       <Breadcrumb
-        pageName="Insights & Resources"
+        pageName="Blogs"
         description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
         data-oid="77ujja3"
       />
@@ -40,13 +48,6 @@ const Blog = async () => {
             ))}
           </div> */}
 
-
-          <h2
-            className="self-centerleading-tight mb-8 flex items-center justify-center text-3xl font-bold text-black dark:text-white sm:text-4xl sm:leading-tight"
-            data-oid="9r5azi-"
-          >
-            Blog
-          </h2>
           {/* Make a grid of whitepapers, 3 col  */}
           <div
             className="grid grid-cols-1 gap-8 md:grid-cols-3"
@@ -81,7 +82,7 @@ const Blog = async () => {
 
                   <div className="mb-4 mt-4 aspect-[16/6] overflow-hidden rounded-lg">
                     <Image
-                      src={blog.image}
+                      src={blog.image!}
                       alt={blog.title}
                       width={400}
                       height={225}
@@ -92,15 +93,29 @@ const Blog = async () => {
                   {/* Footer */}
                   <div className="mt-4">
                     <hr className="mb-4" />
-                    <Link href={blog.link}>
-                      <button className="inline-block rounded-full bg-blue-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
-                        View
-                      </button>
-                    </Link>
+                    <button
+                      onClick={() => {
+                        setCurrentResource({
+                          url: blog.link,
+                          title: blog.title,
+                        });
+                        setModalOpen(true);
+                      }}
+                      className="inline-block rounded-full bg-blue-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                    >
+                      View
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
+
+            <ResourceModal
+              isOpen={modalOpen}
+              onClose={() => setModalOpen(false)}
+              resourceUrl={currentResource.url}
+              resourceTitle={currentResource.title}
+            />
           </div>
 
           {/* <div

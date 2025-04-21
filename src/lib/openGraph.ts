@@ -25,7 +25,7 @@ function extractMetaContent(html: string, property: string): string | undefined 
 }
 
 function extractTitle(html: string): string | undefined {
-  const match = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  const match = /<title[^>]*>([^<]+)<\/title>/i.exec(html);
   return match ? match[1] : undefined;
 }
 

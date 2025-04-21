@@ -8,6 +8,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Metadata } from "next";
+import { Providers } from "@/app/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +21,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html suppressHydrationWarning lang="en" data-oid="b_2_mja">
       {/*
-                                                  <head /> will contain the components returned by the nearest parent
+                      <head /> will contain the components returned by the nearest parent
                                                   head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
                                                  */}
       <head data-oid="sp.2dib" />
@@ -48,13 +51,13 @@ export default function RootLayout({
 
         <Providers data-oid="son9800">
           <Header data-oid="jely3lu" />
-          {children}
+          <main>{children}</main>
+          {modal}
           <Footer data-oid="afoq8dr" />
           <ScrollToTop data-oid="a.7fq7i" />
+          <div id="modal-root" />
         </Providers>
       </body>
     </html>
   );
 }
-
-import { Providers } from "./providers";

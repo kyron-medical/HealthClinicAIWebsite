@@ -1,0 +1,23 @@
+/* Modal fade transition for react-transition-group */
+.modal-fade-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.modal-fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+.modal-fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-fade-exit-active {
+  opacity: 0;
+  transform: scale(0.98);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}

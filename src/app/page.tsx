@@ -13,6 +13,8 @@ import TestDrive from "./_components/ui/drive-button";
 import SectionTitle from "@/components/Common/SectionTitle";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import GetStarted from "./_components/ui/started-button";
+
 
 const Pipeline = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +22,7 @@ const Pipeline = () => {
 
   const handleSubmit = async () => {
     window.location.href = `https://form.typeform.com/to/zstMkPH7?email=${email}`;
+
     toast.success("Email submitted successfully!");
     setEmail("");
     setSubmitted(true);
@@ -28,7 +31,7 @@ const Pipeline = () => {
   return (
     <section id="prototype" className="my-8 text-center" data-oid="xyjm6k8">
       <div
-        className="flex flex-col items-center justify-center md:flex-row"
+        className="flex flex-col items-center justify-center md:flex-row "
         data-oid="q4msu8v"
       >
         <Image
@@ -57,7 +60,7 @@ const Pipeline = () => {
             Experience Kyron&#39;s tailored solutions with our interactive demo.
           </p>
 
-          <span
+          {/* <span
             className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
             data-oid="qmsxjpk"
           >
@@ -65,8 +68,8 @@ const Pipeline = () => {
             <span className="text-sm text-red-700" data-oid="sgxgpxc">
               *
             </span>
-          </span>
-          <input
+          </span> */}
+          {/* <input
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -77,6 +80,9 @@ const Pipeline = () => {
 
           <div className="mt-8" data-oid="r.m--hx">
             <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
+          </div> */}
+          <div className="mt-8" data-oid="r.m--hx">
+            <GetStarted/>
           </div>
         </div>
       </div>
@@ -102,22 +108,23 @@ export default function Home() {
               className="mb-4 text-2xl font-bold md:text-4xl"
               data-oid=":pricz."
             >
-              Our Physician Dashboard Gives You{" "}
+              Our Admin Dashboard Gives You{" "}
               <span
                 className="bg-gradient-to-b from-[#4A6CF7] to-[#3628d2] bg-clip-text text-transparent"
                 data-oid="hf0zrmz"
               >
                 Full Control
               </span>{" "}
-              Over Your Billing
+              Over Your Claim Denials
             </h2>
             <p
-              className="text-base text-body-color md:text-lg"
+              className="text-justify text-base text-body-color md:text-lg"
               data-oid="7e8ixnp"
             >
-              Our physician dashboard is designed to give you full control over
-              your billing, scheduling, and patient records. You can easily
-              automate every repetitive task you do not want to do.
+              Our admin dashboard is designed to give you full control over
+              letters of appeal, phone calls to insurance, and denial
+              management. You can easily automate every repetitive task you do
+              not want to do.
             </p>
           </div>
           <Image
@@ -427,26 +434,26 @@ export default function Home() {
           >
             <div className="text-center text-white" data-oid="-ex_t2d">
               <h4 className="mb-2 text-4xl font-bold" data-oid="x2dtl18">
-                98%
+                &lt; 10s
               </h4>
               <p className="text-blue-100" data-oid="gwz2po2">
-                First Pass Resolution Rate
+                Time for Appeal Drafting
               </p>
             </div>
             <div className="text-center text-white" data-oid="u9_c_so">
               <h4 className="mb-2 text-4xl font-bold" data-oid="-7d6.jv">
-                3x
+                &gt; 99%
               </h4>
               <p className="text-blue-100" data-oid="zsjql0p">
-                Faster Processing Time
+                Possible Appeals Submitted
               </p>
             </div>
             <div className="text-center text-white" data-oid="7x5707o">
               <h4 className="mb-2 text-4xl font-bold" data-oid="63h026p">
-                $2.1M
+                &gt; 100 hours
               </h4>
               <p className="text-blue-100" data-oid="yv_y98y">
-                Average Annual Savings
+                Call Time Saved per Biller per Year
               </p>
             </div>
           </div>
@@ -474,7 +481,10 @@ export default function Home() {
                 >
                   Denials Management
                 </h3>
-                <p className="text-left text-body-color" data-oid="x.mjukc">
+                <p
+                  className="text-left text-body-color sm:text-justify"
+                  data-oid="x.mjukc"
+                >
                   <span className="text-left font-bold" data-oid="53w_dib">
                     Turn denials into approvals.
                   </span>{" "}
@@ -494,14 +504,18 @@ export default function Home() {
                   className="text-lg font-semibold md:text-xl"
                   data-oid="y4b1kv1"
                 >
-                  Claims Management
+                  Voice AI Agent
                 </h3>
-                <p className="text-left text-body-color" data-oid="4vm030o">
+                <p
+                  className="text-left text-body-color sm:text-justify"
+                  data-oid="4vm030o"
+                >
                   <span className="font-bold" data-oid="q_uppeg">
-                    Faster claims, fewer errors, higher revenue.
+                    Capture every word, every nuance.
                   </span>{" "}
-                  AI-powered claims processing ensures accuracy, accelerates
-                  approvals, and minimizes rework—so you get paid faster.
+                  Our Voice AI Agent transcribes real-time conversations into
+                  precise, actionable documentation—so your team can focus on
+                  patient care without missing a beat.
                 </p>
               </div>
             </div>
@@ -517,7 +531,10 @@ export default function Home() {
                 >
                   Prior Authorization
                 </h3>
-                <p className="text-left text-body-color" data-oid="bd_ksgt">
+                <p
+                  className="text-left text-body-color sm:text-justify"
+                  data-oid="bd_ksgt"
+                >
                   <span className="font-bold" data-oid="v8v4t_p">
                     Instant approvals, fewer delays.
                   </span>{" "}
@@ -537,59 +554,19 @@ export default function Home() {
                   className="text-lg font-semibold md:text-xl"
                   data-oid="v37rr7k"
                 >
-                  Eligibility Verification
+                  Appeal Letter Generation
                 </h3>
-                <p className="text-left text-body-color" data-oid="f984kl-">
+                <p
+                  className="text-left text-body-color sm:text-justify"
+                  data-oid="f984kl-"
+                >
                   <span className="font-bold" data-oid=".boalr7">
-                    Verify in seconds, reduce rejections.
+                    Transform denials into approvals with persuasive, automated
+                    appeal letters.
                   </span>{" "}
-                  AI-driven eligibility checks instantly confirm patient
-                  coverage, preventing claim denials and improving front-end
-                  efficiency.
-                </p>
-              </div>
-            </div>
-            <div
-              className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="sih6m0a"
-            >
-              <Orb color="gold" data-oid="cy.gagb" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="z2wg9gk">
-                <h3
-                  className="text-lg font-semibold md:text-xl"
-                  data-oid="11s6az9"
-                >
-                  Payment Posting
-                </h3>
-                <p className="text-left text-body-color" data-oid="my_5x7p">
-                  <span className="font-bold" data-oid="9g_kuq4">
-                    Experience flawless financial reconciliation
-                  </span>{" "}
-                  Our system automates payment posting with unparalleled
-                  accuracy. It seamlessly matches remittance data to patient
-                  accounts, minimizes human error, and speeds up cash flow.
-                </p>
-              </div>
-            </div>
-            <div
-              className=" flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row"
-              data-oid="vv.jzlq"
-            >
-              <Orb color="copper" data-oid="lfrdikg" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0" data-oid="ezlvddp">
-                <h3
-                  className="text-lg font-semibold md:text-xl"
-                  data-oid="xnmf:ui"
-                >
-                  Coding Notes and Review
-                </h3>
-                <p className="text-left text-body-color" data-oid="wq0vvra">
-                  <span className="font-bold" data-oid="vlgog4.">
-                    Transform your medical records with precision.
-                  </span>{" "}
-                  Our AI-powered tool analyzes and refines coding notes,
-                  ensuring consistency and compliance, reducing claim denials,
-                  and letting healthcare professionals focus on patient care.
+                  Our AI drafts articulate, compliant appeals that streamline
+                  your resubmission process, protecting revenue and reducing
+                  administrative hassle.
                 </p>
               </div>
             </div>

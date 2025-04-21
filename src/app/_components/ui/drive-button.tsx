@@ -14,15 +14,9 @@ const TestDrive: React.FC<TestDriveProps> = ({ handleSubmit }) => {
       onHoverStart={() => console.log("hover started!")}
       onClick={handleSubmit}
       data-oid="eqejpjj"
+      className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
     >
-      <a
-        href="https://form.typeform.com/to/zstMkPH7"
-        rel="noopener noreferrer"
-        className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
-        data-oid="7d.66pz"
-      >
         Test Drive Kyron
-      </a>
     </motion.button>
   );
 };
