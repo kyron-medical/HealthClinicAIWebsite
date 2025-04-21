@@ -2,17 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { CSSTransition } from "react-transition-group";
-import type { PatientEvent } from "@prisma/client";
-
-import "./modal-transition.css";
-import FileUploadBox from "./FileUpload";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { AnimatePresence, motion } from "framer-motion";
-import Orb from "@/app/_components/ui/orb";
-import { toast, ToastBar } from "react-hot-toast"; // Assuming you're using react-toastify for notifications
+import { toast } from "react-hot-toast";
 import { trpc } from "trpc/client";
 import { z } from "zod";
+import type { PatientEvent } from "@prisma/client";
 
 // Define interface for your row data
 interface PatientRow {
@@ -73,7 +67,17 @@ function CountryCodeSelect({
   );
 }
 
-const VoiceAI = ({ patient, events, patients, createEventMutation }) => {
+const VoiceAI = ({
+  patient,
+  _events,
+  _patients,
+  createEventMutation,
+}: {
+  patient: PatientRow;
+  _events: PatientEvent[];
+  _patients: PatientRow[];
+  createEventMutation: ReturnType<typeof trpc.createPatientEvent.useMutation>;
+}) => {
   const [callType, setCallType] = useState("biller-insurance");
   const [number1, setNumber1] = useState("");
   const [number2, setNumber2] = useState("");
@@ -92,6 +96,19 @@ const VoiceAI = ({ patient, events, patients, createEventMutation }) => {
     phoneNumberSchema.safeParse(number1.replace(/\D/g, "")).success &&
     phoneNumberSchema.safeParse(number2.replace(/\D/g, "")).success;
 
+  const postCall = async <T,>(endpoint: string): Promise<T> => {
+    const response = await fetch(`https://api.kyronmedical.com${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        doctor_phone: number1Country + number1,
+        insurance: number2Country + number2,
+      }),
+    });
+    if (!response.ok) throw new Error(`Failed to complete ${endpoint} call.`);
+    return response.json() as Promise<T>;
+  };
+
   async function handleMakeCalls() {
     setCallInProgress(true);
     setCallTranscript("");
@@ -102,79 +119,81 @@ const VoiceAI = ({ patient, events, patients, createEventMutation }) => {
         let transcript = "";
         let summary = "";
 
-        // Helper for POST requests
-        const postCall = async (endpoint: string) => {
-          const response = await fetch(
-            `https://api.kyronmedical.com${endpoint}`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                doctor_phone: number1Country + number1,
-                insurance: number2Country + number2,
-              }),
-            },
-          );
-          if (!response.ok)
-            throw new Error(`Failed to complete ${endpoint} call.`);
-          return response.json();
-        };
-
         if (callType === "peer-peer") {
-          type P2PResponse = { p2p_transcript?: string; summary?: string };
-          const data: P2PResponse = await postCall("/api/p2p");
+          const data = await postCall<{
+            p2p_transcript?: string;
+            summary?: string;
+          }>("/api/p2p");
           transcript = data.p2p_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "biller-insurance") {
-          // You can use the same endpoint or a different one if needed
-          // For demo, using /api/p2p as placeholder
-          type P2PResponse = { p2p_transcript?: string; summary?: string };
-          const data: P2PResponse = await postCall("/api/p2p");
+          const data = await postCall<{
+            p2p_transcript?: string;
+            summary?: string;
+          }>("/api/p2p");
           transcript = data.p2p_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "claim-status") {
-          type CSIResponse = { CSI_transcript?: string; summary?: string };
-          const data = await postCall("/api/claim_status_inquiry");
+          const data = await postCall<{
+            CSI_transcript?: string;
+            summary?: string;
+          }>("/api/claim_status_inquiry");
           transcript = data.CSI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "appeal-followup") {
-          type AFResponse = { AF_transcript?: string; summary?: string };
-          const data = await postCall("/api/appeal_followup");
+          const data = await postCall<{
+            AF_transcript?: string;
+            summary?: string;
+          }>("/api/appeal_followup");
           transcript = data.AF_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "denial-clarification") {
-          type DRCResponse = { DRC_transcript?: string; summary?: string };
-          const data = await postCall("/api/denial_reason_clarification");
+          const data = await postCall<{
+            DRC_transcript?: string;
+            summary?: string;
+          }>("/api/denial_reason_clarification");
           transcript = data.DRC_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "eob-query") {
-          type EOBResponse = { EOB_transcript?: string; summary?: string };
-          const data = await postCall("/api/eob");
+          const data = await postCall<{
+            EOB_transcript?: string;
+            summary?: string;
+          }>("/api/eob");
           transcript = data.EOB_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "eligibility-verification") {
-          type EVResponse = { EV_transcript?: string; summary?: string };
-          const data = await postCall("/api/eligibility_verification");
+          const data = await postCall<{
+            EV_transcript?: string;
+            summary?: string;
+          }>("/api/eligibility_verification");
           transcript = data.EV_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "policy-detail") {
-          type PDIResponse = { PDI_transcript?: string; summary?: string };
-          const data = await postCall("/api/policy_detail_inquiry");
+          const data = await postCall<{
+            PDI_transcript?: string;
+            summary?: string;
+          }>("/api/policy_detail_inquiry");
           transcript = data.PDI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "coordination-of-benefits") {
-          type COBResponse = { COB_transcript?: string; summary?: string };
-          const data = await postCall("/api/coordination_of_benefits");
+          const data = await postCall<{
+            COB_transcript?: string;
+            summary?: string;
+          }>("/api/coordination_of_benefits");
           transcript = data.COB_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "billing-discrepancy") {
-          type BDRResponse = { BDR_transcript?: string; summary?: string };
-          const data = await postCall("/api/billing_discrepancy_resolution");
+          const data = await postCall<{
+            BDR_transcript?: string;
+            summary?: string;
+          }>("/api/billing_discrepancy_resolution");
           transcript = data.BDR_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "claim-rejection") {
-          type CRIResponse = { CRI_transcript?: string; summary?: string };
-          const data = await postCall("/api/claim_rejection_inquiry");
+          const data = await postCall<{
+            CRI_transcript?: string;
+            summary?: string;
+          }>("/api/claim_rejection_inquiry");
           transcript = data.CRI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else {
@@ -185,7 +204,6 @@ const VoiceAI = ({ patient, events, patients, createEventMutation }) => {
 
         setCallTranscript(transcript);
 
-        // Automatically add to history log
         await createEventMutation.mutateAsync({
           patientId: patient.id,
           eventType: "Voice AI",
@@ -209,13 +227,10 @@ const VoiceAI = ({ patient, events, patients, createEventMutation }) => {
     setCallTranscript("");
   }
 
-  
-
   return (
     <>
       <div className="flex flex-row items-center gap-2">
         <h2 className="m-0 text-3xl font-bold">Voice AI Agent</h2>
-        {/* <Orb color="green" height={120} width={120} data-oid="4s5zrls" /> */}
       </div>
       <p className="mb-4 text-sm text-gray-500">
         Place a call to {patient.name}'s insurance and let the AI agent handle
@@ -335,10 +350,6 @@ const ACCEPTED_TYPES = [
   "text/plain",
 ];
 
-function isAcceptedFileType(file: File) {
-  return ACCEPTED_TYPES.includes(file.type);
-}
-
 export default function PatientModal({
   isOpen,
   onClose,
@@ -348,26 +359,12 @@ export default function PatientModal({
   patients,
 }: PatientModalProps) {
   const [mounted, setMounted] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
   const patientModalRef = useRef(null);
   const eventModalRef = useRef(null);
 
   const [selectedEvent, setSelectedEvent] = useState<PatientEvent | null>(null);
   const [view, setView] = useState<"timeline" | "appeal" | "voice">("timeline");
-
-  const [appealLetter, setAppealLetter] = useState<string>("");
-  const [files, setFiles] = useState<File[]>([]);
-
-  // Upload state for multiple files with progress
-  interface UploadFile {
-    file: File;
-    progress: number;
-    uploaded: boolean;
-  }
-  const [uploadedFiles, setUploadedFiles] = useState<UploadFile[]>([]);
-  const [allUploaded, setAllUploaded] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [eventType, setEventType] = useState("");
@@ -376,38 +373,16 @@ export default function PatientModal({
     new Date().toISOString().split("T")[0],
   );
   const [eventPdfs, setEventPdfs] = useState<File[]>([]);
-  // Add these functions inside PatientModal
-  const handleEditPdf = (event, pdfIdx) => {
-    // Open a modal or file input to replace the PDF
-    // After upload, update the event.pdfs array and persist to backend
+
+  const handleEditPdf = (_event, _pdfIdx) => {
     toast("Edit PDF not implemented (stub)");
   };
 
-  const handleDeletePdf = async (event, pdfIdx) => {
-    // Remove the PDF from event.pdfs and persist to backend
-    // Example:
-    // await trpc.deleteEventPdf.mutate({ eventId: event.id, pdfIdx });
+  const handleDeletePdf = (_event, _pdfIdx) => {
     toast("Delete PDF not implemented (stub)");
   };
 
   const createEventMutation = trpc.createPatientEvent.useMutation();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setUploadedFiles((files) =>
-        files.map((f) =>
-          !f.uploaded && f.progress < 100
-            ? {
-                ...f,
-                progress: Math.min(f.progress + 10, 100),
-                uploaded: f.progress + 10 >= 100,
-              }
-            : f,
-        ),
-      );
-    }, 200);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -477,8 +452,7 @@ export default function PatientModal({
       });
 
       if (eventType === "Insurance Paid") {
-        // Try to extract a number (with or without $) from the content
-        const match = eventContent.match(/(\$?\s?)(\d+(\.\d{1,2})?)/);
+        const match = /(\$?\s?)(\d+(\.\d{1,2})?)/.exec(eventContent);
         const amount = match ? parseFloat(match[2]) : 0;
         await trpc.updatePatientMoneyCollected.useMutation().mutateAsync({
           patientId: patient.id,
@@ -493,100 +467,9 @@ export default function PatientModal({
       setEventContent("");
       setEventDate(new Date().toISOString().split("T")[0]);
       setEventPdfs([]);
-    } catch (err) {
+    } catch {
       toast.dismiss();
       toast.error("Error adding event");
-    }
-  };
-
-  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    if (uploadedFiles.length < 2) {
-      const fileNames = uploadedFiles.map((file) => file.file.name);
-      const uniqueFileNames = new Set(fileNames);
-      if (fileNames.length !== uniqueFileNames.size) {
-        toast.error("Duplicate files detected.");
-        return;
-      }
-
-      toast.error("Please upload at least 2 files.");
-      return;
-    }
-
-    const formData = new FormData();
-    uploadedFiles.forEach((file) => {
-      formData.append("files", file.file);
-    });
-    console.log(formData);
-
-    try {
-      const fetchPromise = async () => {
-        const response = await fetch(
-          "https://api.kyronmedical.com/generate-appeal",
-          {
-            method: "POST",
-            body: formData,
-          },
-        );
-
-        if (response.ok) {
-
-          type ResponseData = {
-            appeal_letter: string;
-          };
-
-          const data : ResponseData = await response.json();
-          const appealLetter : string = data.appeal_letter;
-
-          setAppealLetter(appealLetter);
-
-
-          const blob = new Blob([appealLetter], { type: "text/plain" });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "appeal_letter.txt";
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          window.URL.revokeObjectURL(url);
-          
-          const urlList = [url];
-
-          // Automatically add to history log
-          await createEventMutation.mutateAsync({
-            patientId: patient.id,
-            eventType: "Letter of Appeal",
-            eventContent: appealLetter,
-            date: new Date(),
-            fileUrls: urlList,
-          });
-        } else {
-
-          type ErrorResponse = {
-            error: string;
-          }
-          const errorData : ErrorResponse  = await response.json();
-          throw new Error(errorData.error ?? "Failed to generate appeal.");
-        }
-      };
-
-      toast.promise(
-        fetchPromise(),
-        {
-          loading: "Generating your appeal letter...",
-          success: "Appeal letter generated successfully!",
-          error: "Failed to generate appeal letter.",
-        },
-        {
-          style: {
-            minWidth: "250px",
-          },
-        },
-      );
-    } catch (error) {
-      console.error("Error during appeal generation:", error);
     }
   };
 
@@ -758,7 +641,6 @@ export default function PatientModal({
                           className="cursor-pointer border-b pb-2 hover:bg-gray-100"
                           onClick={() => {
                             setSelectedEvent(event);
-                            setModalOpen(true);
                           }}
                         >
                           <p className="font-semibold">
@@ -815,161 +697,14 @@ export default function PatientModal({
                         matter.
                       </span>
                     </div>
-                    <div className="flex space-x-8">
-                      <div className="w-3/5 border-r pr-4">
-                        <h3 className="mb-2 text-xl font-semibold">
-                          Required Files
-                        </h3>
-                        <div className="space-y-4">
-                          <div>
-                            <label className="mb-1 block font-semibold">
-                              Denial
-                            </label>
-                            {uploadedFiles[0] ? (
-                              <div className="flex items-center gap-2">
-                                <span className="truncate text-sm">
-                                  {uploadedFiles[0].file.name}
-                                </span>
-                                <button
-                                  className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
-                                  onClick={() =>
-                                    setUploadedFiles(
-                                      (prev) =>
-                                        [undefined, prev[1]].filter(
-                                          Boolean,
-                                        ) as UploadFile[],
-                                    )
-                                  }
-                                >
-                                  Remove
-                                </button>
-                              </div>
-                            ) : (
-                              <input
-                                type="file"
-                                accept=".pdf,.doc,.docx,.txt"
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0];
-                                  if (!file) return;
-                                  if (!isAcceptedFileType(file)) {
-                                    toast.error(
-                                      "Invalid file type. Only PDF, Word, or TXT allowed.",
-                                    );
-                                    return;
-                                  }
-                                  if (
-                                    uploadedFiles[1] &&
-                                    uploadedFiles[1].file.name === file.name
-                                  ) {
-                                    toast.error("Duplicate file detected.");
-                                    return;
-                                  }
-                                  setUploadedFiles(
-                                    (prev) =>
-                                      [
-                                        { file, progress: 0, uploaded: false },
-                                        prev[1],
-                                      ].filter(Boolean) as UploadFile[],
-                                  );
-                                }}
-                              />
-                            )}
-                          </div>
-                          <div>
-                            <label className="mb-1 block font-semibold">
-                              Note
-                            </label>
-                            {uploadedFiles[1] ? (
-                              <div className="flex items-center gap-2">
-                                <span className="truncate text-sm">
-                                  {uploadedFiles[1].file.name}
-                                </span>
-                                <button
-                                  className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
-                                  onClick={() =>
-                                    setUploadedFiles(
-                                      (prev) =>
-                                        [prev[0], undefined].filter(
-                                          Boolean,
-                                        ) as UploadFile[],
-                                    )
-                                  }
-                                >
-                                  Remove
-                                </button>
-                              </div>
-                            ) : (
-                              <input
-                                type="file"
-                                accept=".pdf,.doc,.docx,.txt"
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0];
-                                  if (!file) return;
-                                  if (!isAcceptedFileType(file)) {
-                                    toast.error(
-                                      "Invalid file type. Only PDF, Word, or TXT allowed.",
-                                    );
-                                    return;
-                                  }
-                                  if (
-                                    uploadedFiles[0] &&
-                                    uploadedFiles[0].file.name === file.name
-                                  ) {
-                                    toast.error("Duplicate file detected.");
-                                    return;
-                                  }
-                                  setUploadedFiles(
-                                    (prev) =>
-                                      [
-                                        prev[0],
-                                        { file, progress: 0, uploaded: false },
-                                      ].filter(Boolean) as UploadFile[],
-                                  );
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <button
-                          className={`mt-8 w-[256px] rounded px-4 py-2 text-white ${
-                            uploadedFiles.length === 2 &&
-                            uploadedFiles[0]?.uploaded &&
-                            uploadedFiles[1]?.uploaded
-                              ? "bg-blue-500 hover:bg-blue-600"
-                              : "cursor-not-allowed bg-gray-400"
-                          }`}
-                          onClick={handleSubmit}
-                          disabled={
-                            uploadedFiles.length !== 2 ||
-                            !uploadedFiles[0]?.uploaded ||
-                            !uploadedFiles[1]?.uploaded
-                          }
-                        >
-                          Generate Letter of Appeal
-                        </button>
-                      </div>
-                      <div className="w-2/5 pl-8">
-                        <div className="mb-4 rounded bg-blue-50 p-4">
-                          <strong>Instructions:</strong>
-                          <ul className="ml-6 mt-2 list-disc text-sm">
-                            <li>Upload one Denial and one Note file.</li>
-                            <li>
-                              Accepted formats: PDF, Word (.doc/.docx), or TXT.
-                            </li>
-                            <li>Do not upload the same file twice.</li>
-                            <li>File names do not matter.</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
                   </>
                 )}
 
                 {view === "voice" && (
                   <VoiceAI
                     patient={patient}
-                    events={events}
-                    patients={patients}
+                    _events={events}
+                    _patients={patients}
                     createEventMutation={createEventMutation}
                   />
                 )}
