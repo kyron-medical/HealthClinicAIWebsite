@@ -32,5 +32,3 @@ yarn-error.log*
 .vercel
 .env
 
-/utils/secure.ts
-src/app/biller/dashboard/[slug]/api.py
