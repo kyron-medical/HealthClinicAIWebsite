@@ -3,8 +3,6 @@
 import SingleBlog from "@/app/_components/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 
-import { getBlogPosts } from "@/server/db";
-import Link from "next/link";
 import { TbLogs } from "react-icons/tb";
 import resourcesData from "../data/resource-data";
 import Image from "next/image";
