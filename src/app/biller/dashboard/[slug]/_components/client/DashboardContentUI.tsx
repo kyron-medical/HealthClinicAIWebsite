@@ -9,9 +9,18 @@ import { trpc } from "trpc/client";
 import toast from "react-hot-toast";
 import { parse } from "@/../utils/parser";
 import middleware from "@/middleware";
+import { useUser } from "@clerk/nextjs";
 
 interface DashboardContentClientProps {
-  patients: Patient[];
+  patients: {
+    id: string;
+    name: string;
+    insurer: string;
+    moneyCollected: number;
+    createdAt: Date;
+    updatedAt: Date;
+    billerId: string;
+  }[];
   patientEvents: PatientEvent[];
 }
 
@@ -45,16 +54,29 @@ const DashboardContentClient = ({
 
   const createPatientsBulk = trpc.createPatientsBulk.useMutation();
 
+  const { user } = useUser(); // Assuming you have a way to get the current user
+  
+  if (!user) {
+    return;
+  }
+
   // This function should be called when a file is selected
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
     const file = e.target.files?.[0];
     if (!file) return;
+
+    
 
     try {
       const patients: {
         name: string;
         insurer: string;
         moneyCollected: number;
+        createdAt: Date;
+        updatedAt: Date;
+        billerId: string;
       }[] = [];
       for await (const row of parse(file)) {
         const name = row.data.name;
@@ -68,6 +90,9 @@ const DashboardContentClient = ({
           name,
           insurer,
           moneyCollected: Number(moneyCollected),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          billerId: user.id
         });
       }
 

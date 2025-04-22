@@ -214,7 +214,11 @@ const VoiceAI = ({
 
         setCallInProgress(false);
       } catch (error) {
-        setCallTranscript("Error during call: " + error.message);
+        let errorMsg = "Unknown error";
+        if (error instanceof Error) {
+          errorMsg = error.message;
+        }
+        setCallTranscript("Error during call: " + errorMsg);
         setCallInProgress(false);
         return null;
       }
@@ -344,12 +348,6 @@ const VoiceAI = ({
   );
 };
 
-const ACCEPTED_TYPES = [
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "text/plain",
-];
 
 export default function PatientModal({
   isOpen,

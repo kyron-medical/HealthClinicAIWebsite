@@ -19,7 +19,15 @@ interface PatientRow {
 }
 
 interface PatientGridProps {
-  patients: Patient[];
+  patients: {
+    id: string;
+    name: string;
+    insurer: string;
+    moneyCollected: number;
+    createdAt: Date;
+    updatedAt: Date;
+    billerId: string;
+  }[];
 
   filterName: string;
   filterInsurer: string;
@@ -27,7 +35,7 @@ interface PatientGridProps {
 
 const PatientGridClient = ({
   patients,
- 
+
   filterName,
   filterInsurer,
 }: PatientGridProps) => {

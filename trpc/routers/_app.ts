@@ -12,6 +12,7 @@ import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
 import { Patient } from "@prisma/client";
 import { encrypt, decrypt } from "@/../utils/secure";
+import { I } from "@upstash/redis/zmscore-CjoCv9kz";
 
 /*
 ===============================================================================
@@ -80,9 +81,13 @@ This is where we define the API endpoints and their logic.
 */
 
 export const PatientSchema = z.object({
+  id : z.string(),
   name: z.string(),
   insurer: z.string(),
   moneyCollected: z.number(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  billerId: z.string(),
   // Add other fields as needed, e.g.:
   // id: z.string().optional(),
   // billerId: z.string().optional(),
@@ -252,6 +257,7 @@ export const appRouter = createTRPCRouter({
         userId: z.string(),
       }),
     )
+    .output(z.array(PatientSchema))
     .query(async ({ ctx, input }) => {
       const patients = await ctx.prisma.patient.findMany({
         where: {
@@ -260,7 +266,7 @@ export const appRouter = createTRPCRouter({
         take: 100,
         orderBy: [{ createdAt: "desc" }],
       });
-      return (patients.map(decryptPHI));
+      return patients.map(decryptPHI);
     }),
 
   //Guarantees user is authenticated
@@ -319,7 +325,16 @@ export const appRouter = createTRPCRouter({
 
   // In your tRPC router
   createPatientsBulk: privateProcedure
-    .input(z.array(PatientSchema)) // PatientSchema = z.object({ ... })
+    .input(
+      z.array(
+        z.object({
+          name: z.string(),
+          insurer: z.string(),
+          moneyCollected: z.number(),
+          billerId: z.string(),
+        }),
+      ),
+    ) // PatientSchema = z.object({ ... })
     .mutation(async ({ input, ctx }) => {
       // Validate, dedupe, etc.
       // Insert all patients in a transaction
@@ -370,7 +385,7 @@ export const appRouter = createTRPCRouter({
         eventContent: z.string().optional(),
         date: z.date(),
         fileUrls: z.array(z.string()).optional(),
-        transcript : z.string().optional(),
+        transcript: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
