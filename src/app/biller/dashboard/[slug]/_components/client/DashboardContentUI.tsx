@@ -27,6 +27,7 @@ const DashboardContentClient = ({
   const [chatbotOpen, setChatbotOpen] = useState(false);
   // Inside your component, before the return statement
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const utils = trpc.useUtils(); // or useQueryClient() for React Query
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,6 +72,7 @@ const DashboardContentClient = ({
       }
 
       await createPatientsBulk.mutateAsync(patients);
+      await utils.getPatientsByBillerId.invalidate(); // Invalidate/refetch the patients query
       toast.success("Patients added successfully!");
     } catch (err) {
       toast.dismiss();
@@ -90,7 +92,6 @@ const DashboardContentClient = ({
   return (
     <>
       <div className="flex h-screen bg-gray-100">
-       
         {/* Floating Kyron AI Button */}
         <button
           className="fixed bottom-8 right-8 z-50 w-16 rounded-full bg-blue-600 p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
