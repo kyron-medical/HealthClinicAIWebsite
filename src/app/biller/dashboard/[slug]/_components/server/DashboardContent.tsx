@@ -24,16 +24,15 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
       userId: user.id,
     });
 
-  // Fetch all patient events for these patients
+
   const patientIds: string[] = patients.map((p) => p.id);
 
-  if (!patientIds || patientIds.length === 0) {
-    return <div>No patients found.</div>;
+  let patientEvents: PatientEvent[] = [];
+  if (patientIds.length > 0) {
+    patientEvents = await trpc.getpatientEventsByPatientIds({
+      patientIds,
+    });
   }
-
-  const patientEvents: PatientEvent[] = await trpc.getpatientEventsByPatientIds({
-    patientIds,
-  });
 
   // If you know the type of patientEvents, replace 'unknown' with the correct type above
 
