@@ -129,6 +129,7 @@ const PatientGridClient = ({
       {modalOpen &&
         selectedPatient &&
         modalRoot instanceof Element &&
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
         createPortal(
           <PatientModal
             isOpen={modalOpen}

@@ -472,6 +472,7 @@ export default function PatientModal({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
   return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 "

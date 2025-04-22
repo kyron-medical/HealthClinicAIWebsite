@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import EmailCollectionForm from "@/components/EmailCollectionForm";
 
+
 interface ResourceModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -48,6 +49,7 @@ export default function ResourceModal({
   const modalRoot = document.getElementById("modal-root");
   if (!modalRoot || !(modalRoot instanceof Element)) return null;
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
   return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
