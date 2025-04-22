@@ -107,7 +107,7 @@ const DemoForm = () => {
           },
         },
       );
-    } catch (error) {
+    } catch (error : unknown) {
       console.error("Error during appeal generation:", error);
     }
   };

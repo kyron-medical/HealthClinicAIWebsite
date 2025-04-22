@@ -214,8 +214,9 @@ const VoiceAI = ({
 
         setCallInProgress(false);
       } catch (error) {
-        setCallTranscript("Error during call: " + (error as Error).message);
+        setCallTranscript("Error during call: " + error.message);
         setCallInProgress(false);
+        return null;
       }
     };
 
@@ -233,8 +234,8 @@ const VoiceAI = ({
         <h2 className="m-0 text-3xl font-bold">Voice AI Agent</h2>
       </div>
       <p className="mb-4 text-sm text-gray-500">
-        Place a call to {patient.name}'s insurance and let the AI agent handle
-        the conversation.
+        Place a call to {patient.name}&apos;s insurance and let the AI agent
+        handle the conversation.
       </p>
 
       <div className="mb-4">
@@ -404,7 +405,7 @@ export default function PatientModal({
   if (!mounted || !isOpen) return null;
 
   const modalRoot = document.getElementById("modal-root");
-  if (!modalRoot) return null;
+  if (!modalRoot || !(modalRoot instanceof Element)) return null;
 
   if (!patient) return null;
 

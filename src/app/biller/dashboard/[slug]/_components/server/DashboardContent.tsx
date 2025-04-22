@@ -21,16 +21,19 @@ const DashboardContent = async () => {
     redirect("/");
   }
 
-  const patients : Patient[] = await trpc.getPatientsByBillerId({
+  const patients = await trpc.getPatientsByBillerId({
     userId: user.id,
   });
 
   // Fetch all patient events for these patients
   const patientIds = patients.map((p) => p.id);
-  let patientEvents: PatientEvent[] = [];
-  if (patientIds.length > 0) {
-    patientEvents = await trpc.getpatientEventsByPatientIds({ patientIds });
+
+  if (!patientIds || patientIds.length === 0) {
+    return <div>No patients found.</div>;
   }
+   
+  const patientEvents = await trpc.getpatientEventsByPatientIds({ patientIds }); 
+  
 
   const totalCollected = patients.reduce((sum, p) => sum + p.moneyCollected, 0);
 

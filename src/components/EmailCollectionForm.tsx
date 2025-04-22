@@ -39,7 +39,7 @@ export default function EmailCollectionForm({
         alert("Thank you for submitting!");
         onClose();
       }
-    } catch (error) {
+    } catch (error : unknown) {
       console.error("Error submitting:", error);
       alert("Something went wrong. Please try again.");
     } finally {

@@ -11,25 +11,25 @@ interface ResourceModalProps {
   resourceTitle?: string;
 }
 
-export default function ResourceModal({ 
-  isOpen, 
-  onClose, 
+export default function ResourceModal({
+  isOpen,
+  onClose,
   resourceUrl,
-  resourceTitle = "Exclusive Resource"
+  resourceTitle = "Exclusive Resource",
 }: ResourceModalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Add event to close on escape key
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
-    window.addEventListener('keydown', handleEsc);
-    
+    window.addEventListener("keydown", handleEsc);
+
     return () => {
-      window.removeEventListener('keydown', handleEsc);
+      window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
 
@@ -43,10 +43,10 @@ export default function ResourceModal({
   };
 
   if (!mounted || !isOpen) return null;
-  
+
   // Find the modal root element
-  const modalRoot = document.getElementById('modal-root');
-  if (!modalRoot) return null;
+  const modalRoot = document.getElementById("modal-root");
+  if (!modalRoot || !(modalRoot instanceof Element)) return null;
 
   return createPortal(
     <div

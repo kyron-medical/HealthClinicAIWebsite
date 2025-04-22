@@ -51,9 +51,10 @@ export function BlogPostForm() {
         author: "",
         mainImage: "",
       });
-    } catch (error) {
+    } catch (error : unknown) {
       console.error("Error creating blog post:", error);
       toast.error("Failed to create blog post");
+      return;
     }
   };
 

@@ -23,9 +23,9 @@ const useUploadThingInputProps = (...args: Input) => {
         console.log("Upload successful:", result);
         return result[0].ufsUrl; // Return the URL of the uploaded file
       }
-    } catch (error) {
+    } catch (error : unknown) {
       console.error("Upload failed:", error);
-      throw error;
+      return;
     }
   };
 

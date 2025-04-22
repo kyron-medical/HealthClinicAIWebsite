@@ -120,7 +120,7 @@ const PatientGridClient = ({
       </div>
       {modalOpen &&
         selectedPatient &&
-        modalRoot &&
+        modalRoot instanceof Element &&
         createPortal(
           <PatientModal
             isOpen={modalOpen}

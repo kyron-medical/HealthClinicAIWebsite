@@ -20,7 +20,7 @@ export async function createBlogPost(data: {
         imageUrls: [],
       },
     });
-  } catch (error) {
+  } catch (error : unknown) {
     console.error("Error creating blog post:", error);
     throw error;
   }
@@ -40,7 +40,7 @@ export async function getRelatedPosts(excludeId: string) {
         createdAt: true,
       },
     });
-  } catch (error) {
+  } catch (error : unknown) {
     console.error("Error fetching related posts:", error);
     throw error;
   }

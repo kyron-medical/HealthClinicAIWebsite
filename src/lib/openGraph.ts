@@ -45,7 +45,7 @@ export async function scrapeOpenGraph(url: string): Promise<OpenGraphData> {
     };
 
     return ogData;
-  } catch (error) {
+  } catch (error : unknown) {
     throw new Error('Failed to fetch metadata');
   }
 }

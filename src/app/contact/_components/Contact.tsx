@@ -38,8 +38,9 @@ const Contact = () => {
       } else {
         console.error("Failed to send email", response.statusText);
       }
-    } catch (error) {
+    } catch (error : unknown) {
       console.error("Error: Failed to fetch", error);
+      return;
     }
   };
 
