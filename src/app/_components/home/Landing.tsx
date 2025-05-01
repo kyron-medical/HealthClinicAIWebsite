@@ -10,34 +10,38 @@ const Landing = () => {
       <Analytics data-oid="lewqbc5" />
       <section
         id="home"
-        className="bg-oval-gradient flowing-lines relative z-10 overflow-hidden  pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
+        className="flowing-lines relative z-10 overflow-hidden bg-oval-gradient  pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
         data-oid="bgbwdy."
       >
         <div className="container relative z-10" data-oid="2c.lkov">
           <div className="flex flex-wrap justify-center" data-oid="w0xel3_">
             <div className="flex w-full px-4 text-center" data-oid="xk.9:4m">
               <div
-                className="flex flex-col items-center justify-center w-full"
+                className="flex w-full flex-col items-center justify-center"
                 data-oid="09ycpgw"
               >
-                <h1
-                  className="mb-5 rounded text-3xl font-bold leading-tight text-slate-900 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
-                  data-oid="nt4-j4v"
-                >
-                  Spend more time with your patients. We&#39;ll help you handle
-                </h1>
-                <Typing data-oid="k5fwdsz" />
+                <span>
+                  <h1
+                    className="mb-5 rounded text-3xl font-bold leading-tight text-slate-900 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
+                    data-oid="nt4-j4v"
+                  >
+                    Spend more time with your patients. We&#39;ll help you
+                    handle
+                    <Typing data-oid="k5fwdsz" />
+                  </h1>
+                </span>
                 <div className="w-2/3" data-oid="64.u9o9">
                   <p
                     className="mb-12 rounded text-base !leading-relaxed text-slate-500  sm:text-lg md:text-xl"
                     data-oid="nd42cbw"
                   >
-                    Kyron provides a suite of proprietary AI agents to help your staff automate your denial management process. 
+                    Kyron provides a suite of proprietary AI agents to help your
+                    staff automate your denial management process.
                   </p>
                 </div>
 
                 <div
-                  className="flex flex-row justify-cente items-center"
+                  className="justify-cente flex flex-row items-center"
                   data-oid="glzwica"
                 >
                   <motion.button

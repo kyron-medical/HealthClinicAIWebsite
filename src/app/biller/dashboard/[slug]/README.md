@@ -12,5 +12,5 @@
 - [x] Fix styling of the chatbot
 - [x] Next patient button
 - [x] Encrypt upon storing in database, decrypt upon retrieval.
-- [] De-identify letters of appeal before storing them in the database.
+- [] De-identify letters of appeal before storing them in the database and then re-identify them upon retrieval
 - [] How to add patient events in bulk

@@ -106,7 +106,7 @@ If you like the template, please star this repository to inspire the team to cre
 - [x] Our physician dashboard gives you control over your claim denials
 
 - [] Blurb
-- [] Server-side render orb/orb video
+- [x] Server-side render orb/orb video
 
 < 10s
 time for appeal drafting
@@ -154,13 +154,3 @@ News page - phone
 
 
 ## Dashboard Todos
-- [] Transfer from Vercel to EC2 HIPAA compliant deployment
-- [] Put data in S3 HIPAA compliant database
-- [] tRPC and API Calls
-
-- [] Voice Agent Modal Page
-- [] Ability to delete files
-- [] Ability to add patients en masse
-- [x] Find icons for the arrows
-- [] Fix borders of AG Grid
-- [] Fix styling of the chatbot

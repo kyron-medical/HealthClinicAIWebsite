@@ -93,6 +93,18 @@ export const PatientSchema = z.object({
   // billerId: z.string().optional(),
 });
 
+const PatientEventBulkSchema = z.array(
+  z.object({
+    patientId: z.string(),
+    type: z.string(),
+    eventContent: z.string().optional(),
+    date: z.date(),
+    fileUrls: z.array(z.string()).optional(),
+    transcript: z.string().optional(),
+    summary: z.string().optional(),
+  }),
+);
+
 const addBillerDataToPatients = async (patients: Patient[]) => {
   const userId = patients.map((patient) => patient.billerId);
 
@@ -405,6 +417,14 @@ export const appRouter = createTRPCRouter({
         },
       });
       return patientEvent;
+    }),
+
+  createPatientEventsBulk: privateProcedure
+    .input(PatientEventBulkSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.prisma.patientEvent.createMany({
+        data: input,
+      });
     }),
 });
 // export type definition of API

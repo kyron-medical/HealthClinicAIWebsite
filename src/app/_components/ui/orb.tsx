@@ -12,11 +12,7 @@ interface OrbProps {
 }
 
 const Orb = ({ color, width, height }: OrbProps) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+ 
   const orbSrc: Record<OrbColor, string> = {
     pink: "https://lottie.host/543493c1-96a0-40bc-b052-40869ea7932b/xgY0fP4RXr.lottie",
     green:
@@ -34,12 +30,12 @@ const Orb = ({ color, width, height }: OrbProps) => {
 
   return (
     <div
-      ref={ref}
+      
       style={{ display: "flex", justifyContent: "center" }}
       data-oid="6:y1thv"
     >
-      {
-        inView ? (
+      
+        
           <div
             style={{
               width: width ?? "300px", // Adjust to desired size
@@ -60,12 +56,7 @@ const Orb = ({ color, width, height }: OrbProps) => {
               data-oid="rcwda7g"
             />
           </div>
-        ) : (
-          <div data-oid="6-tmw7m">Loading...</div>
-        )
-
-        // Placeholder while the animation is not in view
-      }
+        
     </div>
   );
 };
