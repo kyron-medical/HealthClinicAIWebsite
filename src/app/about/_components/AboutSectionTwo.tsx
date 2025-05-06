@@ -58,7 +58,7 @@ const teamMembers = [
     name: "Thanmay Kumar",
     title: "Sales & Marketing",
     image: "/images/team/thanmay-kumar.jpg",
-  }
+  },
 ];
 
 const AboutSectionTwo = () => {

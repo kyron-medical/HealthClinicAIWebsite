@@ -23,7 +23,7 @@ const useUploadThingInputProps = (...args: Input) => {
         console.log("Upload successful:", result);
         return result[0].ufsUrl; // Return the URL of the uploaded file
       }
-    } catch (error : unknown) {
+    } catch (error: unknown) {
       console.error("Upload failed:", error);
       return;
     }
@@ -48,13 +48,11 @@ function AddPostIcon() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="size-6"
-      data-oid="7:6xjms"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        data-oid="--k_-.v"
       />
     </svg>
   );
@@ -68,18 +66,15 @@ function LoadingSpinnerSVG() {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="white"
-      data-oid="g9b0on-"
     >
       <path
         d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
         opacity=".25"
-        data-oid="8s0qvc:"
       />
 
       <path
         d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
         className="spinner_ajPY"
-        data-oid="s4zcq6c"
       />
     </svg>
   );
@@ -93,11 +88,9 @@ export function CustomUploadButton({
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast.loading(
-        <div className="flex items-center gap-2" data-oid="o0isvwb">
-          <LoadingSpinnerSVG data-oid="l-xt:sz" />
-          <span className="text-lg" data-oid="9rpv1ci">
-            Uploading image...
-          </span>
+        <div className="flex items-center gap-2">
+          <LoadingSpinnerSVG />
+          <span className="text-lg">Uploading image...</span>
         </div>,
         {
           id: "upload-begin",
@@ -124,13 +117,9 @@ export function CustomUploadButton({
   });
 
   return (
-    <div data-oid="b-nomy-">
-      <label
-        htmlFor="upload-button"
-        className="cursor-pointer"
-        data-oid="fbzh5wg"
-      >
-        <AddPostIcon data-oid="6rrk5o3" />
+    <div>
+      <label htmlFor="upload-button" className="cursor-pointer">
+        <AddPostIcon />
       </label>
       <input
         id="upload-button"
@@ -138,7 +127,6 @@ export function CustomUploadButton({
         value=""
         className="sr-only"
         {...inputProps}
-        data-oid="mfp6vz2"
       />
     </div>
   );

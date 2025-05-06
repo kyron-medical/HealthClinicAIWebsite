@@ -5,10 +5,9 @@ const Dashboard = () => {
 
   // Next.js will automatically handle the promise and suspend rendering until resolved
   return (
-    <section className="pb-[120px] pt-[120px]" data-oid="oq5_5g2">
-      <div className="container" data-oid=".pu5iw:">
-        <DashboardContent data-oid="bmriigl" />
-        
+    <section className="pb-[120px] pt-[120px]">
+      <div className="container">
+        <DashboardContent />
       </div>
     </section>
   );

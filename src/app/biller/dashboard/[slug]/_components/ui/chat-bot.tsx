@@ -1,4 +1,3 @@
-
 "use client";
 
 interface ChatBotProps {
@@ -10,11 +9,14 @@ interface ChatBotProps {
   setChatbotOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ChatBot = (
-  { chatMessages, setChatMessages, chatInput, setChatInput, chatbotOpen, setChatbotOpen }: ChatBotProps
-
-) => {
-
+const ChatBot = ({
+  chatMessages,
+  setChatMessages,
+  chatInput,
+  setChatInput,
+  chatbotOpen,
+  setChatbotOpen,
+}: ChatBotProps) => {
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/30">
@@ -23,6 +25,7 @@ const ChatBot = (
           onClick={() => setChatbotOpen(false)}
           style={{ zIndex: 1 }}
         />
+
         <div
           className="relative m-8 mb-32 w-full max-w-md rounded-lg bg-white p-4 shadow-lg"
           onClick={(e) => e.stopPropagation()}
@@ -56,6 +59,7 @@ const ChatBot = (
               onChange={(e) => setChatInput(e.target.value)}
               className="w-full rounded border px-2 py-1 text-sm"
             />
+
             <button
               onClick={() => {
                 if (chatInput.trim() !== "") {
@@ -74,6 +78,6 @@ const ChatBot = (
       </div>
     </>
   );
-}
+};
 
 export default ChatBot;

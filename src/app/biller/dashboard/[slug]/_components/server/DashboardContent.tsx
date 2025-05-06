@@ -19,11 +19,9 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
     return null;
   }
 
-  const patients =
-    await trpc.getPatientsByBillerId({
-      userId: user.id,
-    });
-
+  const patients = await trpc.getPatientsByBillerId({
+    userId: user.id,
+  });
 
   const patientIds: string[] = patients.map((p) => p.id);
 

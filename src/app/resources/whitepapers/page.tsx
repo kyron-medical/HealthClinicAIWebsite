@@ -8,8 +8,6 @@ import { FaFilePdf } from "react-icons/fa6";
 import { useState } from "react";
 import ResourceModal from "../_components/ui/resource-modal";
 
-
-
 const Whitepapers = () => {
   // Add state for the modal
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,11 +24,10 @@ const Whitepapers = () => {
       <Breadcrumb
         pageName="Whitepapers"
         description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
-        data-oid="9.jqsql"
       />
 
-      <section className="pb-[120px] pt-[120px]" data-oid="oq5_5g2">
-        <div className="container" data-oid=".pu5iw:">
+      <section className="pb-[120px] pt-[120px]">
+        <div className="container">
           {/* Make a grid of whitepapers, 3 col  */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {whitepapersData.map((whitepaper) => (

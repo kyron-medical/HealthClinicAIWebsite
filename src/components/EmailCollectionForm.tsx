@@ -8,10 +8,10 @@ interface EmailCollectionFormProps {
   redirectUrl?: string;
 }
 
-export default function EmailCollectionForm({ 
-  onClose, 
+export default function EmailCollectionForm({
+  onClose,
   onSuccess,
-  redirectUrl 
+  redirectUrl,
 }: EmailCollectionFormProps) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,7 +39,7 @@ export default function EmailCollectionForm({
         alert("Thank you for submitting!");
         onClose();
       }
-    } catch (error : unknown) {
+    } catch (error: unknown) {
       console.error("Error submitting:", error);
       alert("Something went wrong. Please try again.");
     } finally {

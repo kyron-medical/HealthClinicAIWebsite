@@ -45,7 +45,6 @@ interface PatientModalProps {
 ===============================================================================
 */
 
-
 /*
 ===============================================================================
 
@@ -290,6 +289,7 @@ const VoiceAI = ({
             value={number1Country}
             onChange={setNumber1Country}
           />
+
           <input
             type="tel"
             className="flex-1 rounded border px-2 py-1"
@@ -307,6 +307,7 @@ const VoiceAI = ({
             value={number2Country}
             onChange={setNumber2Country}
           />
+
           <input
             type="tel"
             className="flex-1 rounded border px-2 py-1"
@@ -358,8 +359,6 @@ const VoiceAI = ({
   );
 };
 
-
-
 const ACCEPTED_TYPES = [
   "application/pdf",
   "application/msword",
@@ -404,9 +403,12 @@ export default function PatientModal({
   }
   const [appealLetter, setAppealLetter] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
-  const [uploadedFiles, setUploadedFiles] = useState<UploadFile[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<
+    [UploadFile | undefined, UploadFile | undefined]
+  >([undefined, undefined]);
   const [allUploaded, setAllUploaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
 
   const handleEditPdf = (_event, _pdfIdx) => {
     toast("Edit PDF not implemented (stub)");
@@ -510,23 +512,17 @@ export default function PatientModal({
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    if (uploadedFiles.length < 2) {
-      const fileNames = uploadedFiles.map((file) => file.file.name);
-      const uniqueFileNames = new Set(fileNames);
-      if (fileNames.length !== uniqueFileNames.size) {
-        toast.error("Duplicate files detected.");
-        return;
-      }
+    const [denialFile, noteFile] = uploadedFiles;
 
-      toast.error("Please upload at least 2 files.");
+    if (!denialFile || !noteFile) {
+      toast.error("Please upload both Denial and Note files.");
       return;
     }
 
     const formData = new FormData();
-    uploadedFiles.forEach((file) => {
-      formData.append("files", file.file);
-    });
-    console.log(formData);
+    
+    formData.append("files", denialFile.file);
+    formData.append("files", noteFile.file);
 
     try {
       const fetchPromise = async () => {
@@ -885,13 +881,12 @@ export default function PatientModal({
                                 </span>
                                 <button
                                   className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
+                                  // Remove denial from tuple
                                   onClick={() =>
-                                    setUploadedFiles(
-                                      (prev) =>
-                                        [undefined, prev[1]].filter(
-                                          Boolean,
-                                        ) as UploadFile[],
-                                    )
+                                    setUploadedFiles(([_, note]) => [
+                                      undefined,
+                                      note,
+                                    ])
                                   }
                                 >
                                   Remove
@@ -911,19 +906,15 @@ export default function PatientModal({
                                     return;
                                   }
                                   if (
-                                    uploadedFiles[1] &&
-                                    uploadedFiles[1].file.name === file.name
+                                    uploadedFiles[1]?.file.name === file.name
                                   ) {
                                     toast.error("Duplicate file detected.");
                                     return;
                                   }
-                                  setUploadedFiles(
-                                    (prev) =>
-                                      [
-                                        { file, progress: 0, uploaded: false },
-                                        prev[1],
-                                      ].filter(Boolean),
-                                  );
+                                  setUploadedFiles(([_, note]) => [
+                                    { file, progress: 0, uploaded: false },
+                                    note,
+                                  ]);
                                 }}
                               />
                             )}
@@ -939,13 +930,12 @@ export default function PatientModal({
                                 </span>
                                 <button
                                   className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600"
+                                  // Remove patient note from tuple
                                   onClick={() =>
-                                    setUploadedFiles(
-                                      (prev) =>
-                                        [prev[0], undefined].filter(
-                                          Boolean,
-                                        ) as UploadFile[],
-                                    )
+                                    setUploadedFiles(([denial]) => [
+                                      denial,
+                                      undefined,
+                                    ])
                                   }
                                 >
                                   Remove
@@ -965,19 +955,15 @@ export default function PatientModal({
                                     return;
                                   }
                                   if (
-                                    uploadedFiles[0] &&
-                                    uploadedFiles[0].file.name === file.name
+                                    uploadedFiles[0]?.file.name === file.name
                                   ) {
                                     toast.error("Duplicate file detected.");
                                     return;
                                   }
-                                  setUploadedFiles(
-                                    (prev) =>
-                                      [
-                                        prev[0],
-                                        { file, progress: 0, uploaded: false },
-                                      ].filter(Boolean),
-                                  );
+                                  setUploadedFiles(([denial]) => [
+                                    denial,
+                                    { file, progress: 0, uploaded: false },
+                                  ]);
                                 }}
                               />
                             )}

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import EmailCollectionForm from "@/components/EmailCollectionForm";
 
-
 interface ResourceModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -81,11 +80,11 @@ export default function ResourceModal({
         />
 
         {/* <button 
-          onClick={() => window.location.href = resourceUrl}
-          className="mt-4 w-full text-center text-sm text-gray-500 hover:underline"
-        >
-          Skip and continue to resource
-        </button> */}
+            onClick={() => window.location.href = resourceUrl}
+            className="mt-4 w-full text-center text-sm text-gray-500 hover:underline"
+           >
+            Skip and continue to resource
+           </button> */}
       </div>
     </div>,
     modalRoot,

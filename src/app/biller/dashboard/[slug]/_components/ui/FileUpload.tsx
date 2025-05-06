@@ -31,9 +31,13 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
       setUploadedFiles((files) =>
         files.map((f) =>
           !f.uploaded && f.progress < 100
-            ? { ...f, progress: Math.min(f.progress + 10, 100), uploaded: f.progress + 10 >= 100 }
-            : f
-        )
+            ? {
+                ...f,
+                progress: Math.min(f.progress + 10, 100),
+                uploaded: f.progress + 10 >= 100,
+              }
+            : f,
+        ),
       );
     }, 200);
     return () => clearInterval(interval);
@@ -55,7 +59,11 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const files = Array.from(event.dataTransfer.files);
-    const newFiles = files.map((file) => ({ file, progress: 0, uploaded: false }));
+    const newFiles = files.map((file) => ({
+      file,
+      progress: 0,
+      uploaded: false,
+    }));
     setUploadedFiles((prev) => [...prev, ...newFiles]);
     onFileChange(files[0] || null);
     setIsDragOver(false);
@@ -73,16 +81,17 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files ? Array.from(event.target.files) : [];
-    const newFiles = files.map((file) => ({ file, progress: 0, uploaded: false }));
+    const newFiles = files.map((file) => ({
+      file,
+      progress: 0,
+      uploaded: false,
+    }));
     setUploadedFiles((prev) => [...prev, ...newFiles]);
     onFileChange(files[0] || null);
   };
 
   return (
-    <div
-      className="flex w-full max-w-md flex-col items-center"
-      data-oid="dn4i1bl"
-    >
+    <div className="flex w-full max-w-md flex-col items-center">
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -91,11 +100,9 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
         onClick={() =>
           document.getElementById(label.replace(/\s+/g, "-"))?.click()
         }
-        data-oid="_3ud:c."
       >
         <div className="p-4">
-
-        <TiUpload />
+          <TiUpload />
         </div>
         Upload files
         <input
@@ -104,11 +111,8 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
           multiple
           onChange={handleFileSelect}
           style={{ display: "none" }}
-          data-oid="t5f64yz"
         />
       </div>
-
-      
     </div>
   );
 };

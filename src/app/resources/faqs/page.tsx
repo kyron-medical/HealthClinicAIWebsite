@@ -17,76 +17,48 @@ export default function FAQPage() {
       <Breadcrumb
         pageName="Frequently Asked Questions"
         description="Find answers to common questions about Kyron's AI-driven healthcare solutions"
-        data-oid="-bq6o2c"
       />
 
-      <section className="pb-[120px] pt-[120px]" data-oid="q2-q21y">
-        <div className="container" data-oid=".gix47u">
+      <section className="pb-[120px] pt-[120px]">
+        <div className="container">
           {/* Main FAQ Container */}
-          <div className="mx-auto max-w-4xl" data-oid="nhpzk8d">
+          <div className="mx-auto max-w-4xl">
             {/* FAQ Categories */}
-            <div
-              className="mb-12 flex flex-wrap justify-center gap-4"
-              data-oid="kvm09rn"
-            >
-              <Link href={"#general"} data-oid="est6je7">
-                <button
-                  className="rounded-full bg-blue-600 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                  data-oid="ip07kgp"
-                >
+            <div className="mb-12 flex flex-wrap justify-center gap-4">
+              <Link href={"#general"}>
+                <button className="rounded-full bg-blue-600 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
                   General
                 </button>
               </Link>
-              <Link href={"#technology"} data-oid="n5fshrv">
-                <button
-                  className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                  data-oid="8bwhgfq"
-                >
+              <Link href={"#technology"}>
+                <button className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
                   Technology
                 </button>
               </Link>
-              <Link href={"#implementation"} data-oid="8jr:z1c">
-                <button
-                  className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                  data-oid="hk-v1jd"
-                >
+              <Link href={"#implementation"}>
+                <button className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
                   Implementation
                 </button>
               </Link>
-              <Link href={"#pricing"} data-oid="gfqm-ij">
-                <button
-                  className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                  data-oid="036arul"
-                >
+              <Link href={"#pricing"}>
+                <button className="rounded-full bg-gray-100 px-6 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
                   Pricing
                 </button>
               </Link>
             </div>
 
             {/* FAQ Items */}
-            <div className="space-y-6" data-oid="2eul_xf">
+            <div className="space-y-6">
               {/* General Questions Section */}
-              <div className="mb-10" id="general" data-oid=":enb8pd">
-                <h2
-                  className="mb-6 text-2xl font-bold text-gray-900 dark:text-white"
-                  data-oid="ve.e97s"
-                >
+              <div className="mb-10" id="general">
+                <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   General Questions
                 </h2>
 
                 {/* FAQ Item 1 */}
-                <div
-                  className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="e:y85l."
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="nld4g3f"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="p:zryvt"
-                    >
+                <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       What is Kyron Medical?
                     </h3>
                     <svg
@@ -94,25 +66,17 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="8-k::ym"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="dfwv6pi"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="uriy03o"
-                  >
-                    <p
-                      className="text-gray-600 dark:text-gray-400"
-                      data-oid="_1eet9b"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="text-gray-600 dark:text-gray-400">
                       Kyron Medical is a healthcare technology company that
                       leverages artificial intelligence to solve complex
                       challenges in medical billing, claims processing, and
@@ -124,18 +88,9 @@ export default function FAQPage() {
                 </div>
 
                 {/* FAQ Item 2 */}
-                <div
-                  className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="j6pba5g"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="pskjc8q"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="ukzzp07"
-                    >
+                <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       How does Kyron differ from other healthcare technology
                       solutions?
                     </h3>
@@ -144,74 +99,49 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="1tupel3"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="krwqsof"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="8unmhv1"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid="bjum8-8"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Kyron stands apart from traditional healthcare technology
                       solutions in several key ways:
                     </p>
-                    <ul
-                      className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-400"
-                      data-oid="ul1nmc-"
-                    >
-                      <li data-oid="6k4-thv">
-                        <strong data-oid="2hr_m0q">AI-First Approach:</strong>{" "}
-                        Our platform is built from the ground up with artificial
-                        intelligence at its core, not as an afterthought.
+                    <ul className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>
+                        <strong>AI-First Approach:</strong> Our platform is
+                        built from the ground up with artificial intelligence at
+                        its core, not as an afterthought.
                       </li>
-                      <li data-oid=":n4vv24">
-                        <strong data-oid="eib0ir2">
-                          End-to-End Integration:
-                        </strong>{" "}
-                        Kyron offers a comprehensive solution that addresses the
-                        entire revenue cycle, eliminating the need for multiple
-                        disconnected systems.
+                      <li>
+                        <strong>End-to-End Integration:</strong> Kyron offers a
+                        comprehensive solution that addresses the entire revenue
+                        cycle, eliminating the need for multiple disconnected
+                        systems.
                       </li>
-                      <li data-oid="v1yd2ea">
-                        <strong data-oid="b13nkzp">Adaptive Learning:</strong>{" "}
-                        Our AI continuously learns from your practice&apos;s
-                        data, becoming more effective over time.
+                      <li>
+                        <strong>Adaptive Learning:</strong> Our AI continuously
+                        learns from your practice&apos;s data, becoming more
+                        effective over time.
                       </li>
-                      <li data-oid="tfm12uf">
-                        <strong data-oid="3tov6fs">
-                          Performance-Based Pricing:
-                        </strong>{" "}
-                        We align our success with yours through our innovative
-                        pricing model.
+                      <li>
+                        <strong>Performance-Based Pricing:</strong> We align our
+                        success with yours through our innovative pricing model.
                       </li>
                     </ul>
                   </div>
                 </div>
 
                 {/* FAQ Item 3 */}
-                <div
-                  className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="f1pr5xb"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="hmipr8w"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="0x_wio9"
-                    >
+                <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       What types of healthcare providers can benefit from Kyron?
                     </h3>
                     <svg
@@ -219,68 +149,43 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="b28lor9"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="e62z_sj"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="l80u2u1"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid=".vwflfl"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Kyron&apos;s solutions are designed to benefit a wide
                       range of healthcare providers, including:
                     </p>
-                    <ul
-                      className="list-inside list-disc space-y-1 text-gray-600 dark:text-gray-400"
-                      data-oid="ogb.jax"
-                    >
-                      <li data-oid="s19n3xw">
-                        Independent physician practices
-                      </li>
-                      <li data-oid="4yo8mk0">Multi-specialty groups</li>
-                      <li data-oid="uh63bd1">Hospitals and health systems</li>
-                      <li data-oid="9czc6y4">Ambulatory surgery centers</li>
-                      <li data-oid=".e7mq4p">Behavioral health providers</li>
-                      <li data-oid="1d.pmst">Physical therapy practices</li>
-                      <li data-oid="4kyhl14">Dental practices</li>
+                    <ul className="list-inside list-disc space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Independent physician practices</li>
+                      <li>Multi-specialty groups</li>
+                      <li>Hospitals and health systems</li>
+                      <li>Ambulatory surgery centers</li>
+                      <li>Behavioral health providers</li>
+                      <li>Physical therapy practices</li>
+                      <li>Dental practices</li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               {/* Technology Section */}
-              <div className="mb-10" id="technology" data-oid="d4r:rip">
-                <h2
-                  className="mb-6 text-2xl font-bold text-gray-900 dark:text-white"
-                  data-oid="m.b__nj"
-                >
+              <div className="mb-10" id="technology">
+                <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   Our Technology
                 </h2>
 
                 {/* FAQ Item 1 */}
-                <div
-                  className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="n:7_ja9"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="8_sanzv"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="8zh:w8s"
-                    >
+                <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       How does Kyron&apos;s AI technology work?
                     </h3>
                     <svg
@@ -288,77 +193,50 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="o4.1uzx"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="uv-agke"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="_u:xg0s"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid="md2bcwd"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Kyron&apos;s AI technology works through a sophisticated
                       combination of machine learning algorithms, natural
                       language processing, and predictive analytics. Our system:
                     </p>
-                    <ol
-                      className="list-inside list-decimal space-y-2 text-gray-600 dark:text-gray-400"
-                      data-oid="a:ps:z1"
-                    >
-                      <li data-oid="1pamnb8">
-                        <strong data-oid="ex063ui">Analyzes patterns</strong> in
-                        your billing data, claim submissions, and payer
-                        responses
+                    <ol className="list-inside list-decimal space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>
+                        <strong>Analyzes patterns</strong> in your billing data,
+                        claim submissions, and payer responses
                       </li>
-                      <li data-oid="d9.jh6j">
-                        <strong data-oid="5ow0j8m">
-                          Identifies potential issues
-                        </strong>{" "}
-                        before claims are submitted
+                      <li>
+                        <strong>Identifies potential issues</strong> before
+                        claims are submitted
                       </li>
-                      <li data-oid="au85acq">
-                        <strong data-oid="v2edt4-">
-                          Recommends optimizations
-                        </strong>{" "}
-                        to improve clean claims rates and reduce denials
+                      <li>
+                        <strong>Recommends optimizations</strong> to improve
+                        clean claims rates and reduce denials
                       </li>
-                      <li data-oid="u:gtygc">
-                        <strong data-oid="e:vlp.f">
-                          Automates routine tasks
-                        </strong>{" "}
-                        like eligibility verification and prior authorization
+                      <li>
+                        <strong>Automates routine tasks</strong> like
+                        eligibility verification and prior authorization
                       </li>
-                      <li data-oid="4t5ylxr">
-                        <strong data-oid="o6t1ry:">Continuously learns</strong>{" "}
-                        from outcomes to improve future performance
+                      <li>
+                        <strong>Continuously learns</strong> from outcomes to
+                        improve future performance
                       </li>
                     </ol>
                   </div>
                 </div>
 
                 {/* FAQ Item 2 */}
-                <div
-                  className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="ll75oh4"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid=".phtzi4"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="p:qqeke"
-                    >
+                <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       Can Kyron integrate with my existing EHR/PM system?
                     </h3>
                     <svg
@@ -366,35 +244,24 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid=".59g2la"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="t9-ycg_"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="uegv5g:"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid=".62hs22"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Yes, Kyron is designed to integrate seamlessly with most
                       major Electronic Health Record (EHR) and Practice
                       Management (PM) systems. We support integration with Epic,
                       Cerner, Allscripts, eClinicalWorks, NextGen, Athenahealth,
                       and many others.
                     </p>
-                    <p
-                      className="text-gray-600 dark:text-gray-400"
-                      data-oid="t7olk8w"
-                    >
+                    <p className="text-gray-600 dark:text-gray-400">
                       Our integration process is designed to be minimally
                       disruptive to your existing workflows. We use secure API
                       connections and HL7/FHIR standards to ensure reliable data
@@ -406,27 +273,15 @@ export default function FAQPage() {
               </div>
 
               {/* Implementation Section */}
-              <div className="mb-10" id="implementation" data-oid="vk.0:r1">
-                <h2
-                  className="mb-6 text-2xl font-bold text-gray-900 dark:text-white"
-                  data-oid="cg3kr9m"
-                >
+              <div className="mb-10" id="implementation">
+                <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   Implementation
                 </h2>
 
                 {/* FAQ Item 1 */}
-                <div
-                  className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="ue_k2bf"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="tg3lawk"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="hjo2don"
-                    >
+                <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       What does the implementation process look like?
                     </h3>
                     <svg
@@ -434,82 +289,53 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="u7_ibp9"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="4nbdn0r"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="nzdgjep"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid="h5rky0t"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Our implementation process is designed to be thorough yet
                       efficient, typically taking 4-6 weeks from start to
                       finish. Here&apos;s what you can expect:
                     </p>
-                    <ol
-                      className="list-inside list-decimal space-y-2 text-gray-600 dark:text-gray-400"
-                      data-oid="bk9_0k7"
-                    >
-                      <li data-oid="ze-_02g">
-                        <strong data-oid="-dc428h">
-                          Discovery & Planning:
-                        </strong>{" "}
-                        We conduct a thorough assessment of your current
-                        workflows, systems, and pain points.
+                    <ol className="list-inside list-decimal space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>
+                        <strong>Discovery & Planning:</strong> We conduct a
+                        thorough assessment of your current workflows, systems,
+                        and pain points.
                       </li>
-                      <li data-oid="i_g:n65">
-                        <strong data-oid="0ges2hy">System Integration:</strong>{" "}
-                        Our technical team establishes secure connections with
-                        your existing systems.
+                      <li>
+                        <strong>System Integration:</strong> Our technical team
+                        establishes secure connections with your existing
+                        systems.
                       </li>
-                      <li data-oid=".d8kpki">
-                        <strong data-oid="a_c5lv_">
-                          Configuration & Customization:
-                        </strong>{" "}
-                        We configure the Kyron platform to match your specific
+                      <li>
+                        <strong>Configuration & Customization:</strong> We
+                        configure the Kyron platform to match your specific
                         workflows and requirements.
                       </li>
-                      <li data-oid="db42y0t">
-                        <strong data-oid="c.6i0k:">
-                          Training & Education:
-                        </strong>{" "}
-                        We provide comprehensive training for your staff.
+                      <li>
+                        <strong>Training & Education:</strong> We provide
+                        comprehensive training for your staff.
                       </li>
-                      <li data-oid="29agxlz">
-                        <strong data-oid=".vaq7tq">
-                          Go-Live & Ongoing Support:
-                        </strong>{" "}
-                        We provide dedicated support during the transition
-                        period.
+                      <li>
+                        <strong>Go-Live & Ongoing Support:</strong> We provide
+                        dedicated support during the transition period.
                       </li>
                     </ol>
                   </div>
                 </div>
 
                 {/* FAQ Item 2 */}
-                <div
-                  className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="05_q9jm"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="sfbl8_1"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="z-7w10s"
-                    >
+                <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       How quickly can I see results after implementing Kyron?
                     </h3>
                     <svg
@@ -517,44 +343,28 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid="mugad-c"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="zbwjcuq"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="e086_26"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid=".0mvta."
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Most clients begin seeing measurable improvements within
                       the first 30-60 days of implementation. These initial
                       results typically include:
                     </p>
-                    <ul
-                      className="list-inside list-disc space-y-1 text-gray-600 dark:text-gray-400"
-                      data-oid="ef:52y1"
-                    >
-                      <li data-oid=":.oayok">Reduction in claim denials</li>
-                      <li data-oid="h9_r96_">Faster payment processing</li>
-                      <li data-oid="09a.v2-">
-                        Decreased administrative workload
-                      </li>
-                      <li data-oid="s_qofyi">Improved clean claims rate</li>
+                    <ul className="list-inside list-disc space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Reduction in claim denials</li>
+                      <li>Faster payment processing</li>
+                      <li>Decreased administrative workload</li>
+                      <li>Improved clean claims rate</li>
                     </ul>
-                    <p
-                      className="mt-4 text-gray-600 dark:text-gray-400"
-                      data-oid="iyzjpk3"
-                    >
+                    <p className="mt-4 text-gray-600 dark:text-gray-400">
                       The full benefits of Kyron&apos;s AI-driven optimization
                       continue to grow over time as our system learns from your
                       practice&apos;s specific patterns and challenges.
@@ -564,27 +374,15 @@ export default function FAQPage() {
               </div>
 
               {/* Pricing Section */}
-              <div id="pricing" data-oid="r7mc2qa">
-                <h2
-                  className="mb-6 text-2xl font-bold text-gray-900 dark:text-white"
-                  data-oid="q5kn94f"
-                >
+              <div id="pricing">
+                <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   Pricing & Billing
                 </h2>
 
                 {/* FAQ Item 1 */}
-                <div
-                  className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                  data-oid="2lgl40e"
-                >
-                  <button
-                    className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    data-oid="05qckzh"
-                  >
-                    <h3
-                      className="text-lg font-medium text-gray-900 dark:text-white"
-                      data-oid="hlbnklk"
-                    >
+                <div className="mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                  <button className="flex w-full items-center justify-between bg-white px-6 py-4 text-left transition-colors hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">
                       How is Kyron priced?
                     </h3>
                     <svg
@@ -592,52 +390,37 @@ export default function FAQPage() {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      data-oid=".d-9_ky"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M19 9l-7 7-7-7"
-                        data-oid="t6zv1mn"
                       />
                     </svg>
                   </button>
-                  <div
-                    className="bg-white px-6 py-4 dark:bg-gray-800"
-                    data-oid="ldoe-xa"
-                  >
-                    <p
-                      className="mb-4 text-gray-600 dark:text-gray-400"
-                      data-oid="7cwj-pu"
-                    >
+                  <div className="bg-white px-6 py-4 dark:bg-gray-800">
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">
                       Kyron offers flexible pricing models designed to align
                       with your practice&apos;s needs and goals:
                     </p>
-                    <ul
-                      className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-400"
-                      data-oid="qd8arzy"
-                    >
-                      <li data-oid="dow6zd.">
-                        <strong data-oid="04ax5bw">Subscription Model:</strong>{" "}
-                        Fixed monthly fee based on your practice size and
-                        volume, with all features included.
+                    <ul className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>
+                        <strong>Subscription Model:</strong> Fixed monthly fee
+                        based on your practice size and volume, with all
+                        features included.
                       </li>
-                      <li data-oid="0r7fsmw">
-                        <strong data-oid="q3r_eqd">Performance-Based:</strong>{" "}
-                        We share in your success with pricing tied to measurable
-                        improvements in your revenue cycle.
+                      <li>
+                        <strong>Performance-Based:</strong> We share in your
+                        success with pricing tied to measurable improvements in
+                        your revenue cycle.
                       </li>
-                      <li data-oid="b1dawz6">
-                        <strong data-oid="v2gd0iv">Hybrid Model:</strong>{" "}
-                        Combines a reduced base fee with performance incentives
-                        for maximum flexibility.
+                      <li>
+                        <strong>Hybrid Model:</strong> Combines a reduced base
+                        fee with performance incentives for maximum flexibility.
                       </li>
                     </ul>
-                    <p
-                      className="mt-4 text-gray-600 dark:text-gray-400"
-                      data-oid="navistx"
-                    >
+                    <p className="mt-4 text-gray-600 dark:text-gray-400">
                       All pricing models include implementation, training, and
                       ongoing support. We work with each client to determine the
                       most advantageous pricing structure.
@@ -648,24 +431,17 @@ export default function FAQPage() {
             </div>
 
             {/* Contact CTA */}
-            <div
-              className="mt-16 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center shadow-xl"
-              data-oid="p25ogqr"
-            >
-              <h3
-                className="mb-4 text-2xl font-bold text-white"
-                data-oid="vx4lmfp"
-              >
+            <div className="mt-16 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center shadow-xl">
+              <h3 className="mb-4 text-2xl font-bold text-white">
                 Still have questions?
               </h3>
-              <p className="mb-6 text-blue-100" data-oid="ptpro47">
+              <p className="mb-6 text-blue-100">
                 Our team is ready to help you find the right solution for your
                 healthcare practice.
               </p>
               <Link
                 href="https://form.typeform.com/to/zstMkPH7"
                 className="inline-block rounded-lg bg-white px-6 py-3 font-medium text-blue-600 transition hover:bg-blue-50"
-                data-oid="a_22kp3"
               >
                 Contact Us
               </Link>

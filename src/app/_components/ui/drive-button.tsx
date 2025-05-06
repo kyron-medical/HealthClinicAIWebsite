@@ -13,10 +13,9 @@ const TestDrive: React.FC<TestDriveProps> = ({ handleSubmit }) => {
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => console.log("hover started!")}
       onClick={handleSubmit}
-      data-oid="eqejpjj"
       className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
     >
-        Test Drive Kyron
+      Test Drive Kyron
     </motion.button>
   );
 };

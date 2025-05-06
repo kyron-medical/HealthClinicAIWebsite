@@ -139,6 +139,7 @@ const PatientGridClient = ({
             events={patientEvents}
             patients={patients}
           />,
+
           modalRoot,
         )}
     </>

@@ -3,7 +3,6 @@ import { BlogPostForm } from "./BlogPostForm";
 import { useUser } from "@clerk/nextjs";
 import { redirect, useRouter } from "next/navigation";
 
-
 export const DashboardContent = () => {
   const { user, isLoaded } = useUser();
 
@@ -28,7 +27,7 @@ export const DashboardContent = () => {
     }
   }, [user, isLoaded, router]);
 
-  if(!user) {
+  if (!user) {
     redirect("/sign-in");
   }
 

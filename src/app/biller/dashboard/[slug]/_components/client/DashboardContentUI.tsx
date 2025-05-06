@@ -56,19 +56,15 @@ const DashboardContentClient = ({
   const createPatientsBulk = trpc.createPatientsBulk.useMutation();
 
   const { user } = useUser(); // Assuming you have a way to get the current user
-  
+
   if (!user) {
     return;
   }
 
   // This function should be called when a file is selected
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-
-
     const file = e.target.files?.[0];
     if (!file) return;
-
-    
 
     try {
       const patients: {
@@ -93,7 +89,7 @@ const DashboardContentClient = ({
           moneyCollected: Number(moneyCollected),
           createdAt: new Date(),
           updatedAt: new Date(),
-          billerId: user.id
+          billerId: user.id,
         });
       }
 
@@ -159,6 +155,7 @@ const DashboardContentClient = ({
                     className="hidden"
                     onChange={handleFileChange}
                   />
+
                   <button
                     onClick={addPatients}
                     className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
@@ -183,6 +180,7 @@ const DashboardContentClient = ({
               onChange={(e) => setFilterName(e.target.value)}
               className="w-64 rounded border px-3 py-2"
             />
+
             <input
               type="text"
               placeholder="Filter by insurer..."

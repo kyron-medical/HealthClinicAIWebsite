@@ -12,7 +12,6 @@ interface OrbProps {
 }
 
 const Orb = ({ color, width, height }: OrbProps) => {
- 
   const orbSrc: Record<OrbColor, string> = {
     pink: "https://lottie.host/543493c1-96a0-40bc-b052-40869ea7932b/xgY0fP4RXr.lottie",
     green:
@@ -29,34 +28,25 @@ const Orb = ({ color, width, height }: OrbProps) => {
   };
 
   return (
-    <div
-      
-      style={{ display: "flex", justifyContent: "center" }}
-      data-oid="6:y1thv"
-    >
-      
-        
-          <div
-            style={{
-              width: width ?? "300px", // Adjust to desired size
-              height: height ?? "300px",
-              margin: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            data-oid="wq7keuh"
-          >
-            <DotLottieReact
-              src={orbSrc[color]}
-              loop
-              autoplay
-              speed={2}
-              style={{ width: "100%", height: "100%" }}
-              data-oid="rcwda7g"
-            />
-          </div>
-        
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          width: width ?? "300px", // Adjust to desired size
+          height: height ?? "300px",
+          margin: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <DotLottieReact
+          src={orbSrc[color]}
+          loop
+          autoplay
+          speed={2}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </div>
     </div>
   );
 };
