@@ -26,6 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) {
+  
   return (
     <html suppressHydrationWarning lang="en">
       {/*

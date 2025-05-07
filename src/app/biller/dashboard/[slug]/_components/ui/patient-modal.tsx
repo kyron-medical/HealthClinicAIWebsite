@@ -912,7 +912,7 @@ export default function PatientModal({
                                     return;
                                   }
                                   setUploadedFiles(([_, note]) => [
-                                    { file, progress: 0, uploaded: false },
+                                    { file, progress: 0, uploaded: true },
                                     note,
                                   ]);
                                 }}
@@ -962,7 +962,7 @@ export default function PatientModal({
                                   }
                                   setUploadedFiles(([denial]) => [
                                     denial,
-                                    { file, progress: 0, uploaded: false },
+                                    { file, progress: 0, uploaded: true },
                                   ]);
                                 }}
                               />
