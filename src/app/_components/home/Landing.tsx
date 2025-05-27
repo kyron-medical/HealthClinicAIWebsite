@@ -37,7 +37,7 @@ const Landing = () => {
                     onHoverStart={() => console.log("hover started!")}
                   >
                     <a
-                      href="/contact"
+                      href="https://form.typeform.com/to/zstMkPH7"
                       rel="noopener noreferrer"
                       className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
                     >
