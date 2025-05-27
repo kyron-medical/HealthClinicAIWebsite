@@ -106,7 +106,7 @@ const VoiceAI = ({
     phoneNumberSchema.safeParse(number2.replace(/\D/g, "")).success;
 
   const postCall = async <T,>(endpoint: string): Promise<T> => {
-    const response = await fetch(`https://api.kyronmedical.com${endpoint}`, {
+    const response = await fetch(`https://aws.kyronmedical.com${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -132,77 +132,77 @@ const VoiceAI = ({
           const data = await postCall<{
             p2p_transcript?: string;
             summary?: string;
-          }>("/api/p2p");
+          }>("/bapi/p2p");
           transcript = data.p2p_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "biller-insurance") {
           const data = await postCall<{
             p2p_transcript?: string;
             summary?: string;
-          }>("/api/p2p");
+          }>("/bapi/p2p");
           transcript = data.p2p_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "claim-status") {
           const data = await postCall<{
             CSI_transcript?: string;
             summary?: string;
-          }>("/api/claim_status_inquiry");
+          }>("/bapi/claim_status_inquiry");
           transcript = data.CSI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "appeal-followup") {
           const data = await postCall<{
             AF_transcript?: string;
             summary?: string;
-          }>("/api/appeal_followup");
+          }>("/bapi/appeal_followup");
           transcript = data.AF_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "denial-clarification") {
           const data = await postCall<{
             DRC_transcript?: string;
             summary?: string;
-          }>("/api/denial_reason_clarification");
+          }>("/bapi/denial_reason_clarification");
           transcript = data.DRC_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "eob-query") {
           const data = await postCall<{
             EOB_transcript?: string;
             summary?: string;
-          }>("/api/eob");
+          }>("/bapi/eob");
           transcript = data.EOB_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "eligibility-verification") {
           const data = await postCall<{
             EV_transcript?: string;
             summary?: string;
-          }>("/api/eligibility_verification");
+          }>("/bapi/eligibility_verification");
           transcript = data.EV_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "policy-detail") {
           const data = await postCall<{
             PDI_transcript?: string;
             summary?: string;
-          }>("/api/policy_detail_inquiry");
+          }>("/bapi/policy_detail_inquiry");
           transcript = data.PDI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "coordination-of-benefits") {
           const data = await postCall<{
             COB_transcript?: string;
             summary?: string;
-          }>("/api/coordination_of_benefits");
+          }>("/bapi/coordination_of_benefits");
           transcript = data.COB_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "billing-discrepancy") {
           const data = await postCall<{
             BDR_transcript?: string;
             summary?: string;
-          }>("/api/billing_discrepancy_resolution");
+          }>("b/api/billing_discrepancy_resolution");
           transcript = data.BDR_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else if (callType === "claim-rejection") {
           const data = await postCall<{
             CRI_transcript?: string;
             summary?: string;
-          }>("/api/claim_rejection_inquiry");
+          }>("/bapi/claim_rejection_inquiry");
           transcript = data.CRI_transcript ?? "No transcript available.";
           summary = data.summary ?? "";
         } else {
@@ -527,7 +527,7 @@ export default function PatientModal({
     try {
       const fetchPromise = async () => {
         const response = await fetch(
-          "https://api.kyronmedical.com/generate-appeal",
+          "https://aws.kyronmedical.com/bapi/generate-appeal",
           {
             method: "POST",
             body: formData,
