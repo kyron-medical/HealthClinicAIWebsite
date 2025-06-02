@@ -41,7 +41,7 @@ const Landing = () => {
                       rel="noopener noreferrer"
                       className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
                     >
-                      Get Started
+                      Request a Demo
                     </a>
                   </motion.button>
                   <motion.button

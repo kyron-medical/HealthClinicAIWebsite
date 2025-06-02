@@ -21,7 +21,7 @@ newTab: false,
 },*/
   {
     id: 3,
-    title: "Get Started",
+    title: "Request a Demo",
     path: "https://form.typeform.com/to/zstMkPH7",
     newTab: false,
   },

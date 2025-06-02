@@ -139,7 +139,7 @@ const Footer = () => {
                       href="https://form.typeform.com/to/zstMkPH7"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Get Started
+                      Request a Demo
                     </Link>
                   </li>
                   <li>
