@@ -1,6 +1,5 @@
 "use client";
 
-import SingleBlog from "@/app/_components/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 
 import { TbLogs } from "react-icons/tb";

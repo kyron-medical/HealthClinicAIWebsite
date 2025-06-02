@@ -6,10 +6,12 @@ import { Patient } from "@prisma/client";
 import { PatientEvent } from "@prisma/client";
 import { createPortal } from "react-dom";
 import { trpc } from "trpc/client";
+import styles from "./styles/PatientRow.module.css";
 
 // Define interface for your row data
 interface PatientRow {
   name: string;
+  dob: Date; // Assuming dob is a Date object
   insurer: string;
   moneyCollected: number;
   id: string;
@@ -22,11 +24,13 @@ interface PatientGridProps {
   patients: {
     id: string;
     name: string;
+    dob: Date; // Assuming dob is a Date object
     insurer: string;
     moneyCollected: number;
     createdAt: Date;
     updatedAt: Date;
     billerId: string;
+    groupNumber: string | null;
   }[];
 
   filterName: string;
@@ -99,7 +103,22 @@ const PatientGridClient = ({
                   onClick={() => handleRowClick(patient)}
                   className="group cursor-pointer transition hover:bg-blue-50"
                 >
-                  <td className="px-6 py-4">{patient.name}</td>
+                  <td className="flex items-center gap-2 px-6 py-4">
+                    {patient.name}
+
+                    {!patient.name ||
+                    !patient.dob ||
+                    !patient.insurer ||
+                    patient.insurer === "Unknown" ||
+                    !patient.groupNumber ? (
+                      <span
+                        className={styles.pulseDot}
+                        title="Missing data"
+                      ></span>
+                    ) : (
+                      <span></span>
+                    )}
+                  </td>
                   <td className="px-6 py-4">{patient.insurer}</td>
                   <td className="flex items-center justify-between px-6 py-4">
                     ${patient.moneyCollected}

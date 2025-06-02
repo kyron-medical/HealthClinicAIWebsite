@@ -81,16 +81,34 @@ This is where we define the API endpoints and their logic.
 */
 
 export const PatientSchema = z.object({
-  id : z.string(),
+  id: z.string(),
   name: z.string(),
+  name_iv: z.string(),
+  name_tag: z.string(),
+  dob: z.date(),
+  sex: z.string().nullable(),
+  sex_iv: z.string().nullable(),
+  sex_tag: z.string().nullable(),
+  address: z.string().nullable(),
+  address_iv: z.string().nullable(),
+  address_tag: z.string().nullable(),
   insurer: z.string(),
+  insurer_iv: z.string(),
+  insurer_tag: z.string(),
   moneyCollected: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
   billerId: z.string(),
-  // Add other fields as needed, e.g.:
-  // id: z.string().optional(),
-  // billerId: z.string().optional(),
+  serviceStart: z.date(),
+  serviceEnd: z.date().nullable(),
+  providerName: z.string().nullable(),
+  providerName_iv: z.string().nullable(),
+  providerName_tag: z.string().nullable(),
+  facilityName: z.string().nullable(),
+  zipCode: z.string().nullable(),
+  zipCode_iv: z.string().nullable(),
+  zipCode_tag: z.string().nullable(),
+  groupNumber: z.string().nullable(),
 });
 
 const PatientEventBulkSchema = z.array(
@@ -310,6 +328,22 @@ export const appRouter = createTRPCRouter({
       });
       return decryptPHI(patient);
     }),
+  
+  deletePatient : privateProcedure 
+    .input(z.object({ patientId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      const patient = await ctx.prisma.patient.delete({
+        where: {
+          id: input.patientId,
+        },
+      });
+      return patient;
+    }),
 
   updatePatientMoneyCollected: privateProcedure
     .input(
@@ -335,6 +369,67 @@ export const appRouter = createTRPCRouter({
       return patient;
     }),
 
+  getPatientDetails: privateProcedure
+    .input(z.object({ patientId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      const patient = await ctx.prisma.patient.findUnique({
+        where: {
+          id: input.patientId,
+        },
+      });
+
+      if (!patient) throw new TRPCError({ code: "NOT_FOUND" });
+
+      return decryptPHI(patient);
+    }),
+
+  updatePatientDetails: privateProcedure
+    .input(
+      z.object({
+        patientId: z.string(),
+        name: z.string(),
+        dob: z.string(),
+        serviceStart: z.string().optional(),
+        serviceEnd: z.string().optional(),
+        providerName: z.string(),
+        facilityName: z.string(),
+        zipCode: z.string(),
+        groupNumber: z.string(),
+        sex: z.string().nullable(),
+        address: z.string().nullable(),
+        // …etc
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      // Encrypt PHI before updating
+      const encryptedData = encryptPHI({
+        name: input.name,
+        insurer: input.providerName,
+      });
+
+      const patient = await ctx.prisma.patient.update({
+        where: {
+          id: input.patientId,
+        },
+        data: {
+          ...encryptedData,
+          billerId,
+          // Add other fields as needed
+        },
+      });
+      return decryptPHI(patient);
+    }),
+
   // In your tRPC router
   createPatientsBulk: privateProcedure
     .input(
@@ -342,6 +437,13 @@ export const appRouter = createTRPCRouter({
         z.object({
           name: z.string(),
           insurer: z.string(),
+          dob: z.date(),
+          serviceStart: z.date().optional(),
+          serviceEnd: z.date().nullable().optional(),
+          providerName: z.string().nullable(),
+          facilityName: z.string().nullable(),
+          zipCode: z.string().nullable(),
+          groupNumber: z.string().nullable(),
           moneyCollected: z.number(),
           billerId: z.string(),
         }),

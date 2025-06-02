@@ -7,17 +7,23 @@ import { toast } from "react-hot-toast";
 import { trpc } from "trpc/client";
 import { z } from "zod";
 import type { PatientEvent } from "@prisma/client";
-import { parse } from "utils/parser";
+
 
 // Define interface for your row data
 interface PatientRow {
   name: string;
+  dob: Date;
+  sex?: string | null;
+  address?: string;
   insurer: string;
   moneyCollected: number;
   id: string;
   createdAt: Date;
   updatedAt: Date;
   billerId: string;
+  groupNumber?: string | null;
+  serviceStart?: Date | null;
+  serviceEnd?: Date | null;
 }
 
 interface PatientModalProps {
@@ -36,6 +42,538 @@ interface PatientModalProps {
 
 ===============================================================================
 */
+
+/*
+===============================================================================
+
+  Details Component
+
+===============================================================================
+*/
+
+// Add a type assertion if needed:
+type PatientDetails = {
+  dob?: string | Date | null;
+  serviceStart?: string | Date | null;
+  serviceEnd?: string | Date | null;
+  address?: string | null;
+  sex?: string | null;
+  groupNumber?: string | null;
+  providerName?: string | null;
+  facilityName?: string | null;
+  zipCode?: string | null;
+  name?: string;
+  patientId: string;
+  // Add other fields as needed
+};
+
+export function DetailsForm({ patient }: { patient: PatientRow }) {
+  // Local form state for every field:
+  const [firstName, setFirstName] = useState(patient.name.split(" ")[0] || "");
+  const [editingFirstName, setEditingFirstName] = useState(false);
+
+  const [lastName, setLastName] = useState(patient.name.split(" ")[1] || "");
+  const [editingLastName, setEditingLastName] = useState(false);
+
+  const [dob, setDob] = useState(
+    patient.dob.toISOString().substring(0, 10) || "",
+  );
+  const [editingDob, setEditingDob] = useState(false);
+
+  const [serviceStart, setServiceStart] = useState("");
+  const [editingServiceStart, setEditingServiceStart] = useState(false);
+
+  const [serviceEnd, setServiceEnd] = useState("");
+  const [editingServiceEnd, setEditingServiceEnd] = useState(false);
+
+  const [providerName, setProviderName] = useState("");
+  const [editingProviderName, setEditingProviderName] = useState(false);
+
+  const [facilityName, setFacilityName] = useState("");
+  const [editingFacilityName, setEditingFacilityName] = useState(false);
+
+  const [zipCode, setZipCode] = useState("");
+  const [editingZipCode, setEditingZipCode] = useState(false);
+
+  const [groupNumber, setGroupNumber] = useState("");
+  const [editingGroupNumber, setEditingGroupNumber] = useState(false);
+
+  // New fields
+  const [address, setAddress] = useState("");
+  const [editingAddress, setEditingAddress] = useState(false);
+
+  const [sex, setSex] = useState("");
+  const [editingSex, setEditingSex] = useState(false);
+
+  // TRPC mutation to upsert details:
+  const detailsMutation = trpc.updatePatientDetails.useMutation({
+    onSuccess: () => toast.success("Details saved"),
+    onError: (err) => toast.error(err.message),
+  });
+
+  // On mount, you might fetch existing details to seed the form:
+  const { data: existing } = trpc.getPatientDetails.useQuery({
+    patientId: patient.id,
+  });
+
+  useEffect(() => {
+    if (existing) {
+      // dob
+      let dobString = "";
+      if (existing.dob) {
+        const dobVal =
+          typeof existing.dob === "string"
+            ? existing.dob
+            : existing.dob.toISOString();
+        dobString = dobVal.substring(0, 10);
+      }
+      setDob(dobString);
+
+      // serviceStart
+      let serviceStartString = "";
+      if (existing.serviceStart) {
+        const ssVal =
+          typeof existing.serviceStart === "string"
+            ? existing.serviceStart
+            : existing.serviceStart.toISOString();
+        serviceStartString = ssVal.substring(0, 16);
+      }
+      setServiceStart(serviceStartString);
+
+      // serviceEnd
+      let serviceEndString = "";
+      if (existing.serviceEnd) {
+        const seVal =
+          typeof existing.serviceEnd === "string"
+            ? existing.serviceEnd
+            : existing.serviceEnd.toISOString();
+        serviceEndString = seVal.substring(0, 16);
+      }
+      setServiceEnd(serviceEndString);
+
+      setAddress(existing.address ?? "");
+      setSex(existing.sex ?? "");
+      setGroupNumber(existing.groupNumber ?? "");
+    }
+  }, [existing]);
+
+  // Simple schema validation (optional)
+  const detailsSchema = z.object({
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    zipCode: z.string().length(5),
+    groupNumber: z.string().min(1),
+    address: z.string().min(1),
+    sex: z.enum(["Male", "Female", "Other"]),
+    // …
+  });
+  const formValid = detailsSchema.safeParse({
+    firstName,
+    lastName,
+    dob,
+    zipCode,
+    groupNumber,
+    address,
+    sex,
+    // …
+  }).success;
+
+  // Render form
+  return (
+    <form
+      className="max-h-[60vh] space-y-4 overflow-y-auto p-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (!formValid) {
+          toast.error("Please fix validation errors");
+          return;
+        }
+        detailsMutation.mutate({
+          patientId: patient.id,
+          name: `${firstName} ${lastName}`,
+          dob,
+          serviceStart,
+          serviceEnd,
+          providerName,
+          facilityName,
+          zipCode,
+          groupNumber,
+          address,
+          sex,
+          // …all other fields
+        });
+      }}
+    >
+      <h2 className="mb-2 text-2xl font-bold">Patient Details</h2>
+
+      <div className="grid grid-cols-2 gap-4">
+        {/* First Name */}
+        <div>
+          <label className="">First Name*</label>
+          {editingFirstName || !firstName ? (
+            <input
+              type="text"
+              className="mt-1 w-full rounded border px-2 py-1"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              onBlur={() => setEditingFirstName(false)}
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setEditingFirstName(false);
+                }
+              }}
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{firstName}</span>
+              <button
+                className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+                onClick={() => setEditingFirstName(true)}
+                type="button"
+              >
+                Change
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Last Name */}
+        <div>
+          <label>Last Name*</label>
+          {editingLastName || !lastName ? (
+            <input
+              type="text"
+              className="mt-1 w-full rounded border px-2 py-1"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              onBlur={() => setEditingLastName(false)}
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setEditingLastName(false);
+                }
+              }}
+              required
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{lastName}</span>
+              <button
+                className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+                onClick={() => setEditingLastName(true)}
+                type="button"
+              >
+                Change
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Date of Birth */}
+        <div>
+          <label>Date of Birth*</label>
+          {editingDob || !dob ? (
+            <input
+              type="date"
+              className="mt-1 w-full rounded border px-2 py-1"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              onBlur={() => setEditingDob(false)}
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setEditingDob(false);
+                }
+              }}
+              required
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <span>{dob}</span>
+              <button
+                className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+                onClick={() => setEditingDob(true)}
+                type="button"
+              >
+                Change
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Sex */}
+        <div>
+          <label>Sex*</label>
+          {editingSex || !sex ? (
+            <select
+              className="mt-1 w-full rounded border px-2 py-1"
+              value={sex}
+              onChange={(e) => setSex(e.target.value)}
+              onBlur={() => setEditingSex(false)}
+              autoFocus
+              required
+            >
+              <option value="">Select...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{sex}</span>
+              <button
+                className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+                onClick={() => setEditingSex(true)}
+                type="button"
+              >
+                Change
+              </button>
+            </div>
+          )}
+        </div>
+        {/* …and all your other insurance, procedure, ICD fields… */}
+      </div>
+
+      {/* Address */}
+      <div className="col-span-2">
+        <label>Address*</label>
+        {editingAddress || !address ? (
+          <input
+            type="text"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            onBlur={() => setEditingAddress(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingAddress(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{address}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingAddress(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Zip Code */}
+      <div>
+        <label>Zip Code*</label>
+        {editingZipCode || !zipCode ? (
+          <input
+            type="text"
+            pattern="\d{5}"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+            onBlur={() => setEditingZipCode(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingZipCode(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{zipCode}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingZipCode(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Service Start */}
+      <div>
+        <label>Service Start*</label>
+        {editingServiceStart || !serviceStart ? (
+          <input
+            type="datetime-local"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={serviceStart}
+            onChange={(e) => setServiceStart(e.target.value)}
+            onBlur={() => setEditingServiceStart(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingServiceStart(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{serviceStart}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingServiceStart(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Service End */}
+      <div>
+        <label>Service End</label>
+        {editingServiceEnd || !serviceEnd ? (
+          <input
+            type="datetime-local"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={serviceEnd}
+            onChange={(e) => setServiceEnd(e.target.value)}
+            onBlur={() => setEditingServiceEnd(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingServiceEnd(false);
+              }
+            }}
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{serviceEnd}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingServiceEnd(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Provider Name */}
+      <div>
+        <label>Provider Name*</label>
+        {editingProviderName || !providerName ? (
+          <input
+            type="text"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={providerName}
+            onChange={(e) => setProviderName(e.target.value)}
+            onBlur={() => setEditingProviderName(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingProviderName(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{providerName}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingProviderName(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Facility Name */}
+      <div>
+        <label>Facility Name*</label>
+        {editingFacilityName || !facilityName ? (
+          <input
+            type="text"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={facilityName}
+            onChange={(e) => setFacilityName(e.target.value)}
+            onBlur={() => setEditingFacilityName(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingFacilityName(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{facilityName}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingFacilityName(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Group Number */}
+      <div>
+        <label>Group Number*</label>
+        {editingGroupNumber || !groupNumber ? (
+          <input
+            type="text"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={groupNumber}
+            onChange={(e) => setGroupNumber(e.target.value)}
+            onBlur={() => setEditingGroupNumber(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingGroupNumber(false);
+              }
+            }}
+            required
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{groupNumber}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingGroupNumber(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        disabled={!formValid || detailsMutation.isPending}
+        className={`mt-4 w-full rounded px-4 py-2 font-bold text-white ${
+          formValid
+            ? "bg-green-600 hover:bg-green-700"
+            : "cursor-not-allowed bg-gray-400"
+        }`}
+      >
+        {detailsMutation.isPending ? "Saving…" : "Save Details"}
+      </button>
+    </form>
+  );
+}
 
 /*
 ===============================================================================
@@ -370,6 +908,8 @@ function isAcceptedFileType(file: File) {
   return ACCEPTED_TYPES.includes(file.type);
 }
 
+type View = "timeline" | "details" | "appeal" | "voice";
+
 export default function PatientModal({
   isOpen,
   onClose,
@@ -384,7 +924,7 @@ export default function PatientModal({
   const eventModalRef = useRef(null);
 
   const [selectedEvent, setSelectedEvent] = useState<PatientEvent | null>(null);
-  const [view, setView] = useState<"timeline" | "appeal" | "voice">("timeline");
+  const [view, setView] = useState<View>("timeline");
 
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [eventType, setEventType] = useState("");
@@ -393,7 +933,7 @@ export default function PatientModal({
     new Date().toISOString().split("T")[0],
   );
   const [eventPdfs, setEventPdfs] = useState<File[]>([]);
-  const utils = trpc.useUtils(); // or useQueryClient() for React Query
+  // const utils = trpc.useUtils(); // or useQueryClient() for React Query
 
   // Upload state for multiple files with progress
   interface UploadFile {
@@ -402,13 +942,12 @@ export default function PatientModal({
     uploaded: boolean;
   }
   const [appealLetter, setAppealLetter] = useState<string>("");
-  const [files, setFiles] = useState<File[]>([]);
+  // const [files, setFiles] = useState<File[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<
     [UploadFile | undefined, UploadFile | undefined]
   >([undefined, undefined]);
-  const [allUploaded, setAllUploaded] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
+  // const [allUploaded, setAllUploaded] = useState(false);
+  // const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleEditPdf = (_event, _pdfIdx) => {
     toast("Edit PDF not implemented (stub)");
@@ -520,7 +1059,7 @@ export default function PatientModal({
     }
 
     const formData = new FormData();
-    
+
     formData.append("files", denialFile.file);
     formData.append("files", noteFile.file);
 
@@ -669,10 +1208,20 @@ export default function PatientModal({
             >
               <div
                 ref={patientModalRef}
-                className="h-full w-full overflow-y-auto rounded-lg bg-white"
+                className="h-full w-full  rounded-lg bg-white"
               >
                 <div className="mb-4 flex flex-col gap-2">
                   <div className="flex flex-row items-center gap-2">
+                    <button
+                      className={`rounded px-4 py-2 ${
+                        view === "details"
+                          ? "bg-blue-500 text-white"
+                          : "bg-gray-200 text-gray-700"
+                      }`}
+                      onClick={() => setView("details")}
+                    >
+                      Details
+                    </button>
                     <button
                       className={`rounded px-4 py-2 ${
                         view === "appeal"
@@ -840,6 +1389,8 @@ export default function PatientModal({
                     </div>
                   </>
                 )}
+
+                {view === "details" && <DetailsForm patient={patient} />}
 
                 {view === "appeal" && (
                   <>

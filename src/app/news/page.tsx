@@ -1,7 +1,5 @@
 import { useMemo } from "react";
-import styles from "./NewsPage.module.css";
 import SectionTitle from "@/components/Common/SectionTitle";
-import SingleBlog from "@/app/_components/SingleBlog";
 import newsData from "./_components/newsData"; // Import the news data
 
 import type { Metadata } from "next";

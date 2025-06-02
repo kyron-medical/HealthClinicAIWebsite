@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { Button } from "./ui/button";
 import Resource from "../resource-type";
 import resourcesData from "../data/resource-data";
 import Pipeline from "./pipeline";

@@ -1,15 +1,12 @@
 "use client";
 
 import ScrollUp from "@/components/Common/ScrollUp";
-import { Metadata } from "next";
 import Landing from "./_components/home/Landing";
-import Testimonials from "./_components/home/Testimonials";
 import Image from "next/image";
 import Orb from "@/app/_components/ui/orb";
 import { InfiniteCarousel } from "./news/_components/InfiniteCarousel";
-import { CarouselPlugin } from "@/app/_components/ui/carousel";
 import Link from "next/link";
-import TestDrive from "./_components/ui/drive-button";
+
 import SectionTitle from "@/components/Common/SectionTitle";
 import { useState } from "react";
 import { toast } from "react-hot-toast";

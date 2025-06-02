@@ -7,7 +7,7 @@ import "../styles/global.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Providers } from "@/app/providers";
 
 const inter = Inter({ subsets: ["latin"] });
