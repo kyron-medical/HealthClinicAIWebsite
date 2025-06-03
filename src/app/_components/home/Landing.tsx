@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import Typing from "../../animations/Typing";
-import styles from "@/styles/Landing.module.css";
-import Link from "next/link";
 
 const Landing = () => {
   return (

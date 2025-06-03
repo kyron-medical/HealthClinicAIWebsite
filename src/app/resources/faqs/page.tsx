@@ -1,6 +1,5 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { Metadata } from "next";
-import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {

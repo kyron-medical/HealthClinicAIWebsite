@@ -42,19 +42,36 @@ export type PatientEvent = {
 */
 
 model Patient {
-  id            String   @id @default(cuid())
-  name          String
-  name_iv       String   
-  name_tag      String   
-  insurer       String
-  insurer_iv    String   
-  insurer_tag   String   
-  moneyCollected Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  patientEvents PatientEvent[]
-  billerId      String
-  }
+  id              String   @id @default(cuid())
+  name            String  @default("patient_name")
+  name_iv         String?           // now nullable (defaults to NULL)
+  name_tag        String?           // likewise
+  dob             DateTime @default(dbgenerated("'1900-01-01T00:00:00.000Z'"))  // default to a sentinel value
+  address         String?           // nullable
+  address_iv      String?           // nullable
+  address_tag     String?           // nullable
+  sex            String?           // nullable
+  sex_iv         String?           // nullable
+  sex_tag        String?           // nullable
+  insurer         String @default("insurer_name") // default to "insurer_name"
+  insurer_iv      String?           // nullable
+  insurer_tag     String?           // nullable
+  moneyCollected  Int @default(0) // default to 0
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  patientEvents   PatientEvent[]
+  billerId        String
+  serviceStart    DateTime @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
+  serviceEnd      DateTime?
+  providerName    String?           // already nullable
+  providerName_iv String?           // already nullable
+  providerName_tag String?          // already nullable
+  facilityName    String?           // already nullable
+  zipCode         String?           // already nullable
+  zipCode_iv      String?           // already nullable
+  zipCode_tag     String?           // already nullable
+  groupNumber     String?           // already nullable
+}
 
 
 model PatientEvent {

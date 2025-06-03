@@ -1,6 +1,6 @@
 "use client";
 
-import { Testimonial } from "@/types/testimonial";
+import type { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../../../components/Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
 import { motion, useInView } from "framer-motion";

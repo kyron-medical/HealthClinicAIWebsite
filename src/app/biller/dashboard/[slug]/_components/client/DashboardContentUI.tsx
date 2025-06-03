@@ -3,42 +3,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import PatientGridClient from "./GridUI";
 
-import { patients, patientEvents, messages } from "../../data/dashboard-data";
-import { Patient, PatientEvent } from "@prisma/client";
+import { messages } from "../../data/dashboard-data";
+import type { PatientEvent } from "@prisma/client";
 import { trpc } from "trpc/client";
-import toast from "react-hot-toast";
-import { parse } from "@/../utils/parser";
-import middleware from "@/middleware";
 import { useUser } from "@clerk/nextjs";
 import ChatBot from "../ui/chat-bot";
+import { FaceSheetMassUploader } from "./FaceSheetUploader";
 
 interface DashboardContentClientProps {
-  patients: {
-    id: string;
-    name: string;
-    insurer: string;
-    moneyCollected: number;
-    createdAt: Date;
-    updatedAt: Date;
-    billerId: string;
-  }[];
   patientEvents: PatientEvent[];
 }
 
-const DashboardContentClient = ({
-  patients,
-  patientEvents,
-}: DashboardContentClientProps) => {
+const DashboardContentClient = (props: DashboardContentClientProps) => {
   const [filterName, setFilterName] = useState("");
   const [filterInsurer, setFilterInsurer] = useState("");
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [chatMessages, setChatMessages] = useState<string[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [chatbotOpen, setChatbotOpen] = useState(false);
+
   // Inside your component, before the return statement
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const utils = trpc.useUtils(); // or useQueryClient() for React Query
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
@@ -46,62 +32,28 @@ const DashboardContentClient = ({
     return () => clearInterval(interval);
   }, []);
 
+  const { user } = useUser();
+
+  
+  if (!user) {
+    return;
+  }
+
+  const { data: patients = [], refetch } = trpc.getPatientsByBillerId.useQuery(
+    { userId: user.id },
+    { enabled: !!user },
+  );
+
+  if (!user) {
+    return <div className="p-4">Loading...</div>; // or a loading spinner
+  }
+
   const totalCollected = patients.reduce((sum, p) => sum + p.moneyCollected, 0);
 
   const formattedTotalCollected = totalCollected.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
-
-  const createPatientsBulk = trpc.createPatientsBulk.useMutation();
-
-  const { user } = useUser(); // Assuming you have a way to get the current user
-
-  if (!user) {
-    return;
-  }
-
-  // This function should be called when a file is selected
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      const patients: {
-        name: string;
-        insurer: string;
-        moneyCollected: number;
-        createdAt: Date;
-        updatedAt: Date;
-        billerId: string;
-      }[] = [];
-      for await (const row of parse(file)) {
-        const name = row.data.name;
-        const insurer = row.data.insurer;
-        const moneyCollected = row.data.moneyCollected;
-        if (!name || !insurer || !moneyCollected) {
-          toast.error("Invalid data in CSV file");
-          return;
-        }
-        patients.push({
-          name,
-          insurer,
-          moneyCollected: Number(moneyCollected),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          billerId: user.id,
-        });
-      }
-
-      await createPatientsBulk.mutateAsync(patients);
-      await utils.getPatientsByBillerId.invalidate(); // Invalidate/refetch the patients query
-      toast.success("Patients added successfully!");
-    } catch (err) {
-      toast.dismiss();
-      toast.error("Error adding patients");
-      console.error("Error adding patients:", err);
-    }
-  };
 
   // 2. addPatients just triggers the file input
   const addPatients = () => {
@@ -146,8 +98,7 @@ const DashboardContentClient = ({
               {/* Place this input somewhere in your JSX, e.g. at the top-level of your return */}
               <div className="flex flex-row items-center justify-between">
                 <h3 className="mb-2 text-sm text-gray-500">Total Patients</h3>
-
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -162,7 +113,8 @@ const DashboardContentClient = ({
                   >
                     +
                   </button>
-                </div>
+                </div> */}
+                <FaceSheetMassUploader refetchPatientsAction={refetch} />
               </div>
               <p className="text-3xl font-bold">{patients.length}</p>
             </div>
@@ -194,6 +146,7 @@ const DashboardContentClient = ({
             patients={patients}
             filterName={filterName}
             filterInsurer={filterInsurer}
+            refetchPatientsAction={refetch}
           />
         </div>
       </div>

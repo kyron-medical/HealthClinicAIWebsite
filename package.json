@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.5.8",
+    "@aws-sdk/client-textract": "^3.821.0",
     "@clerk/nextjs": "^6.3.0",
     "@lottiefiles/dotlottie-react": "^0.13.0",
     "@prisma/client": "^6.6.0",
@@ -35,6 +36,7 @@
     "ag-grid-community": "^33.2.1",
     "ag-grid-react": "^33.2.1",
     "aws-amplify": "^6.8.0",
+    "aws-sdk": "^2.1692.0",
     "axios": "^1.7.8",
     "class-variance-authority": "^0.7.1",
     "client-only": "^0.0.1",
@@ -50,6 +52,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.3.8",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.15.1",

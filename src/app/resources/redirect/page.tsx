@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import EmailCollectionForm from "@/components/EmailCollectionForm";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 function RedirectPageInner() {
