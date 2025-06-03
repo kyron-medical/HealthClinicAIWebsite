@@ -6,63 +6,59 @@ import { toast } from "react-hot-toast";
 import { trpc } from "trpc/client";
 import { useUser } from "@clerk/nextjs";
 
-interface PatientSummary {
-  id: string;
-  name: string;
-  dob: Date;
-  insurer: string;
-  moneyCollected: number;
-  createdAt: Date;
-  updatedAt: Date;
-  billerId: string;
-  serviceStart: Date;
-  serviceEnd: Date | null;
-  providerName: string | null;
-  facilityName: string | null;
-  zipCode: string | null;
-  groupNumber: string | null;
+interface ExtractedPatientData {
+  patient_name: string;
+  insurance_name?: string;
+  date_of_birth: string;
+  address?: string | null;
+  age?: string | number | null;
+  sex?: string | null;
+  state?: string | null;
+  city?: string | null;
+  provider_name?: string | null;
+  facility_name?: string | null;
+  zip?: string | null;
+  group_number?: string | null;
 }
+
+interface UploadFaceSheetsResult {
+  results: Array<{
+    extractedData: ExtractedPatientData;
+    filename: string;
+    status: string;
+    missingFields?: string[];
+  }>;
+}
+
 interface FaceSheetMassUploaderProps {
-  patients: PatientSummary[];
-  setPatients: (newList: PatientSummary[]) => void;
+  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
 }
 
 // const textract = new TextractClient({ region: "us-east-1" }); // set your region
 
 export function FaceSheetMassUploader({
-  patients,
-  setPatients,
+  refetchPatientsAction,
 }: FaceSheetMassUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const utils = trpc.useUtils(); // or useQueryClient() for React Query
-
   const createPatientsBulk = trpc.createPatientsBulk.useMutation();
-
   const { user } = useUser();
   if (!user) {
     toast.error("You must be logged in to upload face sheets.");
     return null;
   }
 
-
   // Narrowing function in order to type the JSON response from the server
   // JSON contains an array called results which has the patient summaries
   // Narrowing function to check if data is in the expected format
   function isPatientSummaryArray(
-    data: any,
-  ): data is {
-    results: Array<{
-      extractedData: any;
-      filename: string;
-      status: string;
-      missingFields?: string[];
-    }>;
-  } {
+    data: unknown,
+  ): data is UploadFaceSheetsResult {
     return (
-      data &&
-      Array.isArray(data.results) &&
-      data.results.every(
+      typeof data === "object" &&
+      data !== null &&
+      Array.isArray((data as UploadFaceSheetsResult).results) &&
+      (data as UploadFaceSheetsResult).results.every(
         (item) =>
           item &&
           typeof item.filename === "string" &&
@@ -110,14 +106,14 @@ export function FaceSheetMassUploader({
       }
 
       // Only parse JSON when status is 200–299:
-      let data: any;
+      let data: unknown;
       try {
         data = await response.json();
+        console.log("Response data:", data);
       } catch (err) {
         console.error("Expected JSON, but received:", await response.text());
         return;
       }
-
 
       toast.dismiss(toastId);
 
@@ -130,12 +126,17 @@ export function FaceSheetMassUploader({
         const extractedData = patient.extractedData;
         return {
           name: extractedData.patient_name,
-          insurer: extractedData.insurer ?? "Unknown",
+          insurer: extractedData.insurance_name ?? "Unknown",
           dob: new Date(extractedData.date_of_birth),
+          address: extractedData.address ?? null,
+          age: extractedData.age ?? null,
+          sex: extractedData.sex ?? null,
+          state: extractedData.state ?? null,
+          city: extractedData.city ?? null,
           serviceEnd: null, // Default to null, can be updated later
           providerName: extractedData.provider_name ?? null,
           facilityName: extractedData.facility_name ?? null,
-          zipCode: extractedData.zip_code ?? null,
+          zipCode: extractedData.zip ?? null,
           groupNumber: extractedData.group_number ?? null,
           moneyCollected: 0, // Default value, can be updated later
           billerId: user.id,
@@ -145,14 +146,19 @@ export function FaceSheetMassUploader({
       try {
         await createPatientsBulk.mutateAsync(newPatients);
         toast.success(`Created ${newPatients.length} patient(s)`);
-        await utils.getPatientsByBillerId.invalidate({ userId: user.id });
+        await refetchPatientsAction(); // Immediately update the list
       } catch (err) {
-        toast.error("Failed to create patients in bulk.");
+        toast.error(
+          "Failed to create patients in bulk." +
+            (err instanceof Error ? `: ${err.message}` : ""),
+        );
       }
     } catch (err) {
       toast.dismiss(toastId);
-      toast.error("Network error while uploading face sheets.");
-    
+      toast.error(
+        "Network error while uploading face sheets." +
+          (err instanceof Error ? `: ${err.message}` : ""),
+      );
     } finally {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = "";

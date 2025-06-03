@@ -35,13 +35,14 @@ interface PatientGridProps {
 
   filterName: string;
   filterInsurer: string;
+  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
 }
 
 const PatientGridClient = ({
   patients,
-
   filterName,
   filterInsurer,
+  refetchPatientsAction,
 }: PatientGridProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState<PatientRow | null>(
@@ -157,6 +158,7 @@ const PatientGridClient = ({
             setPatient={(patient) => setSelectedPatient(patient)}
             events={patientEvents}
             patients={patients}
+            refetchPatientsAction={refetchPatientsAction}
           />,
 
           modalRoot,

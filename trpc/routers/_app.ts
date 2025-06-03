@@ -33,7 +33,13 @@ type EncryptedPatient = {
 };
 
 // Helper to encrypt PHI fields before storing
-function encryptPHI(patient: { name: string; insurer: string }) {
+function encryptPHI(patient: {
+  name: string;
+  insurer: string;
+  address?: string | null;
+  zipCode?: string | null;
+  sex?: string | null;
+}) {
   const encrypted: any = { ...patient };
   if (patient.name) {
     const { data, iv, tag } = encrypt(patient.name);
@@ -46,6 +52,24 @@ function encryptPHI(patient: { name: string; insurer: string }) {
     encrypted.insurer = data;
     encrypted.insurer_iv = iv;
     encrypted.insurer_tag = tag;
+  }
+  if (patient.address) {
+    const { data, iv, tag } = encrypt(patient.address);
+    encrypted.address = data;
+    encrypted.address_iv = iv;
+    encrypted.address_tag = tag;
+  }
+  if (patient.zipCode) {
+    const { data, iv, tag } = encrypt(patient.zipCode);
+    encrypted.zipCode = data;
+    encrypted.zipCode_iv = iv;
+    encrypted.zipCode_tag = tag;
+  }
+  if (patient.sex) {
+    const { data, iv, tag } = encrypt(patient.sex);
+    encrypted.sex = data;
+    encrypted.sex_iv = iv;
+    encrypted.sex_tag = tag;
   }
   return encrypted;
 }
@@ -65,6 +89,27 @@ function decryptPHI(patient: any) {
       data: patient.insurer,
       iv: patient.insurer_iv,
       tag: patient.insurer_tag,
+    });
+  }
+  if (patient.address && patient.address_iv && patient.address_tag) {
+    decrypted.address = decrypt({
+      data: patient.address,
+      iv: patient.address_iv,
+      tag: patient.address_tag,
+    });
+  }
+  if (patient.zipCode && patient.zipCode_iv && patient.zipCode_tag) {
+    decrypted.zipCode = decrypt({
+      data: patient.zipCode,
+      iv: patient.zipCode_iv,
+      tag: patient.zipCode_tag,
+    });
+  }
+  if (patient.sex && patient.sex_iv && patient.sex_tag) {
+    decrypted.sex = decrypt({
+      data: patient.sex,
+      iv: patient.sex_iv,
+      tag: patient.sex_tag,
     });
   }
   // Add more PHI fields as needed
@@ -328,8 +373,8 @@ export const appRouter = createTRPCRouter({
       });
       return decryptPHI(patient);
     }),
-  
-  deletePatient : privateProcedure 
+
+  deletePatient: privateProcedure
     .input(z.object({ patientId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const billerId = ctx.userId;
@@ -394,6 +439,7 @@ export const appRouter = createTRPCRouter({
         patientId: z.string(),
         name: z.string(),
         dob: z.string(),
+        insurer: z.string().optional(),
         serviceStart: z.string().optional(),
         serviceEnd: z.string().optional(),
         providerName: z.string(),
@@ -414,7 +460,7 @@ export const appRouter = createTRPCRouter({
       // Encrypt PHI before updating
       const encryptedData = encryptPHI({
         name: input.name,
-        insurer: input.providerName,
+        insurer: input.insurer ?? "",
       });
 
       const patient = await ctx.prisma.patient.update({
@@ -431,6 +477,24 @@ export const appRouter = createTRPCRouter({
     }),
 
   // In your tRPC router
+
+  /*
+    name: extractedData.patient_name,
+    insurer: extractedData.insurance_name ?? "Unknown",
+    dob: new Date(extractedData.date_of_birth),
+    address: extractedData.address ?? null,
+    age: extractedData.age ?? null,
+    sex: extractedData.sex ?? null,
+    state: extractedData.state ?? null,
+    city: extractedData.city ?? null,
+    serviceEnd: null, // Default to null, can be updated later
+    providerName: extractedData.provider_name ?? null,
+    facilityName: extractedData.facility_name ?? null,
+    zipCode: extractedData.zip_code ?? null,
+    groupNumber: extractedData.group_number ?? null,
+    moneyCollected: 0, // Default value, can be updated later
+    billerId: user.id,
+  */
   createPatientsBulk: privateProcedure
     .input(
       z.array(
@@ -438,6 +502,8 @@ export const appRouter = createTRPCRouter({
           name: z.string(),
           insurer: z.string(),
           dob: z.date(),
+          address: z.string().nullable(),
+          sex: z.string().nullable(),
           serviceStart: z.date().optional(),
           serviceEnd: z.date().nullable().optional(),
           providerName: z.string().nullable(),

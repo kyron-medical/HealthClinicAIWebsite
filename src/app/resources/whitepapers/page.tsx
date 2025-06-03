@@ -3,7 +3,6 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
 
 import resourcesData from "../data/resource-data";
-import Link from "next/link";
 import { FaFilePdf } from "react-icons/fa6";
 import { useState } from "react";
 import ResourceModal from "../_components/ui/resource-modal";

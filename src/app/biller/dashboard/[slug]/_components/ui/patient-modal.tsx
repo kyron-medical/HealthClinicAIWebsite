@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { trpc } from "trpc/client";
 import { z } from "zod";
 import type { PatientEvent } from "@prisma/client";
-
+import { FaRegTrashCan } from "react-icons/fa6";
 
 // Define interface for your row data
 interface PatientRow {
@@ -30,9 +30,10 @@ interface PatientModalProps {
   isOpen: boolean;
   onClose: () => void;
   patient: PatientRow | null;
-  setPatient: (patient: PatientRow) => void;
+  setPatient: (patient: PatientRow | null) => void;
   events: PatientEvent[];
   patients: PatientRow[];
+  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
 }
 
 /*
@@ -52,22 +53,28 @@ interface PatientModalProps {
 */
 
 // Add a type assertion if needed:
-type PatientDetails = {
+type ExistingPatientDetails = {
   dob?: string | Date | null;
   serviceStart?: string | Date | null;
   serviceEnd?: string | Date | null;
+  zipCode?: string | null;
+  insurer?: string | null;
   address?: string | null;
   sex?: string | null;
   groupNumber?: string | null;
   providerName?: string | null;
   facilityName?: string | null;
-  zipCode?: string | null;
-  name?: string;
-  patientId: string;
   // Add other fields as needed
 };
 
-export function DetailsForm({ patient }: { patient: PatientRow }) {
+type DetailsFormProps = {
+  patient: PatientRow;
+  refetchPatientsAction : (options?: unknown) => Promise<unknown>;
+}
+
+export function DetailsForm(
+  { patient, refetchPatientsAction }: DetailsFormProps,
+) {
   // Local form state for every field:
   const [firstName, setFirstName] = useState(patient.name.split(" ")[0] || "");
   const [editingFirstName, setEditingFirstName] = useState(false);
@@ -76,9 +83,22 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
   const [editingLastName, setEditingLastName] = useState(false);
 
   const [dob, setDob] = useState(
-    patient.dob.toISOString().substring(0, 10) || "",
+    patient.dob ? patient.dob.toISOString().substring(0, 10) : "",
   );
   const [editingDob, setEditingDob] = useState(false);
+
+  const [sex, setSex] = useState("");
+  const [editingSex, setEditingSex] = useState(false);
+
+  // New fields
+  const [address, setAddress] = useState("");
+  const [editingAddress, setEditingAddress] = useState(false);
+
+  const [zipCode, setZipCode] = useState("");
+  const [editingZipCode, setEditingZipCode] = useState(false);
+
+  const [insurer, setInsurer] = useState(patient.insurer || "");
+  const [editingInsurer, setEditingInsurer] = useState(false);
 
   const [serviceStart, setServiceStart] = useState("");
   const [editingServiceStart, setEditingServiceStart] = useState(false);
@@ -92,117 +112,123 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
   const [facilityName, setFacilityName] = useState("");
   const [editingFacilityName, setEditingFacilityName] = useState(false);
 
-  const [zipCode, setZipCode] = useState("");
-  const [editingZipCode, setEditingZipCode] = useState(false);
-
   const [groupNumber, setGroupNumber] = useState("");
   const [editingGroupNumber, setEditingGroupNumber] = useState(false);
 
-  // New fields
-  const [address, setAddress] = useState("");
-  const [editingAddress, setEditingAddress] = useState(false);
-
-  const [sex, setSex] = useState("");
-  const [editingSex, setEditingSex] = useState(false);
+  // Track if any field has changed
+  const [dirty, setDirty] = useState(false);
 
   // TRPC mutation to upsert details:
   const detailsMutation = trpc.updatePatientDetails.useMutation({
-    onSuccess: () => toast.success("Details saved"),
+    onSuccess: () => {
+      toast.success("Details saved");
+      setDirty(false);
+    },
     onError: (err) => toast.error(err.message),
   });
 
   // On mount, you might fetch existing details to seed the form:
   const { data: existing } = trpc.getPatientDetails.useQuery({
     patientId: patient.id,
-  });
+  }) as { data: ExistingPatientDetails };
 
   useEffect(() => {
     if (existing) {
       // dob
       let dobString = "";
       if (existing.dob) {
-        const dobVal =
-          typeof existing.dob === "string"
-            ? existing.dob
-            : existing.dob.toISOString();
-        dobString = dobVal.substring(0, 10);
+        if (typeof existing.dob === "string") {
+          dobString = existing.dob.substring(0, 10);
+        } else if (existing.dob instanceof Date) {
+          dobString = existing.dob.toISOString().substring(0, 10);
+        }
       }
       setDob(dobString);
 
       // serviceStart
       let serviceStartString = "";
       if (existing.serviceStart) {
-        const ssVal =
-          typeof existing.serviceStart === "string"
-            ? existing.serviceStart
-            : existing.serviceStart.toISOString();
-        serviceStartString = ssVal.substring(0, 16);
+        if (typeof existing.serviceStart === "string") {
+          serviceStartString = existing.serviceStart.substring(0, 16);
+        } else if (existing.serviceStart instanceof Date) {
+          serviceStartString = existing.serviceStart.toISOString().substring(0, 16);
+        }
       }
       setServiceStart(serviceStartString);
 
       // serviceEnd
       let serviceEndString = "";
       if (existing.serviceEnd) {
-        const seVal =
-          typeof existing.serviceEnd === "string"
-            ? existing.serviceEnd
-            : existing.serviceEnd.toISOString();
-        serviceEndString = seVal.substring(0, 16);
+        if (typeof existing.serviceEnd === "string") {
+          serviceEndString = existing.serviceEnd.substring(0, 16);
+        } else if (existing.serviceEnd instanceof Date) {
+          serviceEndString = existing.serviceEnd.toISOString().substring(0, 16);
+        }
       }
       setServiceEnd(serviceEndString);
+
+      let zipCodeString = "";
+      if (existing.zipCode) {
+        zipCodeString =
+          typeof existing.zipCode === "string"
+            ? existing.zipCode
+            : ""
+      }
+      setZipCode(zipCodeString);
+
+      let insurerString = "";
+      if (existing.insurer) {
+        insurerString =
+          typeof existing.insurer === "string"
+            ? existing.insurer
+            : ""
+      }
 
       setAddress(existing.address ?? "");
       setSex(existing.sex ?? "");
       setGroupNumber(existing.groupNumber ?? "");
+      setProviderName(existing.providerName ?? "");
+      setFacilityName(existing.facilityName ?? "");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existing]);
 
-  // Simple schema validation (optional)
-  const detailsSchema = z.object({
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-    zipCode: z.string().length(5),
-    groupNumber: z.string().min(1),
-    address: z.string().min(1),
-    sex: z.enum(["Male", "Female", "Other"]),
-    // …
-  });
-  const formValid = detailsSchema.safeParse({
-    firstName,
-    lastName,
-    dob,
-    zipCode,
-    groupNumber,
-    address,
-    sex,
-    // …
-  }).success;
+  // Mark dirty on any change
+  function handleChange<T>(setter: (v: T) => void) {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setter(e.target.value as T);
+      setDirty(true);
+    };
+  }
+
+  // Only require at least one field to be changed to enable save
+  const formValid = dirty && !detailsMutation.isPending;
 
   // Render form
   return (
     <form
-      className="max-h-[60vh] space-y-4 overflow-y-auto p-4"
+      className="max-h-[60vh] space-y-4  p-4"
       onSubmit={(e) => {
         e.preventDefault();
         if (!formValid) {
-          toast.error("Please fix validation errors");
+          toast.error("No changes to save");
           return;
         }
+
         detailsMutation.mutate({
           patientId: patient.id,
           name: `${firstName} ${lastName}`,
-          dob,
-          serviceStart,
-          serviceEnd,
-          providerName,
-          facilityName,
-          zipCode,
-          groupNumber,
-          address,
-          sex,
-          // …all other fields
+          dob: dob ?? undefined,
+          serviceStart: serviceStart ?? undefined,
+          serviceEnd: serviceEnd ?? undefined,
+          providerName: providerName ?? undefined,
+          facilityName: facilityName ?? undefined,
+          zipCode: zipCode ?? undefined,
+          groupNumber: groupNumber ?? undefined,
+          address: address ?? undefined,
+          sex: sex ?? undefined,
         });
+        void refetchPatientsAction(); // Refetch patients after saving
       }}
     >
       <h2 className="mb-2 text-2xl font-bold">Patient Details</h2>
@@ -210,13 +236,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
       <div className="grid grid-cols-2 gap-4">
         {/* First Name */}
         <div>
-          <label className="">First Name*</label>
+          <label className="">First Name</label>
           {editingFirstName || !firstName ? (
             <input
               type="text"
               className="mt-1 w-full rounded border px-2 py-1"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={handleChange(setFirstName)}
               onBlur={() => setEditingFirstName(false)}
               autoFocus
               onKeyDown={(e) => {
@@ -241,13 +267,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
         {/* Last Name */}
         <div>
-          <label>Last Name*</label>
+          <label>Last Name</label>
           {editingLastName || !lastName ? (
             <input
               type="text"
               className="mt-1 w-full rounded border px-2 py-1"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={handleChange(setLastName)}
               onBlur={() => setEditingLastName(false)}
               autoFocus
               onKeyDown={(e) => {
@@ -255,7 +281,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                   setEditingLastName(false);
                 }
               }}
-              required
             />
           ) : (
             <div className="flex items-center gap-2">
@@ -273,13 +298,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
         {/* Date of Birth */}
         <div>
-          <label>Date of Birth*</label>
+          <label>Date of Birth</label>
           {editingDob || !dob ? (
             <input
               type="date"
               className="mt-1 w-full rounded border px-2 py-1"
               value={dob}
-              onChange={(e) => setDob(e.target.value)}
+              onChange={handleChange(setDob)}
               onBlur={() => setEditingDob(false)}
               autoFocus
               onKeyDown={(e) => {
@@ -287,7 +312,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                   setEditingDob(false);
                 }
               }}
-              required
             />
           ) : (
             <div className="flex items-center gap-2">
@@ -305,15 +329,14 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
         {/* Sex */}
         <div>
-          <label>Sex*</label>
+          <label>Sex</label>
           {editingSex || !sex ? (
             <select
               className="mt-1 w-full rounded border px-2 py-1"
               value={sex}
-              onChange={(e) => setSex(e.target.value)}
+              onChange={handleChange(setSex)}
               onBlur={() => setEditingSex(false)}
               autoFocus
-              required
             >
               <option value="">Select...</option>
               <option value="Male">Male</option>
@@ -338,13 +361,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       {/* Address */}
       <div className="col-span-2">
-        <label>Address*</label>
+        <label>Address</label>
         {editingAddress || !address ? (
           <input
             type="text"
             className="mt-1 w-full rounded border px-2 py-1"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={handleChange(setAddress)}
             onBlur={() => setEditingAddress(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -352,7 +375,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingAddress(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -370,14 +392,14 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       {/* Zip Code */}
       <div>
-        <label>Zip Code*</label>
+        <label>Zip Code</label>
         {editingZipCode || !zipCode ? (
           <input
             type="text"
             pattern="\d{5}"
             className="mt-1 w-full rounded border px-2 py-1"
             value={zipCode}
-            onChange={(e) => setZipCode(e.target.value)}
+            onChange={handleChange(setZipCode)}
             onBlur={() => setEditingZipCode(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -385,7 +407,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingZipCode(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -401,15 +422,46 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
         )}
       </div>
 
+      {/* Insurer Name */}
+      <div>
+        <label>Insurer Name</label>
+        {editingInsurer || !insurer ? (
+          <input
+            type="text"
+            className="mt-1 w-full rounded border px-2 py-1"
+            value={insurer}
+            onChange={handleChange(setInsurer)}
+            onBlur={() => setEditingInsurer(false)}
+            autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setEditingInsurer(false);
+              }
+            }}
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{insurer}</span>
+            <button
+              className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
+              onClick={() => setEditingInsurer(true)}
+              type="button"
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Service Start */}
       <div>
-        <label>Service Start*</label>
+        <label>Service Start</label>
         {editingServiceStart || !serviceStart ? (
           <input
             type="datetime-local"
             className="mt-1 w-full rounded border px-2 py-1"
             value={serviceStart}
-            onChange={(e) => setServiceStart(e.target.value)}
+            onChange={handleChange(setServiceStart)}
             onBlur={() => setEditingServiceStart(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -417,7 +469,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingServiceStart(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -441,7 +492,7 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
             type="datetime-local"
             className="mt-1 w-full rounded border px-2 py-1"
             value={serviceEnd}
-            onChange={(e) => setServiceEnd(e.target.value)}
+            onChange={handleChange(setServiceEnd)}
             onBlur={() => setEditingServiceEnd(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -466,13 +517,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       {/* Provider Name */}
       <div>
-        <label>Provider Name*</label>
+        <label>Provider Name</label>
         {editingProviderName || !providerName ? (
           <input
             type="text"
             className="mt-1 w-full rounded border px-2 py-1"
             value={providerName}
-            onChange={(e) => setProviderName(e.target.value)}
+            onChange={handleChange(setProviderName)}
             onBlur={() => setEditingProviderName(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -480,7 +531,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingProviderName(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -498,13 +548,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       {/* Facility Name */}
       <div>
-        <label>Facility Name*</label>
+        <label>Facility Name</label>
         {editingFacilityName || !facilityName ? (
           <input
             type="text"
             className="mt-1 w-full rounded border px-2 py-1"
             value={facilityName}
-            onChange={(e) => setFacilityName(e.target.value)}
+            onChange={handleChange(setFacilityName)}
             onBlur={() => setEditingFacilityName(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -512,7 +562,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingFacilityName(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -530,13 +579,13 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       {/* Group Number */}
       <div>
-        <label>Group Number*</label>
+        <label>Group Number</label>
         {editingGroupNumber || !groupNumber ? (
           <input
             type="text"
             className="mt-1 w-full rounded border px-2 py-1"
             value={groupNumber}
-            onChange={(e) => setGroupNumber(e.target.value)}
+            onChange={handleChange(setGroupNumber)}
             onBlur={() => setEditingGroupNumber(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -544,7 +593,6 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
                 setEditingGroupNumber(false);
               }
             }}
-            required
           />
         ) : (
           <div className="flex items-center gap-2">
@@ -562,7 +610,7 @@ export function DetailsForm({ patient }: { patient: PatientRow }) {
 
       <button
         type="submit"
-        disabled={!formValid || detailsMutation.isPending}
+        disabled={!formValid}
         className={`mt-4 w-full rounded px-4 py-2 font-bold text-white ${
           formValid
             ? "bg-green-600 hover:bg-green-700"
@@ -917,6 +965,7 @@ export default function PatientModal({
   setPatient,
   events,
   patients,
+  refetchPatientsAction
 }: PatientModalProps) {
   const [mounted, setMounted] = useState(false);
 
@@ -958,6 +1007,7 @@ export default function PatientModal({
   };
 
   const createEventMutation = trpc.createPatientEvent.useMutation();
+  const deletePatientMutation = trpc.deletePatient.useMutation();
 
   useEffect(() => {
     setMounted(true);
@@ -988,6 +1038,7 @@ export default function PatientModal({
     const index = patients.findIndex((p) => p.id === patient.id);
     const prevIndex = (index - 1 + patients.length) % patients.length;
     setPatient(patients[prevIndex]);
+    setShowAddEvent(false);
   };
 
   const handleNextPatient = () => {
@@ -995,6 +1046,35 @@ export default function PatientModal({
     const index = patients.findIndex((p) => p.id === patient.id);
     const nextIndex = (index + 1) % patients.length;
     setPatient(patients[nextIndex]);
+    setShowAddEvent(false);
+  };
+
+  const handleDeletePatient = async (patientId: string) => {
+    if (!patientId) return;
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this patient? This action cannot be undone.",
+    );
+    if (!confirmed) return;
+
+    try {
+      await deletePatientMutation.mutateAsync({ patientId });
+      toast.success("Patient deleted successfully");
+      await refetchPatientsAction();
+      // Remove the deleted patient from the patients list and select the next one if available
+      const idx = patients.findIndex((p) => p.id === patientId);
+      const newPatients = patients.filter((p) => p.id !== patientId);
+      if (newPatients.length > 0) {
+        // Select next patient, or previous if last was deleted
+        const nextIdx = idx < newPatients.length ? idx : newPatients.length - 1;
+        setPatient(newPatients[nextIdx]);
+        setShowAddEvent(false);
+      } else {
+        setPatient(null);
+      }
+      onClose();
+    } catch (error : unknown) {
+      toast.error("Failed to delete patient: ");
+    }
   };
 
   const handleAddEvent = async (e: React.FormEvent) => {
@@ -1196,6 +1276,20 @@ export default function PatientModal({
           ✕
         </button>
 
+        {view === "timeline" && (
+          <>
+            {/* Delete Patient Button - top left corner */}
+            <button
+              className="absolute right-16 top-6 flex items-center gap-1 rounded bg-red-100 px-3 py-1 text-red-600 hover:bg-red-200"
+              onClick={() => handleDeletePatient(patient.id)}
+              title="Delete Patient"
+            >
+              <FaRegTrashCan className="text-lg" />
+              Delete
+            </button>
+          </>
+        )}
+
         <AnimatePresence mode="wait">
           {!selectedEvent ? (
             <motion.div
@@ -1208,7 +1302,7 @@ export default function PatientModal({
             >
               <div
                 ref={patientModalRef}
-                className="h-full w-full  rounded-lg bg-white"
+                className="h-full w-full overflow-y-auto rounded-lg bg-white"
               >
                 <div className="mb-4 flex flex-col gap-2">
                   <div className="flex flex-row items-center gap-2">
@@ -1218,7 +1312,10 @@ export default function PatientModal({
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 text-gray-700"
                       }`}
-                      onClick={() => setView("details")}
+                      onClick={() => {
+                        setView("details");
+                        setShowAddEvent(false);
+                      }}
                     >
                       Details
                     </button>
@@ -1228,7 +1325,10 @@ export default function PatientModal({
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 text-gray-700"
                       }`}
-                      onClick={() => setView("appeal")}
+                      onClick={() => {
+                        setView("appeal");
+                        setShowAddEvent(false);
+                      }}
                     >
                       Letter of Appeal
                     </button>
@@ -1238,7 +1338,10 @@ export default function PatientModal({
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 text-gray-700"
                       }`}
-                      onClick={() => setView("voice")}
+                      onClick={() => {
+                        setView("voice");
+                        setShowAddEvent(false);
+                      }}
                     >
                       Voice AI Agent
                     </button>
@@ -1390,7 +1493,9 @@ export default function PatientModal({
                   </>
                 )}
 
-                {view === "details" && <DetailsForm patient={patient} />}
+                {view === "details" && (
+                  <DetailsForm patient={patient} refetchPatientsAction={refetchPatientsAction}/>
+                )}
 
                 {view === "appeal" && (
                   <>

@@ -3,58 +3,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import PatientGridClient from "./GridUI";
 
-import { patients, patientEvents, messages } from "../../data/dashboard-data";
-import { Patient, PatientEvent } from "@prisma/client";
+import { messages } from "../../data/dashboard-data";
+import type { PatientEvent } from "@prisma/client";
 import { trpc } from "trpc/client";
 import { useUser } from "@clerk/nextjs";
 import ChatBot from "../ui/chat-bot";
 import { FaceSheetMassUploader } from "./FaceSheetUploader";
 
 interface DashboardContentClientProps {
-  patients: {
-    id: string;
-    name: string;
-    dob: Date;
-    insurer: string;
-    moneyCollected: number;
-    createdAt: Date;
-    updatedAt: Date;
-    billerId: string;
-    serviceStart: Date;
-    serviceEnd: Date | null;
-    providerName: string | null;
-    facilityName: string | null;
-    zipCode: string | null;
-    groupNumber: string | null;
-  }[];
-
   patientEvents: PatientEvent[];
 }
 
-const DashboardContentClient = ({
-  patients,
-  patientEvents,
-}: DashboardContentClientProps) => {
-
-  const [patientsState, setPatientsState] = useState(patients);
-
-
+const DashboardContentClient = (props: DashboardContentClientProps) => {
   const [filterName, setFilterName] = useState("");
   const [filterInsurer, setFilterInsurer] = useState("");
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [chatMessages, setChatMessages] = useState<string[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [chatbotOpen, setChatbotOpen] = useState(false);
+
   // Inside your component, before the return statement
   const fileInputRef = useRef<HTMLInputElement>(null);
- 
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
     }, 10000);
     return () => clearInterval(interval);
   }, []);
+
+  const { user } = useUser();
+
+  
+  if (!user) {
+    return;
+  }
+
+  const { data: patients = [], refetch } = trpc.getPatientsByBillerId.useQuery(
+    { userId: user.id },
+    { enabled: !!user },
+  );
+
+  if (!user) {
+    return <div className="p-4">Loading...</div>; // or a loading spinner
+  }
 
   const totalCollected = patients.reduce((sum, p) => sum + p.moneyCollected, 0);
 
@@ -63,15 +55,6 @@ const DashboardContentClient = ({
     currency: "USD",
   });
 
-  const createPatientsBulk = trpc.createPatientsBulk.useMutation();
-
-  const { user } = useUser(); // Assuming you have a way to get the current user
-
-  if (!user) {
-    return;
-  }
-
-  
   // 2. addPatients just triggers the file input
   const addPatients = () => {
     if (fileInputRef.current) {
@@ -131,10 +114,7 @@ const DashboardContentClient = ({
                     +
                   </button>
                 </div> */}
-                <FaceSheetMassUploader
-                  patients={patientsState}
-                  setPatients={setPatientsState}
-                />
+                <FaceSheetMassUploader refetchPatientsAction={refetch} />
               </div>
               <p className="text-3xl font-bold">{patients.length}</p>
             </div>
@@ -166,6 +146,7 @@ const DashboardContentClient = ({
             patients={patients}
             filterName={filterName}
             filterInsurer={filterInsurer}
+            refetchPatientsAction={refetch}
           />
         </div>
       </div>

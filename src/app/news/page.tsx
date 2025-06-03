@@ -20,7 +20,7 @@ const NewsPage = () => {
       const dateB = new Date(b.publishDate); // Convert publishDate to Date
       return dateB.getTime() - dateA.getTime(); // Sort in descending order
     });
-  }, [newsData]);
+  }, []);
 
   return (
     <section

@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { trpc } from "@/../trpc/server";
 import DashboardContentClient from "../client/DashboardContentUI";
 import { redirect } from "next/navigation";
-import type { Patient, PatientEvent } from "@prisma/client";
+import type { PatientEvent } from "@prisma/client";
 
 const DashboardContent = async (): Promise<JSX.Element | null> => {
   const user = await currentUser();
@@ -35,7 +35,7 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
   // If you know the type of patientEvents, replace 'unknown' with the correct type above
 
   return (
-    <DashboardContentClient patients={patients} patientEvents={patientEvents} />
+    <DashboardContentClient patientEvents={patientEvents} />
   );
 };
 
