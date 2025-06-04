@@ -17,7 +17,7 @@
     "@aws-sdk/client-textract": "^3.821.0",
     "@clerk/nextjs": "^6.3.0",
     "@lottiefiles/dotlottie-react": "^0.13.0",
-    "@prisma/client": "^6.6.0",
+    "@prisma/client": "^6.9.0",
     "@prisma/extension-accelerate": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@rive-app/webgl": "^2.23.10",
