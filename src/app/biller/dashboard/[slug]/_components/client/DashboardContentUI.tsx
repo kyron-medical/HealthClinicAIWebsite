@@ -34,19 +34,10 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
 
   const { user } = useUser();
 
-  
-  if (!user) {
-    return;
-  }
-
   const { data: patients = [], refetch } = trpc.getPatientsByBillerId.useQuery(
-    { userId: user.id },
+    { userId: user?.id ?? "" },
     { enabled: !!user },
   );
-
-  if (!user) {
-    return <div className="p-4">Loading...</div>; // or a loading spinner
-  }
 
   const totalCollected = patients.reduce((sum, p) => sum + p.moneyCollected, 0);
 
@@ -62,6 +53,10 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
       fileInputRef.current.click();
     }
   };
+  
+  if (!user) {
+    return <div className="p-4">Loading...</div>; // or a loading spinner
+  }
 
   return (
     <>

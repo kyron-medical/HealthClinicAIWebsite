@@ -389,6 +389,11 @@ export const appRouter = createTRPCRouter({
 
       const { success } = await ratelimit.limit(billerId);
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      
+      // First, delete all related PatientEvent records
+      await ctx.prisma.patientEvent.deleteMany({
+        where: { patientId: input.patientId },
+      });
 
       const patient = await ctx.prisma.patient.delete({
         where: {
@@ -416,7 +421,9 @@ export const appRouter = createTRPCRouter({
           id: input.patientId,
         },
         data: {
-          moneyCollected: input.moneyCollected,
+          moneyCollected: {
+            increment: input.moneyCollected,
+          },
         },
       });
       return patient;
