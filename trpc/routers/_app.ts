@@ -519,10 +519,10 @@ export const appRouter = createTRPCRouter({
         z.object({
           name: z.string(),
           insurer: z.string(),
-          dob: z.date(),
+          dob: z.date().nullable().optional(),
           address: z.string().nullable(),
           sex: z.string().nullable(),
-          serviceStart: z.date().optional(),
+          serviceStart: z.date().nullable().optional(),
           serviceEnd: z.date().nullable().optional(),
           providerName: z.string().nullable(),
           facilityName: z.string().nullable(),
@@ -532,7 +532,7 @@ export const appRouter = createTRPCRouter({
           billerId: z.string(),
         }),
       ),
-    ) // PatientSchema = z.object({ ... })
+    )
     .mutation(async ({ input, ctx }) => {
       // Validate, dedupe, etc.
       // Insert all patients in a transaction
