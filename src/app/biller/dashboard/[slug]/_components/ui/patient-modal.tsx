@@ -1268,7 +1268,7 @@ export default function PatientModal({
       onClick={handleBackdropClick}
     >
       <div
-        className="relative h-[70%] w-[70%] rounded-lg bg-white p-6 px-16 shadow-lg dark:bg-gray-800"
+        className="relative h-[80%] w-[80%] rounded-lg bg-white p-6 px-16 shadow-lg dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -1279,20 +1279,6 @@ export default function PatientModal({
           ✕
         </button>
 
-        {view === "timeline" && (
-          <>
-            {/* Delete Patient Button - top left corner */}
-            <button
-              className="absolute right-16 top-6 flex items-center gap-1 rounded bg-red-100 px-3 py-1 text-red-600 hover:bg-red-200"
-              onClick={() => handleDeletePatient(patient.id)}
-              title="Delete Patient"
-            >
-              <FaRegTrashCan className="text-lg" />
-              Delete
-            </button>
-          </>
-        )}
-
         <AnimatePresence mode="wait">
           {!selectedEvent ? (
             <motion.div
@@ -1301,11 +1287,11 @@ export default function PatientModal({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.3 }}
-              className="h-full w-full rounded-lg bg-white"
+              className="flex h-full w-full items-center justify-center rounded-lg bg-white"
             >
               <div
                 ref={patientModalRef}
-                className="h-full w-full overflow-y-auto rounded-lg bg-white"
+                className="h-[85%] w-[100%] overflow-y-auto rounded-lg bg-white"
               >
                 <div className="mb-4 flex flex-col gap-2">
                   <div className="flex flex-row items-center gap-2">
@@ -1348,13 +1334,25 @@ export default function PatientModal({
                     >
                       Voice AI Agent
                     </button>
-                    {view !== "timeline" && (
+                    {view !== "timeline" ? (
                       <button
                         className="ml-auto rounded px-3 py-1 text-sm text-gray-500 hover:bg-gray-100"
                         onClick={() => setView("timeline")}
                       >
                         Back to Timeline
                       </button>
+                    ) : (
+                      <>
+                        {/* Delete Patient Button - top left corner */}
+                        <button
+                          className="ml-auto flex items-center gap-1 mr-4 rounded bg-red-100 px-3 py-1 text-red-600 hover:bg-red-200"
+                          onClick={() => handleDeletePatient(patient.id)}
+                          title="Delete Patient"
+                        >
+                          <FaRegTrashCan className="text-lg" />
+                          Delete
+                        </button>
+                      </>
                     )}
                   </div>
                   {view === "timeline" && (
@@ -1486,7 +1484,7 @@ export default function PatientModal({
                         </li>
                       ))}
                     </ul>
-                    <div className="absolute bottom-2 left-16 mt-6 flex justify-end">
+                    <div className="absolute bottom-4 left-16 mt-6 flex justify-end">
                       <button
                         className="rounded  px-4 py-2 text-slate-700"
                         onClick={handlePreviousPatient}
@@ -1494,7 +1492,7 @@ export default function PatientModal({
                         ← Previous Patient
                       </button>
                     </div>
-                    <div className="absolute bottom-2 right-16 mt-6 flex justify-end">
+                    <div className="absolute bottom-4 right-16 mt-6 flex justify-end">
                       <button
                         className="rounded  px-4 py-2 text-slate-700"
                         onClick={handleNextPatient}
