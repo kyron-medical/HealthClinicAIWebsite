@@ -30,7 +30,7 @@ interface PatientGridProps {
     createdAt: Date;
     updatedAt: Date;
     billerId: string;
-    groupNumber: string | null;
+    groupNumber: string;
   }[];
 
   filterName: string;

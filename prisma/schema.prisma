@@ -46,7 +46,7 @@ model Patient {
   name            String  @default("patient_name")
   name_iv         String?           // now nullable (defaults to NULL)
   name_tag        String?           // likewise
-  dob             DateTime @default(dbgenerated("'1900-01-01T00:00:00.000Z'"))  // default to a sentinel value
+  dob             DateTime @default(dbgenerated("'1000-01-01T00:00:00.000Z'"))  // default to a sentinel value
   address         String?           // nullable
   address_iv      String?           // nullable
   address_tag     String?           // nullable

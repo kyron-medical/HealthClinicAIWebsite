@@ -143,7 +143,10 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
           </div>
 
           <PatientGridClient
-            patients={patients}
+            patients={patients.map((p) => ({
+              ...p,
+              groupNumber: p.groupNumber ?? "",
+            }))}
             filterName={filterName}
             filterInsurer={filterInsurer}
             refetchPatientsAction={refetch}

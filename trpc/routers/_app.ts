@@ -128,32 +128,32 @@ This is where we define the API endpoints and their logic.
 export const PatientSchema = z.object({
   id: z.string(),
   name: z.string(),
-  name_iv: z.string(),
-  name_tag: z.string(),
+  name_iv: z.string().nullable().optional(),
+  name_tag: z.string().nullable().optional(),
   dob: z.date(),
-  sex: z.string().nullable(),
-  sex_iv: z.string().nullable(),
-  sex_tag: z.string().nullable(),
-  address: z.string().nullable(),
-  address_iv: z.string().nullable(),
-  address_tag: z.string().nullable(),
+  sex: z.string().nullable().optional(),
+  sex_iv: z.string().nullable().optional(),
+  sex_tag: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  address_iv: z.string().nullable().optional(),
+  address_tag: z.string().nullable().optional(),
   insurer: z.string(),
-  insurer_iv: z.string(),
-  insurer_tag: z.string(),
+  insurer_iv: z.string().nullable().optional(),
+  insurer_tag: z.string().nullable().optional(),
   moneyCollected: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
   billerId: z.string(),
   serviceStart: z.date(),
-  serviceEnd: z.date().nullable(),
-  providerName: z.string().nullable(),
-  providerName_iv: z.string().nullable(),
-  providerName_tag: z.string().nullable(),
-  facilityName: z.string().nullable(),
-  zipCode: z.string().nullable(),
-  zipCode_iv: z.string().nullable(),
-  zipCode_tag: z.string().nullable(),
-  groupNumber: z.string().nullable(),
+  serviceEnd: z.date().nullable().optional(),
+  providerName: z.string().nullable().optional(),
+  providerName_iv: z.string().nullable().optional(),
+  providerName_tag: z.string().nullable().optional(),
+  facilityName: z.string().nullable().optional(),
+  zipCode: z.string().nullable().optional(),
+  zipCode_iv: z.string().nullable().optional(),
+  zipCode_tag: z.string().nullable().optional(),
+  groupNumber: z.string().nullable().optional(),
 });
 
 const PatientEventBulkSchema = z.array(
@@ -354,6 +354,9 @@ export const appRouter = createTRPCRouter({
         name: z.string(),
         insurer: z.string(),
         moneyCollected: z.number(),
+        address: z.string().nullable().optional(),
+        zipCode: z.string().nullable().optional(),
+        sex: z.string().nullable().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -363,7 +366,12 @@ export const appRouter = createTRPCRouter({
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
 
       // Encrypt PHI before storing
-      const encrypted = encryptPHI(input);
+      const encrypted = encryptPHI({
+        ...input,
+        address: input.address ?? null,
+        zipCode: input.zipCode ?? null,
+        sex: input.sex ?? null,
+      });
 
       const patient = await ctx.prisma.patient.create({
         data: {
@@ -444,8 +452,8 @@ export const appRouter = createTRPCRouter({
         serviceEnd: z.string().optional(),
         providerName: z.string(),
         facilityName: z.string(),
-        zipCode: z.string(),
-        groupNumber: z.string(),
+        zipCode: z.string().nullable().optional(),
+        groupNumber: z.string().nullable().optional(),
         sex: z.string().nullable(),
         address: z.string().nullable(),
         // …etc
@@ -461,6 +469,9 @@ export const appRouter = createTRPCRouter({
       const encryptedData = encryptPHI({
         name: input.name,
         insurer: input.insurer ?? "",
+        address: input.address ?? null,
+        zipCode: input.zipCode ?? null,
+        sex: input.sex ?? null,
       });
 
       const patient = await ctx.prisma.patient.update({
@@ -470,7 +481,14 @@ export const appRouter = createTRPCRouter({
         data: {
           ...encryptedData,
           billerId,
-          // Add other fields as needed
+          serviceStart: input.serviceStart ?? null,
+          serviceEnd: input.serviceEnd ?? null,
+          providerName: input.providerName ?? null,
+          facilityName: input.facilityName ?? null,
+          zipCode: input.zipCode ?? null,
+          groupNumber: input.groupNumber ?? null,
+          sex: input.sex ?? null,
+          address: input.address ?? null,
         },
       });
       return decryptPHI(patient);
@@ -492,7 +510,7 @@ export const appRouter = createTRPCRouter({
     facilityName: extractedData.facility_name ?? null,
     zipCode: extractedData.zip_code ?? null,
     groupNumber: extractedData.group_number ?? null,
-    moneyCollected: 0, // Default value, can be updated later
+    moneyCollected: 0 // Default value, can be updated later
     billerId: user.id,
   */
   createPatientsBulk: privateProcedure
@@ -521,8 +539,21 @@ export const appRouter = createTRPCRouter({
       const billerId = ctx.userId;
 
       const encryptedPatients = input.map((patient) => ({
-        ...encryptPHI(patient),
+        ...encryptPHI({
+          ...patient,
+          address: patient.address ?? null,
+          zipCode: patient.zipCode ?? null,
+          sex: patient.sex ?? null,
+        }),
         billerId,
+        serviceStart: patient.serviceStart ?? null,
+        serviceEnd: patient.serviceEnd ?? null,
+        providerName: patient.providerName ?? null,
+        facilityName: patient.facilityName ?? null,
+        zipCode: patient.zipCode ?? null,
+        groupNumber: patient.groupNumber ?? null,
+        sex: patient.sex ?? null,
+        address: patient.address ?? null,
       }));
 
       await ctx.prisma.patient.createMany({ data: encryptedPatients });
