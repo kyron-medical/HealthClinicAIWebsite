@@ -978,6 +978,7 @@ export default function PatientModal({
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [eventType, setEventType] = useState("");
   const [eventContent, setEventContent] = useState("");
+  const [amountPaid, setAmountPaid] = useState('');
   const [eventDate, setEventDate] = useState(
     new Date().toISOString().split("T")[0],
   );
@@ -1008,6 +1009,7 @@ export default function PatientModal({
 
   const createEventMutation = trpc.createPatientEvent.useMutation();
   const deletePatientMutation = trpc.deletePatient.useMutation();
+  const updateMoneyCollectedMutation = trpc.updatePatientMoneyCollected.useMutation();
 
   useEffect(() => {
     setMounted(true);
@@ -1059,7 +1061,7 @@ export default function PatientModal({
     try {
       await deletePatientMutation.mutateAsync({ patientId });
       toast.success("Patient deleted successfully");
-      await refetchPatientsAction();
+      void refetchPatientsAction();
       // Remove the deleted patient from the patients list and select the next one if available
       const idx = patients.findIndex((p) => p.id === patientId);
       const newPatients = patients.filter((p) => p.id !== patientId);
@@ -1105,15 +1107,16 @@ export default function PatientModal({
         date: new Date(eventDate),
         fileUrls: fileUrls,
       });
-
+      
       if (eventType === "Insurance Paid") {
-        const match = /(\$?\s?)(\d+(\.\d{1,2})?)/.exec(eventContent);
-        const amount = match ? parseFloat(match[2]) : 0;
-        await trpc.updatePatientMoneyCollected.useMutation().mutateAsync({
+        const amount = parseFloat(amountPaid) || 0;
+        await updateMoneyCollectedMutation.mutateAsync({
           patientId: patient.id,
           moneyCollected: amount,
         });
       }
+      void refetchPatientsAction();
+      
 
       toast.dismiss();
       toast.success("Event added!");
@@ -1373,13 +1376,22 @@ export default function PatientModal({
                   >
                     <label className="text-sm font-semibold">
                       Event Type
-                      <input
+                      <select
                         className="mt-1 w-full rounded border px-2 py-1"
                         value={eventType}
                         onChange={(e) => setEventType(e.target.value)}
-                        placeholder="e.g. Note, Voice AI"
                         required
-                      />
+                      >
+                        <option value="" disabled>
+                          Select event type
+                        </option>
+                        <option value="Note">Note</option>
+                        <option value="Letter of Appeal">
+                          Letter of Appeal
+                        </option>
+                        <option value="Voice AI">Voice AI</option>
+                        <option value="Insurance Paid">Insurance Paid</option>
+                      </select>
                     </label>
                     <label className="text-sm font-semibold">
                       Event Content
@@ -1420,8 +1432,8 @@ export default function PatientModal({
                           <input
                             type="number"
                             className="mt-1 w-full rounded border px-2 py-1"
-                            value={eventContent}
-                            onChange={(e) => setEventContent(e.target.value)}
+                            value={amountPaid}
+                            onChange={(e) => setAmountPaid(e.target.value)}
                             required
                           />
                         </label>
@@ -1494,7 +1506,10 @@ export default function PatientModal({
                 )}
 
                 {view === "details" && (
-                  <DetailsForm patient={patient} refetchPatientsAction={refetchPatientsAction}/>
+                  <DetailsForm
+                    patient={patient}
+                    refetchPatientsAction={refetchPatientsAction}
+                  />
                 )}
 
                 {view === "appeal" && (
