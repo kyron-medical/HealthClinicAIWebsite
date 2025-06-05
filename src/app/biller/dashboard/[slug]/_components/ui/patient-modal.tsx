@@ -92,6 +92,7 @@ const VoiceAI = ({
   const [number2, setNumber2] = useState("");
   const [number1Country, setNumber1Country] = useState("+1");
   const [number2Country, setNumber2Country] = useState("+1");
+  const [number1Mode, setNumber1Mode] = useState("text"); // or "phone"
   const [callInProgress, setCallInProgress] = useState(false);
   const [callTranscript, setCallTranscript] = useState("");
 
@@ -101,16 +102,21 @@ const VoiceAI = ({
     .max(15, "Phone number too long")
     .regex(/^\d+$/, "Phone number must be digits only");
 
-  const numbersValid =
-    phoneNumberSchema.safeParse(number1.replace(/\D/g, "")).success &&
-    phoneNumberSchema.safeParse(number2.replace(/\D/g, "")).success;
+  const number1Valid =
+    number1Mode === "phone"
+      ? phoneNumberSchema.safeParse(number1.replace(/\D/g, "")).success
+      : number1.trim().length > 0;
+
+  const number2Valid = phoneNumberSchema.safeParse(number2.replace(/\D/g, "")).success;
+
+  const numbersValid = number1Valid && number2Valid;
 
   const postCall = async <T,>(endpoint: string): Promise<T> => {
     const response = await fetch(`https://api.kyronmedical.com${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        doctor_phone: number1Country + number1,
+        doctor_phone: number1Mode === "phone" ? number1Country + number1 : number1,
         insurance: number2Country + number2,
       }),
     });
@@ -284,30 +290,47 @@ const VoiceAI = ({
         </select>
       </div>
       <div className="mb-4 flex flex-col gap-4">
+        {/* Toggle input mode for the first field */}
         <div className="flex items-center gap-2">
-          <CountryCodeSelect
-            value={number1Country}
-            onChange={setNumber1Country}
-          />
+          <select
+            className="rounded border px-2 py-1"
+            value={number1Mode}
+            onChange={(e) => setNumber1Mode(e.target.value)}
+          >
+            <option value="text">Instructions</option>
+            <option value="phone">Phone Number</option>
+          </select>
 
-          <input
-            type="tel"
-            className="flex-1 rounded border px-2 py-1"
-            placeholder={
-              callType === "peer-peer"
-                ? "Physician's Phone Number"
-                : "Medical Biller's Phone Number"
-            }
-            value={number1}
-            onChange={(e) => setNumber1(e.target.value)}
-          />
+          {number1Mode === "phone" ? (
+            <>
+              <CountryCodeSelect
+                value={number1Country}
+                onChange={setNumber1Country}
+              />
+              <input
+                type="tel"
+                className="flex-1 rounded border px-2 py-1"
+                placeholder="Medical Biller's Phone Number"
+                value={number1}
+                onChange={(e) => setNumber1(e.target.value)}
+              />
+            </>
+          ) : (
+            <input
+              type="text"
+              className="flex-1 rounded border px-2 py-1"
+              placeholder="Enter instructions or context (e.g. claim ID, billing note)"
+              value={number1}
+              onChange={(e) => setNumber1(e.target.value)}
+            />
+          )}
         </div>
+        {/* Second input: remains as insurance phone number */}
         <div className="flex items-center gap-2">
           <CountryCodeSelect
             value={number2Country}
             onChange={setNumber2Country}
           />
-
           <input
             type="tel"
             className="flex-1 rounded border px-2 py-1"
@@ -317,6 +340,7 @@ const VoiceAI = ({
           />
         </div>
       </div>
+
       {!callInProgress ? (
         <button
           className={`w-full rounded px-4 py-2 font-bold text-white ${
