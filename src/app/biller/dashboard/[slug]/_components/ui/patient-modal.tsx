@@ -88,11 +88,11 @@ const VoiceAI = ({
   createEventMutation: ReturnType<typeof trpc.createPatientEvent.useMutation>;
 }) => {
   const [callType, setCallType] = useState("biller-insurance");
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [number1Country, setNumber1Country] = useState("+1");
-  const [number2Country, setNumber2Country] = useState("+1");
-  const [number1Mode, setNumber1Mode] = useState("text"); // or "phone"
+  const [billerInput, setbillerInput] = useState("");
+  const [insuranceNumber, setinsuranceNumber] = useState("");
+  const [billerInputCountry, setbillerInputCountry] = useState("+1");
+  const [insuranceNumberCountry, setinsuranceNumberCountry] = useState("+1");
+  const [billerInputMode, setbillerInputMode] = useState("text");
   const [callInProgress, setCallInProgress] = useState(false);
   const [callTranscript, setCallTranscript] = useState("");
 
@@ -102,22 +102,22 @@ const VoiceAI = ({
     .max(15, "Phone number too long")
     .regex(/^\d+$/, "Phone number must be digits only");
 
-  const number1Valid =
-    number1Mode === "phone"
-      ? phoneNumberSchema.safeParse(number1.replace(/\D/g, "")).success
-      : number1.trim().length > 0;
+  const billerInputValid =
+    billerInputMode === "phone"
+      ? phoneNumberSchema.safeParse(billerInput.replace(/\D/g, "")).success
+      : billerInput.trim().length > 0;
 
-  const number2Valid = phoneNumberSchema.safeParse(number2.replace(/\D/g, "")).success;
+  const insuranceNumberValid = phoneNumberSchema.safeParse(insuranceNumber.replace(/\D/g, "")).success;
 
-  const numbersValid = number1Valid && number2Valid;
+  const inputsValid = billerInputValid && insuranceNumberValid;
 
   const postCall = async <T,>(endpoint: string): Promise<T> => {
     const response = await fetch(`https://api.kyronmedical.com${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        doctor_phone: number1Mode === "phone" ? number1Country + number1 : number1,
-        insurance: number2Country + number2,
+        doctor_phone: billerInputMode === "phone" ? billerInputCountry + billerInput : billerInput,
+        insurance: insuranceNumberCountry + insuranceNumber,
       }),
     });
     if (!response.ok) throw new Error(`Failed to complete ${endpoint} call.`);
@@ -294,49 +294,48 @@ const VoiceAI = ({
         <div className="flex items-center gap-2">
           <select
             className="rounded border px-2 py-1"
-            value={number1Mode}
-            onChange={(e) => setNumber1Mode(e.target.value)}
+            value={billerInputMode}
+            onChange={(e) => setbillerInputMode(e.target.value)}
           >
             <option value="text">Instructions</option>
             <option value="phone">Phone Number</option>
           </select>
 
-          {number1Mode === "phone" ? (
+          {billerInputMode === "phone" ? (
             <>
               <CountryCodeSelect
-                value={number1Country}
-                onChange={setNumber1Country}
+                value={billerInputCountry}
+                onChange={setbillerInputCountry}
               />
               <input
                 type="tel"
                 className="flex-1 rounded border px-2 py-1"
                 placeholder="Medical Biller's Phone Number"
-                value={number1}
-                onChange={(e) => setNumber1(e.target.value)}
+                value={billerInput}
+                onChange={(e) => setbillerInput(e.target.value)}
               />
             </>
           ) : (
-            <input
-              type="text"
+            <textarea
               className="flex-1 rounded border px-2 py-1"
               placeholder="Enter instructions or context (e.g. claim ID, billing note)"
-              value={number1}
-              onChange={(e) => setNumber1(e.target.value)}
+              value={billerInput}
+              onChange={(e) => setbillerInput(e.target.value)}
             />
           )}
         </div>
         {/* Second input: remains as insurance phone number */}
         <div className="flex items-center gap-2">
           <CountryCodeSelect
-            value={number2Country}
-            onChange={setNumber2Country}
+            value={insuranceNumberCountry}
+            onChange={setinsuranceNumberCountry}
           />
           <input
             type="tel"
             className="flex-1 rounded border px-2 py-1"
             placeholder="Insurance Phone Number"
-            value={number2}
-            onChange={(e) => setNumber2(e.target.value)}
+            value={insuranceNumber}
+            onChange={(e) => setinsuranceNumber(e.target.value)}
           />
         </div>
       </div>
@@ -344,11 +343,11 @@ const VoiceAI = ({
       {!callInProgress ? (
         <button
           className={`w-full rounded px-4 py-2 font-bold text-white ${
-            numbersValid
+            inputsValid
               ? "bg-blue-600 hover:bg-blue-700"
               : "cursor-not-allowed bg-gray-400"
           }`}
-          disabled={!numbersValid}
+          disabled={!inputsValid}
           onClick={handleMakeCalls}
         >
           Make Calls
