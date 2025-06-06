@@ -20,7 +20,6 @@ model BlogPost {
 }
 
 model Patient {
-<<<<<<< Updated upstream
   id              String   @id @default(cuid())
   name            String  @default("patient_name")
   name_iv         String?           // now nullable (defaults to NULL)
@@ -50,32 +49,23 @@ model Patient {
   zipCode_iv      String?           // already nullable
   zipCode_tag     String?           // already nullable
   groupNumber     String?           // already nullable
-=======
-  id             String         @id @default(cuid())
-  name           String
-  name_iv        String
-  name_tag       String
-  insurer        String
-  insurer_iv     String
-  insurer_tag    String
-  moneyCollected Int
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  billerId       String
-  patientEvents  PatientEvent[]
->>>>>>> Stashed changes
 }
 
+
 model PatientEvent {
-  id         String   @id @default(cuid())
-  patientId  String
-  date       DateTime
-  type       String
-  content    String?
+  id        String   @id @default(cuid())
+  patientId String
+  date      DateTime
+  type      String
+  content   String?
   transcript String?
-  summary    String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  fileUrls   String[]
-  patient    Patient  @relation(fields: [patientId], references: [id])
+  summary   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // Add an array of file urls
+  fileUrls  String[]
+  // Add a relation to the Patient model
+
+  patient Patient @relation(fields: [patientId], references: [id])
 }
+
