@@ -850,29 +850,11 @@ const VoiceAI = ({
           value={callType}
           onChange={(e) => setCallType(e.target.value)}
         >
-          <option value="biller-insurance">
-            Medical Biller ↔ Insurance (Medical Biller Prior Authorization)
-          </option>
-          <option value="peer-peer">
-            Physician ↔ Insurance (Peer-to-Peer Prior Authorization)
-          </option>
           <option value="claim-status">Claim Status Inquiry</option>
           <option value="appeal-followup">Appeal Follow-up</option>
-          <option value="denial-clarification">
-            Denial Reason Clarification
-          </option>
-          <option value="eob-query">EOB Query</option>
           <option value="eligibility-verification">
-            Eligibility Verification
+            Eligibility and Benefits Verification
           </option>
-          <option value="policy-detail">Policy Detail Inquiry</option>
-          <option value="coordination-of-benefits">
-            Coordination of Benefits
-          </option>
-          <option value="billing-discrepancy">
-            Billing Discrepancy Resolution
-          </option>
-          <option value="claim-rejection">Claim Rejection Inquiry</option>
         </select>
       </div>
       <div className="mb-4 flex flex-col gap-4">
