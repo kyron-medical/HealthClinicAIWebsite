@@ -59,6 +59,16 @@ const teamMembers = [
     title: "Sales & Marketing",
     image: "/images/team/thanmay-kumar.jpg",
   },
+  {
+    name: "Andrew Chan",
+    title: "Marketing & Growth",
+    image: "/images/team/andrew-chan.jpg",
+  },
+  {
+    name: "Kathy Sun",
+    title: "Product Management",
+    image: "/images/team/kathy-sun.jpg",
+  },
 ];
 
 const AboutSectionTwo = () => {
