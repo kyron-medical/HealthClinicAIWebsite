@@ -30,7 +30,7 @@ const Orb = ({ color, width, height }: OrbProps) => {
   return (
     <div
       style={{ display: "flex", justifyContent: "center" }}
-      data-oid="9nhr326"
+      data-oid="2xx_a21"
     >
       <div
         style={{
@@ -41,7 +41,7 @@ const Orb = ({ color, width, height }: OrbProps) => {
           alignItems: "center",
           justifyContent: "center",
         }}
-        data-oid="boat5xd"
+        data-oid="bqh596p"
       >
         <DotLottieReact
           src={orbSrc[color]}
@@ -49,7 +49,7 @@ const Orb = ({ color, width, height }: OrbProps) => {
           autoplay
           speed={2}
           style={{ width: "100%", height: "100%" }}
-          data-oid="ekh06j4"
+          data-oid="imljsho"
         />
       </div>
     </div>

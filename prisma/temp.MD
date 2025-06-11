@@ -7,7 +7,6 @@ model Patient {
   insurer         String
   insurer_iv      String   
   insurer_tag     String   
-  moneyCollected  Int
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   patientEvents   PatientEvent[]

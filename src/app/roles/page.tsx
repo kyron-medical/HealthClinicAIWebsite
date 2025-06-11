@@ -26,17 +26,17 @@ export default function Page() {
     return (
       <section
         className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-        data-oid="14cc4_o"
+        data-oid="auqw.rx"
       >
-        <div className="container" data-oid="bkiq7jh">
-          <div className="-mx-4 flex flex-wrap" data-oid="s_a_t6j">
-            <div className="w-full px-4" data-oid="6:id_z0">
+        <div className="container" data-oid="27yg821">
+          <div className="-mx-4 flex flex-wrap" data-oid="33ui5s5">
+            <div className="w-full px-4" data-oid="umia0u7">
               <div
                 className="mx-auto max-w-[500px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
-                data-oid="lf8sl9z"
+                data-oid="0wd.yuo"
               >
-                <h1 data-oid="9grolnj">Kyron Medical</h1>
-                <p data-oid="bk2q.ku">Please sign-up to continue</p>
+                <h1 data-oid="v1hrd15">Kyron Medical</h1>
+                <p data-oid="k47:-hy">Please sign-up to continue</p>
               </div>
             </div>
           </div>
@@ -48,23 +48,23 @@ export default function Page() {
   return (
     <section
       className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-      data-oid="aneqqhs"
+      data-oid="wm6n7gz"
     >
-      <div className="container" data-oid="_53pmw5">
-        <div className="-mx-4 flex flex-wrap" data-oid="k0ekfgv">
-          <div className="w-full px-4" data-oid="attcb-i">
+      <div className="container" data-oid="0u:suh8">
+        <div className="-mx-4 flex flex-wrap" data-oid="ufs2.cx">
+          <div className="w-full px-4" data-oid="x6r4esl">
             <div
               className="mx-auto flex max-w-[500px] flex-col items-center justify-center gap-8 rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
-              data-oid="p75t0-f"
+              data-oid="qu6rx28"
             >
-              <div className="text-center" data-oid="drs-l5m">
+              <div className="text-center" data-oid="_vm.a6x">
                 <h1
                   className="mb-2 text-center text-2xl font-bold"
-                  data-oid="atutrug"
+                  data-oid="k1nmo04"
                 >
                   Welcome to Kyron Medical
                 </h1>
-                <strong className="text-gray-700" data-oid="hqv252a">
+                <strong className="text-gray-700" data-oid="onlgfmy">
                   Please select your role to continue:
                 </strong>
               </div>
@@ -72,15 +72,15 @@ export default function Page() {
                 className="block w-full rounded-md border border-gray-300 p-2"
                 value={role}
                 onChange={handleChange}
-                data-oid="nlnzczc"
+                data-oid="vpm9dub"
               >
-                <option value="" disabled data-oid=".j.81xw">
+                <option value="" disabled data-oid="y9bg3j0">
                   Select your role
                 </option>
-                <option value="undergraduate" data-oid="nkb0qu7">
+                <option value="undergraduate" data-oid="7ikjyue">
                   Private Practice
                 </option>
-                <option value="graduate" data-oid=".8az2__">
+                <option value="graduate" data-oid="ltcusl2">
                   Medical Billing Company
                 </option>
               </select>
@@ -90,7 +90,7 @@ export default function Page() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onHoverStart={() => console.log("hover started!")}
-                data-oid="8p3n7.h"
+                data-oid="wzqzap1"
               >
                 <Link
                   href={`/biller/dashboard/${user.id}`}
@@ -117,7 +117,7 @@ export default function Page() {
                       },
                     );
                   }}
-                  data-oid="_oj3xth"
+                  data-oid="s84tznk"
                 >
                   Register
                 </Link>

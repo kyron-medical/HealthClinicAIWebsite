@@ -29,7 +29,6 @@ model BlogPost {
  * export type Patient = {
  * name: string;
  * insurer: string;
- * moneyCollected: number;
  * };
  * export type PatientEvent = {
  * date: string;
@@ -41,72 +40,81 @@ model BlogPost {
  */
 
 model Patient {
-  id               String      @id @default(cuid())
-  name             String      @default("patient_name")
-  name_iv          String? // now nullable (defaults to NULL)
-  name_tag         String? // likewise
-  dob              DateTime    @default(dbgenerated("'1000-01-01T00:00:00.000Z'")) // default to a sentinel value
-  address          String? // nullable
-  address_iv       String? // nullable
-  address_tag      String? // nullable
-  sex              String? // nullable
-  sex_iv           String? // nullable
-  sex_tag          String? // nullable
-  insurer          String      @default("insurer_name") // default to "insurer_name"
-  insurer_iv       String? // nullable
-  insurer_tag      String? // nullable
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  patientEvents    Encounter[]
-  billerId         String
-  serviceStart     DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
-  serviceEnd       DateTime?
-  providerName     String? // already nullable
-  providerName_iv  String? // already nullable
-  providerName_tag String? // already nullable
-  facilityName     String? // already nullable
-  zipCode          String? // already nullable
-  zipCode_iv       String? // already nullable
-  zipCode_tag      String? // already nullable
-  groupNumber      String? // already nullable
+  id           String      @id @default(cuid())
+  name         String      @default("patient_name")
+  name_iv      String? // now nullable (defaults to NULL)
+  name_tag     String? // likewise
+  dob          DateTime    @default(dbgenerated("'1000-01-01T00:00:00.000Z'")) // default to a sentinel value
+  address      String? // nullable
+  address_iv   String? // nullable
+  address_tag  String? // nullable
+  sex          String? // nullable
+  sex_iv       String? // nullable
+  sex_tag      String? // nullable
+  insurer      String      @default("insurer_name") // default to "insurer_name"
+  insurer_iv   String? // nullable
+  insurer_tag  String? // nullable
+  encounters   Encounter[]
+  serviceStart DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
+  serviceEnd   DateTime?
+
+  zipCode     String? // already nullable
+  zipCode_iv  String? // already nullable
+  zipCode_tag String? // already nullable
+  groupNumber String? // already nullable
+
+  billerId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Physician {
-  id          String   @id @default(cuid())
-  name        String
-  npi         String   @unique
-  opn         String? // optional, can be null
-  address     String?
-  phone       String?
-  email       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  name      String
+  name_iv   String? // nullable
+  name_tag  String? // nullable
+  npi       String   @unique
+  opn       String? // optional, can be null
+  address   String?
+  phone     String?
+  email     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Add a relation to the encounter model
+  encounters Encounter[]
 }
 
 model Encounter {
-  id              String   @id @default(cuid())
-  patientId       String
-  physicianId     String
-  date            DateTime
-  type            String
-  content         String?
-  summary         String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(cuid())
+  patientId     String
+  physicianId   String
+  dateOfService DateTime
+  content       String?
+  summary       String?
+
+  facilityName String? // already nullable
+
+  appointmentType String
+  placeOfService  String?
   // Add an array of file urls
   fileUrls        String[]
-  // Add a relation to the Patient model
-  appointmentType String?
-  placeOfService  String?
+  status          String   @default("Pending") // default to "PENDING"
 
-  patient      Patient        @relation(fields: [patientId], references: [id])
-  billerAction billerAction[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Add a relation to the Patient model
+  patient   Patient        @relation(fields: [patientId], references: [id])
+  physician Physician      @relation(fields: [physicianId], references: [id])
+  actions  billerAction[] 
 }
 
 enum Action {
   ELIBIGIBILITY_AND_BENEFITS
   APPEALS
   CLAIM_STATUS_INQUIRIES
+  DENIALS
 }
 
 model billerAction {

@@ -138,7 +138,6 @@ export function FaceSheetMassUploader({
           facilityName: extractedData.facility_name ?? null,
           zipCode: extractedData.zip ?? null,
           groupNumber: extractedData.group_number ?? null,
-          moneyCollected: 0, // Default value, can be updated later
           billerId: user.id,
         };
       });
@@ -166,7 +165,7 @@ export function FaceSheetMassUploader({
   };
 
   return (
-    <div className="flex items-center" data-oid=".76_lwa">
+    <div className="flex items-center" data-oid="20rrr-_">
       {/* Hidden file input to trigger face sheet upload */}
       <input
         ref={fileInputRef}
@@ -175,7 +174,7 @@ export function FaceSheetMassUploader({
         multiple
         className="hidden"
         onChange={handleFilesSelected}
-        data-oid="nksywm2"
+        data-oid="2o5fpxr"
       />
 
       {/* Only the "+" button is rendered here */}
@@ -187,7 +186,7 @@ export function FaceSheetMassUploader({
             ? "cursor-not-allowed bg-gray-400"
             : "bg-blue-600 hover:bg-blue-700"
         }`}
-        data-oid="j.5mh-_"
+        data-oid="tmy:nnv"
       >
         {uploading ? "Uploading…" : "+"}
       </button>

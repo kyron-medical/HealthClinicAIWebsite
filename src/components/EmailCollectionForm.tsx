@@ -50,12 +50,12 @@ export default function EmailCollectionForm({
   // Rest of component unchanged
   // Add the return statement with JSX
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" data-oid="w_y972e">
-      <div data-oid="_o81dot">
+    <form onSubmit={handleSubmit} className="space-y-4" data-oid="n90fcvd">
+      <div data-oid="nla76pe">
         <label
           htmlFor="email"
           className="mb-1 block text-sm font-medium"
-          data-oid="8s_2p0a"
+          data-oid="e08k6p1"
         >
           Email Address
         </label>
@@ -67,7 +67,7 @@ export default function EmailCollectionForm({
           required
           className="w-full rounded-md border px-4 py-2 focus:border-blue-500 focus:ring-blue-500"
           placeholder="your@email.com"
-          data-oid="idvn17z"
+          data-oid="m471w__"
         />
       </div>
 
@@ -75,7 +75,7 @@ export default function EmailCollectionForm({
         type="submit"
         className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         disabled={isSubmitting}
-        data-oid="mu-iwxa"
+        data-oid="3fp3r5t"
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>

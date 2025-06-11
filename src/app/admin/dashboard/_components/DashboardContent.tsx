@@ -32,12 +32,12 @@ export const DashboardContent = () => {
   return (
     <section
       className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-      data-oid="tfvpi-k"
+      data-oid="pjkm2h_"
     >
-      <div className="container" data-oid=":sff2i-">
+      <div className="container" data-oid="-b3p2uz">
         <div
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
-          data-oid="peu033o"
+          data-oid="a.ax4g1"
         ></div>
       </div>
     </section>

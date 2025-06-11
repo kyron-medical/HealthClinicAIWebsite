@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { trpc } from "@/../trpc/server";
 import DashboardContentClient from "../client/DashboardContentUI";
 import { redirect } from "next/navigation";
-import type { PatientEvent } from "@prisma/client";
+import type { Encounter } from "@prisma/client";
 
 const DashboardContent = async (): Promise<JSX.Element | null> => {
   const user = await currentUser();
@@ -25,9 +25,9 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
 
   const patientIds: string[] = patients.map((p) => p.id);
 
-  let patientEvents: PatientEvent[] = [];
+  let encounters: Encounter[] = [];
   if (patientIds.length > 0) {
-    patientEvents = await trpc.getpatientEventsByPatientIds({
+    encounters = await trpc.getEncountersByPatientIds({
       patientIds,
     });
   }
@@ -35,7 +35,7 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
   // If you know the type of patientEvents, replace 'unknown' with the correct type above
 
   return (
-    <DashboardContentClient patientEvents={patientEvents} data-oid="-c6ag3x" />
+    <DashboardContentClient patientEvents={encounters} data-oid="rp22iex" />
   );
 };
 

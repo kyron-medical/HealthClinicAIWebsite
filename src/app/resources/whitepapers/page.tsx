@@ -23,50 +23,50 @@ const Whitepapers = () => {
       <Breadcrumb
         pageName="Whitepapers"
         description="Explore the latest healthcare technology trends, insights, and best practices to transform your practice and improve patient outcomes."
-        data-oid="s9r1:by"
+        data-oid="w-o51ki"
       />
 
-      <section className="pb-[120px] pt-[120px]" data-oid="yx1:3uh">
-        <div className="container" data-oid=":rh9js2">
+      <section className="pb-[120px] pt-[120px]" data-oid="n1c6f3-">
+        <div className="container" data-oid="j8nwaij">
           {/* Make a grid of whitepapers, 3 col  */}
           <div
             className="grid grid-cols-1 gap-8 md:grid-cols-3"
-            data-oid="s079kl0"
+            data-oid="68-5e0:"
           >
             {whitepapersData.map((whitepaper) => (
               <div
                 key={whitepaper.id}
                 className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800"
-                data-oid="ytfpej5"
+                data-oid="ds:eb7x"
               >
                 {/* PDF icon */}
-                <div className="overflow-hidden pl-8 pt-8" data-oid="7-qaqnn">
+                <div className="overflow-hidden pl-8 pt-8" data-oid="9wrjpas">
                   <FaFilePdf
                     className="text-2xl text-blue-500"
-                    data-oid="zcvphc3"
+                    data-oid="npgayto"
                   />
                 </div>
 
-                <div className="flex h-full flex-col p-6" data-oid="fzu5sju">
+                <div className="flex h-full flex-col p-6" data-oid="wd_jp.o">
                   <h3
                     className="mb-4 line-clamp-1 text-xl font-bold text-gray-900 dark:text-white "
-                    data-oid="jzly01o"
+                    data-oid="-1g1919"
                   >
                     {whitepaper.title}
                   </h3>
 
-                  <div className="min-h-[4.5rem]" data-oid="bz8gizu">
+                  <div className="min-h-[4.5rem]" data-oid="m9.3nzz">
                     <p
                       className="line-clamp-3 text-lg text-gray-600 dark:text-gray-300"
-                      data-oid="5:ic0ko"
+                      data-oid="8yk-t:0"
                     >
                       {whitepaper.description}
                     </p>
                   </div>
 
                   {/* Footer */}
-                  <div className="mt-4" data-oid="idefw_t">
-                    <hr className="mb-4" data-oid="s8u_w0r" />
+                  <div className="mt-4" data-oid="2ojiwkx">
+                    <hr className="mb-4" data-oid="o5pe067" />
                     <button
                       onClick={() => {
                         setCurrentResource({
@@ -76,7 +76,7 @@ const Whitepapers = () => {
                         setModalOpen(true);
                       }}
                       className="inline-block rounded-full bg-blue-500 px-6 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                      data-oid="cc0obny"
+                      data-oid="ty27m7d"
                     >
                       View
                     </button>
@@ -91,7 +91,7 @@ const Whitepapers = () => {
               onClose={() => setModalOpen(false)}
               resourceUrl={currentResource.url}
               resourceTitle={currentResource.title}
-              data-oid="yf8_tkv"
+              data-oid="aw-nj6s"
             />
           </div>
         </div>

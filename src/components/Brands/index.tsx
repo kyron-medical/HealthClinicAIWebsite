@@ -4,16 +4,16 @@ import brandsData from "./brandsData";
 
 const Brands = () => {
   return (
-    <section className="pt-16" data-oid="zu9e.i0">
-      <div className="container" data-oid="o91k3a:">
-        <div className="-mx-4 flex flex-wrap" data-oid="onmsjcl">
-          <div className="w-full px-4" data-oid="ayy6-wo">
+    <section className="pt-16" data-oid="d94kilv">
+      <div className="container" data-oid="ijlec0g">
+        <div className="-mx-4 flex flex-wrap" data-oid="70-i90p">
+          <div className="w-full px-4" data-oid="jvxk7ah">
             <div
               className="flex flex-wrap items-center justify-center rounded-sm bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]"
-              data-oid="ej27hyg"
+              data-oid="wflr5e2"
             >
               {brandsData.map((brand) => (
-                <SingleBrand key={brand.id} brand={brand} data-oid="yu2rhcz" />
+                <SingleBrand key={brand.id} brand={brand} data-oid="bpw7c5f" />
               ))}
             </div>
           </div>
@@ -31,14 +31,14 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
   return (
     <div
       className="flex w-1/2 items-center justify-center px-3 py-[15px] sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6"
-      data-oid="ez165-h"
+      data-oid="dq_ywy-"
     >
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
         className="relative h-10 w-full opacity-70 transition hover:opacity-100 dark:opacity-60 dark:hover:opacity-100"
-        data-oid="nw6u7re"
+        data-oid="c:ji8jp"
       >
         {imageLight && (
           <Image
@@ -46,7 +46,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
             alt={name}
             fill
             className="hidden dark:block"
-            data-oid="rfqzgps"
+            data-oid="6nr-0g2"
           />
         )}
         {image && (
@@ -55,7 +55,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
             alt={name}
             fill
             className="block dark:hidden"
-            data-oid="fojqcnk"
+            data-oid="jwb0l3:"
           />
         )}
       </a>

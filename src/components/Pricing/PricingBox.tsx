@@ -8,73 +8,73 @@ const PricingBox = (props: {
   const { price, duration, packageName, subtitle, children } = props;
 
   return (
-    <div className="w-full" data-oid="gv_u37f">
+    <div className="w-full" data-oid="ddl1ej.">
       <div
         className="relative z-10 rounded-sm bg-white px-8 py-10 shadow-three hover:shadow-one dark:bg-gray-dark dark:shadow-two dark:hover:shadow-gray-dark"
-        data-oid="jb0-j1_"
+        data-oid="861evi-"
       >
-        <div className="flex items-center justify-between" data-oid="m5z:8ha">
+        <div className="flex items-center justify-between" data-oid="djcnetf">
           <h3
             className="price mb-2 text-[32px] font-bold text-black dark:text-white"
-            data-oid="h0nhyjy"
+            data-oid="491hj_e"
           >
             $
-            <span className="amount" data-oid=".97llbx">
+            <span className="amount" data-oid="77asaux">
               {price}
             </span>
             <span
               className="time text-lg font-medium text-body-color"
-              data-oid="iuqncqt"
+              data-oid="djlobi3"
             >
               /{duration}
             </span>
           </h3>
           <h4
             className="mb-2 text-xl font-bold text-dark dark:text-white"
-            data-oid="qlyh30g"
+            data-oid="qfpaf4c"
           >
             {packageName}
           </h4>
         </div>
-        <p className="mb-7 text-base text-body-color" data-oid="78vrgsq">
+        <p className="mb-7 text-base text-body-color" data-oid="m84..1o">
           {subtitle}
         </p>
         <div
           className="mb-8 border-b border-body-color border-opacity-10 pb-8 dark:border-white dark:border-opacity-10"
-          data-oid="iheb7tc"
+          data-oid="e4zyn0m"
         >
           <button
             className="flex w-full items-center justify-center rounded-sm bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
-            data-oid="wzfma5z"
+            data-oid=".sp697z"
           >
             Start Free Trial
           </button>
         </div>
-        <div data-oid="msq1:23">{children}</div>
-        <div className="absolute bottom-0 right-0 z-[-1]" data-oid="z.nv8c_">
+        <div data-oid="kfrp9s1">{children}</div>
+        <div className="absolute bottom-0 right-0 z-[-1]" data-oid="6.zeqjv">
           <svg
             width="179"
             height="158"
             viewBox="0 0 179 158"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="oyf.eko"
+            data-oid="jw-u9ac"
           >
             <path
               opacity="0.5"
               d="M75.0002 63.256C115.229 82.3657 136.011 137.496 141.374 162.673C150.063 203.47 207.217 197.755 202.419 167.738C195.393 123.781 137.273 90.3579 75.0002 63.256Z"
               fill="url(#paint0_linear_70:153)"
-              data-oid="092qbv."
+              data-oid="bu.rkjl"
             />
 
             <path
               opacity="0.3"
               d="M178.255 0.150879C129.388 56.5969 134.648 155.224 143.387 197.482C157.547 265.958 65.9705 295.709 53.1024 246.401C34.2588 174.197 100.939 83.7223 178.255 0.150879Z"
               fill="url(#paint1_linear_70:153)"
-              data-oid="7qj_pin"
+              data-oid="h5bi708"
             />
 
-            <defs data-oid="3yv6vy5">
+            <defs data-oid="z__66i1">
               <linearGradient
                 id="paint0_linear_70:153"
                 x1="69.6694"
@@ -82,19 +82,19 @@ const PricingBox = (props: {
                 x2="196.108"
                 y2="83.2919"
                 gradientUnits="userSpaceOnUse"
-                data-oid="ag_9sqx"
+                data-oid=".cuksy2"
               >
                 <stop
                   stopColor="#4A6CF7"
                   stopOpacity="0.62"
-                  data-oid="gf3oe7v"
+                  data-oid="04qzwyg"
                 />
 
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="l6mdl7o"
+                  data-oid="frnbta-"
                 />
               </linearGradient>
               <linearGradient
@@ -104,19 +104,19 @@ const PricingBox = (props: {
                 x2="-3.75136"
                 y2="103.645"
                 gradientUnits="userSpaceOnUse"
-                data-oid="f7p7gw2"
+                data-oid="jw46bou"
               >
                 <stop
                   stopColor="#4A6CF7"
                   stopOpacity="0.62"
-                  data-oid="d3:mts2"
+                  data-oid="8rw:bnc"
                 />
 
                 <stop
                   offset="1"
                   stopColor="#4A6CF7"
                   stopOpacity="0"
-                  data-oid="j12.i2b"
+                  data-oid="1inurdl"
                 />
               </linearGradient>
             </defs>

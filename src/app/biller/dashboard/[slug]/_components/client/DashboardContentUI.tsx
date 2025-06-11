@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import PatientGridClient from "./GridUI";
+import EncounterGridClient from "./GridUI";
 
 import { messages } from "../../data/dashboard-data";
-import type { PatientEvent } from "@prisma/client";
+import type { Encounter } from "@prisma/client";
 import { trpc } from "trpc/client";
 import { useUser } from "@clerk/nextjs";
 import ChatBot from "../ui/chat-bot";
 import { FaceSheetMassUploader } from "./FaceSheetUploader";
 
 interface DashboardContentClientProps {
-  patientEvents: PatientEvent[];
+  patientEvents: Encounter[];
 }
 
 const DashboardContentClient = (props: DashboardContentClientProps) => {
@@ -34,17 +34,16 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
 
   const { user } = useUser();
 
-  const { data: patients = [], refetch } = trpc.getPatientsByBillerId.useQuery(
+  const { data: patients = [], refetch: refetchPatients } =
+    trpc.getPatientsByBillerId.useQuery(
+      { userId: user?.id ?? "" },
+      { enabled: !!user },
+    );
+
+  const { data: encounters = [], refetch } = trpc.getAllEncountersByBillerId.useQuery(
     { userId: user?.id ?? "" },
     { enabled: !!user },
   );
-
-  const totalCollected = patients.reduce((sum, p) => sum + p.moneyCollected, 0);
-
-  const formattedTotalCollected = totalCollected.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
 
   // 2. addPatients just triggers the file input
   const addPatients = () => {
@@ -56,7 +55,7 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
 
   if (!user) {
     return (
-      <div className="p-4" data-oid="v48faz9">
+      <div className="p-4" data-oid="vv8ci5e">
         Loading...
       </div>
     );
@@ -66,15 +65,15 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
 
   return (
     <>
-      <div className="flex h-screen bg-gray-100" data-oid="bmgm9dw">
+      <div className="flex h-screen bg-gray-100" data-oid=":svb6ck">
         {/* Floating Kyron AI Button */}
         <button
           className="fixed bottom-8 right-8 z-50 w-16 rounded-full bg-blue-600 p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={() => setChatbotOpen(true)}
           aria-label="Open Kyron AI Assistant"
-          data-oid="q5bf.nc"
+          data-oid="9:0r4w:"
         >
-          <span className="text-2xl font-bold text-white" data-oid="isaxrus">
+          <span className="text-2xl font-bold text-white" data-oid="x87tkh3">
             ?
           </span>
         </button>
@@ -88,95 +87,59 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
             setChatInput={setChatInput}
             chatbotOpen={chatbotOpen}
             setChatbotOpen={setChatbotOpen}
-            data-oid="r:zgdos"
+            data-oid="28oxo1l"
           />
         )}
 
         {/* Main Content */}
-        <div className="flex-1 overflow-auto p-8" data-oid="ulsav84">
-          <h2 className="mb-6 text-3xl font-bold" data-oid=":20ddpz">
+        <div className="flex-1 overflow-auto p-8" data-oid="_:t8hy6">
+          <h2 className="mb-6 text-3xl font-bold" data-oid="p8rbx3j">
             {messages[currentMessageIndex]}
           </h2>
 
-          <div className="mb-6 flex space-x-8" data-oid=":llkzh7">
+          <div className="mb-6 flex space-x-8" data-oid=".j0vafe">
             <div
               className="w-64 rounded-lg bg-white p-6 shadow"
-              data-oid="red5o3u"
+              data-oid="znc59ld"
             >
               {/* Place this input somewhere in your JSX, e.g. at the top-level of your return */}
               <div
                 className="flex flex-row items-center justify-between"
-                data-oid="qf_wpu9"
+                data-oid="nwybgaf"
               >
-                <h3 className="mb-2 text-sm text-gray-500" data-oid=":urvfg3">
+                <h3 className="mb-2 text-sm text-gray-500" data-oid="cckkhz8">
                   Total Patients
                 </h3>
                 {/* <div className="flex items-center space-x-2">
-                           <input
-                             ref={fileInputRef}
-                             type="file"
-                             accept=".csv"
-                             className="hidden"
-                             onChange={handleFileChange}
-                           />
-                             <button
-                             onClick={addPatients}
-                             className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
-                           >
-                             +
-                           </button>
-                          </div> */}
+                             <input
+                               ref={fileInputRef}
+                               type="file"
+                               accept=".csv"
+                               className="hidden"
+                               onChange={handleFileChange}
+                             />
+                               <button
+                               onClick={addPatients}
+                               className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
+                             >
+                               +
+                             </button>
+                            </div> */}
                 <FaceSheetMassUploader
                   refetchPatientsAction={refetch}
-                  data-oid="zbl:udm"
+                  data-oid="7t1uvx1"
                 />
               </div>
-              <p className="text-3xl font-bold" data-oid="9r53:qe">
+              <p className="text-3xl font-bold" data-oid="g37f-ac">
                 {patients.length}
               </p>
             </div>
-            <div
-              className="w-64 rounded-lg bg-white p-6 shadow"
-              data-oid="8099ebc"
-            >
-              <h3 className="mb-2 text-sm text-gray-500" data-oid="he115xo">
-                Total Collected
-              </h3>
-              <p className="text-3xl font-bold" data-oid="71qeru6">
-                {formattedTotalCollected}
-              </p>
-            </div>
           </div>
 
-          <div className="mb-4 flex space-x-4" data-oid="0cj05s2">
-            <input
-              type="text"
-              placeholder="Filter by name..."
-              value={filterName}
-              onChange={(e) => setFilterName(e.target.value)}
-              className="w-64 rounded border px-3 py-2"
-              data-oid="7vbz3zd"
-            />
-
-            <input
-              type="text"
-              placeholder="Filter by insurer..."
-              value={filterInsurer}
-              onChange={(e) => setFilterInsurer(e.target.value)}
-              className="w-64 rounded border px-3 py-2"
-              data-oid="wa_lsoa"
-            />
-          </div>
-
-          <PatientGridClient
-            patients={patients.map((p) => ({
-              ...p,
-              groupNumber: p.groupNumber ?? "",
-            }))}
-            filterName={filterName}
-            filterInsurer={filterInsurer}
+          <EncounterGridClient
+            encounters={encounters}
             refetchPatientsAction={refetch}
-            data-oid="-5r2-e1"
+            data-oid="i-r4zgq"
           />
         </div>
       </div>

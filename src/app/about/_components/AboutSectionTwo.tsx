@@ -63,41 +63,41 @@ const teamMembers = [
 
 const AboutSectionTwo = () => {
   return (
-    <section className=" py-8 md:py-20 lg:py-28" data-oid="9ddtt_j">
+    <section className=" py-8 md:py-20 lg:py-28" data-oid="-ya-p.p">
       {" "}
-      <div className="container" data-oid="i.d_jo5">
-        <div className="mb-12 text-center" data-oid="w..r88s">
-          <h2 className="text-2xl font-bold" data-oid="m3v-9vu">
+      <div className="container" data-oid="9x04zi5">
+        <div className="mb-12 text-center" data-oid="jvyc:dg">
+          <h2 className="text-2xl font-bold" data-oid="mvg-jrs">
             Meet Our Team
           </h2>
-          <p className="text-lg text-body-color" data-oid="i5:rstk">
+          <p className="text-lg text-body-color" data-oid=".kw88_7">
             We are a group of passionate individuals dedicated to excellence.
           </p>
         </div>
         <div
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-          data-oid="u629kal"
+          data-oid="i9hnv4b"
         >
           {teamMembers.map((member, index) => (
-            <div key={index} className="text-center" data-oid="1_-89sm">
+            <div key={index} className="text-center" data-oid="jpt:y-b">
               <motion.div
                 className="relative mx-auto mb-4 aspect-square h-32 w-32"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
-                data-oid="mb-ves_"
+                data-oid="btpg5r7"
               >
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="rounded-full object-cover"
-                  data-oid="k45f2vc"
+                  data-oid="552r77-"
                 />
               </motion.div>
-              <h3 className="text-xl font-bold" data-oid="hph4yv7">
+              <h3 className="text-xl font-bold" data-oid="eniys_8">
                 {member.name}
               </h3>
-              <p className="text-base text-body-color" data-oid="-85yy5k">
+              <p className="text-base text-body-color" data-oid="-05kxnx">
                 {member.title}
               </p>
             </div>

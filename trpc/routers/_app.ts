@@ -10,7 +10,7 @@ import { TRPCError } from "@trpc/server";
 import { filterUserForClient } from "@/server/helpers/filterUserForClient";
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
-import { Patient } from "@prisma/client";
+import { Encounter, Patient, Action} from "@prisma/client";
 import { encrypt, decrypt } from "@/../utils/secure";
 import { I } from "@upstash/redis/zmscore-CjoCv9kz";
 
@@ -140,7 +140,6 @@ export const PatientSchema = z.object({
   insurer: z.string(),
   insurer_iv: z.string().nullable().optional(),
   insurer_tag: z.string().nullable().optional(),
-  moneyCollected: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
   billerId: z.string(),
@@ -156,7 +155,7 @@ export const PatientSchema = z.object({
   groupNumber: z.string().nullable().optional(),
 });
 
-const PatientEventBulkSchema = z.array(
+const EncounterBulkSchema = z.array(
   z.object({
     patientId: z.string(),
     type: z.string(),
@@ -167,6 +166,14 @@ const PatientEventBulkSchema = z.array(
     summary: z.string().optional(),
   }),
 );
+
+
+
+z.object({
+  // ...
+  type: z.nativeEnum(Action),
+  // ...
+})
 
 const addBillerDataToPatients = async (patients: Patient[]) => {
   const userId = patients.map((patient) => patient.billerId);
@@ -211,6 +218,7 @@ const addBillerDataToPatients = async (patients: Patient[]) => {
     };
   });
 };
+
 
 // Create a new ratelimiter, that allows 3 requests per 1 minute
 const ratelimit = new Ratelimit({
@@ -318,7 +326,7 @@ export const appRouter = createTRPCRouter({
         authetication because people should NOT be able to see all patients from 
         anywhere.
         */
-  getAll: publicProcedure.query(async ({ ctx }) => {
+  getAll: privateProcedure.query(async ({ ctx }) => {
     try {
       // Remove this line:
       // if (!ctx.userId) throw new Error("No user in context");
@@ -335,7 +343,7 @@ export const appRouter = createTRPCRouter({
     }
   }),
 
-  getById: publicProcedure
+  getById: privateProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const patient = await ctx.prisma.patient.findUnique({
@@ -385,7 +393,7 @@ export const appRouter = createTRPCRouter({
       z.object({
         name: z.string(),
         insurer: z.string(),
-        moneyCollected: z.number(),
+
         address: z.string().nullable().optional(),
         zipCode: z.string().nullable().optional(),
         sex: z.string().nullable().optional(),
@@ -423,39 +431,13 @@ export const appRouter = createTRPCRouter({
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
 
       // First, delete all related PatientEvent records
-      await ctx.prisma.patientEvent.deleteMany({
+      await ctx.prisma.encounter.deleteMany({
         where: { patientId: input.patientId },
       });
 
       const patient = await ctx.prisma.patient.delete({
         where: {
           id: input.patientId,
-        },
-      });
-      return patient;
-    }),
-
-  updatePatientMoneyCollected: privateProcedure
-    .input(
-      z.object({
-        patientId: z.string(),
-        moneyCollected: z.number(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      const billerId = ctx.userId;
-
-      const { success } = await ratelimit.limit(billerId);
-      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
-
-      const patient = await ctx.prisma.patient.update({
-        where: {
-          id: input.patientId,
-        },
-        data: {
-          moneyCollected: {
-            increment: input.moneyCollected,
-          },
         },
       });
       return patient;
@@ -549,7 +531,6 @@ export const appRouter = createTRPCRouter({
     facilityName: extractedData.facility_name ?? null,
     zipCode: extractedData.zip_code ?? null,
     groupNumber: extractedData.group_number ?? null,
-    moneyCollected: 0 // Default value, can be updated later
     billerId: user.id,
   */
   createPatientsBulk: privateProcedure
@@ -567,7 +548,6 @@ export const appRouter = createTRPCRouter({
           facilityName: z.string().nullable().optional(),
           zipCode: z.string().nullable().optional(),
           groupNumber: z.string().nullable().optional(),
-          moneyCollected: z.number().optional(),
           billerId: z.string(),
         }),
       ),
@@ -599,14 +579,14 @@ export const appRouter = createTRPCRouter({
       return { count: input.length };
     }),
 
-  getpatientEventsByPatientId: publicProcedure
+  getEncountersByPatientId: publicProcedure
     .input(
       z.object({
         patientId: z.string(),
       }),
     )
     .query(({ ctx, input }) =>
-      ctx.prisma.patientEvent.findMany({
+      ctx.prisma.encounter.findMany({
         where: {
           patientId: input.patientId,
         },
@@ -615,10 +595,50 @@ export const appRouter = createTRPCRouter({
       }),
     ),
 
-  getpatientEventsByPatientIds: publicProcedure
+  getAllEncountersByBillerId: privateProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      // Ensure the user is authenticated
+      if (!ctx.userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
+      // Get all patients for the biller
+      const patients = await ctx.prisma.patient.findMany({
+        where: { billerId: input.userId },
+        select: { id: true },
+      });
+
+      // Get all encounters for those patients and add patient details, Furthermore,
+      // get the physician details for each encounter using the physicianId tied to the encounter
+      const encounters = await ctx.prisma.encounter.findMany({
+        where: {
+          patientId: { in: patients.map((p) => p.id) },
+        },
+        take: 1000,
+        orderBy: [{ createdAt: "desc" }],
+        include: {
+          patient: true, // Include patient details
+          physician: true, // Include physician details
+          actions: true,
+        },
+      });
+
+      // Return encounters with patient details
+      return encounters.map((enc) => ({
+        ...enc,
+        patient: decryptPHI(enc.patient),
+      }));
+    }),
+
+  getEncountersByPatientIds: publicProcedure
     .input(z.object({ patientIds: z.array(z.string()) }))
     .query(({ ctx, input }) =>
-      ctx.prisma.patientEvent.findMany({
+      ctx.prisma.encounter.findMany({
         where: {
           patientId: { in: input.patientIds },
         },
@@ -627,7 +647,7 @@ export const appRouter = createTRPCRouter({
       }),
     ),
 
-  createPatientEvent: privateProcedure
+  createEncounter: privateProcedure
     .input(
       z.object({
         patientId: z.string(),
@@ -635,7 +655,8 @@ export const appRouter = createTRPCRouter({
         eventContent: z.string().optional(),
         date: z.date(),
         fileUrls: z.array(z.string()).optional(),
-        transcript: z.string().optional(),
+        physicianId: z.string(), // <-- Add this
+        appointmentType: z.string(), // <-- Add this
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -644,26 +665,74 @@ export const appRouter = createTRPCRouter({
       const { success } = await ratelimit.limit(billerId);
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
 
-      const patientEvent = await ctx.prisma.patientEvent.create({
+      const encounter = await ctx.prisma.encounter.create({
         data: {
           patientId: input.patientId,
-          type: input.eventType,
           content: input.eventContent,
-          date: input.date,
+          dateOfService: input.date,
           fileUrls: input.fileUrls,
-          transcript: input.transcript,
+          physicianId: input.physicianId, // <-- Add this
+          appointmentType: input.appointmentType, // <-- Add this
         },
       });
-      return patientEvent;
+      return encounter;
     }),
 
-  createPatientEventsBulk: privateProcedure
-    .input(PatientEventBulkSchema)
+  deleteEncounter: privateProcedure
+    .input(z.object({ encounterId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.patientEvent.createMany({
-        data: input,
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      // Delete the encounter
+      const encounter = await ctx.prisma.encounter.delete({
+        where: {
+          id: input.encounterId,
+        },
       });
+      return encounter;
     }),
+
+  createAction: privateProcedure
+    .input(
+      z.object({
+        encounterId: z.string(),
+        date: z.date(),
+        type: z.nativeEnum(Action),
+        eventContent: z.string().optional(),
+        transcript: z.string().optional(),
+        summary: z.string().optional(),
+        fileUrls: z.array(z.string()).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      // Create the biller action
+      const action = await ctx.prisma.billerAction.create({
+        data: {
+          encounterId : input.encounterId, // <-- Add this
+          date: input.date,
+          type: input.type,
+          content: input.eventContent,
+          transcript: input.transcript,
+          summary: input.summary,
+          fileUrls: input.fileUrls,
+        },
+      });
+      return action;
+    }),
+
+  // createEncountersBulk: privateProcedure
+  //   .input(EncounterBulkSchema)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.prisma.encounter.createMany({
+  //       data: input,
+  //     });
+  //   }),
 });
 // export type definition of API
 export type AppRouter = typeof appRouter;

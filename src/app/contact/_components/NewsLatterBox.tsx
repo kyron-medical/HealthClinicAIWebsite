@@ -8,27 +8,27 @@ const NewsLatterBox = () => {
   return (
     <div
       className="relative z-10 rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark sm:p-11 lg:p-8 xl:p-11"
-      data-oid="25b6lp8"
+      data-oid="rxyft7:"
     >
       <h3
         className="mb-4 text-2xl font-bold leading-tight text-black dark:text-white"
-        data-oid="23dm5zg"
+        data-oid="jb:.b-9"
       >
         Join the Waitlist
       </h3>
       <p
         className="mb-11 border-b border-body-color border-opacity-25 pb-11 text-base leading-relaxed text-body-color dark:border-white dark:border-opacity-25"
-        data-oid="4gr3oi4"
+        data-oid="aosv8yh"
       >
         Discounts, new features, free upgrades, and more.
       </p>
-      <div data-oid="e_r8rqt">
+      <div data-oid="7ide5id">
         <input
           type="text"
           name="name"
           placeholder="Enter your name"
           className="border-stroke mb-4 w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-          data-oid="165mv7:"
+          data-oid="hx7.slb"
         />
 
         <input
@@ -36,42 +36,42 @@ const NewsLatterBox = () => {
           name="email"
           placeholder="Enter your email"
           className="border-stroke mb-4 w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
-          data-oid="ct24vsd"
+          data-oid="7:5ibvo"
         />
 
         <input
           type="submit"
           value="Subscribe"
           className="mb-5 flex w-full cursor-pointer items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
-          data-oid="bs27rb2"
+          data-oid="sy2lv5n"
         />
 
         <p
           className="text-center text-base leading-relaxed text-body-color dark:text-body-color-dark"
-          data-oid="l-0abk1"
+          data-oid="69dxvph"
         >
           You will be the first to know about new Kyron developments!
         </p>
       </div>
 
-      <div data-oid="waafv1j">
-        <span className="absolute left-2 top-7" data-oid="9o765jh">
+      <div data-oid="q-hjq_v">
+        <span className="absolute left-2 top-7" data-oid="12nl3zu">
           <svg
             width="57"
             height="65"
             viewBox="0 0 57 65"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="wm58.o4"
+            data-oid="_hrtmbp"
           >
             <path
               opacity="0.5"
               d="M0.407629 15.9573L39.1541 64.0714L56.4489 0.160793L0.407629 15.9573Z"
               fill="url(#paint0_linear_1028_600)"
-              data-oid="69s7b18"
+              data-oid="pt8c943"
             />
 
-            <defs data-oid="9j6:il6">
+            <defs data-oid="e56tzz9">
               <linearGradient
                 id="paint0_linear_1028_600"
                 x1="-18.3187"
@@ -79,42 +79,42 @@ const NewsLatterBox = () => {
                 x2="37.161"
                 y2="15.3509"
                 gradientUnits="userSpaceOnUse"
-                data-oid="dwmy:vb"
+                data-oid="uf1.0qc"
               >
                 <stop
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0.62"
-                  data-oid="ivfxrte"
+                  data-oid="-wck:x9"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="5et0xpi"
+                  data-oid="3uu-uz6"
                 />
               </linearGradient>
             </defs>
           </svg>
         </span>
 
-        <span className="absolute bottom-24 left-1.5" data-oid="2geydc1">
+        <span className="absolute bottom-24 left-1.5" data-oid="rizhspq">
           <svg
             width="39"
             height="32"
             viewBox="0 0 39 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid=":r2qgh:"
+            data-oid="iqz2ebu"
           >
             <path
               opacity="0.5"
               d="M14.7137 31.4215L38.6431 4.24115L6.96581e-07 0.624124L14.7137 31.4215Z"
               fill="url(#paint0_linear_1028_601)"
-              data-oid="ylalrm8"
+              data-oid="smjmrlm"
             />
 
-            <defs data-oid="i_4csx3">
+            <defs data-oid="o5eheje">
               <linearGradient
                 id="paint0_linear_1028_601"
                 x1="39.1948"
@@ -122,42 +122,42 @@ const NewsLatterBox = () => {
                 x2="10.6982"
                 y2="10.2511"
                 gradientUnits="userSpaceOnUse"
-                data-oid="i.qdh:s"
+                data-oid="z1.kefy"
               >
                 <stop
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0.62"
-                  data-oid="uknx5lb"
+                  data-oid="y:15z_h"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="wqy5ys5"
+                  data-oid="vn_a063"
                 />
               </linearGradient>
             </defs>
           </svg>
         </span>
 
-        <span className="absolute right-2 top-[140px]" data-oid="3btw:le">
+        <span className="absolute right-2 top-[140px]" data-oid="goph4ws">
           <svg
             width="38"
             height="38"
             viewBox="0 0 38 38"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid=".0:khyy"
+            data-oid="g9hf6p9"
           >
             <path
               opacity="0.5"
               d="M10.6763 35.3091C23.3976 41.6367 38.1681 31.7045 37.107 17.536C36.1205 4.3628 21.9407 -3.46901 10.2651 2.71063C-2.92254 9.69061 -2.68321 28.664 10.6763 35.3091Z"
               fill="url(#paint0_linear_1028_602)"
-              data-oid="09tuefn"
+              data-oid="xhxb7h8"
             />
 
-            <defs data-oid="z0311.e">
+            <defs data-oid="r-a0qp1">
               <linearGradient
                 id="paint0_linear_1028_602"
                 x1="-0.571054"
@@ -165,64 +165,64 @@ const NewsLatterBox = () => {
                 x2="28.7937"
                 y2="26.7564"
                 gradientUnits="userSpaceOnUse"
-                data-oid="oqhjp70"
+                data-oid="x3pmf2s"
               >
                 <stop
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0.62"
-                  data-oid="3nydg64"
+                  data-oid="ig08lxo"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="92z1r90"
+                  data-oid="ei:f79u"
                 />
               </linearGradient>
             </defs>
           </svg>
         </span>
 
-        <span className="absolute right-0 top-0" data-oid="gs:n0e4">
+        <span className="absolute right-0 top-0" data-oid="buqx0b3">
           <svg
             width="162"
             height="91"
             viewBox="0 0 162 91"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="18h8392"
+            data-oid="owwovp0"
           >
-            <g opacity="0.3" data-oid="4o7852k">
+            <g opacity="0.3" data-oid="ej-bm-e">
               <path
                 opacity="0.45"
                 d="M1 89.9999C8 77.3332 27.7 50.7999 50.5 45.9999C79 39.9999 95 41.9999 106 30.4999C117 18.9999 126 -3.50014 149 -3.50014C172 -3.50014 187 4.99986 200.5 -8.50014C214 -22.0001 210.5 -46.0001 244 -37.5001C270.8 -30.7001 307.167 -45 322 -53"
                 stroke="url(#paint0_linear_1028_603)"
-                data-oid="lvdxne9"
+                data-oid="ag25_un"
               />
 
               <path
                 opacity="0.45"
                 d="M43 64.9999C50 52.3332 69.7 25.7999 92.5 20.9999C121 14.9999 137 16.9999 148 5.49986C159 -6.00014 168 -28.5001 191 -28.5001C214 -28.5001 229 -20.0001 242.5 -33.5001C256 -47.0001 252.5 -71.0001 286 -62.5001C312.8 -55.7001 349.167 -70 364 -78"
                 stroke="url(#paint1_linear_1028_603)"
-                data-oid="i2us:j0"
+                data-oid="8cgt0ap"
               />
 
               <path
                 opacity="0.45"
                 d="M4 73.9999C11 61.3332 30.7 34.7999 53.5 29.9999C82 23.9999 98 25.9999 109 14.4999C120 2.99986 129 -19.5001 152 -19.5001C175 -19.5001 190 -11.0001 203.5 -24.5001C217 -38.0001 213.5 -62.0001 247 -53.5001C273.8 -46.7001 310.167 -61 325 -69"
                 stroke="url(#paint2_linear_1028_603)"
-                data-oid="28c:nsd"
+                data-oid="j4ggayv"
               />
 
               <path
                 opacity="0.45"
                 d="M41 40.9999C48 28.3332 67.7 1.79986 90.5 -3.00014C119 -9.00014 135 -7.00014 146 -18.5001C157 -30.0001 166 -52.5001 189 -52.5001C212 -52.5001 227 -44.0001 240.5 -57.5001C254 -71.0001 250.5 -95.0001 284 -86.5001C310.8 -79.7001 347.167 -94 362 -102"
                 stroke="url(#paint3_linear_1028_603)"
-                data-oid="0i.geie"
+                data-oid="l56:lxv"
               />
             </g>
-            <defs data-oid="1a-hqhc">
+            <defs data-oid="l78.caa">
               <linearGradient
                 id="paint0_linear_1028_603"
                 x1="291.35"
@@ -230,19 +230,19 @@ const NewsLatterBox = () => {
                 x2="179.211"
                 y2="237.617"
                 gradientUnits="userSpaceOnUse"
-                data-oid=":bjjz94"
+                data-oid="dysp3mw"
               >
                 <stop
                   offset="0.328125"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
-                  data-oid="uimq05:"
+                  data-oid="6n8w2b3"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="15nn.1t"
+                  data-oid="-aol9.b"
                 />
               </linearGradient>
               <linearGradient
@@ -252,19 +252,19 @@ const NewsLatterBox = () => {
                 x2="221.211"
                 y2="212.617"
                 gradientUnits="userSpaceOnUse"
-                data-oid="99puinf"
+                data-oid="exwp3q:"
               >
                 <stop
                   offset="0.328125"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
-                  data-oid="s_5oyzj"
+                  data-oid=":w0licl"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="r1oztl4"
+                  data-oid=":wbo:ok"
                 />
               </linearGradient>
               <linearGradient
@@ -274,19 +274,19 @@ const NewsLatterBox = () => {
                 x2="182.211"
                 y2="221.617"
                 gradientUnits="userSpaceOnUse"
-                data-oid="1mv9yb5"
+                data-oid="npkbmsb"
               >
                 <stop
                   offset="0.328125"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
-                  data-oid="aoc1lrj"
+                  data-oid="gclr2xg"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="koxdkxw"
+                  data-oid="uzf-vmg"
                 />
               </linearGradient>
               <linearGradient
@@ -296,19 +296,19 @@ const NewsLatterBox = () => {
                 x2="219.211"
                 y2="188.617"
                 gradientUnits="userSpaceOnUse"
-                data-oid="1_fvzrk"
+                data-oid="k_x40a_"
               >
                 <stop
                   offset="0.328125"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
-                  data-oid="zeqnzvl"
+                  data-oid="1.mv0ep"
                 />
 
                 <stop
                   offset="1"
                   stopColor={theme === "light" ? "#4A6CF7" : "#fff"}
                   stopOpacity="0"
-                  data-oid="f29oa1k"
+                  data-oid=":rgeayc"
                 />
               </linearGradient>
             </defs>

@@ -16,13 +16,13 @@ const DashboardButton = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => console.log("hover started!")}
-      data-oid="nse3:5s"
+      data-oid="tlhq.hr"
     >
       <Link
         href={`/biller/dashboard/${user.id}`}
         rel="noopener noreferrer"
         className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
-        data-oid="3jhm6bv"
+        data-oid="-rwo9lt"
       >
         Dashboard
       </Link>

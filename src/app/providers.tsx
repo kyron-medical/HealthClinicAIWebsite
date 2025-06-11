@@ -8,12 +8,12 @@ import { TRPCProvider } from "@/../trpc/client"; // <-- Import your TRPCProvider
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider data-oid="i_n5o6p">
+    <ClerkProvider data-oid="8:ah_1o">
       <ThemeProvider
         attribute="class"
         enableSystem={false}
         defaultTheme="light"
-        data-oid="lvxe7:g"
+        data-oid="70shdlj"
       >
         <Toaster
           toastOptions={{
@@ -24,10 +24,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
           containerStyle={{
             top: 70,
           }}
-          data-oid="nqr3.6s"
+          data-oid="7i2j6tn"
         />
 
-        <TRPCProvider data-oid="p87g7ob">{children}</TRPCProvider>
+        <TRPCProvider data-oid="xssnfi0">{children}</TRPCProvider>
       </ThemeProvider>
     </ClerkProvider>
   );

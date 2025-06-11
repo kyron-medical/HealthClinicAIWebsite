@@ -48,37 +48,37 @@ const Contact = () => {
     <section
       id="contact"
       className="overflow-hidden py-16 md:py-20 lg:py-28"
-      data-oid="081ltrn"
+      data-oid="ih_rloo"
     >
-      <div className="container" data-oid="hm3tw10">
-        <div className="-mx-4 flex flex-wrap" data-oid="3zb8rp2">
-          <div className="w-full px-4 lg:w-7/12 xl:w-8/12" data-oid="eapu1d5">
+      <div className="container" data-oid="1q52i4h">
+        <div className="-mx-4 flex flex-wrap" data-oid="uod_xlw">
+          <div className="w-full px-4 lg:w-7/12 xl:w-8/12" data-oid="0o9a6d8">
             <div
               className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
               data-wow-delay=".15s
               "
-              data-oid="1pgcgot"
+              data-oid="nr00ajl"
             >
               <h2
                 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl"
-                data-oid="smdum6c"
+                data-oid="3kddyn."
               >
                 Request a Demo
               </h2>
               <p
                 className="mb-12 text-base font-medium text-body-color"
-                data-oid="ljt02-v"
+                data-oid="ee.uj28"
               >
                 Our support team will get back to you ASAP via email.
               </p>
-              <form data-oid=".zl6r5t">
-                <div className="-mx-4 flex flex-wrap" data-oid="gxuwp4b">
-                  <div className="w-full px-4 md:w-1/2" data-oid="6ijp1kj">
-                    <div className="mb-8" data-oid="lkf4272">
+              <form data-oid="-y42ec0">
+                <div className="-mx-4 flex flex-wrap" data-oid="ne7b09n">
+                  <div className="w-full px-4 md:w-1/2" data-oid="l32.ws1">
+                    <div className="mb-8" data-oid="959j:dc">
                       <label
                         htmlFor="name"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        data-oid="d4sukx-"
+                        data-oid="y9r3gf2"
                       >
                         Your Name
                       </label>
@@ -88,16 +88,16 @@ const Contact = () => {
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        data-oid="2ephft4"
+                        data-oid="46zn-7m"
                       />
                     </div>
                   </div>
-                  <div className="w-full px-4 md:w-1/2" data-oid="gk8u5u8">
-                    <div className="mb-8" data-oid="ec1sp4x">
+                  <div className="w-full px-4 md:w-1/2" data-oid="70t8ib9">
+                    <div className="mb-8" data-oid="bossw-o">
                       <label
                         htmlFor="subject"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        data-oid="5fdwt.l"
+                        data-oid="osffzv3"
                       >
                         Subject
                       </label>
@@ -107,16 +107,16 @@ const Contact = () => {
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        data-oid="df8:025"
+                        data-oid="ok8_5cq"
                       />
                     </div>
                   </div>
-                  <div className="w-full px-4" data-oid="swsmj:k">
-                    <div className="mb-8" data-oid="_coli1g">
+                  <div className="w-full px-4" data-oid="_ta8znw">
+                    <div className="mb-8" data-oid="thvdb-_">
                       <label
                         htmlFor="message"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                        data-oid="cpj87wf"
+                        data-oid="zz9y4sl"
                       >
                         Your Message
                       </label>
@@ -127,16 +127,16 @@ const Contact = () => {
                         className="border-stroke w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        data-oid=":1jmntu"
+                        data-oid="7mtl43r"
                       ></textarea>
                     </div>
                   </div>
-                  <div className="w-full px-4" data-oid="mke7.3b">
+                  <div className="w-full px-4" data-oid="qkumwwd">
                     <button
                       type="button"
                       className="rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
                       onClick={handleSubmit}
-                      data-oid="ytbxbv2"
+                      data-oid="23wb8_."
                     >
                       Submit Ticket
                     </button>

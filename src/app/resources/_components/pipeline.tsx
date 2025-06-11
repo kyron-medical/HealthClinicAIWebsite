@@ -18,10 +18,10 @@ const Pipeline = () => {
   };
 
   return (
-    <section id="prototype" className="my-8 text-center" data-oid="s9_gefx">
+    <section id="prototype" className="my-8 text-center" data-oid="u_nvwp7">
       <div
         className="flex flex-col items-center justify-center md:flex-row"
-        data-oid="_5r047h"
+        data-oid="yxzrfid"
       >
         <Image
           src="/images/demo.png"
@@ -29,48 +29,48 @@ const Pipeline = () => {
           className="mx-auto w-full transform rounded-md shadow-lg transition-transform duration-500 hover:scale-105 md:w-1/2"
           width={500}
           height={400}
-          data-oid="5zjxhci"
+          data-oid="geeylpl"
         />
 
         <div
           className="mx-auto w-full pl-4 text-left md:w-1/3 md:pl-16"
-          data-oid="ij42:za"
+          data-oid="bqqc:s3"
         >
           <h2
             className="mb-4 text-2xl font-bold md:text-4xl"
-            data-oid="l2vz079"
+            data-oid="eor2r:w"
           >
             Access an Interactive Demo of Kyron
           </h2>
           <p
             className="text-base text-body-color md:text-lg"
-            data-oid="62s0nuy"
+            data-oid="x5mr7s9"
           >
             Experience Kyron&#39;s tailored solutions with our interactive demo.
           </p>
 
           {/* <span
-                     className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
-                     data-oid="qmsxjpk"
-                    >
-                     Email
-                     <span className="text-sm text-red-700" data-oid="sgxgpxc">
-                       *
-                     </span>
-                    </span> */}
+                       className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
+                       data-oid="qmsxjpk"
+                      >
+                       Email
+                       <span className="text-sm text-red-700" data-oid="sgxgpxc">
+                         *
+                       </span>
+                      </span> */}
           {/* <input
-                     type="email"
-                     placeholder="Enter your email"
-                     value={email}
-                     onChange={(e) => setEmail(e.target.value)}
-                     className="mt-4 w-full rounded-md border border-gray-300 p-2 text-base text-body-color focus:border-blue-500 focus:outline-none md:text-lg"
-                     data-oid="i9_px7q"
-                    />
-                     <div className="mt-8" data-oid="r.m--hx">
-                     <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
-                    </div> */}
-          <div className="mt-8" data-oid="_bmxap5">
-            <GetStarted data-oid="tcnjetd" />
+                       type="email"
+                       placeholder="Enter your email"
+                       value={email}
+                       onChange={(e) => setEmail(e.target.value)}
+                       className="mt-4 w-full rounded-md border border-gray-300 p-2 text-base text-body-color focus:border-blue-500 focus:outline-none md:text-lg"
+                       data-oid="i9_px7q"
+                      />
+                       <div className="mt-8" data-oid="r.m--hx">
+                       <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
+                      </div> */}
+          <div className="mt-8" data-oid=".kczyq1">
+            <GetStarted data-oid="pm-um5u" />
           </div>
         </div>
       </div>

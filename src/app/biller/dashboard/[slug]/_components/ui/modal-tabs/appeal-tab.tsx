@@ -18,20 +18,31 @@ function isAcceptedFileType(file: File) {
 
 // Define interface for your row data
 interface PatientRow {
+  id: string;
   name: string;
   dob: Date;
   sex?: string | null;
   address?: string;
+  physician: string;
+
+  caseId: string;
+  encounterId: string;
+  dateOfService: Date;
+  facility: string;
+  insuranceCompany: string;
+  actions: number;
+  status: string;
+
   insurer: string;
-  moneyCollected: number;
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  billerId: string;
   groupNumber?: string | null;
   serviceStart?: Date | null;
   serviceEnd?: Date | null;
+
+  billerId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
 
 type AppealFormProps = {
   patient: PatientRow;
@@ -67,10 +78,9 @@ export const AppealForm = ({
   const [eventPdfs, setEventPdfs] = useState<File[]>([]);
   // const utils = trpc.useUtils(); // or useQueryClient() for React Query
 
-  const createEventMutation = trpc.createPatientEvent.useMutation();
+  const createActionMutation = trpc.createAction.useMutation();
   const deletePatientMutation = trpc.deletePatient.useMutation();
-  const updateMoneyCollectedMutation =
-    trpc.updatePatientMoneyCollected.useMutation();
+ 
 
   // Upload state for multiple files with progress
   interface UploadFile {
@@ -178,38 +188,38 @@ export const AppealForm = ({
 
   return (
     <>
-      <h2 className="mb-4 text-3xl font-bold" data-oid="ay2:dpt">
+      <h2 className="mb-4 text-3xl font-bold" data-oid="kywvv0y">
         Letter of Appeal Generation
       </h2>
-      <div className="mb-4 text-sm text-gray-500" data-oid="hmaeg7s">
-        <strong data-oid="_3drw_s">
+      <div className="mb-4 text-sm text-gray-500" data-oid="ur.y3w4">
+        <strong data-oid="gy9bhxu">
           To generate a letter of appeal for {patient.name}, please upload both:
         </strong>
-        <ul className="ml-6 mt-2 list-disc" data-oid="05e4a33">
-          <li data-oid="-2tq2ax">
-            <strong data-oid="coof0n6">Denial</strong> (PDF, Word, or TXT)
+        <ul className="ml-6 mt-2 list-disc" data-oid="so30cdy">
+          <li data-oid="5dj1byz">
+            <strong data-oid="j.1l2bt">Denial</strong> (PDF, Word, or TXT)
           </li>
-          <li data-oid="cxicnue">
-            <strong data-oid="-cgqa:z">Note</strong> (PDF, Word, or TXT)
+          <li data-oid="17mg3-c">
+            <strong data-oid="8a2_xbg">Note</strong> (PDF, Word, or TXT)
           </li>
         </ul>
-        <span className="mt-2 block text-red-500" data-oid="rju3gfi">
+        <span className="mt-2 block text-red-500" data-oid="fvhcp-0">
           Do not upload the same file twice. File names do not matter.
         </span>
       </div>
-      <div className="flex space-x-8" data-oid="4h9iqs6">
-        <div className="w-3/5 border-r pr-4" data-oid=".qtpp:2">
-          <h3 className="mb-2 text-xl font-semibold" data-oid="._a--kl">
+      <div className="flex space-x-8" data-oid="dgm15rg">
+        <div className="w-3/5 border-r pr-4" data-oid="uqdoc:0">
+          <h3 className="mb-2 text-xl font-semibold" data-oid="1ilgqud">
             Required Files
           </h3>
-          <div className="space-y-4" data-oid="d39_e7.">
-            <div data-oid="2c2v_vp">
-              <label className="mb-1 block font-semibold" data-oid="sya.jz2">
+          <div className="space-y-4" data-oid="1eplfej">
+            <div data-oid="yfrfkc7">
+              <label className="mb-1 block font-semibold" data-oid="1hnkf3b">
                 Denial
               </label>
               {uploadedFiles[0] ? (
-                <div className="flex items-center gap-2" data-oid="quudo2c">
-                  <span className="truncate text-sm" data-oid="i9n6jou">
+                <div className="flex items-center gap-2" data-oid="5bn-jeu">
+                  <span className="truncate text-sm" data-oid=".z1el.7">
                     {uploadedFiles[0].file.name}
                   </span>
                   <button
@@ -218,7 +228,7 @@ export const AppealForm = ({
                     onClick={() =>
                       setUploadedFiles(([_, note]) => [undefined, note])
                     }
-                    data-oid="6nf_mq0"
+                    data-oid="7adwfnu"
                   >
                     Remove
                   </button>
@@ -245,17 +255,17 @@ export const AppealForm = ({
                       note,
                     ]);
                   }}
-                  data-oid="-17qwh5"
+                  data-oid="2_p4-h1"
                 />
               )}
             </div>
-            <div data-oid="pjd_2b:">
-              <label className="mb-1 block font-semibold" data-oid="xaye7zh">
+            <div data-oid="lzl8qkn">
+              <label className="mb-1 block font-semibold" data-oid="jij957r">
                 Note
               </label>
               {uploadedFiles[1] ? (
-                <div className="flex items-center gap-2" data-oid="8nf0.:4">
-                  <span className="truncate text-sm" data-oid="x.6e2tt">
+                <div className="flex items-center gap-2" data-oid="._sre-m">
+                  <span className="truncate text-sm" data-oid="2fq028.">
                     {uploadedFiles[1].file.name}
                   </span>
                   <button
@@ -264,7 +274,7 @@ export const AppealForm = ({
                     onClick={() =>
                       setUploadedFiles(([denial]) => [denial, undefined])
                     }
-                    data-oid="3s24ofx"
+                    data-oid="zicf0zo"
                   >
                     Remove
                   </button>
@@ -291,7 +301,7 @@ export const AppealForm = ({
                       { file, progress: 0, uploaded: true },
                     ]);
                   }}
-                  data-oid="ltxlohl"
+                  data-oid="boeadjb"
                 />
               )}
             </div>
@@ -310,21 +320,21 @@ export const AppealForm = ({
               !uploadedFiles[0]?.uploaded ||
               !uploadedFiles[1]?.uploaded
             }
-            data-oid="19-sxxr"
+            data-oid="qnab8cd"
           >
             Generate Letter of Appeal
           </button>
         </div>
-        <div className="w-2/5 pl-8" data-oid=".lnclc1">
-          <div className="mb-4 rounded bg-blue-50 p-4" data-oid="z8zr7fp">
-            <strong data-oid="4epqn6z">Instructions:</strong>
-            <ul className="ml-6 mt-2 list-disc text-sm" data-oid="nzx-h5r">
-              <li data-oid="8-gtr76">Upload one Denial and one Note file.</li>
-              <li data-oid="5id2tj1">
+        <div className="w-2/5 pl-8" data-oid="0wyceah">
+          <div className="mb-4 rounded bg-blue-50 p-4" data-oid="vih51ec">
+            <strong data-oid="rpi-i.y">Instructions:</strong>
+            <ul className="ml-6 mt-2 list-disc text-sm" data-oid="x7ofatd">
+              <li data-oid="efkz2ln">Upload one Denial and one Note file.</li>
+              <li data-oid="-9w9ynb">
                 Accepted formats: PDF, Word (.doc/.docx), or TXT.
               </li>
-              <li data-oid="zrk-kj.">Do not upload the same file twice.</li>
-              <li data-oid="a-9591b">File names do not matter.</li>
+              <li data-oid="kehmf3l">Do not upload the same file twice.</li>
+              <li data-oid="0fredfw">File names do not matter.</li>
             </ul>
           </div>
         </div>

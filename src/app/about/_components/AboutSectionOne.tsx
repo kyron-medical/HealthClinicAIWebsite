@@ -5,13 +5,13 @@ const AboutSectionOne = () => {
     <>
       <section
         className="py-16 text-center md:py-20 lg:py-28"
-        data-oid="nkd_-q8"
+        data-oid="nahzb1a"
       >
-        <div className="container mx-auto max-w-3xl" data-oid="20jefbs">
-          <h2 className="text-3xl font-bold mb-6" data-oid="-fhy37:">
+        <div className="container mx-auto max-w-3xl" data-oid="lk_t-53">
+          <h2 className="text-3xl font-bold mb-6" data-oid="7qq8b0p">
             About Kyron Medical
           </h2>
-          <p className="text-lg text-body-color" data-oid="1w1krv_">
+          <p className="text-lg text-body-color" data-oid="9dl430b">
             Kyron Medical is revolutionizing medical billing through
             intelligent, AI-driven denial handling. We specialize in
             transforming tedious and complex denial management processes into
@@ -20,8 +20,8 @@ const AboutSectionOne = () => {
             seamlessly with existing medical billing and electronic health
             record (EHR) systems, proactively identifying and resolving claim
             denials with unmatched speed and accuracy.
-            <br data-oid=":gej5rc" />
-            <br data-oid="on94585" />
+            <br data-oid="vce9sra" />
+            <br data-oid="mhhkf-a" />
             By automating denial handling, Kyron Medical significantly reduces
             administrative burdens, enabling healthcare providers to reclaim
             valuable time previously spent on manual billing tasks. This
@@ -32,8 +32,8 @@ const AboutSectionOne = () => {
             profitability.
           </p>
         </div>
-        <div className="container pt-16" data-oid="r8:anox">
-          <GetStarted data-oid="dgp32pp" />
+        <div className="container pt-16" data-oid="n:0gqjh">
+          <GetStarted data-oid="idxgj9a" />
         </div>
       </section>
     </>
