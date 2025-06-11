@@ -281,10 +281,42 @@ export const appRouter = createTRPCRouter({
       return filterUserForClient(user);
     }),
 
+  updateUserRole: privateProcedure
+    .input(
+      z.object({
+        role: z.string(),
+        userId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Ensure the user is authenticated
+      if (!ctx.userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      // Update the user's public metadata with the new role
+      (await clerkClient()).users.updateUserMetadata(input.userId, {
+        publicMetadata: {
+          role: input.role,
+        },
+      });
+      return { success: true };
+    }),
+
+  // (request: Request) {
+  //   const { role, userId } = await request.json();
+
+  //   await clerkClient.users.updateUserMetadata(userId, {
+  //     publicMetadata: {
+  //       role: role,
+  //     },
+  //   });
+  //   return NextResponse.json({ success: true });
+  // }
+
   /*
-        Gets all the patients for us. This does not need to be protected by user
-        authetication because people should be able to see all posts from the home
-        page without logging in.
+        Gets all the patients for us. TODO: This needS to be protected by user
+        authetication because people should NOT be able to see all patients from 
+        anywhere.
         */
   getAll: publicProcedure.query(async ({ ctx }) => {
     try {
@@ -389,7 +421,7 @@ export const appRouter = createTRPCRouter({
 
       const { success } = await ratelimit.limit(billerId);
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
-      
+
       // First, delete all related PatientEvent records
       await ctx.prisma.patientEvent.deleteMany({
         where: { patientId: input.patientId },

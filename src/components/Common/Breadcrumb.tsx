@@ -11,21 +11,21 @@ const Breadcrumb = ({
         <div className="container py-16 lg:py-24">
           <div className="flex flex-col items-center text-center">
             {/* <div className="relative mb-6 inline-block">
-                            <span className="absolute -left-6 -top-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
-                            <span className="absolute -bottom-6 -right-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
-                            <ul className="flex items-center rounded-full bg-white px-4 py-2 shadow-md dark:bg-gray-800">
-                              <li className="flex items-center">
-                                <Link
-                                  href="/"
-                                  className="pr-1 text-sm font-medium text-body-color hover:text-primary"
-                                >
-                                  Home
-                                </Link>
-                                <span className="mx-3 block h-1.5 w-1.5 rotate-45 border-r-2 border-t-2 border-body-color"></span>
-                              </li>
-                              <li className="text-sm font-medium text-primary">{pageName}</li>
-                            </ul>
-                           </div> */}
+                                 <span className="absolute -left-6 -top-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
+                                 <span className="absolute -bottom-6 -right-6 z-[-1] h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30"></span>
+                                 <ul className="flex items-center rounded-full bg-white px-4 py-2 shadow-md dark:bg-gray-800">
+                                   <li className="flex items-center">
+                                     <Link
+                                       href="/"
+                                       className="pr-1 text-sm font-medium text-body-color hover:text-primary"
+                                     >
+                                       Home
+                                     </Link>
+                                     <span className="mx-3 block h-1.5 w-1.5 rotate-45 border-r-2 border-t-2 border-body-color"></span>
+                                   </li>
+                                   <li className="text-sm font-medium text-primary">{pageName}</li>
+                                 </ul>
+                                </div> */}
 
             <h1 className="mb-6 pb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl">
               {pageName}

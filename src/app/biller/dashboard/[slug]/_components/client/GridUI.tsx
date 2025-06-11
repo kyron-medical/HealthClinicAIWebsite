@@ -76,22 +76,34 @@ const PatientGridClient = ({
   return (
     <>
       {/* Patient Table */}
-      <div className="overflow-x-auto rounded-lg bg-white shadow">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-gray-50 text-left">
-              <th className="px-6 py-3 text-xs uppercase text-gray-500">
+      <div
+        className="overflow-x-auto rounded-lg bg-white shadow"
+        data-oid="uuvf2x2"
+      >
+        <table className="w-full" data-oid="nta0rm1">
+          <thead data-oid="lkke8v:">
+            <tr className="bg-gray-50 text-left" data-oid="b9io6e_">
+              <th
+                className="px-6 py-3 text-xs uppercase text-gray-500"
+                data-oid="yl1plz-"
+              >
                 Name
               </th>
-              <th className="px-6 py-3 text-xs uppercase text-gray-500">
+              <th
+                className="px-6 py-3 text-xs uppercase text-gray-500"
+                data-oid=".lyfz5-"
+              >
                 Insurer
               </th>
-              <th className="px-6 py-3 text-xs uppercase text-gray-500">
+              <th
+                className="px-6 py-3 text-xs uppercase text-gray-500"
+                data-oid="auv40uz"
+              >
                 Money Collected
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-oid=".f22f0g">
             {patients
               .filter(
                 (p) =>
@@ -103,8 +115,12 @@ const PatientGridClient = ({
                   key={patient.id}
                   onClick={() => handleRowClick(patient)}
                   className="group cursor-pointer transition hover:bg-blue-50"
+                  data-oid="96d62pz"
                 >
-                  <td className="flex items-center gap-2 px-6 py-4">
+                  <td
+                    className="flex items-center gap-2 px-6 py-4"
+                    data-oid="351a.qg"
+                  >
                     {patient.name}
 
                     {!patient.name ||
@@ -115,21 +131,31 @@ const PatientGridClient = ({
                       <span
                         className={styles.pulseDot}
                         title="Missing data"
+                        data-oid="zky.-ax"
                       ></span>
                     ) : (
-                      <span></span>
+                      <span data-oid="093bp_x"></span>
                     )}
                   </td>
-                  <td className="px-6 py-4">{patient.insurer}</td>
-                  <td className="flex items-center justify-between px-6 py-4">
+                  <td className="px-6 py-4" data-oid="l._tg_1">
+                    {patient.insurer}
+                  </td>
+                  <td
+                    className="flex items-center justify-between px-6 py-4"
+                    data-oid="-gn-:73"
+                  >
                     ${patient.moneyCollected}
-                    <span className="ml-2 opacity-60 transition group-hover:opacity-100">
+                    <span
+                      className="ml-2 opacity-60 transition group-hover:opacity-100"
+                      data-oid="b.do4pr"
+                    >
                       {/* Right arrow icon */}
                       <svg
                         width="18"
                         height="18"
                         fill="none"
                         viewBox="0 0 24 24"
+                        data-oid="6pkatl2"
                       >
                         <path
                           stroke="currentColor"
@@ -137,6 +163,7 @@ const PatientGridClient = ({
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           d="M9 18l6-6-6-6"
+                          data-oid="edwqb5w"
                         />
                       </svg>
                     </span>
@@ -159,6 +186,7 @@ const PatientGridClient = ({
             events={patientEvents}
             patients={patients}
             refetchPatientsAction={refetchPatientsAction}
+            data-oid="q4zux_d"
           />,
 
           modalRoot,

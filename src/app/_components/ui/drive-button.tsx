@@ -14,6 +14,7 @@ const TestDrive: React.FC<TestDriveProps> = ({ handleSubmit }) => {
       onHoverStart={() => console.log("hover started!")}
       onClick={handleSubmit}
       className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
+      data-oid="u3v5n2o"
     >
       Test Drive Kyron
     </motion.button>

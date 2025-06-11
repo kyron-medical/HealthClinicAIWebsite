@@ -16,7 +16,6 @@ function isAcceptedFileType(file: File) {
   return ACCEPTED_TYPES.includes(file.type);
 }
 
-
 // Define interface for your row data
 interface PatientRow {
   name: string;
@@ -39,7 +38,6 @@ type AppealFormProps = {
   refetchPatientsAction: (options?: unknown) => Promise<unknown>;
 };
 
-
 /*
 ===============================================================================
 
@@ -48,14 +46,16 @@ type AppealFormProps = {
 ===============================================================================
 */
 
-export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) => {
+export const AppealForm = ({
+  patient,
+  refetchPatientsAction,
+}: AppealFormProps) => {
   const [mounted, setMounted] = useState(false);
 
   const patientModalRef = useRef(null);
   const eventModalRef = useRef(null);
 
   const [selectedEvent, setSelectedEvent] = useState<PatientEvent | null>(null);
- 
 
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [eventType, setEventType] = useState("");
@@ -178,32 +178,38 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
 
   return (
     <>
-      <h2 className="mb-4 text-3xl font-bold">Letter of Appeal Generation</h2>
-      <div className="mb-4 text-sm text-gray-500">
-        <strong>
+      <h2 className="mb-4 text-3xl font-bold" data-oid="ay2:dpt">
+        Letter of Appeal Generation
+      </h2>
+      <div className="mb-4 text-sm text-gray-500" data-oid="hmaeg7s">
+        <strong data-oid="_3drw_s">
           To generate a letter of appeal for {patient.name}, please upload both:
         </strong>
-        <ul className="ml-6 mt-2 list-disc">
-          <li>
-            <strong>Denial</strong> (PDF, Word, or TXT)
+        <ul className="ml-6 mt-2 list-disc" data-oid="05e4a33">
+          <li data-oid="-2tq2ax">
+            <strong data-oid="coof0n6">Denial</strong> (PDF, Word, or TXT)
           </li>
-          <li>
-            <strong>Note</strong> (PDF, Word, or TXT)
+          <li data-oid="cxicnue">
+            <strong data-oid="-cgqa:z">Note</strong> (PDF, Word, or TXT)
           </li>
         </ul>
-        <span className="mt-2 block text-red-500">
+        <span className="mt-2 block text-red-500" data-oid="rju3gfi">
           Do not upload the same file twice. File names do not matter.
         </span>
       </div>
-      <div className="flex space-x-8">
-        <div className="w-3/5 border-r pr-4">
-          <h3 className="mb-2 text-xl font-semibold">Required Files</h3>
-          <div className="space-y-4">
-            <div>
-              <label className="mb-1 block font-semibold">Denial</label>
+      <div className="flex space-x-8" data-oid="4h9iqs6">
+        <div className="w-3/5 border-r pr-4" data-oid=".qtpp:2">
+          <h3 className="mb-2 text-xl font-semibold" data-oid="._a--kl">
+            Required Files
+          </h3>
+          <div className="space-y-4" data-oid="d39_e7.">
+            <div data-oid="2c2v_vp">
+              <label className="mb-1 block font-semibold" data-oid="sya.jz2">
+                Denial
+              </label>
               {uploadedFiles[0] ? (
-                <div className="flex items-center gap-2">
-                  <span className="truncate text-sm">
+                <div className="flex items-center gap-2" data-oid="quudo2c">
+                  <span className="truncate text-sm" data-oid="i9n6jou">
                     {uploadedFiles[0].file.name}
                   </span>
                   <button
@@ -212,6 +218,7 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
                     onClick={() =>
                       setUploadedFiles(([_, note]) => [undefined, note])
                     }
+                    data-oid="6nf_mq0"
                   >
                     Remove
                   </button>
@@ -238,14 +245,17 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
                       note,
                     ]);
                   }}
+                  data-oid="-17qwh5"
                 />
               )}
             </div>
-            <div>
-              <label className="mb-1 block font-semibold">Note</label>
+            <div data-oid="pjd_2b:">
+              <label className="mb-1 block font-semibold" data-oid="xaye7zh">
+                Note
+              </label>
               {uploadedFiles[1] ? (
-                <div className="flex items-center gap-2">
-                  <span className="truncate text-sm">
+                <div className="flex items-center gap-2" data-oid="8nf0.:4">
+                  <span className="truncate text-sm" data-oid="x.6e2tt">
                     {uploadedFiles[1].file.name}
                   </span>
                   <button
@@ -254,6 +264,7 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
                     onClick={() =>
                       setUploadedFiles(([denial]) => [denial, undefined])
                     }
+                    data-oid="3s24ofx"
                   >
                     Remove
                   </button>
@@ -280,6 +291,7 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
                       { file, progress: 0, uploaded: true },
                     ]);
                   }}
+                  data-oid="ltxlohl"
                 />
               )}
             </div>
@@ -298,18 +310,21 @@ export const AppealForm = ({ patient, refetchPatientsAction }: AppealFormProps) 
               !uploadedFiles[0]?.uploaded ||
               !uploadedFiles[1]?.uploaded
             }
+            data-oid="19-sxxr"
           >
             Generate Letter of Appeal
           </button>
         </div>
-        <div className="w-2/5 pl-8">
-          <div className="mb-4 rounded bg-blue-50 p-4">
-            <strong>Instructions:</strong>
-            <ul className="ml-6 mt-2 list-disc text-sm">
-              <li>Upload one Denial and one Note file.</li>
-              <li>Accepted formats: PDF, Word (.doc/.docx), or TXT.</li>
-              <li>Do not upload the same file twice.</li>
-              <li>File names do not matter.</li>
+        <div className="w-2/5 pl-8" data-oid=".lnclc1">
+          <div className="mb-4 rounded bg-blue-50 p-4" data-oid="z8zr7fp">
+            <strong data-oid="4epqn6z">Instructions:</strong>
+            <ul className="ml-6 mt-2 list-disc text-sm" data-oid="nzx-h5r">
+              <li data-oid="8-gtr76">Upload one Denial and one Note file.</li>
+              <li data-oid="5id2tj1">
+                Accepted formats: PDF, Word (.doc/.docx), or TXT.
+              </li>
+              <li data-oid="zrk-kj.">Do not upload the same file twice.</li>
+              <li data-oid="a-9591b">File names do not matter.</li>
             </ul>
           </div>
         </div>

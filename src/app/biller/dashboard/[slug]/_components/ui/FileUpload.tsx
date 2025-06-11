@@ -91,7 +91,10 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
   };
 
   return (
-    <div className="flex w-full max-w-md flex-col items-center">
+    <div
+      className="flex w-full max-w-md flex-col items-center"
+      data-oid="97pucal"
+    >
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -100,9 +103,10 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
         onClick={() =>
           document.getElementById(label.replace(/\s+/g, "-"))?.click()
         }
+        data-oid="uq5vxyf"
       >
-        <div className="p-4">
-          <TiUpload />
+        <div className="p-4" data-oid="fr-bv:m">
+          <TiUpload data-oid="1kclxz8" />
         </div>
         Upload files
         <input
@@ -111,6 +115,7 @@ const FileUploadBox: React.FC<FileUploadBoxProps> = ({
           multiple
           onChange={handleFileSelect}
           style={{ display: "none" }}
+          data-oid=".9..rx_"
         />
       </div>
     </div>

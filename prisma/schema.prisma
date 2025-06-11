@@ -25,68 +25,102 @@ model BlogPost {
   updatedAt DateTime @updatedAt
 }
 
-/*
-export type Patient = {
-  name: string;
-  insurer: string;
-  moneyCollected: number;
-};
-
-export type PatientEvent = {
-  date: string;
-  type: string;
-  content?: string;
-  transcript?: string;
-  summary?: string;
-};
-*/
+/**
+ * export type Patient = {
+ * name: string;
+ * insurer: string;
+ * moneyCollected: number;
+ * };
+ * export type PatientEvent = {
+ * date: string;
+ * type: string;
+ * content?: string;
+ * transcript?: string;
+ * summary?: string;
+ * };
+ */
 
 model Patient {
-  id              String   @id @default(cuid())
-  name            String  @default("patient_name")
-  name_iv         String?           // now nullable (defaults to NULL)
-  name_tag        String?           // likewise
-  dob             DateTime @default(dbgenerated("'1000-01-01T00:00:00.000Z'"))  // default to a sentinel value
-  address         String?           // nullable
-  address_iv      String?           // nullable
-  address_tag     String?           // nullable
-  sex            String?           // nullable
-  sex_iv         String?           // nullable
-  sex_tag        String?           // nullable
-  insurer         String @default("insurer_name") // default to "insurer_name"
-  insurer_iv      String?           // nullable
-  insurer_tag     String?           // nullable
-  moneyCollected  Int @default(0) // default to 0
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  patientEvents   PatientEvent[]
-  billerId        String
-  serviceStart    DateTime @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
-  serviceEnd      DateTime?
-  providerName    String?           // already nullable
-  providerName_iv String?           // already nullable
-  providerName_tag String?          // already nullable
-  facilityName    String?           // already nullable
-  zipCode         String?           // already nullable
-  zipCode_iv      String?           // already nullable
-  zipCode_tag     String?           // already nullable
-  groupNumber     String?           // already nullable
+  id               String      @id @default(cuid())
+  name             String      @default("patient_name")
+  name_iv          String? // now nullable (defaults to NULL)
+  name_tag         String? // likewise
+  dob              DateTime    @default(dbgenerated("'1000-01-01T00:00:00.000Z'")) // default to a sentinel value
+  address          String? // nullable
+  address_iv       String? // nullable
+  address_tag      String? // nullable
+  sex              String? // nullable
+  sex_iv           String? // nullable
+  sex_tag          String? // nullable
+  insurer          String      @default("insurer_name") // default to "insurer_name"
+  insurer_iv       String? // nullable
+  insurer_tag      String? // nullable
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  patientEvents    Encounter[]
+  billerId         String
+  serviceStart     DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
+  serviceEnd       DateTime?
+  providerName     String? // already nullable
+  providerName_iv  String? // already nullable
+  providerName_tag String? // already nullable
+  facilityName     String? // already nullable
+  zipCode          String? // already nullable
+  zipCode_iv       String? // already nullable
+  zipCode_tag      String? // already nullable
+  groupNumber      String? // already nullable
 }
 
+model Physician {
+  id          String   @id @default(cuid())
+  name        String
+  npi         String   @unique
+  opn         String? // optional, can be null
+  address     String?
+  phone       String?
+  email       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
-model PatientEvent {
-  id        String   @id @default(cuid())
-  patientId String
-  date      DateTime
-  type      String
-  content   String?
-  transcript String?
-  summary   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Encounter {
+  id              String   @id @default(cuid())
+  patientId       String
+  physicianId     String
+  date            DateTime
+  type            String
+  content         String?
+  summary         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   // Add an array of file urls
-  fileUrls  String[]
+  fileUrls        String[]
   // Add a relation to the Patient model
+  appointmentType String?
+  placeOfService  String?
 
-  patient Patient @relation(fields: [patientId], references: [id])
+  patient      Patient        @relation(fields: [patientId], references: [id])
+  billerAction billerAction[]
+}
+
+enum Action {
+  ELIBIGIBILITY_AND_BENEFITS
+  APPEALS
+  CLAIM_STATUS_INQUIRIES
+}
+
+model billerAction {
+  id          String   @id @default(cuid())
+  encounterId String
+  date        DateTime
+  type        Action
+  content     String?
+  transcript  String?
+  summary     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  // Add an array of file urls
+  fileUrls    String[]
+
+  encounter Encounter @relation(fields: [encounterId], references: [id])
 }

@@ -59,10 +59,13 @@ export function BlogPostForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" data-oid="xfy:_wv">
       {/* Title Input */}
-      <div>
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+      <div data-oid="et9qvs-">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          data-oid="koo-cwv"
+        >
           Title
         </label>
         <input
@@ -74,12 +77,16 @@ export function BlogPostForm() {
           placeholder="Enter blog title"
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
+          data-oid="thmh4h3"
         />
       </div>
 
       {/* Author Input */}
-      <div>
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+      <div data-oid="1e4im_m">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          data-oid="9sp_dip"
+        >
           Author
         </label>
         <input
@@ -91,12 +98,16 @@ export function BlogPostForm() {
           placeholder="Enter author name"
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
+          data-oid="o-qfyhj"
         />
       </div>
 
       {/* Tagline Input */}
-      <div>
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+      <div data-oid="erufmdk">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          data-oid="ww-npi:"
+        >
           Tagline
         </label>
         <textarea
@@ -108,12 +119,16 @@ export function BlogPostForm() {
           rows={4}
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
+          data-oid="pdk_h47"
         />
       </div>
 
       {/* Content Input */}
-      <div>
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+      <div data-oid="tc_pwh4">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          data-oid="kvm-0n9"
+        >
           Content
         </label>
         <textarea
@@ -125,19 +140,26 @@ export function BlogPostForm() {
           rows={8}
           className="w-full rounded-md border border-transparent px-6 py-3 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
           required
+          data-oid="oslfxap"
         />
       </div>
 
       {/* Upload Image */}
-      <div className="flex flex-col gap-2">
-        <label className="mb-2.5 block font-medium text-black dark:text-white">
+      <div className="flex flex-col gap-2" data-oid="60w440_">
+        <label
+          className="mb-2.5 block font-medium text-black dark:text-white"
+          data-oid="hzk8gda"
+        >
           Upload Image
         </label>
-        <div className="flex items-center gap-2">
-          <CustomUploadButton onUploadComplete={handleImageUpload} />
+        <div className="flex items-center gap-2" data-oid="x2z3tmc">
+          <CustomUploadButton
+            onUploadComplete={handleImageUpload}
+            data-oid="1s_8968"
+          />
 
           {formData.mainImage && (
-            <span className="text-sm text-green-600">
+            <span className="text-sm text-green-600" data-oid="j.nna77">
               Image uploaded successfully!
             </span>
           )}
@@ -145,7 +167,7 @@ export function BlogPostForm() {
       </div>
 
       {/* Submit Button */}
-      <div>
+      <div data-oid="54:.buk">
         <button
           type="submit"
           onClick={handleSubmit}
@@ -155,6 +177,7 @@ export function BlogPostForm() {
               ? "cursor-pointer border-primary bg-primary text-white hover:bg-opacity-80 hover:shadow-signUp"
               : "cursor-not-allowed border-gray-300 bg-gray-300 text-gray-500"
           }`}
+          data-oid="twfkjai"
         >
           Create Blog Post
         </button>

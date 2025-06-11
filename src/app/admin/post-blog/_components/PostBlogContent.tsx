@@ -32,14 +32,23 @@ export const DashboardContent = () => {
   }
 
   return (
-    <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
-      <div className="container">
-        <div className="w-full px-4">
-          <div className="mx-auto max-w-[800px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]">
-            <h1 className="mb-8 text-3xl font-bold text-black dark:text-white">
+    <section
+      className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
+      data-oid="3f09xtv"
+    >
+      <div className="container" data-oid="wqcwjvt">
+        <div className="w-full px-4" data-oid="i2wc-.:">
+          <div
+            className="mx-auto max-w-[800px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
+            data-oid=".wuegb6"
+          >
+            <h1
+              className="mb-8 text-3xl font-bold text-black dark:text-white"
+              data-oid="8a3oa0f"
+            >
               Welcome, {user.firstName}
             </h1>
-            <BlogPostForm />
+            <BlogPostForm data-oid="5yv-dt5" />
           </div>
         </div>
       </div>

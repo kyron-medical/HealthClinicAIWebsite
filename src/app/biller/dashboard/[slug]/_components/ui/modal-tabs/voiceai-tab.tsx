@@ -35,13 +35,26 @@ function CountryCodeSelect({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       style={{ width: 80 }}
+      data-oid="gi8mwgi"
     >
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+44">🇬🇧 +44</option>
-      <option value="+91">🇮🇳 +91</option>
-      <option value="+61">🇦🇺 +61</option>
-      <option value="+81">🇯🇵 +81</option>
-      <option value="+33">🇫🇷 +33</option>
+      <option value="+1" data-oid="-vqx7ii">
+        🇺🇸 +1
+      </option>
+      <option value="+44" data-oid="2oc:de9">
+        🇬🇧 +44
+      </option>
+      <option value="+91" data-oid="3r185h1">
+        🇮🇳 +91
+      </option>
+      <option value="+61" data-oid="xxq7bbh">
+        🇦🇺 +61
+      </option>
+      <option value="+81" data-oid="2z50f9r">
+        🇯🇵 +81
+      </option>
+      <option value="+33" data-oid="bzkinhe">
+        🇫🇷 +33
+      </option>
     </select>
   );
 }
@@ -231,38 +244,52 @@ export const VoiceAI = ({
 
   return (
     <>
-      <div className="flex flex-row items-center gap-2">
-        <h2 className="m-0 text-3xl font-bold">Voice AI Agent</h2>
+      <div className="flex flex-row items-center gap-2" data-oid="wn:2:qm">
+        <h2 className="m-0 text-3xl font-bold" data-oid="w53mna_">
+          Voice AI Agent
+        </h2>
       </div>
-      <p className="mb-4 text-sm text-gray-500">
+      <p className="mb-4 text-sm text-gray-500" data-oid="xr:hmra">
         Place a call to {patient.name}&apos;s insurance and let the AI agent
         handle the conversation.
       </p>
 
-      <div className="mb-4">
-        <label className="mb-1 block text-sm font-semibold">Call Type</label>
+      <div className="mb-4" data-oid="6c.r-tj">
+        <label className="mb-1 block text-sm font-semibold" data-oid="32bx5l0">
+          Call Type
+        </label>
         <select
           className="w-full rounded border px-2 py-1"
           value={callType}
           onChange={(e) => setCallType(e.target.value)}
+          data-oid="67pjypg"
         >
-          <option value="claim-status">Claim Status Inquiry</option>
-          <option value="appeal-followup">Appeal Follow-up</option>
-          <option value="eligibility-verification">
+          <option value="claim-status" data-oid="klbr9_j">
+            Claim Status Inquiry
+          </option>
+          <option value="appeal-followup" data-oid="eu4wexw">
+            Appeal Follow-up
+          </option>
+          <option value="eligibility-verification" data-oid="lkppd9g">
             Eligibility and Benefits Verification
           </option>
         </select>
       </div>
-      <div className="mb-4 flex flex-col gap-4">
+      <div className="mb-4 flex flex-col gap-4" data-oid="3rzxfsf">
         {/* Toggle input mode for the first field */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" data-oid="9ll--zu">
           <select
             className="rounded border px-2 py-1"
             value={billerInputMode}
             onChange={(e) => setbillerInputMode(e.target.value)}
+            data-oid="gmig.kf"
           >
-            <option value="text">Instructions</option>
-            <option value="phone">Phone Number</option>
+            <option value="text" data-oid="1xuc1j9">
+              Instructions
+            </option>
+            <option value="phone" data-oid="qt3edyy">
+              Phone Number
+            </option>
           </select>
 
           {billerInputMode === "phone" ? (
@@ -270,13 +297,16 @@ export const VoiceAI = ({
               <CountryCodeSelect
                 value={billerInputCountry}
                 onChange={setbillerInputCountry}
+                data-oid="pl9_p6p"
               />
+
               <input
                 type="tel"
                 className="flex-1 rounded border px-2 py-1"
                 placeholder="Medical Biller's Phone Number"
                 value={billerInput}
                 onChange={(e) => setbillerInput(e.target.value)}
+                data-oid="9hd--p0"
               />
             </>
           ) : (
@@ -285,21 +315,25 @@ export const VoiceAI = ({
               placeholder="Enter instructions or context (e.g. claim ID, billing note)"
               value={billerInput}
               onChange={(e) => setbillerInput(e.target.value)}
+              data-oid="iglsbrt"
             />
           )}
         </div>
         {/* Second input: remains as insurance phone number */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" data-oid=".qah7r.">
           <CountryCodeSelect
             value={insuranceNumberCountry}
             onChange={setinsuranceNumberCountry}
+            data-oid="8.fm5-7"
           />
+
           <input
             type="tel"
             className="flex-1 rounded border px-2 py-1"
             placeholder="Insurance Phone Number"
             value={insuranceNumber}
             onChange={(e) => setinsuranceNumber(e.target.value)}
+            data-oid="sw1c5h5"
           />
         </div>
       </div>
@@ -313,29 +347,41 @@ export const VoiceAI = ({
           }`}
           disabled={!inputsValid}
           onClick={handleMakeCalls}
+          data-oid="0k5-3p_"
         >
           Make Calls
         </button>
       ) : (
-        <div className="mt-4 rounded border bg-gray-50 p-4">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"></span>
-            <span className="font-semibold">Calling in progress...</span>
+        <div className="mt-4 rounded border bg-gray-50 p-4" data-oid="tcfczd0">
+          <div className="mb-2 flex items-center gap-2" data-oid="wpnqphm">
+            <span
+              className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent"
+              data-oid="iiv5kkw"
+            ></span>
+            <span className="font-semibold" data-oid="i4:-x:s">
+              Calling in progress...
+            </span>
           </div>
           <button
             className="mt-2 rounded bg-red-500 px-4 py-2 text-white"
             onClick={handleCancelCall}
+            data-oid="ygej3us"
           >
             Cancel
           </button>
-          <div className="mt-4 text-xs text-gray-500">
+          <div className="mt-4 text-xs text-gray-500" data-oid="881d_jg">
             Please feel free to close this window – calls will operate
             autonomously.
           </div>
           {callTranscript && (
-            <div className="mt-4 rounded border bg-white p-2">
-              <div className="mb-1 font-bold">Transcript:</div>
-              <pre className="whitespace-pre-wrap text-xs">
+            <div
+              className="mt-4 max-h-64 overflow-auto rounded border bg-white p-2"
+              data-oid="dqrnggg"
+            >
+              <div className="mb-1 font-bold" data-oid="994_.mv">
+                Transcript:
+              </div>
+              <pre className="whitespace-pre-wrap text-xs" data-oid="krhfsj.">
                 {callTranscript}
               </pre>
             </div>

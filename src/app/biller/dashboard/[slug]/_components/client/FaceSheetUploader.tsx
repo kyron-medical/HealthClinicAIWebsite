@@ -166,7 +166,7 @@ export function FaceSheetMassUploader({
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center" data-oid=".76_lwa">
       {/* Hidden file input to trigger face sheet upload */}
       <input
         ref={fileInputRef}
@@ -175,7 +175,9 @@ export function FaceSheetMassUploader({
         multiple
         className="hidden"
         onChange={handleFilesSelected}
+        data-oid="nksywm2"
       />
+
       {/* Only the "+" button is rendered here */}
       <button
         onClick={() => fileInputRef.current?.click()}
@@ -185,6 +187,7 @@ export function FaceSheetMassUploader({
             ? "cursor-not-allowed bg-gray-400"
             : "bg-blue-600 hover:bg-blue-700"
         }`}
+        data-oid="j.5mh-_"
       >
         {uploading ? "Uploading…" : "+"}
       </button>

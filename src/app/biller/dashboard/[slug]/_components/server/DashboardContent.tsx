@@ -35,7 +35,7 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
   // If you know the type of patientEvents, replace 'unknown' with the correct type above
 
   return (
-    <DashboardContentClient patientEvents={patientEvents} />
+    <DashboardContentClient patientEvents={patientEvents} data-oid="-c6ag3x" />
   );
 };
 

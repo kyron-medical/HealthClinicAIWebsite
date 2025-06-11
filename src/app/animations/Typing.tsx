@@ -17,6 +17,7 @@ const Typing = () => {
         delay: 20,
         deleteSpeed: 10,
       }}
+      data-oid="kkedjyr"
     />
   );
 };
