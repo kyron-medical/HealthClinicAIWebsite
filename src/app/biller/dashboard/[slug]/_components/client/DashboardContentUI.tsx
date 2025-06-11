@@ -112,20 +112,20 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
                   Total Patients
                 </h3>
                 {/* <div className="flex items-center space-x-2">
-                          <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept=".csv"
-                            className="hidden"
-                            onChange={handleFileChange}
-                          />
-                            <button
-                            onClick={addPatients}
-                            className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
-                          >
-                            +
-                          </button>
-                         </div> */}
+                           <input
+                             ref={fileInputRef}
+                             type="file"
+                             accept=".csv"
+                             className="hidden"
+                             onChange={handleFileChange}
+                           />
+                             <button
+                             onClick={addPatients}
+                             className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
+                           >
+                             +
+                           </button>
+                          </div> */}
                 <FaceSheetMassUploader
                   refetchPatientsAction={refetch}
                   data-oid="zbl:udm"

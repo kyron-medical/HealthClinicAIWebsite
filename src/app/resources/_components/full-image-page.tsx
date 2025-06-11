@@ -33,15 +33,15 @@ export default async function FullPageImageView(props: {
           <div className="" data-oid="0_7r41k">
             {/* Using Server actions we can favorite the position, send you back to the home page, and ensure the position is favorited on from the homepage all in one function. */}
             {/* <form
-                     action={async () => {
-                     "use server";
-                      await deletePosition(data.id);
-                     }}
-                     >
-                     <Button type="submit" variant={"default"}>
-                     Favorite
-                     </Button>
-                     </form> */}
+                      action={async () => {
+                      "use server";
+                       await deletePosition(data.id);
+                      }}
+                      >
+                      <Button type="submit" variant={"default"}>
+                      Favorite
+                      </Button>
+                      </form> */}
           </div>
         </div>
       </div>

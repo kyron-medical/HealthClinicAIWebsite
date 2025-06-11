@@ -48,8 +48,12 @@ export function TRPCProvider(
     }),
   );
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
+    <trpc.Provider
+      client={trpcClient}
+      queryClient={queryClient}
+      data-oid="uo-058r"
+    >
+      <QueryClientProvider client={queryClient} data-oid="skvzbp8">
         {props.children}
       </QueryClientProvider>
     </trpc.Provider>
