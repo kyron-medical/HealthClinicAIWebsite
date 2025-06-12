@@ -28,8 +28,9 @@ const Landing = () => {
                   </p>
                 </div>
 
-                <div className="justify-cente flex flex-row items-center">
+                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
                   <motion.button
+                    style={{ display: "contents" }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
@@ -43,6 +44,7 @@ const Landing = () => {
                     </a>
                   </motion.button>
                   <motion.button
+                    style={{ display: "contents" }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
@@ -50,7 +52,7 @@ const Landing = () => {
                     <a
                       href="/about"
                       rel="noopener noreferrer"
-                      className="ml-4 rounded-lg border border-white bg-transparent px-6 py-3 font-bold text-blue-500 hover:bg-white hover:text-blue-500"
+                      className="rounded-lg border border-white bg-transparent px-6 py-3 font-bold text-blue-500 hover:bg-white hover:text-blue-500"
                     >
                       Learn More
                     </a>
