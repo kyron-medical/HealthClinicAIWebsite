@@ -10,9 +10,10 @@ import { TRPCError } from "@trpc/server";
 import { filterUserForClient } from "@/server/helpers/filterUserForClient";
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
-import { Encounter, Patient, Action} from "@prisma/client";
+import { Encounter, Patient, Action, Physician, Facility } from "@prisma/client";
 import { encrypt, decrypt } from "@/../utils/secure";
 import { I } from "@upstash/redis/zmscore-CjoCv9kz";
+import { parseDate, normalize, levenshteinTwoMatrixRows } from "utils/tools";
 
 /*
 ===============================================================================
@@ -155,25 +156,47 @@ export const PatientSchema = z.object({
   groupNumber: z.string().nullable().optional(),
 });
 
-const EncounterBulkSchema = z.array(
+const CasesBulkSchema = z.array(
   z.object({
-    patientId: z.string(),
-    type: z.string(),
-    eventContent: z.string().optional(),
-    date: z.date(),
-    fileUrls: z.array(z.string()).optional(),
-    transcript: z.string().optional(),
-    summary: z.string().optional(),
+    patientName: z.string().optional(),
+    patientId: z.string().optional(),
+    // mrn or medical_record_number
+    mrn: z.string().optional(),
+    medical_record_number: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+    age: z.number().optional(),
+    sex: z.string().optional(),
+    race: z.string().optional(),
+    address: z.string().optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    zip: z.string().optional(),
+    phone: z.string().optional(),
+    emergencyContactName: z.string().optional(),
+    emergency_contact_phone: z.string().optional(),
+    group_number: z.string().optional(),
+    admission_date: z.string().date().optional(),
+    admission_time: z.string().time().optional(),
+    attending_physician: z.string().optional(),
+    diagnosis: z.string().optional(),
+    procedure: z.string().optional(),
+    discharge_date: z.string().date().optional(),
+    insurance_id: z.string().optional(),
+    insurance_name: z.string().optional(),
+    insurance_type: z.string().optional(),
+    insurance_plan: z.string().optional(),
+    insurance_primary_secondary: z.string().optional(),
+    insurance_start_date: z.string().date().optional(),
+    insurance_end_date: z.string().date().optional(),
+    facility_name: z.string().optional(),
   }),
 );
-
-
 
 z.object({
   // ...
   type: z.nativeEnum(Action),
   // ...
-})
+});
 
 const addBillerDataToPatients = async (patients: Patient[]) => {
   const userId = patients.map((patient) => patient.billerId);
@@ -218,7 +241,6 @@ const addBillerDataToPatients = async (patients: Patient[]) => {
     };
   });
 };
-
 
 // Create a new ratelimiter, that allows 3 requests per 1 minute
 const ratelimit = new Ratelimit({
@@ -695,6 +717,226 @@ export const appRouter = createTRPCRouter({
       return encounter;
     }),
 
+  createCasesBulk: privateProcedure
+    .input(CasesBulkSchema)
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      // Using the CasesBulkSchema, we need to create one or more
+      // encounters, and create or update one or more patients and physicians.
+      // 1. Fetch all existing patients for this biller
+
+      // Quick access map for patients
+      const patientMap = new Map<string, Patient>();
+      const existingPatients = await ctx.prisma.patient.findMany({
+        where: { billerId },
+        // Optionally select only fields needed for matching (name, dob, etc.)
+      });
+
+      existingPatients.forEach((p) => {
+        const key = `${normalize(p.name)}|${p.dob.toISOString().split("T")[0]}`;
+        patientMap.set(key, p);
+      });
+
+      // Quick access map for physicians
+      const physicianMap = new Map<string, Physician>();
+      const existingPhysicians = await ctx.prisma.physician.findMany({
+      });
+
+      existingPhysicians.forEach((p) => {
+        const key = `${normalize(p.name)}|${p.address}`;
+        physicianMap.set(key, p);
+      });
+
+      // Quick access map for facilities
+      const facilityMap = new Map<string, Facility>();
+      const existingFacilities = await ctx.prisma.facility.findMany({
+      });
+
+      existingFacilities.forEach((f) => {
+        const key = `${normalize(f.name)}|${f.address}`;
+        facilityMap.set(key, f);
+      });
+
+
+      // Let's divide-and-conquer to narrow down existing patients. We
+      // need to t match encounters to patients using available fields
+      // (name, DOB, etc.), using exact or fuzzy matching
+
+      // 2. For each case in the input:
+      input.forEach(async (caseData) => {
+        if (!caseData.patientName  || !caseData.dateOfBirth) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message:
+              "Patient name and date of birth are required for matching. " + 
+            "Face sheet is incomplete.",
+          });
+        }
+
+        const patientName: string = caseData.patientName!;
+        const dateOfBirth: string = caseData.dateOfBirth!;
+
+        // Then, inside your loop:
+        const patientkey = `${normalize(patientName)}|${dateOfBirth}`;
+        let matchedPatient = patientMap.get(patientkey);
+
+        // b. If not found, try fuzzy match (e.g., Levenshtein/Jaro-Winkler on name, dob within 1-2 days)
+        if (matchedPatient === undefined) {
+
+            // 1. Filter by DOB (exact or within a range, e.g., ±1 day)
+            const dobCandidates = existingPatients.filter((p) => {
+              // Example: exact match
+              return p.dob.toISOString().split("T")[0] === dateOfBirth;
+              // Or for a range, use a date diff function
+            });
+
+          const threshold = 2; // Adjust this threshold as needed
+          for (const p of dobCandidates) {
+            if (
+              levenshteinTwoMatrixRows(p.name, caseData.patientName!) >
+                threshold &&
+              levenshteinTwoMatrixRows(
+                p.dob.toISOString().split("T")[0],
+                caseData.dateOfBirth!,
+              ) > threshold
+            ) {
+              matchedPatient = p;
+              break;
+            }
+          }
+        }
+
+        // c. If still not found, create new patient
+        if (matchedPatient === undefined) {
+          const newPatient = await ctx.prisma.patient.create({
+            data: {
+              name: caseData.patientName,
+              dob: parseDate(caseData.dateOfBirth),
+              // ...other fields...
+              billerId,
+            },
+            
+          }).catch((error) => {
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: `Failed to create patient: ${error.message}`,
+            });
+          });
+
+          // Create insurance for the new patient
+            await ctx.prisma.insurance.create({
+              data: {
+                name: caseData.insurance_name ?? "Unknown",
+                insuranceType: caseData.insurance_type ?? "",
+                insurancePlan: caseData.insurance_plan ?? "",
+                insuranceStartDate: caseData.insurance_start_date
+                  ? parseDate(caseData.insurance_start_date)
+                  : new Date(),
+                insuranceEndDate: caseData.insurance_end_date
+                  ? parseDate(caseData.insurance_end_date)
+                  : null,
+                patientId: newPatient.id,
+              },
+            });
+
+          matchedPatient = newPatient;
+        }
+
+
+        if (!caseData.attending_physician  || !caseData.address) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message:
+              "Attending physician and address are required for matching. " + 
+            "Face sheet is incomplete.",
+          });
+        }
+
+        const attending_physician: string = caseData.attending_physician!;
+        const address: string = caseData.address!;
+
+        // Then, inside your loop:
+        const physicianKey = `${normalize(attending_physician)}|${address}`;
+        let matchedPhysician = physicianMap.get(physicianKey);
+
+        if (matchedPhysician === undefined) {
+          // 1. Filter by address (exact or within a range, e.g., similar street names)
+          const addressCandidates = existingPhysicians.filter((p) => {
+            // Example: exact match
+            return p.address === address;
+            // Or for a range, use a string similarity function
+          });
+
+          const threshold = 2; // Adjust this threshold as needed
+          for (const p of addressCandidates) {
+            if (
+              levenshteinTwoMatrixRows(p.name, caseData.attending_physician!) >
+                threshold &&
+              levenshteinTwoMatrixRows(p.address!, caseData.address!) > threshold
+            ) {
+              matchedPhysician = p;
+              break;
+            }
+          }
+        }
+
+        // c. If still not found, create new physician
+        if (matchedPhysician === undefined) {
+          const newPhysician = await ctx.prisma.physician.create({
+            data: {
+              name: attending_physician,
+              address: caseData.address,
+              physicianNPI: "missing_npi", // <-- required, use value or default
+              phone: caseData.phone ?? null,
+              // Add other fields as needed
+            }
+
+          }).catch((error) => {
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: `Failed to create physician: ${error.message}`,
+            });
+          });
+
+          matchedPhysician = newPhysician;
+        }
+
+
+        if (!caseData.admission_date) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Admission date is required for creating an encounter." + 
+            "Face sheet is incomplete.",
+          });
+        }
+        
+        // d. Create new encounter for this patient
+        await ctx.prisma.encounter.create({
+          data: {
+            patientId: matchedPatient.id,
+            // ...other encounter fields from caseData...
+            dateOfService: parseDate(caseData.admission_date),
+            physicianId: matchedPhysician.id,        // <-- Make sure this exists in caseData
+            appointmentType: "Select",
+
+          }
+        }).catch((error) => {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: `Failed to create encounter: ${error.message}`,
+            });
+        });
+        
+
+      // 3. Return summary (e.g., number of encounters created)
+      return { count: input.length };
+    });
+  }),
+
   createAction: privateProcedure
     .input(
       z.object({
@@ -714,7 +956,7 @@ export const appRouter = createTRPCRouter({
       // Create the biller action
       const action = await ctx.prisma.billerAction.create({
         data: {
-          encounterId : input.encounterId, // <-- Add this
+          encounterId: input.encounterId, // <-- Add this
           date: input.date,
           type: input.type,
           content: input.eventContent,

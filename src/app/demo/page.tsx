@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const DemoPage = () => {
   return (
-    <section className="pb-[120px] pt-[120px]" data-oid="vhl1o2w">
-      <div className="container" data-oid="hgeq:_o">
-        <DemoForm data-oid="jdv38py" />
+    <section className="pb-[120px] pt-[120px]">
+      <div className="container">
+        <DemoForm />
       </div>
     </section>
   );

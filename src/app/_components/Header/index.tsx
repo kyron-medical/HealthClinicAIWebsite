@@ -59,24 +59,16 @@ const Header = () => {
             ? "fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition dark:bg-gray-dark dark:shadow-sticky-dark"
             : "absolute h-20 bg-transparent bg-opacity-90"
         }`}
-        data-oid="56lzuu5"
       >
-        <div
-          className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row"
-          data-oid="q43ac2."
-        >
-          <div
-            className="relative flex w-full flex-col items-center justify-between lg:flex-row"
-            data-oid="i6er9b1"
-          >
+        <div className="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
+          <div className="relative flex w-full flex-col items-center justify-between lg:flex-row">
             {/* Logo */}
-            <div className="w-60 max-w-full px-4 xl:mr-12" data-oid="r9v.786">
+            <div className="w-60 max-w-full px-4 xl:mr-12">
               <Link
                 href="/"
                 className={`header-logo block w-full ${
                   sticky ? "py-5 lg:py-2" : "py-8"
                 } `}
-                data-oid="--kkcxl"
               >
                 <Image
                   src="/images/logo/kyron_medical.png"
@@ -84,7 +76,6 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
-                  data-oid="2r-uus6"
                 />
 
                 <Image
@@ -93,41 +84,33 @@ const Header = () => {
                   width={140}
                   height={30}
                   className="hidden w-full dark:block"
-                  data-oid="6h391yk"
                 />
               </Link>
             </div>
-            <div
-              className="flex w-full flex-col items-center justify-between px-4 lg:flex-row"
-              data-oid=".v5wcpo"
-            >
-              <div data-oid="fyosck9">
+            <div className="flex w-full flex-col items-center justify-between px-4 lg:flex-row">
+              <div>
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
                   aria-label="Mobile Menu"
                   className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
-                  data-oid="0nj4wfp"
                 >
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[7px] rotate-45" : " "
                     }`}
-                    data-oid="bhylr6d"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? "opacity-0 " : " "
                     }`}
-                    data-oid="lcum:8y"
                   />
 
                   <span
                     className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[-8px] -rotate-45" : " "
                     }`}
-                    data-oid="l2-iptj"
                   />
                 </button>
 
@@ -138,18 +121,10 @@ const Header = () => {
                       ? "visibility top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
                   }`}
-                  data-oid=":9ylbsm"
                 >
-                  <ul
-                    className="mb-5 block lg:flex lg:space-x-12"
-                    data-oid="owlfni7"
-                  >
+                  <ul className="mb-5 block lg:flex lg:space-x-12">
                     {menuData.map((menuItem, index) => (
-                      <li
-                        key={index}
-                        className="group relative"
-                        data-oid="5..cdwx"
-                      >
+                      <li key={index} className="group relative">
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
@@ -158,7 +133,6 @@ const Header = () => {
                                 ? "active text-primary underline-offset-2 dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
-                            data-oid=".8498q3"
                           >
                             {menuItem.title}
                           </Link>
@@ -167,22 +141,15 @@ const Header = () => {
                             <p
                               onClick={() => handleSubmenu(index)}
                               className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
-                              data-oid="w48vjjh"
                             >
                               {menuItem.title}
-                              <span className="pl-3" data-oid="sfwvno.">
-                                <svg
-                                  width="25"
-                                  height="24"
-                                  viewBox="0 0 25 24"
-                                  data-oid="vox8aaj"
-                                >
+                              <span className="pl-3">
+                                <svg width="25" height="24" viewBox="0 0 25 24">
                                   <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
                                     d="M6.29289 8.8427C6.68342 8.45217 7.31658 8.45217 7.70711 8.8427L12 13.1356L16.2929 8.8427C16.6834 8.45217 17.3166 8.45217 17.7071 8.8427C18.0976 9.23322 18.0976 9.86639 17.7071 10.2569L12 15.964L6.29289 10.2569C5.90237 9.86639 5.90237 9.23322 6.29289 8.8427Z"
                                     fill="currentColor"
-                                    data-oid="va-v8zb"
                                   />
                                 </svg>
                               </span>
@@ -191,7 +158,6 @@ const Header = () => {
                               className={`submenu relative left-0 top-full rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${
                                 openIndex === index ? "block" : "hidden"
                               }`}
-                              data-oid="xotj:jj"
                             >
                               {menuItem.submenu?.map((submenuItem, index) =>
                                 submenuItem.path ? (
@@ -201,7 +167,6 @@ const Header = () => {
                                     className={`block rounded py-2.5 text-sm text-dark hover:text-primary dark:text-white/70 dark:hover:text-white lg:px-3
         ${usePathName === submenuItem.path ? "active text-primary underline underline-offset-2" : ""}
       `}
-                                    data-oid="aex1euy"
                                   >
                                     {submenuItem.title}
                                   </Link>
@@ -215,40 +180,31 @@ const Header = () => {
                   </ul>
 
                   {/* Mobile-only login and signup */}
-                  <div className="mb-5 block lg:hidden" data-oid="oo745_f">
-                    <SignedOut data-oid=".eogjr4">
-                      <div
-                        className="flex flex-col items-center justify-between gap-4"
-                        data-oid="ouwt-3y"
-                      >
-                        <SignInButton data-oid="2fb2gu3">Login</SignInButton>
-                        <GetStarted data-oid="u:-7uk9" />
+                  <div className="mb-5 block lg:hidden">
+                    <SignedOut>
+                      <div className="flex flex-col items-center justify-between gap-4">
+                        <SignInButton>Login</SignInButton>
+                        <GetStarted />
                       </div>
                     </SignedOut>
-                    <SignedIn data-oid="9n7fnrz">
-                      <div
-                        className="flex flex-col items-center justify-between gap-4"
-                        data-oid="fs.fate"
-                      ></div>
-                      {isBiller && <DashboardButton data-oid="-sabzu_" />}
-                      <UserButton data-oid="k9ubq7u" />
+                    <SignedIn>
+                      <div className="flex flex-col items-center justify-between gap-4"></div>
+                      {isBiller && <DashboardButton />}
+                      <UserButton />
                     </SignedIn>
                   </div>
                 </nav>
               </div>
 
               {/* Large screen login and signup */}
-              <div
-                className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex"
-                data-oid="iw8gup8"
-              >
-                <SignedOut data-oid="w.gjj-p">
-                  <SignInButton data-oid="732e:3w">Login</SignInButton>
-                  <GetStarted data-oid="xxy16f5" />
+              <div className="hidden flex-col items-center justify-end gap-4 sm:flex-row lg:flex">
+                <SignedOut>
+                  <SignInButton>Login</SignInButton>
+                  <GetStarted />
                 </SignedOut>
-                <SignedIn data-oid="80kcvjk">
-                  {isBiller && <DashboardButton data-oid="v.sh1-y" />}
-                  <UserButton data-oid="f1.mca-" />
+                <SignedIn>
+                  {isBiller && <DashboardButton />}
+                  <UserButton />
                 </SignedIn>
               </div>
             </div>{" "}

@@ -40,10 +40,11 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
       { enabled: !!user },
     );
 
-  const { data: encounters = [], refetch } = trpc.getAllEncountersByBillerId.useQuery(
-    { userId: user?.id ?? "" },
-    { enabled: !!user },
-  );
+  const { data: encounters = [], refetch } =
+    trpc.getAllEncountersByBillerId.useQuery(
+      { userId: user?.id ?? "" },
+      { enabled: !!user },
+    );
 
   // 2. addPatients just triggers the file input
   const addPatients = () => {
@@ -54,28 +55,21 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
   };
 
   if (!user) {
-    return (
-      <div className="p-4" data-oid="vv8ci5e">
-        Loading...
-      </div>
-    );
+    return <div className="p-4">Loading...</div>;
 
     // or a loading spinner
   }
 
   return (
     <>
-      <div className="flex h-screen bg-gray-100" data-oid=":svb6ck">
+      <div className="flex h-screen bg-gray-100">
         {/* Floating Kyron AI Button */}
         <button
           className="fixed bottom-8 right-8 z-50 w-16 rounded-full bg-blue-600 p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={() => setChatbotOpen(true)}
           aria-label="Open Kyron AI Assistant"
-          data-oid="9:0r4w:"
         >
-          <span className="text-2xl font-bold text-white" data-oid="x87tkh3">
-            ?
-          </span>
+          <span className="text-2xl font-bold text-white">?</span>
         </button>
 
         {/* Kyron AI Assistant Modal */}
@@ -87,59 +81,20 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
             setChatInput={setChatInput}
             chatbotOpen={chatbotOpen}
             setChatbotOpen={setChatbotOpen}
-            data-oid="28oxo1l"
           />
         )}
 
         {/* Main Content */}
-        <div className="flex-1 overflow-auto p-8" data-oid="_:t8hy6">
-          <h2 className="mb-6 text-3xl font-bold" data-oid="p8rbx3j">
+        <div className="flex-1 overflow-auto p-8">
+          <h2 className="mb-6 text-3xl font-bold">
             {messages[currentMessageIndex]}
           </h2>
 
-          <div className="mb-6 flex space-x-8" data-oid=".j0vafe">
-            <div
-              className="w-64 rounded-lg bg-white p-6 shadow"
-              data-oid="znc59ld"
-            >
-              {/* Place this input somewhere in your JSX, e.g. at the top-level of your return */}
-              <div
-                className="flex flex-row items-center justify-between"
-                data-oid="nwybgaf"
-              >
-                <h3 className="mb-2 text-sm text-gray-500" data-oid="cckkhz8">
-                  Total Patients
-                </h3>
-                {/* <div className="flex items-center space-x-2">
-                             <input
-                               ref={fileInputRef}
-                               type="file"
-                               accept=".csv"
-                               className="hidden"
-                               onChange={handleFileChange}
-                             />
-                               <button
-                               onClick={addPatients}
-                               className="rounded bg-blue-600 px-2 py-1 text-xs text-white"
-                             >
-                               +
-                             </button>
-                            </div> */}
-                <FaceSheetMassUploader
-                  refetchPatientsAction={refetch}
-                  data-oid="7t1uvx1"
-                />
-              </div>
-              <p className="text-3xl font-bold" data-oid="g37f-ac">
-                {patients.length}
-              </p>
-            </div>
-          </div>
+          <div className="mb-6 flex space-x-8"></div>
 
           <EncounterGridClient
             encounters={encounters}
-            refetchPatientsAction={refetch}
-            data-oid="i-r4zgq"
+            refetchEncountersAction={refetch}
           />
         </div>
       </div>

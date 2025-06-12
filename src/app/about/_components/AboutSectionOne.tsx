@@ -3,15 +3,10 @@ import GetStarted from "@/app/_components/ui/started-button";
 const AboutSectionOne = () => {
   return (
     <>
-      <section
-        className="py-16 text-center md:py-20 lg:py-28"
-        data-oid="nahzb1a"
-      >
-        <div className="container mx-auto max-w-3xl" data-oid="lk_t-53">
-          <h2 className="text-3xl font-bold mb-6" data-oid="7qq8b0p">
-            About Kyron Medical
-          </h2>
-          <p className="text-lg text-body-color" data-oid="9dl430b">
+      <section className="py-16 text-center md:py-20 lg:py-28">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-3xl font-bold mb-6">About Kyron Medical</h2>
+          <p className="text-lg text-body-color">
             Kyron Medical is revolutionizing medical billing through
             intelligent, AI-driven denial handling. We specialize in
             transforming tedious and complex denial management processes into
@@ -20,8 +15,8 @@ const AboutSectionOne = () => {
             seamlessly with existing medical billing and electronic health
             record (EHR) systems, proactively identifying and resolving claim
             denials with unmatched speed and accuracy.
-            <br data-oid="vce9sra" />
-            <br data-oid="mhhkf-a" />
+            <br />
+            <br />
             By automating denial handling, Kyron Medical significantly reduces
             administrative burdens, enabling healthcare providers to reclaim
             valuable time previously spent on manual billing tasks. This
@@ -32,8 +27,8 @@ const AboutSectionOne = () => {
             profitability.
           </p>
         </div>
-        <div className="container pt-16" data-oid="n:0gqjh">
-          <GetStarted data-oid="idxgj9a" />
+        <div className="container pt-16">
+          <GetStarted />
         </div>
       </section>
     </>

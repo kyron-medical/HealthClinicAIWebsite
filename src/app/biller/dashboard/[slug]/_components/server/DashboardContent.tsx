@@ -34,9 +34,7 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
 
   // If you know the type of patientEvents, replace 'unknown' with the correct type above
 
-  return (
-    <DashboardContentClient patientEvents={encounters} data-oid="rp22iex" />
-  );
+  return <DashboardContentClient patientEvents={encounters} />;
 };
 
 export default DashboardContent;

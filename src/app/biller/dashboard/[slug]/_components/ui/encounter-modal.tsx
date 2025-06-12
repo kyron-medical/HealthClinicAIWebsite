@@ -15,7 +15,7 @@ import {
 } from "@prisma/client";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { DetailsForm } from "./modal-tabs/details-tab";
-import { VoiceAI } from "./modal-tabs/voiceai-tab";
+
 import { AppealForm } from "./modal-tabs/appeal-tab";
 import { EligibilityTab } from "./modal-tabs/eligibility-tab";
 
@@ -105,14 +105,14 @@ export default function EncounterModal({
   setEncounter,
   encounters,
   actions,
-  refetchEncountersAction: refetchPatientsAction,
+  refetchEncountersAction: refetchEncountersAction,
 }: EncounterModalProps) {
   const [mounted, setMounted] = useState(false);
 
   const eventModalRef = useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // In patient-modal.tsx
+  // In encounter-modal.tsx
   const handleTabChange = (newView: View) => {
     // Reset scroll position BEFORE view changes
     if (contentRef.current) {
@@ -124,7 +124,9 @@ export default function EncounterModal({
     setShowAddEvent(false);
   };
 
-  const [selectedAction, setSelectedAction] = useState<billerAction | null>(null);
+  const [selectedAction, setSelectedAction] = useState<billerAction | null>(
+    null,
+  );
   const [view, setView] = useState<View>("timeline");
 
   const [showAddEvent, setShowAddEvent] = useState(false);
@@ -224,7 +226,7 @@ export default function EncounterModal({
     try {
       await deleteEncounterMutation.mutateAsync({ encounterId });
       toast.success("Patient deleted successfully");
-      void refetchPatientsAction();
+      void refetchEncountersAction();
       // Remove the deleted patient from the patients list and select the next one if available
       const idx = encounters.findIndex((p) => p.id === encounterId);
       const newEncounters = encounters.filter((p) => p.id !== encounterId);
@@ -272,7 +274,7 @@ export default function EncounterModal({
         fileUrls: fileUrls,
       });
 
-      void refetchPatientsAction();
+      void refetchEncountersAction();
 
       toast.dismiss();
       toast.success("Event added!");
@@ -297,23 +299,20 @@ export default function EncounterModal({
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 "
       onClick={handleBackdropClick}
-      data-oid="pj6jopk"
     >
       <div
         className="relative h-[80%] w-[80%] rounded-lg bg-white p-6 px-16 shadow-lg dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
-        data-oid="64znale"
       >
         <button
           onClick={onClose}
           className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700"
           aria-label="Close"
-          data-oid="v:k9tqw"
         >
           ✕
         </button>
 
-        <AnimatePresence mode="wait" data-oid="sn6ytc5">
+        <AnimatePresence mode="wait">
           {!selectedAction ? (
             <motion.div
               key={view}
@@ -322,18 +321,13 @@ export default function EncounterModal({
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.3 }}
               className="flex h-full w-full items-center justify-center rounded-lg bg-white"
-              data-oid="b:n_i9q"
             >
               <div
                 ref={contentRef}
                 className="h-[85%] w-[100%] overflow-y-auto rounded-lg bg-white"
-                data-oid="hqlq6-2"
               >
-                <div className="mb-4 flex flex-col gap-2" data-oid="3xmc40t">
-                  <div
-                    className="flex flex-row items-center gap-2"
-                    data-oid="j2hfc5_"
-                  >
+                <div className="mb-4 flex flex-col gap-2">
+                  <div className="flex flex-row items-center gap-2">
                     <button
                       className={`rounded px-4 py-2 ${
                         view === "details"
@@ -343,7 +337,6 @@ export default function EncounterModal({
                       onClick={() => {
                         handleTabChange("details");
                       }}
-                      data-oid="ua17_d2"
                     >
                       Details
                     </button>
@@ -357,24 +350,10 @@ export default function EncounterModal({
                         setView("appeal");
                         setShowAddEvent(false);
                       }}
-                      data-oid="x8j-pld"
                     >
-                      Letter of Appeal
+                      Appeals
                     </button>
-                    <button
-                      className={`rounded px-4 py-2 ${
-                        view === "voice"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200 text-gray-700"
-                      }`}
-                      onClick={() => {
-                        setView("voice");
-                        setShowAddEvent(false);
-                      }}
-                      data-oid="5-:dm-:"
-                    >
-                      Voice AI Agent
-                    </button>
+
                     <button
                       className={`rounded px-4 py-2 ${
                         view === "eligibility"
@@ -385,7 +364,6 @@ export default function EncounterModal({
                         setView("eligibility");
                         setShowAddEvent(false);
                       }}
-                      data-oid="db74tqi"
                     >
                       Eligibility & Benefits
                     </button>
@@ -393,7 +371,6 @@ export default function EncounterModal({
                       <button
                         className="ml-auto rounded px-3 py-1 text-sm text-gray-500 hover:bg-gray-100"
                         onClick={() => setView("timeline")}
-                        data-oid="1adbc_a"
                       >
                         Back to Timeline
                       </button>
@@ -404,26 +381,18 @@ export default function EncounterModal({
                           className="ml-auto mr-4 flex items-center gap-1 rounded bg-red-100 px-3 py-1 text-red-600 hover:bg-red-200"
                           onClick={() => handleDeleteEncounter(encounter.id)}
                           title="Delete Patient"
-                          data-oid="m1yk0ow"
                         >
-                          <FaRegTrashCan
-                            className="text-lg"
-                            data-oid="4zcgk28"
-                          />
+                          <FaRegTrashCan className="text-lg" />
                           Delete
                         </button>
                       </>
                     )}
                   </div>
                   {view === "timeline" && (
-                    <div
-                      className="flex flex-row items-center gap-2"
-                      data-oid="bwv-02."
-                    >
+                    <div className="flex flex-row items-center gap-2">
                       <button
                         className="rounded bg-blue-600 px-4 py-2 text-white"
                         onClick={() => setShowAddEvent(true)}
-                        data-oid="aa3s5m8"
                       >
                         Add Patient Event
                       </button>
@@ -435,35 +404,27 @@ export default function EncounterModal({
                   <form
                     className="mb-4 flex flex-col gap-2 rounded border bg-gray-50 p-4"
                     onSubmit={handleAddAction}
-                    data-oid="lts80:y"
                   >
-                    <label className="text-sm font-semibold" data-oid="bskuh6b">
+                    <label className="text-sm font-semibold">
                       Event Type
                       <select
                         className="mt-1 w-full rounded border px-2 py-1"
                         value={eventType}
                         onChange={(e) => setEventType(e.target.value as Action)}
                         required
-                        data-oid="i3m9nvt"
                       >
-                        <option value="" disabled data-oid="7_12:fh">
+                        <option value="" disabled>
                           Select event type
                         </option>
-                        <option value="Note" data-oid="ub10srp">
-                          Note
-                        </option>
-                        <option value="Letter of Appeal" data-oid="_ucbd8k">
+                        <option value="Note">Note</option>
+                        <option value="Letter of Appeal">
                           Letter of Appeal
                         </option>
-                        <option value="Voice AI" data-oid="8rwnlp3">
-                          Voice AI
-                        </option>
-                        <option value="Insurance Paid" data-oid="x89zrqp">
-                          Insurance Paid
-                        </option>
+                        <option value="Voice AI">Voice AI</option>
+                        <option value="Insurance Paid">Insurance Paid</option>
                       </select>
                     </label>
-                    <label className="text-sm font-semibold" data-oid="t6ff.gn">
+                    <label className="text-sm font-semibold">
                       Event Content
                       <textarea
                         className="mt-1 w-full rounded border px-2 py-1"
@@ -471,10 +432,9 @@ export default function EncounterModal({
                         onChange={(e) => setEventContent(e.target.value)}
                         placeholder="Enter event details"
                         required
-                        data-oid="j50ek-t"
                       />
                     </label>
-                    <label className="text-sm font-semibold" data-oid="qn7vpg:">
+                    <label className="text-sm font-semibold">
                       Event Date
                       <input
                         type="date"
@@ -482,10 +442,9 @@ export default function EncounterModal({
                         value={eventDate}
                         onChange={(e) => setEventDate(e.target.value)}
                         required
-                        data-oid="3kw566k"
                       />
                     </label>
-                    <label className="text-sm font-semibold" data-oid="zy8a4u:">
+                    <label className="text-sm font-semibold">
                       Attach PDF(s)
                       <input
                         type="file"
@@ -495,119 +454,117 @@ export default function EncounterModal({
                         onChange={(e) =>
                           setEventPdfs(Array.from(e.target.files ?? []))
                         }
-                        data-oid="8d:ipn5"
                       />
                     </label>
-                    <div data-oid="ag.av5v">
+                    <div>
                       {/* {eventType === "Note" && (
-                        <div data-oid="56h1c-3">
-                          <label
-                            className="text-sm font-semibold"
-                            data-oid="uk:w3eg"
-                          >
-                            Appointment Type
-                            <select
-                              className="block w-full rounded-md border border-gray-300 p-2"
-                              data-oid="h6s2drz"
-                            >
-                              <option value="yes" data-oid="2lt5tq2">
-                                Annual Physical Exam (APE)
-                              </option>
-                              <option value="no" data-oid="3:rek6h">
-                                Chronic Care Management (CCM)
-                              </option>
-                              <option value="yes" data-oid="0j.7xj_">
-                                Consultation (Consult)
-                              </option>
-                              <option value="no" data-oid="zs268:6">
-                                Follow-Up (F/U)
-                              </option>
-                              <option value="yes" data-oid="8lcg3v1">
-                                Hopistal Follow-Up (Hosp F/U)
-                              </option>
-                              <option value="no" data-oid="4upfy5l">
-                                Immunization Visit (IV)
-                              </option>
-                              <option value="yes" data-oid="qqjcba:">
-                                New Patient Telehealth (TH)
-                              </option>
-                              <option value="no" data-oid="t-37h7a">
-                                New Patient
-                              </option>
-                              <option value="yes" data-oid="2vhb-ht">
-                                Post-Operative Visit (Post-Op)
-                              </option>
-                              <option value="no" data-oid="6x6quwm">
-                                Pre-Operative Assessment (Pre-Op)
-                              </option>
-                              <option value="yes" data-oid="m8sm1w9">
-                                Redraw
-                              </option>
-                              <option value="no" data-oid="zas08ty">
-                                Same Day
-                              </option>
-                              <option value="yes" data-oid="ypufs8h">
-                                Scheduled
-                              </option>
-                              <option value="no" data-oid="6p170g-">
-                                Sick Visit (SV)
-                              </option>
-                              <option value="yes" data-oid="scbv-eh">
-                                True PA
-                              </option>
-                              <option value="no" data-oid="j1v2hqc">
-                                Urgent Care Visit (UCV)
-                              </option>
-                              <option value="no" data-oid="op:eh1c">
-                                Well Child Visit (WCV)
-                              </option>
-                            </select>
-                          </label>
-                          <label
-                            className="text-sm font-semibold"
-                            data-oid="son4vbk"
-                          >
-                            Place of Service
-                            <select
-                              className="block w-full rounded-md border border-gray-300 p-2"
-                              data-oid="v310r.8"
-                            >
-                              <option value="yes" data-oid="q9pnbre">
-                                Home
-                              </option>
-                              <option value="no" data-oid="zfwc.al">
-                                PCP/Physician Office
-                              </option>
-                              <option value="yes" data-oid="2n35rqh">
-                                Outpatient/Facility
-                              </option>
-                              <option value="no" data-oid="gqa8arb">
-                                Free Standing Facility
-                              </option>
-                              <option value="yes" data-oid="g6pnmpw">
-                                Specialist
-                              </option>
-                              <option value="no" data-oid="9z_b8ph">
-                                Ambulatory Surgical Center
-                              </option>
-                              <option value="yes" data-oid="wt21mk_">
-                                Impatient Hospital
-                              </option>
-                              <option value="no" data-oid="wjs9m3x">
-                                Independent Lab
-                              </option>
-                            </select>
-                          </label>
-                        </div>
-                      )} */}
+                    <div data-oid="56h1c-3">
+                    <label
+                      className="text-sm font-semibold"
+                      data-oid="uk:w3eg"
+                    >
+                      Appointment Type
+                      <select
+                        className="block w-full rounded-md border border-gray-300 p-2"
+                        data-oid="h6s2drz"
+                      >
+                        <option value="yes" data-oid="2lt5tq2">
+                          Annual Physical Exam (APE)
+                        </option>
+                        <option value="no" data-oid="3:rek6h">
+                          Chronic Care Management (CCM)
+                        </option>
+                        <option value="yes" data-oid="0j.7xj_">
+                          Consultation (Consult)
+                        </option>
+                        <option value="no" data-oid="zs268:6">
+                          Follow-Up (F/U)
+                        </option>
+                        <option value="yes" data-oid="8lcg3v1">
+                          Hopistal Follow-Up (Hosp F/U)
+                        </option>
+                        <option value="no" data-oid="4upfy5l">
+                          Immunization Visit (IV)
+                        </option>
+                        <option value="yes" data-oid="qqjcba:">
+                          New Patient Telehealth (TH)
+                        </option>
+                        <option value="no" data-oid="t-37h7a">
+                          New Patient
+                        </option>
+                        <option value="yes" data-oid="2vhb-ht">
+                          Post-Operative Visit (Post-Op)
+                        </option>
+                        <option value="no" data-oid="6x6quwm">
+                          Pre-Operative Assessment (Pre-Op)
+                        </option>
+                        <option value="yes" data-oid="m8sm1w9">
+                          Redraw
+                        </option>
+                        <option value="no" data-oid="zas08ty">
+                          Same Day
+                        </option>
+                        <option value="yes" data-oid="ypufs8h">
+                          Scheduled
+                        </option>
+                        <option value="no" data-oid="6p170g-">
+                          Sick Visit (SV)
+                        </option>
+                        <option value="yes" data-oid="scbv-eh">
+                          True PA
+                        </option>
+                        <option value="no" data-oid="j1v2hqc">
+                          Urgent Care Visit (UCV)
+                        </option>
+                        <option value="no" data-oid="op:eh1c">
+                          Well Child Visit (WCV)
+                        </option>
+                      </select>
+                    </label>
+                    <label
+                      className="text-sm font-semibold"
+                      data-oid="son4vbk"
+                    >
+                      Place of Service
+                      <select
+                        className="block w-full rounded-md border border-gray-300 p-2"
+                        data-oid="v310r.8"
+                      >
+                        <option value="yes" data-oid="q9pnbre">
+                          Home
+                        </option>
+                        <option value="no" data-oid="zfwc.al">
+                          PCP/Physician Office
+                        </option>
+                        <option value="yes" data-oid="2n35rqh">
+                          Outpatient/Facility
+                        </option>
+                        <option value="no" data-oid="gqa8arb">
+                          Free Standing Facility
+                        </option>
+                        <option value="yes" data-oid="g6pnmpw">
+                          Specialist
+                        </option>
+                        <option value="no" data-oid="9z_b8ph">
+                          Ambulatory Surgical Center
+                        </option>
+                        <option value="yes" data-oid="wt21mk_">
+                          Impatient Hospital
+                        </option>
+                        <option value="no" data-oid="wjs9m3x">
+                          Independent Lab
+                        </option>
+                      </select>
+                    </label>
+                    </div>
+                    )} */}
                     </div>
 
-                    <div className="flex gap-2" data-oid="1mdc0cc">
+                    <div className="flex gap-2">
                       <button
                         type="submit"
                         className="rounded bg-blue-600 px-4 py-2 text-white"
                         disabled={createActionMutation.isPending}
-                        data-oid="ecedil7"
                       >
                         {createActionMutation.isPending
                           ? "Adding..."
@@ -617,7 +574,6 @@ export default function EncounterModal({
                         type="button"
                         className="rounded bg-gray-300 px-4 py-2 text-gray-700"
                         onClick={() => setShowAddEvent(false)}
-                        data-oid="s-7olcq"
                       >
                         Cancel
                       </button>
@@ -627,10 +583,10 @@ export default function EncounterModal({
 
                 {view === "timeline" && (
                   <>
-                    <h2 className="mb-4 text-3xl font-bold" data-oid="79hcj:r">
+                    <h2 className="mb-4 text-3xl font-bold">
                       {encounter.patient.name}&apos;s Timeline
                     </h2>
-                    <ul className="space-y-4" data-oid="pp.b4i-">
+                    <ul className="space-y-4">
                       {actions.map((action: billerAction, index) => (
                         <li
                           key={index}
@@ -638,16 +594,12 @@ export default function EncounterModal({
                           onClick={() => {
                             setSelectedAction(action);
                           }}
-                          data-oid="jlfp.s:"
                         >
-                          <p className="font-semibold" data-oid="htsc6_5">
+                          <p className="font-semibold">
                             {action.date.toDateString()}:{" "}
                             {action.type ?? action.type}
                           </p>
-                          <p
-                            className="truncate text-sm text-gray-500"
-                            data-oid="xxn60wu"
-                          >
+                          <p className="truncate text-sm text-gray-500">
                             {action.type === Action.APPEALS
                               ? action.summary
                               : action.content}
@@ -655,26 +607,18 @@ export default function EncounterModal({
                         </li>
                       ))}
                     </ul>
-                    <div
-                      className="absolute bottom-4 left-16 mt-6 flex justify-end"
-                      data-oid="ra0mtj3"
-                    >
+                    <div className="absolute bottom-4 left-16 mt-6 flex justify-end">
                       <button
                         className="rounded  px-4 py-2 text-slate-700"
                         onClick={handlePreviousPatientEncounter}
-                        data-oid="k4b2ob3"
                       >
                         ← Previous Encounter
                       </button>
                     </div>
-                    <div
-                      className="absolute bottom-4 right-16 mt-6 flex justify-end"
-                      data-oid="qkto7j4"
-                    >
+                    <div className="absolute bottom-4 right-16 mt-6 flex justify-end">
                       <button
                         className="rounded  px-4 py-2 text-slate-700"
                         onClick={handleNextPatientEncounter}
-                        data-oid="o07l.yi"
                       >
                         Next Encounter →
                       </button>
@@ -682,35 +626,21 @@ export default function EncounterModal({
                   </>
                 )}
 
-                {/* {view === "details" && (
+                {view === "details" && (
                   <DetailsForm
-                    patient={patient}
-                    refetchPatientsAction={refetchPatientsAction}
-                    data-oid="hzkim.u"
+                    encounter={encounter}
+                    refetchEncountersAction={refetchEncountersAction}
                   />
                 )}
 
                 {view === "appeal" && (
                   <AppealForm
-                    patient={patient}
-                    refetchPatientsAction={refetchPatientsAction}
-                    data-oid="89eoreu"
+                    encounter={encounter}
+                    refetchEncountersAction={refetchEncountersAction}
                   />
                 )}
 
-                {view === "voice" && (
-                  <VoiceAI
-                    patient={patient}
-                    _events={events}
-                    _patients={patients}
-                    createEventMutation={createEventMutation}
-                    data-oid="no8v452"
-                  />
-                )} */}
-
-                {view === "eligibility" && (
-                  <EligibilityTab data-oid="abt7e-q" />
-                )}
+                {view === "eligibility" && <EligibilityTab />}
               </div>
             </motion.div>
           ) : (
@@ -721,56 +651,44 @@ export default function EncounterModal({
               exit={{ x: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="h-full w-full rounded-lg bg-white"
-              data-oid="vg-r._m"
             >
               <div
                 ref={eventModalRef}
                 className="h-full w-full rounded-lg bg-white"
-                data-oid="-wdzujc"
               >
                 <button
                   className="absolute left-4 top-4 rounded-full p-2 text-gray-500 hover:bg-gray-200"
                   onClick={() => setSelectedAction(null)}
                   aria-label="Back to Encounter Modal"
-                  data-oid="46q_yfa"
                 >
                   ←
                 </button>
-                <h3 className="mb-4 text-2xl font-bold" data-oid="al:ada5">
+                <h3 className="mb-4 text-2xl font-bold">
                   {selectedAction?.type} Details
                 </h3>
                 {selectedAction?.type === Action.APPEALS ? (
                   <>
-                    <p className="mb-2" data-oid="efb-nn8">
-                      <strong data-oid="i286gf7">Summary:</strong>{" "}
-                      {selectedAction.summary}
+                    <p className="mb-2">
+                      <strong>Summary:</strong> {selectedAction.summary}
                     </p>
-                    <p data-oid="_x363lr">
-                      <strong data-oid="i0iw75c">Transcript:</strong>{" "}
-                      {selectedAction.transcript}
+                    <p>
+                      <strong>Transcript:</strong> {selectedAction.transcript}
                     </p>
                   </>
                 ) : (
-                  <div data-oid="4kern2p">
+                  <div>
                     {selectedAction?.fileUrls &&
                     selectedAction.fileUrls.length > 0 ? (
-                      <div data-oid="e:_daz9">
-                        <h4 className="mb-2 font-semibold" data-oid="_b2rfn_">
-                          Attached PDFs:
-                        </h4>
-                        <ul className="space-y-2" data-oid="ujsxtxh">
+                      <div>
+                        <h4 className="mb-2 font-semibold">Attached PDFs:</h4>
+                        <ul className="space-y-2">
                           {selectedAction.fileUrls.map((url, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-center gap-2"
-                              data-oid="v2ue76l"
-                            >
+                            <li key={idx} className="flex items-center gap-2">
                               <a
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-600 underline"
-                                data-oid="84b5et6"
                               >
                                 View PDF {idx + 1}
                               </a>
@@ -778,7 +696,6 @@ export default function EncounterModal({
                                 href={url}
                                 download
                                 className="rounded bg-green-500 px-2 py-1 text-xs text-white hover:bg-green-600"
-                                data-oid="hhi2h13"
                               >
                                 Download
                               </a>
@@ -787,7 +704,6 @@ export default function EncounterModal({
                                 onClick={() =>
                                   handleEditPdf(selectedAction, idx)
                                 }
-                                data-oid="-b0rl1w"
                               >
                                 Edit
                               </button>
@@ -796,7 +712,6 @@ export default function EncounterModal({
                                 onClick={() =>
                                   handleDeletePdf(selectedAction, idx)
                                 }
-                                data-oid=":bxdz.q"
                               >
                                 Delete
                               </button>
@@ -805,7 +720,7 @@ export default function EncounterModal({
                         </ul>
                       </div>
                     ) : (
-                      <p data-oid="9t5tj-n">{selectedAction?.content}</p>
+                      <p>{selectedAction?.content}</p>
                     )}
                   </div>
                 )}

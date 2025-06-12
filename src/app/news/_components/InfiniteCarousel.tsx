@@ -41,56 +41,40 @@ export const InfiniteCarousel = ({
   }, []);
 
   return (
-    <div className={styles.scroller} ref={scrollerRef} data-oid="h_5gf:_">
-      <ul className={styles.scroller__inner} data-oid="-zkzky4">
+    <div className={styles.scroller} ref={scrollerRef}>
+      <ul className={styles.scroller__inner}>
         {/* First set of images */}
 
         {children.map((child, index) => (
-          <li key={`imageA-${index}`} data-oid="oc_66ds">
-            {child}
-          </li>
+          <li key={`imageA-${index}`}>{child}</li>
         ))}
         {/* Second set of images */}
         {children.map((child, index) => (
-          <li key={`imageB-${index}`} data-oid="j:fmoy0">
-            {child}
-          </li>
+          <li key={`imageB-${index}`}>{child}</li>
         ))}
         {/* Third set of images */}
         {children.map((child, index) => (
-          <li key={`imageC-${index}`} data-oid="mfumlvf">
-            {child}
-          </li>
+          <li key={`imageC-${index}`}>{child}</li>
         ))}
         {/* Fourth set of images */}
         {children.map((child, index) => (
-          <li key={`imageD-${index}`} data-oid="cb3qshj">
-            {child}
-          </li>
+          <li key={`imageD-${index}`}>{child}</li>
         ))}
         {/* Fifth set of images */}
         {children.map((child, index) => (
-          <li key={`imageE-${index}`} data-oid="7ek.ta-">
-            {child}
-          </li>
+          <li key={`imageE-${index}`}>{child}</li>
         ))}
         {/* Sixth set of images */}
         {children.map((child, index) => (
-          <li key={`imageF-${index}`} data-oid="glwi3d2">
-            {child}
-          </li>
+          <li key={`imageF-${index}`}>{child}</li>
         ))}
         {/* Seventh set of images */}
         {children.map((child, index) => (
-          <li key={`imageG-${index}`} data-oid="zzwuk0x">
-            {child}
-          </li>
+          <li key={`imageG-${index}`}>{child}</li>
         ))}
         {/* Eighth set of images */}
         {children.map((child, index) => (
-          <li key={`imageH-${index}`} data-oid="apyx8oj">
-            {child}
-          </li>
+          <li key={`imageH-${index}`}>{child}</li>
         ))}
       </ul>
     </div>

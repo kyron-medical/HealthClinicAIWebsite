@@ -31,17 +31,17 @@ interface UploadFaceSheetsResult {
 }
 
 interface FaceSheetMassUploaderProps {
-  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
+  refetchEncountersAction: (options?: unknown) => Promise<unknown>;
 }
 
 // const textract = new TextractClient({ region: "us-east-1" }); // set your region
 
 export function FaceSheetMassUploader({
-  refetchPatientsAction,
+  refetchEncountersAction,
 }: FaceSheetMassUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const createPatientsBulk = trpc.createPatientsBulk.useMutation();
+  const createCasesBulk = trpc.createCasesBulk.useMutation();
   const { user } = useUser();
   if (!user) {
     toast.error("You must be logged in to upload face sheets.");
@@ -89,7 +89,7 @@ export function FaceSheetMassUploader({
 
     try {
       const response = await fetch(
-        "https://aws.kyronmedical.com/bapi/upload-face-sheets",
+        "https://www.kyronmedical.com/bapi/upload-face-sheets",
         {
           method: "POST",
           body: formData,
@@ -122,8 +122,8 @@ export function FaceSheetMassUploader({
         return;
       }
 
-      const newPatients = data.results.map((patient) => {
-        const extractedData = patient.extractedData;
+      const newEncounters = data.results.map((output) => {
+        const extractedData = output.extractedData;
         return {
           name: extractedData.patient_name,
           insurer: extractedData.insurance_name ?? "Unknown",
@@ -143,9 +143,9 @@ export function FaceSheetMassUploader({
       });
 
       try {
-        await createPatientsBulk.mutateAsync(newPatients);
-        toast.success(`Created ${newPatients.length} patient(s)`);
-        await refetchPatientsAction(); // Immediately update the list
+        await createCasesBulk.mutateAsync(newEncounters);
+        toast.success(`Created ${newEncounters.length} patient(s)`);
+        await refetchEncountersAction(); // Immediately update the list
       } catch (err) {
         toast.error(
           "Failed to create patients in bulk." +
@@ -165,7 +165,7 @@ export function FaceSheetMassUploader({
   };
 
   return (
-    <div className="flex items-center" data-oid="20rrr-_">
+    <div className="flex items-center">
       {/* Hidden file input to trigger face sheet upload */}
       <input
         ref={fileInputRef}
@@ -174,7 +174,6 @@ export function FaceSheetMassUploader({
         multiple
         className="hidden"
         onChange={handleFilesSelected}
-        data-oid="2o5fpxr"
       />
 
       {/* Only the "+" button is rendered here */}
@@ -186,7 +185,6 @@ export function FaceSheetMassUploader({
             ? "cursor-not-allowed bg-gray-400"
             : "bg-blue-600 hover:bg-blue-700"
         }`}
-        data-oid="tmy:nnv"
       >
         {uploading ? "Uploading…" : "+"}
       </button>

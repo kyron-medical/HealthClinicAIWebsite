@@ -24,19 +24,13 @@ export default function Page() {
 
   if (!user) {
     return (
-      <section
-        className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-        data-oid="auqw.rx"
-      >
-        <div className="container" data-oid="27yg821">
-          <div className="-mx-4 flex flex-wrap" data-oid="33ui5s5">
-            <div className="w-full px-4" data-oid="umia0u7">
-              <div
-                className="mx-auto max-w-[500px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
-                data-oid="0wd.yuo"
-              >
-                <h1 data-oid="v1hrd15">Kyron Medical</h1>
-                <p data-oid="k47:-hy">Please sign-up to continue</p>
+      <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
+        <div className="container">
+          <div className="-mx-4 flex flex-wrap">
+            <div className="w-full px-4">
+              <div className="mx-auto max-w-[500px] rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]">
+                <h1>Kyron Medical</h1>
+                <p>Please sign-up to continue</p>
               </div>
             </div>
           </div>
@@ -46,25 +40,16 @@ export default function Page() {
   }
 
   return (
-    <section
-      className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]"
-      data-oid="wm6n7gz"
-    >
-      <div className="container" data-oid="0u:suh8">
-        <div className="-mx-4 flex flex-wrap" data-oid="ufs2.cx">
-          <div className="w-full px-4" data-oid="x6r4esl">
-            <div
-              className="mx-auto flex max-w-[500px] flex-col items-center justify-center gap-8 rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]"
-              data-oid="qu6rx28"
-            >
-              <div className="text-center" data-oid="_vm.a6x">
-                <h1
-                  className="mb-2 text-center text-2xl font-bold"
-                  data-oid="k1nmo04"
-                >
+    <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
+      <div className="container">
+        <div className="-mx-4 flex flex-wrap">
+          <div className="w-full px-4">
+            <div className="mx-auto flex max-w-[500px] flex-col items-center justify-center gap-8 rounded bg-white px-6 py-10 shadow-three dark:bg-dark sm:p-[60px]">
+              <div className="text-center">
+                <h1 className="mb-2 text-center text-2xl font-bold">
                   Welcome to Kyron Medical
                 </h1>
-                <strong className="text-gray-700" data-oid="onlgfmy">
+                <strong className="text-gray-700">
                   Please select your role to continue:
                 </strong>
               </div>
@@ -72,17 +57,12 @@ export default function Page() {
                 className="block w-full rounded-md border border-gray-300 p-2"
                 value={role}
                 onChange={handleChange}
-                data-oid="vpm9dub"
               >
-                <option value="" disabled data-oid="y9bg3j0">
+                <option value="" disabled>
                   Select your role
                 </option>
-                <option value="undergraduate" data-oid="7ikjyue">
-                  Private Practice
-                </option>
-                <option value="graduate" data-oid="ltcusl2">
-                  Medical Billing Company
-                </option>
+                <option value="undergraduate">Private Practice</option>
+                <option value="graduate">Medical Billing Company</option>
               </select>
 
               <motion.button
@@ -90,7 +70,6 @@ export default function Page() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onHoverStart={() => console.log("hover started!")}
-                data-oid="wzqzap1"
               >
                 <Link
                   href={`/biller/dashboard/${user.id}`}
@@ -117,7 +96,6 @@ export default function Page() {
                       },
                     );
                   }}
-                  data-oid="s84tznk"
                 >
                   Register
                 </Link>

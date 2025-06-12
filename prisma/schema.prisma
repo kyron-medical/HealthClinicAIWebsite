@@ -44,18 +44,18 @@ model Patient {
   name         String      @default("patient_name")
   name_iv      String? // now nullable (defaults to NULL)
   name_tag     String? // likewise
-  dob          DateTime    @default(dbgenerated("'1000-01-01T00:00:00.000Z'")) // default to a sentinel value
+  dob          DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
   address      String? // nullable
   address_iv   String? // nullable
   address_tag  String? // nullable
   sex          String? // nullable
   sex_iv       String? // nullable
   sex_tag      String? // nullable
-  insurer      String      @default("insurer_name") // default to "insurer_name"
-  insurer_iv   String? // nullable
-  insurer_tag  String? // nullable
+  insurances   Insurance[] // relation to multiple Insurance records
+  insurer_iv   String[] // array, one for each insurance
+  insurer_tag  String[] // array, one for each insurance
   encounters   Encounter[]
-  serviceStart DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
+  serviceStart DateTime    @default("1900-01-01T00:00:00.000Z") // default to a sentinel value
   serviceEnd   DateTime?
 
   zipCode     String? // already nullable
@@ -68,20 +68,72 @@ model Patient {
   updatedAt DateTime @updatedAt
 }
 
+model Insurance {
+  id                 String    @id @default(cuid())
+  name               String
+  insuranceType      String
+  insurancePlan      String
+  insuranceStartDate DateTime  @default(now())
+  insuranceEndDate   DateTime?
+  patientId          String?
+  Patient            Patient?  @relation(fields: [patientId], references: [id])
+}
+
 model Physician {
-  id        String   @id @default(cuid())
-  name      String
-  name_iv   String? // nullable
-  name_tag  String? // nullable
-  npi       String   @unique
-  opn       String? // optional, can be null
-  address   String?
-  phone     String?
-  email     String?
+  id           String   @id @default(cuid())
+  name         String
+  name_iv      String? // nullable
+  name_tag     String? // nullable
+  physicianNPI String   @default("missing_npi") // default to a sentinel value
+  opn          String? // optional, can be null
+  address      String?
+  phone        String?
+  email        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Add a relation to the encounter model
+  encounters Encounter[]
+}
+
+model Facility {
+  id          String  @id @default(cuid())
+  name        String
+  address     String @default("missing_address") // default to a sentinel value
+  city        String @default("missing_city") // default to a sentinel value
+  state       String @default("missing_state") // default to a sentinel value
+  zipCode     String @default("missing_zip") // default to a sentinel value
+  facilityNPI String? // already present
+
+  taxId String?
+  phone String?
+  fax   String?
+  email String?
+
+  billingAddressLine1 String?
+  billingAddressLine2 String?
+  billingCity         String?
+  billingState        String?
+  billingZipCode      String?
+  billingContactName  String?
+  billingContactPhone String?
+  billingContactEmail String?
+
+  facilityType           String // or enum
+  placeOfServiceCode     String?
+  taxonomyCodes          String[]  @default([])
+  ccn                    String?
+  ptan                   String?
+  cliaNumber             String?
+  licenseNumber          String?
+  licenseState           String?
+  acceptAssignment       Boolean?
+  medicareEnrollmentDate DateTime?
+  medicaidEnrollmentDate DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Add a relation to the encounter model
   encounters Encounter[]
 }
 
@@ -95,7 +147,7 @@ model Encounter {
 
   facilityName String? // already nullable
 
-  appointmentType String
+  appointmentType String @default("Select") 
   placeOfService  String?
   // Add an array of file urls
   fileUrls        String[]
@@ -105,9 +157,11 @@ model Encounter {
   updatedAt DateTime @updatedAt
 
   // Add a relation to the Patient model
-  patient   Patient        @relation(fields: [patientId], references: [id])
-  physician Physician      @relation(fields: [physicianId], references: [id])
-  actions  billerAction[] 
+  patient    Patient        @relation(fields: [patientId], references: [id])
+  physician  Physician      @relation(fields: [physicianId], references: [id])
+  actions    billerAction[]
+  Facility   Facility?      @relation(fields: [facilityId], references: [id])
+  facilityId String?
 }
 
 enum Action {

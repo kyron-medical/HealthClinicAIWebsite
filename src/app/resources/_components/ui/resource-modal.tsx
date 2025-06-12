@@ -53,26 +53,23 @@ export default function ResourceModal({
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       onClick={handleBackdropClick}
-      data-oid="p7_x2n2"
     >
       <div
         className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
-        data-oid=":1n_m4g"
       >
         <button
           onClick={onClose}
           className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700"
           aria-label="Close"
-          data-oid="gsvozob"
         >
           ✕
         </button>
 
-        <h2 className="mb-4 text-2xl font-bold" data-oid="owl3d6b">
+        <h2 className="mb-4 text-2xl font-bold">
           Access &ldquo;{resourceTitle}&rdquo;
         </h2>
-        <p className="mb-6" data-oid="7jz:2_5">
+        <p className="mb-6">
           Please provide your email to access this exclusive resource.
         </p>
 
@@ -80,15 +77,14 @@ export default function ResourceModal({
           onSuccess={handleEmailSuccess}
           onClose={onClose}
           redirectUrl={resourceUrl}
-          data-oid="ijvmj95"
         />
 
         {/* <button 
-                     onClick={() => window.location.href = resourceUrl}
-                     className="mt-4 w-full text-center text-sm text-gray-500 hover:underline"
-                    >
-                     Skip and continue to resource
-                    </button> */}
+                       onClick={() => window.location.href = resourceUrl}
+                       className="mt-4 w-full text-center text-sm text-gray-500 hover:underline"
+                      >
+                       Skip and continue to resource
+                      </button> */}
       </div>
     </div>,
     modalRoot,

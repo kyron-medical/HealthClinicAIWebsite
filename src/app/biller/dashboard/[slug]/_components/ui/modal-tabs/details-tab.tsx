@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  billerAction,
+  Encounter,
+  Patient,
+  Physician,
+  Action,
+} from "@prisma/client";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { trpc } from "trpc/client";
@@ -31,7 +38,6 @@ interface PatientRow {
   updatedAt: Date;
 }
 
-
 // Add a type assertion if needed:
 type ExistingPatientDetails = {
   dob?: string | Date | null;
@@ -48,8 +54,12 @@ type ExistingPatientDetails = {
 };
 
 type DetailsFormProps = {
-  patient: PatientRow;
-  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
+  encounter: Encounter & {
+    patient: Patient;
+    physician: Physician; // or the actual Physician type if you have it imported
+    actions: billerAction[];
+  };
+  refetchEncountersAction: (options?: unknown) => Promise<unknown>;
 };
 
 /*
@@ -61,18 +71,24 @@ type DetailsFormProps = {
 */
 
 export function DetailsForm({
-  patient,
-  refetchPatientsAction,
+  encounter: encounter,
+  refetchEncountersAction: refetchPatientsAction,
 }: DetailsFormProps) {
   // Local form state for every field:
-  const [firstName, setFirstName] = useState(patient.name.split(" ")[0] || "");
+  const [firstName, setFirstName] = useState(
+    encounter.patient.name.split(" ")[0] || "",
+  );
   const [editingFirstName, setEditingFirstName] = useState(false);
 
-  const [lastName, setLastName] = useState(patient.name.split(" ")[1] || "");
+  const [lastName, setLastName] = useState(
+    encounter.patient.name.split(" ")[1] || "",
+  );
   const [editingLastName, setEditingLastName] = useState(false);
 
   const [dob, setDob] = useState(
-    patient.dob ? patient.dob.toISOString().substring(0, 10) : "",
+    encounter.patient.dob
+      ? encounter.patient.dob.toISOString().substring(0, 10)
+      : "",
   );
   const [editingDob, setEditingDob] = useState(false);
 
@@ -86,7 +102,7 @@ export function DetailsForm({
   const [zipCode, setZipCode] = useState("");
   const [editingZipCode, setEditingZipCode] = useState(false);
 
-  const [insurer, setInsurer] = useState(patient.insurer || "");
+  const [insurer, setInsurer] = useState(encounter.patient.insurer || "");
   const [editingInsurer, setEditingInsurer] = useState(false);
 
   const [serviceStart, setServiceStart] = useState("");
@@ -120,7 +136,7 @@ export function DetailsForm({
 
   // On mount, you might fetch existing details to seed the form:
   const { data: existing } = trpc.getPatientDetails.useQuery({
-    patientId: patient.id,
+    patientId: encounter.patient.id,
   }) as { data: ExistingPatientDetails };
 
   useEffect(() => {
@@ -217,7 +233,7 @@ export function DetailsForm({
         }
 
         detailsMutation.mutate({
-          patientId: patient.id,
+          patientId: encounter.patient.id,
           name: `${firstName} ${lastName}`,
           dob: dob ?? undefined,
           serviceStart: serviceStart ?? undefined,
@@ -231,18 +247,13 @@ export function DetailsForm({
         });
         void refetchPatientsAction(); // Refetch patients after saving
       }}
-      data-oid="6t0:1kt"
     >
-      <h2 className="mb-2 text-2xl font-bold" data-oid="bz29t.2">
-        Patient Details
-      </h2>
+      <h2 className="mb-2 text-2xl font-bold">Patient Details</h2>
 
-      <div className="grid grid-cols-2 gap-4" data-oid="yyr1qeu">
+      <div className="grid grid-cols-2 gap-4">
         {/* First Name */}
-        <div data-oid="fkl:8ze">
-          <label className="" data-oid="ya40o05">
-            First Name
-          </label>
+        <div>
+          <label className="">First Name</label>
           {editingFirstName || !firstName ? (
             <input
               type="text"
@@ -256,18 +267,14 @@ export function DetailsForm({
                   setEditingFirstName(false);
                 }
               }}
-              data-oid="u_2.jeh"
             />
           ) : (
-            <div className="flex items-center gap-2" data-oid="6t6.sih">
-              <span className="truncate text-sm" data-oid="._yp5aj">
-                {firstName}
-              </span>
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{firstName}</span>
               <button
                 className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                 onClick={() => setEditingFirstName(true)}
                 type="button"
-                data-oid=":t7b4bj"
               >
                 Change
               </button>
@@ -276,8 +283,8 @@ export function DetailsForm({
         </div>
 
         {/* Last Name */}
-        <div data-oid="5byo-a4">
-          <label data-oid=":lyi3z0">Last Name</label>
+        <div>
+          <label>Last Name</label>
           {editingLastName || !lastName ? (
             <input
               type="text"
@@ -291,18 +298,14 @@ export function DetailsForm({
                   setEditingLastName(false);
                 }
               }}
-              data-oid="_kr:b-w"
             />
           ) : (
-            <div className="flex items-center gap-2" data-oid="0:b83zk">
-              <span className="truncate text-sm" data-oid="h1gn2ja">
-                {lastName}
-              </span>
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{lastName}</span>
               <button
                 className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                 onClick={() => setEditingLastName(true)}
                 type="button"
-                data-oid="j4zi7ny"
               >
                 Change
               </button>
@@ -311,8 +314,8 @@ export function DetailsForm({
         </div>
 
         {/* Date of Birth */}
-        <div data-oid="o9-i1:y">
-          <label data-oid="j-z48v0">Date of Birth</label>
+        <div>
+          <label>Date of Birth</label>
           {editingDob || !dob ? (
             <input
               type="date"
@@ -326,16 +329,14 @@ export function DetailsForm({
                   setEditingDob(false);
                 }
               }}
-              data-oid="5cph7q6"
             />
           ) : (
-            <div className="flex items-center gap-2" data-oid="p.5rrff">
-              <span data-oid=":.om3_s">{dob}</span>
+            <div className="flex items-center gap-2">
+              <span>{dob}</span>
               <button
                 className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                 onClick={() => setEditingDob(true)}
                 type="button"
-                data-oid="s.9.5mz"
               >
                 Change
               </button>
@@ -344,8 +345,8 @@ export function DetailsForm({
         </div>
 
         {/* Sex */}
-        <div data-oid="e9e.e89">
-          <label data-oid="t-jrmvx">Sex</label>
+        <div>
+          <label>Sex</label>
           {editingSex || !sex ? (
             <select
               className="mt-1 w-full rounded border px-2 py-1"
@@ -353,31 +354,19 @@ export function DetailsForm({
               onChange={handleChange(setSex)}
               onBlur={() => setEditingSex(false)}
               autoFocus
-              data-oid="kq:m809"
             >
-              <option value="" data-oid="igf4rc_">
-                Select...
-              </option>
-              <option value="Male" data-oid="qymy18f">
-                Male
-              </option>
-              <option value="Female" data-oid="88ckpoy">
-                Female
-              </option>
-              <option value="Other" data-oid="eqv11o4">
-                Other
-              </option>
+              <option value="">Select...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           ) : (
-            <div className="flex items-center gap-2" data-oid="f7ifhws">
-              <span className="truncate text-sm" data-oid="klvjmxh">
-                {sex}
-              </span>
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm">{sex}</span>
               <button
                 className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                 onClick={() => setEditingSex(true)}
                 type="button"
-                data-oid="zuthys3"
               >
                 Change
               </button>
@@ -388,8 +377,8 @@ export function DetailsForm({
       </div>
 
       {/* Address */}
-      <div className="col-span-2" data-oid="3jq:yaz">
-        <label data-oid="d7im46w">Address</label>
+      <div className="col-span-2">
+        <label>Address</label>
         {editingAddress || !address ? (
           <input
             type="text"
@@ -403,18 +392,14 @@ export function DetailsForm({
                 setEditingAddress(false);
               }
             }}
-            data-oid="e:6pmia"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="5wskngi">
-            <span className="truncate text-sm" data-oid="wgtbb28">
-              {address}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{address}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingAddress(true)}
               type="button"
-              data-oid="j6.i0r0"
             >
               Change
             </button>
@@ -423,8 +408,8 @@ export function DetailsForm({
       </div>
 
       {/* Zip Code */}
-      <div data-oid="6ef7o7a">
-        <label data-oid="nu:ww:1">Zip Code</label>
+      <div>
+        <label>Zip Code</label>
         {editingZipCode || !zipCode ? (
           <input
             type="text"
@@ -439,18 +424,14 @@ export function DetailsForm({
                 setEditingZipCode(false);
               }
             }}
-            data-oid="xgpwrs3"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="s0-_u-b">
-            <span className="truncate text-sm" data-oid="g6b.yl_">
-              {zipCode}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{zipCode}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingZipCode(true)}
               type="button"
-              data-oid="0nysa:z"
             >
               Change
             </button>
@@ -459,8 +440,8 @@ export function DetailsForm({
       </div>
 
       {/* Insurer Name */}
-      <div data-oid="f-f27:k">
-        <label data-oid="x1b-h2r">Insurer Name</label>
+      <div>
+        <label>Insurer Name</label>
         {editingInsurer || !insurer ? (
           <input
             type="text"
@@ -474,18 +455,14 @@ export function DetailsForm({
                 setEditingInsurer(false);
               }
             }}
-            data-oid="hwqym-d"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="9.t41ka">
-            <span className="truncate text-sm" data-oid="5.vnhyc">
-              {insurer}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{insurer}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingInsurer(true)}
               type="button"
-              data-oid="uophoyy"
             >
               Change
             </button>
@@ -494,8 +471,8 @@ export function DetailsForm({
       </div>
 
       {/* Service Start */}
-      <div data-oid="a1:xr01">
-        <label data-oid="dv2jrps">Service Start</label>
+      <div>
+        <label>Service Start</label>
         {editingServiceStart || !serviceStart ? (
           <input
             type="datetime-local"
@@ -509,18 +486,14 @@ export function DetailsForm({
                 setEditingServiceStart(false);
               }
             }}
-            data-oid="_xn6x1i"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="8ud5mhx">
-            <span className="truncate text-sm" data-oid="x.s0o6j">
-              {serviceStart}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{serviceStart}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingServiceStart(true)}
               type="button"
-              data-oid="l8hn3vt"
             >
               Change
             </button>
@@ -529,8 +502,8 @@ export function DetailsForm({
       </div>
 
       {/* Service End */}
-      <div data-oid="978aazb">
-        <label data-oid="nw-vmx3">Service End</label>
+      <div>
+        <label>Service End</label>
         {editingServiceEnd || !serviceEnd ? (
           <input
             type="datetime-local"
@@ -544,18 +517,14 @@ export function DetailsForm({
                 setEditingServiceEnd(false);
               }
             }}
-            data-oid="znojwr0"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="33h1xm-">
-            <span className="truncate text-sm" data-oid="5h2.o10">
-              {serviceEnd}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{serviceEnd}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingServiceEnd(true)}
               type="button"
-              data-oid="fgw.1lz"
             >
               Change
             </button>
@@ -564,8 +533,8 @@ export function DetailsForm({
       </div>
 
       {/* Provider Name */}
-      <div data-oid="zy2b8ww">
-        <label data-oid="_850x14">Provider Name</label>
+      <div>
+        <label>Provider Name</label>
         {editingProviderName || !providerName ? (
           <input
             type="text"
@@ -579,18 +548,14 @@ export function DetailsForm({
                 setEditingProviderName(false);
               }
             }}
-            data-oid="051n8ph"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="ufrd:44">
-            <span className="truncate text-sm" data-oid="7i43y6c">
-              {providerName}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{providerName}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingProviderName(true)}
               type="button"
-              data-oid="9hizsco"
             >
               Change
             </button>
@@ -599,8 +564,8 @@ export function DetailsForm({
       </div>
 
       {/* Facility Name */}
-      <div data-oid="g8tq8e4">
-        <label data-oid="n9rbznl">Facility Name</label>
+      <div>
+        <label>Facility Name</label>
         {editingFacilityName || !facilityName ? (
           <input
             type="text"
@@ -614,18 +579,14 @@ export function DetailsForm({
                 setEditingFacilityName(false);
               }
             }}
-            data-oid="gbsyoec"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="06abdp6">
-            <span className="truncate text-sm" data-oid="i.ys69s">
-              {facilityName}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{facilityName}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingFacilityName(true)}
               type="button"
-              data-oid="58-mt92"
             >
               Change
             </button>
@@ -634,8 +595,8 @@ export function DetailsForm({
       </div>
 
       {/* Group Number */}
-      <div data-oid="-dyt5lq">
-        <label data-oid="_s10p94">Group Number</label>
+      <div>
+        <label>Group Number</label>
         {editingGroupNumber || !groupNumber ? (
           <input
             type="text"
@@ -649,18 +610,14 @@ export function DetailsForm({
                 setEditingGroupNumber(false);
               }
             }}
-            data-oid="5.q76od"
           />
         ) : (
-          <div className="flex items-center gap-2" data-oid="yv:a-av">
-            <span className="truncate text-sm" data-oid="jll_vuw">
-              {groupNumber}
-            </span>
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm">{groupNumber}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingGroupNumber(true)}
               type="button"
-              data-oid="z0j8fq6"
             >
               Change
             </button>
@@ -668,8 +625,8 @@ export function DetailsForm({
         )}
       </div>
 
-      <div data-oid="isap4sa">
-        <label className="text-sm font-semibold" data-oid="nrdr4cf">
+      <div>
+        <label className="text-sm font-semibold">
           Attach Insurance Card
           <input
             type="file"
@@ -679,7 +636,6 @@ export function DetailsForm({
             onChange={(e) =>
               setInsuranceCard(e.target.files ? e.target.files[0] : undefined)
             }
-            data-oid="g-:ii50"
           />
         </label>
       </div>
@@ -692,7 +648,6 @@ export function DetailsForm({
             ? "bg-green-600 hover:bg-green-700"
             : "cursor-not-allowed bg-gray-400"
         }`}
-        data-oid="o4afvac"
       >
         {detailsMutation.isPending ? "Saving…" : "Save Details"}
       </button>

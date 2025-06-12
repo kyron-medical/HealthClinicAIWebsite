@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import EncounterModal from "../ui/patient-modal";
+import EncounterModal from "../ui/encounter-modal";
 import { Encounter, Patient, Physician, billerAction } from "@prisma/client";
 import { createPortal } from "react-dom";
 import { trpc } from "trpc/client";
 import styles from "./styles/PatientRow.module.css";
+import { FaceSheetMassUploader } from "./FaceSheetUploader";
 
 // Define interface for your row data
 interface PatientRow {
@@ -36,9 +37,8 @@ interface EncounterGridProps {
     actions: billerAction[];
   })[];
 
-  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
+  refetchEncountersAction: (options?: unknown) => Promise<unknown>;
 }
-
 
 // Status badge component with exact styling from image
 const StatusBadge = ({ status }) => {
@@ -86,7 +86,6 @@ const StatusBadge = ({ status }) => {
   return (
     <span
       className={`inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-medium ${bgColor} ${textColor} ${borderColor}`}
-      data-oid="zdiqe5v"
     >
       {status}
     </span>
@@ -95,7 +94,7 @@ const StatusBadge = ({ status }) => {
 
 const EncounterGridClient = ({
   encounters,
-  refetchPatientsAction,
+  refetchEncountersAction: refetchEncountersAction,
 }: EncounterGridProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEncounter, setSelectedEncounter] = useState<
@@ -129,11 +128,38 @@ const EncounterGridClient = ({
 
   // Filter cases based on current filters and search
   // Filter and sort patients
-  const filteredEncounters = encounters.filter(
-    (e) =>
+  const filteredEncounters = encounters.filter((e) => {
+    // Search filter
+    const matchesSearch =
       e.patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      e.id.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+      e.id.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // Status filter
+    const matchesStatus = !filters.status || e.status === filters.status;
+
+    // Facility filter
+    const matchesFacility =
+      !filters.facility || e.facilityName === filters.facility;
+
+    // Insurance filter
+    const matchesInsurance =
+      !filters.insurance || e.patient.insurer === filters.insurance;
+
+    // Physician filter
+    const matchesPhysician =
+      !filters.physician || e.physician?.name === filters.physician;
+
+    // Add more filters as needed...
+
+    return (
+      matchesSearch &&
+      matchesStatus &&
+      matchesFacility &&
+      matchesInsurance &&
+      matchesPhysician
+      // ...add more as needed
+    );
+  });
 
   const sortedEncounters = [...filteredEncounters].sort((a, b) => {
     if (!sortConfig.key) return 0;
@@ -151,16 +177,14 @@ const EncounterGridClient = ({
   const currentEncounters = sortedEncounters.slice(startIndex, endIndex);
 
   // Get unique values for filter dropdowns
-  const uniqueStatuses = [...new Set(cases.map((case_) => case_.status))];
-  const uniqueFacilities = [
-    ...new Set(cases.map((case_) => case_.facilityName)),
-  ];
+  const uniqueStatuses = [...new Set(encounters.map((e) => e.status))];
+  const uniqueFacilities = [...new Set(encounters.map((e) => e.facilityName))];
   const uniqueInsurances = [
-    ...new Set(cases.map((case_) => case_.patient.insurer).filter(Boolean)),
+    ...new Set(encounters.map((e) => e.patient.insurer).filter(Boolean)),
   ];
 
   const uniquePhysicians = [
-    ...new Set(cases.map((case_) => case_.physician?.name).filter(Boolean)),
+    ...new Set(encounters.map((e) => e.physician?.name).filter(Boolean)),
   ];
 
   const resetFilters = () => {
@@ -235,32 +259,20 @@ const EncounterGridClient = ({
 
   return (
     <>
-      <div className="mx-auto max-w-7xl" data-oid="6_w5c54">
+      <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div
-          className="mb-6 flex items-center justify-between"
-          data-oid="ezln8ic"
-        >
-          <div data-oid="tbu9h9j">
-            <h1
-              className="text-2xl font-bold text-gray-900 dark:text-white"
-              data-oid="rwf9z.t"
-            >
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               List of Current Cases
             </h1>
-            <p
-              className="text-sm text-gray-600 dark:text-gray-400"
-              data-oid="m2:-xg9"
-            >
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Biller Dashboard - Name
             </p>
           </div>
-          <div className="flex items-center gap-4" data-oid="zpcw.wr">
-            <div className="flex items-center gap-2" data-oid="hsfhefg">
-              <span
-                className="text-sm text-gray-600 dark:text-gray-400"
-                data-oid=":6zr_-j"
-              >
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
                 Showing
               </span>
               <select
@@ -270,50 +282,30 @@ const EncounterGridClient = ({
                   setCurrentPage(1);
                 }}
                 className="rounded border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                data-oid="7eq0f2x"
               >
-                <option value={10} data-oid="8-3ot_k">
-                  10
-                </option>
-                <option value={25} data-oid="jgmjiy9">
-                  25
-                </option>
-                <option value={50} data-oid="89rg64j">
-                  50
-                </option>
-                <option value={100} data-oid="_eqycem">
-                  100
-                </option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
               </select>
-              <span
-                className="text-sm text-gray-600 dark:text-gray-400"
-                data-oid="rr851sw"
-              >
+              <span className="text-sm text-gray-600 dark:text-gray-400">
                 cases per list
               </span>
             </div>
-            <button
-              className="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700"
-              data-oid="x7rpqag"
-            >
+            <FaceSheetMassUploader
+              refetchEncountersAction={refetchEncountersAction}
+            />
+
+            <button className="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700">
               + New Case
             </button>
           </div>
         </div>
 
         {/* Search and Filters Bar */}
-        <div
-          className="mb-6 rounded-lg bg-white p-4 shadow-sm dark:bg-gray-800"
-          data-oid="slluumd"
-        >
-          <div
-            className="mb-4 flex flex-wrap items-center gap-4"
-            data-oid="9ksdzwe"
-          >
-            <span
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              data-oid="zrx3oox"
-            >
+        <div className="mb-6 rounded-lg bg-white p-4 shadow-sm dark:bg-gray-800">
+          <div className="mb-4 flex flex-wrap items-center gap-4">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Filters:
             </span>
 
@@ -324,20 +316,11 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, productType: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="bcya2e0"
             >
-              <option value="" data-oid="dxopqmn">
-                Product Type ▼
-              </option>
-              <option value="Prior Auth" data-oid="0xyc7:4">
-                Prior Auth
-              </option>
-              <option value="Claims" data-oid="u0y_ihc">
-                Claims
-              </option>
-              <option value="Appeals" data-oid="z5.usq6">
-                Appeals
-              </option>
+              <option value="">Product Type ▼</option>
+              <option value="Prior Auth">Prior Auth</option>
+              <option value="Claims">Claims</option>
+              <option value="Appeals">Appeals</option>
             </select>
 
             {/* Status Filter */}
@@ -347,11 +330,8 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, status: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="8dddvdt"
             >
-              <option value="" data-oid="3reu1ax">
-                Status ▼
-              </option>
+              <option value="">Status ▼</option>
               {uniqueStatuses
                 .filter(
                   (status): status is string => typeof status === "string",
@@ -370,18 +350,15 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, facility: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="ft7.v1_"
             >
-              <option value="" data-oid="pxg3ngo">
-                Facility ▼
-              </option>
+              <option value="">Facility ▼</option>
               {uniqueFacilities
                 .filter(
                   (facility): facility is string =>
                     typeof facility === "string",
                 )
                 .map((facility) => (
-                  <option key={facility} value={facility} data-oid="m2:vu42">
+                  <option key={facility} value={facility}>
                     {facility}
                   </option>
                 ))}
@@ -394,18 +371,15 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, insurance: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid=".13lilu"
             >
-              <option value="" data-oid="pdw:4w7">
-                Insurance ▼
-              </option>
+              <option value="">Insurance ▼</option>
               {uniqueInsurances
                 .filter(
                   (insurance): insurance is string =>
                     typeof insurance === "string",
                 )
                 .map((insurance) => (
-                  <option key={insurance} value={insurance} data-oid="eiq2bab">
+                  <option key={insurance} value={insurance}>
                     {insurance}
                   </option>
                 ))}
@@ -418,20 +392,11 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, dateOfService: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="bwho6u6"
             >
-              <option value="" data-oid="oth:i5k">
-                Date of Service ▼
-              </option>
-              <option value="today" data-oid="4srx0.h">
-                Today
-              </option>
-              <option value="week" data-oid="cwex52.">
-                This Week
-              </option>
-              <option value="month" data-oid="ya2gj7e">
-                This Month
-              </option>
+              <option value="">Date of Service ▼</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
             </select>
 
             {/* Physician Filter */}
@@ -441,11 +406,8 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, physician: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="h-qwx12"
             >
-              <option value="" data-oid="l6g3.r1">
-                Physician ▼
-              </option>
+              <option value="">Physician ▼</option>
               {uniquePhysicians.map((physicianName) => (
                 <option key={physicianName} value={physicianName}>
                   {physicianName}
@@ -460,239 +422,163 @@ const EncounterGridClient = ({
                 setFilters({ ...filters, createdBy: e.target.value })
               }
               className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="qtrnyiz"
             >
-              <option value="" data-oid="_1ocr:p">
-                Created By ▼
-              </option>
-              <option value="system" data-oid="htoi3mx">
-                System
-              </option>
-              <option value="user" data-oid="fx5ao9_">
-                User
-              </option>
+              <option value="">Created By ▼</option>
+              <option value="system">System</option>
+              <option value="user">User</option>
             </select>
 
             {/* Filter Actions */}
-            <div className="ml-auto flex items-center gap-2" data-oid="3rre2fp">
+            <div className="ml-auto flex items-center gap-2">
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 transition hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-                data-oid="qxr2:.7"
               >
                 View Filters
               </button>
               <button
                 onClick={resetFilters}
                 className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 transition hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-                data-oid="taopyug"
               >
                 Reset Filters
               </button>
-              <button
-                className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white transition hover:bg-blue-700"
-                data-oid="qzbbn-q"
-              >
+              <button className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white transition hover:bg-blue-700">
                 Edit Dashboard
               </button>
             </div>
           </div>
 
           {/* Search Bar */}
-          <div className="flex items-center gap-4" data-oid="4sdakk5">
+          <div className="flex items-center gap-4">
             <input
               type="text"
               placeholder="Search cases..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-              data-oid="8w_jk8w"
             />
 
-            <span
-              className="text-sm text-gray-600 dark:text-gray-400"
-              data-oid="3oet2lt"
-            >
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               Case ID/Encounter ID/Patient Name
             </span>
           </div>
         </div>
 
         {/* Cases Table */}
-        <div
-          className="overflow-hidden rounded-lg bg-white shadow-sm dark:bg-gray-800"
-          data-oid="wphri5t"
-        >
-          <div className="overflow-x-auto" data-oid="laa_kla">
-            <table
-              className="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
-              data-oid="ggt-6bz"
-            >
-              <thead className="bg-gray-50 dark:bg-gray-700" data-oid="zcnr:60">
-                <tr data-oid="ec.a4on">
+        <div className="overflow-hidden rounded-lg bg-white shadow-sm dark:bg-gray-800">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead className="bg-gray-50 dark:bg-gray-700">
+                <tr>
                   <th
                     className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => handleSort("encounterId")}
-                    data-oid="lijhu8n"
                   >
                     Encounter ID{getSortIcon("encounterId")}
                   </th>
                   <th
                     className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => handleSort("name")}
-                    data-oid=":b2x_d5"
                   >
                     Patient Name{getSortIcon("name")}
                     {/* {!patient.name ||
-                    !patient.dob ||
-                    !patient.insurer ||
-                    patient.insurer === "Unknown" ||
-                    !patient.groupNumber ? (
-                      <span
-                        className={styles.pulseDot}
-                        title="Missing data"
-                        data-oid="3xqfb4n"
-                      ></span>
-                    ) : (
-                      <span data-oid="jrf0unt"></span>
-                    )} */}
+                       !patient.dob ||
+                       !patient.insurer ||
+                       patient.insurer === "Unknown" ||
+                       !patient.groupNumber ? (
+                        <span
+                          className={styles.pulseDot}
+                          title="Missing data"
+                          data-oid="3xqfb4n"
+                        ></span>
+                       ) : (
+                        <span data-oid="jrf0unt"></span>
+                       )} */}
                   </th>
                   <th
                     className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => handleSort("physician")}
-                    data-oid="1xjqxjf"
                   >
                     Physician{getSortIcon("physician")}
                   </th>
                   <th
                     className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => handleSort("dob")}
-                    data-oid="ayc-a0e"
                   >
                     Date of Birth{getSortIcon("dob")}
                   </th>
                   <th
                     className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     onClick={() => handleSort("dateOfService")}
-                    data-oid="pvtnoiv"
                   >
                     Date of Service{getSortIcon("dateOfService")}
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
-                    data-oid="wcabzi5"
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     Facility
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
-                    data-oid="rt6:qsc"
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     Insurance Company
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
-                    data-oid="ya2n_f-"
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     Status
                   </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
-                    data-oid="oea28hh"
-                  >
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     Messages
                   </th>
                 </tr>
               </thead>
-              <tbody
-                className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800"
-                data-oid="j8j_tls"
-              >
+              <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
                 {currentEncounters.map((encounter, index) => (
                   <tr
                     key={encounter.id}
                     className="transition hover:bg-gray-50 dark:hover:bg-gray-700"
-                    data-oid="obv707j"
                     onClick={() => handleRowClick(encounter)} // Make row clickable
                   >
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white"
-                      data-oid="520vsr2"
-                    >
+                    <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                       {encounter.id}
                     </td>
 
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="5lk1.g8"
-                    >
-                      <div className="flex items-center" data-oid="0p.iw.6">
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
+                      <div className="flex items-center">
                         {/* <div
-                          className="h-8 w-8 flex-shrink-0"
-                          data-oid="eqifccr"
+                        className="h-8 w-8 flex-shrink-0"
+                        data-oid="eqifccr"
                         >
-                          <div
-                            className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-600"
-                            data-oid="mq0up:a"
-                          ></div>
+                        <div
+                          className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-600"
+                          data-oid="mq0up:a"
+                        ></div>
                         </div> */}
-                        <div className="ml-3" data-oid="c000q2f">
-                          <div
-                            className="text-sm font-medium text-gray-900 dark:text-white"
-                            data-oid="-kcfqk8"
-                          >
+                        <div className="ml-3">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">
                             {encounter.patient.name}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="3grvvcy"
-                    >
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.physician.name}
                     </td>
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="cfidyp-"
-                    >
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.patient.dob
                         ? new Date(encounter.patient.dob).toLocaleDateString()
                         : ""}
                     </td>
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="k1zrpet"
-                    >
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.dateOfService
                         ? new Date(encounter.dateOfService).toLocaleDateString()
                         : ""}
                     </td>
-                    <td
-                      className="px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="w-r92-n"
-                    >
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.facilityName}
                     </td>
-                    <td
-                      className="px-6 py-4 text-sm text-gray-900 dark:text-white"
-                      data-oid="6-ulo75"
-                    >
+                    <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.patient.insurer}
                     </td>
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-sm"
-                      data-oid="yjb43k-"
-                    >
-                      <StatusBadge
-                        status={encounter.status}
-                        data-oid="vyd4d86"
-                      />
+                    <td className="whitespace-nowrap px-6 py-4 text-sm">
+                      <StatusBadge status={encounter.status} />
                     </td>
-                    <td
-                      className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-900 dark:text-white"
-                      data-oid="nax7rli"
-                    >
+                    <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-900 dark:text-white">
                       {encounter.actions.length}
                     </td>
                   </tr>
@@ -703,22 +589,18 @@ const EncounterGridClient = ({
         </div>
 
         {/* Pagination */}
-        <div
-          className="mt-6 flex items-center justify-between"
-          data-oid="qoa:gu4"
-        >
-          <div className="flex items-center gap-2" data-oid="m4jkiio">
+        <div className="mt-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-              data-oid="1_es99_"
             >
               ← Previous Page
             </button>
           </div>
 
-          <div className="flex items-center gap-2" data-oid="g.mohkz">
+          <div className="flex items-center gap-2">
             {[...Array(Math.min(5, totalPages))].map((_, i) => {
               const pageNum = i + 1;
               return (
@@ -730,7 +612,6 @@ const EncounterGridClient = ({
                       ? "bg-blue-600 text-white"
                       : "border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   }`}
-                  data-oid="mt3lzbo"
                 >
                   {pageNum}
                 </button>
@@ -738,27 +619,21 @@ const EncounterGridClient = ({
             })}
             {totalPages > 5 && (
               <>
-                <span className="text-gray-500" data-oid="2:5bl5h">
-                  ...
-                </span>
-                <span
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-oid="6k.7qhu"
-                >
+                <span className="text-gray-500">...</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
                   {totalPages}
                 </span>
               </>
             )}
           </div>
 
-          <div className="flex items-center gap-2" data-oid="oi-fwxr">
+          <div className="flex items-center gap-2">
             <button
               onClick={() =>
                 setCurrentPage(Math.min(totalPages, currentPage + 1))
               }
               disabled={currentPage === totalPages}
               className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-              data-oid="v2:wup:"
             >
               Next Page →
             </button>
@@ -766,10 +641,7 @@ const EncounterGridClient = ({
         </div>
 
         {/* Results Summary */}
-        <div
-          className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400"
-          data-oid="xf_a_.a"
-        >
+        <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
           Showing {startIndex + 1} to{" "}
           {Math.min(endIndex, sortedEncounters.length)} of{" "}
           {sortedEncounters.length} patients
@@ -780,60 +652,60 @@ const EncounterGridClient = ({
 
       {/* Old Patient Table */}
       {/* <div
-        className="overflow-x-auto rounded-lg bg-white shadow"
-        data-oid="e6-..ci"
-      >
-        <table className="w-full" data-oid="mx.tdr6">
-          <thead data-oid="1-j31d6">
-            <tr className="bg-gray-50 text-left" data-oid="5_59vhr">
-              <th
-                className="px-6 py-3 text-xs uppercase text-gray-500"
-                data-oid="wo:xfwa"
-              >
-                Name
-              </th>
-              <th
-                className="px-6 py-3 text-xs uppercase text-gray-500"
-                data-oid="p8672fd"
-              >
-                Insurer
-              </th>
-              <th
-                className="px-6 py-3 text-xs uppercase text-gray-500"
-                data-oid="_-7t._t"
-              >
-                Money Collected
-              </th>
-            </tr>
-          </thead>
-          <tbody data-oid="ro_guoz">
-            {patients
-              .filter(
-                (p) =>
-                  p.name.toLowerCase().includes(filterName.toLowerCase()) &&
-                  p.insurer.toLowerCase().includes(filterInsurer.toLowerCase()),
-              )
-              .map((patient) => (
-                <tr
-                  key={patient.id}
-                  onClick={() => handleRowClick(patient)}
-                  className="group cursor-pointer transition hover:bg-blue-50"
-                  data-oid=":s9imw5"
+          className="overflow-x-auto rounded-lg bg-white shadow"
+          data-oid="e6-..ci"
+         >
+          <table className="w-full" data-oid="mx.tdr6">
+            <thead data-oid="1-j31d6">
+              <tr className="bg-gray-50 text-left" data-oid="5_59vhr">
+                <th
+                  className="px-6 py-3 text-xs uppercase text-gray-500"
+                  data-oid="wo:xfwa"
                 >
-                  <td
-                    className="flex items-center gap-2 px-6 py-4"
-                    data-oid="6fo11u3"
+                  Name
+                </th>
+                <th
+                  className="px-6 py-3 text-xs uppercase text-gray-500"
+                  data-oid="p8672fd"
+                >
+                  Insurer
+                </th>
+                <th
+                  className="px-6 py-3 text-xs uppercase text-gray-500"
+                  data-oid="_-7t._t"
+                >
+                  Money Collected
+                </th>
+              </tr>
+            </thead>
+            <tbody data-oid="ro_guoz">
+              {patients
+                .filter(
+                  (p) =>
+                    p.name.toLowerCase().includes(filterName.toLowerCase()) &&
+                    p.insurer.toLowerCase().includes(filterInsurer.toLowerCase()),
+                )
+                .map((patient) => (
+                  <tr
+                    key={patient.id}
+                    onClick={() => handleRowClick(patient)}
+                    className="group cursor-pointer transition hover:bg-blue-50"
+                    data-oid=":s9imw5"
                   >
-                    {patient.name}
-                  </td>
-                  <td className="px-6 py-4" data-oid="4en9udw">
-                    {patient.insurer}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div> */}
+                    <td
+                      className="flex items-center gap-2 px-6 py-4"
+                      data-oid="6fo11u3"
+                    >
+                      {patient.name}
+                    </td>
+                    <td className="px-6 py-4" data-oid="4en9udw">
+                      {patient.insurer}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+         </div> */}
 
       {modalOpen &&
         selectedEncounter &&
@@ -847,8 +719,7 @@ const EncounterGridClient = ({
             setEncounter={setSelectedEncounter}
             encounters={encounters}
             actions={selectedEncounter.actions}
-            refetchEncountersAction={refetchPatientsAction}
-            data-oid=":mynx.5"
+            refetchEncountersAction={refetchEncountersAction}
           />,
 
           modalRoot,
