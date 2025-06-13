@@ -38,7 +38,7 @@ const Landing = () => {
                     <a
                       href="https://form.typeform.com/to/zstMkPH7"
                       rel="noopener noreferrer"
-                      className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
+                      className="whitespace-nowrap rounded-xl bg-blue-500 px-4 py-3 text-sm font-bold text-white hover:bg-blue-700 sm:px-6 sm:text-base"
                     >
                       Request a Demo
                     </a>
@@ -52,7 +52,7 @@ const Landing = () => {
                     <a
                       href="/about"
                       rel="noopener noreferrer"
-                      className="rounded-lg border border-white bg-transparent px-6 py-3 font-bold text-blue-500 hover:bg-white hover:text-blue-500"
+                      className="ml-4 rounded-lg border border-white bg-transparent px-6 py-3 font-bold text-blue-500 hover:bg-white hover:text-blue-500"
                     >
                       Learn More
                     </a>
