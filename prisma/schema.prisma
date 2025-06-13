@@ -45,7 +45,7 @@ model Patient {
   name         String      @default("patient_name")
   name_iv      String? // now nullable (defaults to NULL)
   name_tag     String? // likewise
-  dob          DateTime    @default(dbgenerated("1900-01-01T00:00:00.000Z")) // default to a sentinel value
+  dob          DateTime    @default(dbgenerated("'''1900-01-01T00:00:00.000Z'''")) // default to a sentinel value
   address      String? // nullable
   address_iv   String? // nullable
   address_tag  String? // nullable
@@ -56,7 +56,7 @@ model Patient {
   insurer_iv   String[] // array, one for each insurance
   insurer_tag  String[] // array, one for each insurance
   encounters   Encounter[]
-  serviceStart DateTime    @default("1900-01-01T00:00:00.000Z") // default to a sentinel value
+  serviceStart DateTime    @default(dbgenerated("'''1900-01-01T00:00:00.000Z'''")) // default to a sentinel value
   serviceEnd   DateTime?
 
   zipCode     String? // already nullable
@@ -185,3 +185,4 @@ model billerAction {
 
   encounter Encounter @relation(fields: [encounterId], references: [id])
 }
+
