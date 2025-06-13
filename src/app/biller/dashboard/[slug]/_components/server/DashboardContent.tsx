@@ -13,11 +13,6 @@ const DashboardContent = async (): Promise<JSX.Element | null> => {
     return null;
   }
 
-  if (user.publicMetadata?.role !== "biller") {
-    // Redirect to the home page if the user is not a biller
-    redirect("/");
-    return null;
-  }
 
   const patients = await trpc.getPatientsByBillerId({
     userId: user.id,

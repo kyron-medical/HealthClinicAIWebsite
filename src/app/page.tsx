@@ -312,15 +312,17 @@ export default function Home() {
 
       <section className="-pt-24 py-8 text-center md:py-16 md:py-20 lg:py-4">
         <div className="container">
-          <div className="mt-8 grid grid-cols-1 gap-4 pt-12 md:grid-cols-2 md:pt-24">
-            <div className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row">
-              <Orb color="pink" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0">
-                <h3 className="text-lg font-semibold md:text-xl">
+          <div className="mt-8 grid grid-cols-1 gap-6 pt-12 md:grid-cols-2 md:pt-24">
+            <div className="flex transform flex-col items-start rounded-lg border bg-white p-6 shadow-lg transition-transform hover:scale-105 md:flex-row">
+              <div className="mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center md:mb-0 md:mr-6 md:h-16 md:w-16">
+                <Orb color="pink" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="mb-3 text-lg font-semibold md:text-xl">
                   Denials Management
                 </h3>
-                <p className="text-left text-body-color sm:text-justify">
-                  <span className="text-left font-bold">
+                <p className="text-left text-body-color">
+                  <span className="font-bold">
                     Turn denials into approvals.
                   </span>{" "}
                   Proactively identify, analyze, and resolve claim denials with
@@ -329,13 +331,15 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row">
-              <Orb color="green" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0">
-                <h3 className="text-lg font-semibold md:text-xl">
+            <div className="flex transform flex-col items-start rounded-lg border bg-white p-6 shadow-lg transition-transform hover:scale-105 md:flex-row">
+              <div className="mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center md:mb-0 md:mr-6 md:h-16 md:w-16">
+                <Orb color="green" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="mb-3 text-lg font-semibold md:text-xl">
                   Voice AI Agent
                 </h3>
-                <p className="text-left text-body-color sm:text-justify">
+                <p className="text-left text-body-color">
                   <span className="font-bold">
                     Capture every word, every nuance.
                   </span>{" "}
@@ -345,13 +349,15 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row">
-              <Orb color="pearl" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0">
-                <h3 className="text-lg font-semibold md:text-xl">
+            <div className="flex transform flex-col items-start rounded-lg border bg-white p-6 shadow-lg transition-transform hover:scale-105 md:flex-row">
+              <div className="mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center md:mb-0 md:mr-6 md:h-16 md:w-16">
+                <Orb color="pearl" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="mb-3 text-lg font-semibold md:text-xl">
                   Prior Authorization
                 </h3>
-                <p className="text-left text-body-color sm:text-justify">
+                <p className="text-left text-body-color">
                   <span className="font-bold">
                     Instant approvals, fewer delays.
                   </span>{" "}
@@ -361,13 +367,15 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex transform flex-col items-center justify-center rounded-lg border p-3 shadow-lg transition-transform hover:scale-105 md:flex-row ">
-              <Orb color="orange" />
-              <div className="ml-0 mt-4 md:ml-4 md:mt-0">
-                <h3 className="text-lg font-semibold md:text-xl">
+            <div className="flex transform flex-col items-start rounded-lg border bg-white p-6 shadow-lg transition-transform hover:scale-105 md:flex-row">
+              <div className="mb-4 flex h-12 w-12 flex-shrink-0 items-center justify-center md:mb-0 md:mr-6 md:h-16 md:w-16">
+                <Orb color="orange" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="mb-3 text-lg font-semibold md:text-xl">
                   Appeal Letter Generation
                 </h3>
-                <p className="text-left text-body-color sm:text-justify">
+                <p className="text-left text-body-color">
                   <span className="font-bold">
                     Transform denials into approvals with persuasive, automated
                     appeal letters.

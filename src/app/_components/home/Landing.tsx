@@ -28,8 +28,9 @@ const Landing = () => {
                   </p>
                 </div>
 
-                <div className="justify-cente flex flex-row items-center">
+                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
                   <motion.button
+                    style={{ display: "contents" }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
@@ -37,12 +38,13 @@ const Landing = () => {
                     <a
                       href="https://form.typeform.com/to/zstMkPH7"
                       rel="noopener noreferrer"
-                      className="rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700"
+                      className="whitespace-nowrap rounded-xl bg-blue-500 px-4 py-3 text-sm font-bold text-white hover:bg-blue-700 sm:px-6 sm:text-base"
                     >
                       Request a Demo
                     </a>
                   </motion.button>
                   <motion.button
+                    style={{ display: "contents" }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onHoverStart={() => console.log("hover started!")}
