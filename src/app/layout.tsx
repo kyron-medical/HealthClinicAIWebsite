@@ -26,13 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) {
-  
   return (
     <html suppressHydrationWarning lang="en" className="overflow-x-hidden">
       {/*
-                        <head /> will contain the components returned by the nearest parent
-                                                    head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-                                                   */}
+                                   <head /> will contain the components returned by the nearest parent
+                                                               head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+                                                              */}
       <head />
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className} overflow-x-hidden`}>

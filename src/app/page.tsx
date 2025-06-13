@@ -44,25 +44,25 @@ const Pipeline = () => {
           </p>
 
           {/* <span
-              className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
-              data-oid="qmsxjpk"
-             >
-              Email
-              <span className="text-sm text-red-700" data-oid="sgxgpxc">
-                *
-              </span>
-             </span> */}
+                         className="-mb-[12px] ml-[2px] mt-4 block text-left text-sm text-body-color"
+                         data-oid="qmsxjpk"
+                        >
+                         Email
+                         <span className="text-sm text-red-700" data-oid="sgxgpxc">
+                           *
+                         </span>
+                        </span> */}
           {/* <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-4 w-full rounded-md border border-gray-300 p-2 text-base text-body-color focus:border-blue-500 focus:outline-none md:text-lg"
-              data-oid="i9_px7q"
-             />
-              <div className="mt-8" data-oid="r.m--hx">
-              <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
-             </div> */}
+                         type="email"
+                         placeholder="Enter your email"
+                         value={email}
+                         onChange={(e) => setEmail(e.target.value)}
+                         className="mt-4 w-full rounded-md border border-gray-300 p-2 text-base text-body-color focus:border-blue-500 focus:outline-none md:text-lg"
+                         data-oid="i9_px7q"
+                        />
+                         <div className="mt-8" data-oid="r.m--hx">
+                         <TestDrive handleSubmit={handleSubmit} data-oid="l6..mpm" />
+                        </div> */}
           <div className="mt-8">
             <GetStarted />
           </div>
