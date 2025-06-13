@@ -10,9 +10,16 @@ import { TRPCError } from "@trpc/server";
 import { filterUserForClient } from "@/server/helpers/filterUserForClient";
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
-import { Patient } from "@prisma/client";
+import {
+  Encounter,
+  Patient,
+  Action,
+  Physician,
+  Facility,
+} from "@prisma/client";
 import { encrypt, decrypt } from "@/../utils/secure";
 import { I } from "@upstash/redis/zmscore-CjoCv9kz";
+import { parseDate, normalize, levenshteinTwoMatrixRows, toValidDateOrNull } from "utils/tools";
 
 /*
 ===============================================================================
@@ -35,7 +42,6 @@ type EncryptedPatient = {
 // Helper to encrypt PHI fields before storing
 function encryptPHI(patient: {
   name: string;
-  insurer: string;
   address?: string | null;
   zipCode?: string | null;
   sex?: string | null;
@@ -47,12 +53,7 @@ function encryptPHI(patient: {
     encrypted.name_iv = iv;
     encrypted.name_tag = tag;
   }
-  if (patient.insurer) {
-    const { data, iv, tag } = encrypt(patient.insurer);
-    encrypted.insurer = data;
-    encrypted.insurer_iv = iv;
-    encrypted.insurer_tag = tag;
-  }
+
   if (patient.address) {
     const { data, iv, tag } = encrypt(patient.address);
     encrypted.address = data;
@@ -125,6 +126,16 @@ This is where we define the API endpoints and their logic.
 ===============================================================================
 */
 
+export const InsuranceSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  insuranceType: z.string().nullable().optional(),
+  insurancePlan: z.string().nullable().optional(),
+  insuranceStartDate: z.date().nullable().optional(),
+  insuranceEndDate: z.date().nullable().optional(),
+  patientId: z.string(),
+});
+
 export const PatientSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -137,10 +148,9 @@ export const PatientSchema = z.object({
   address: z.string().nullable().optional(),
   address_iv: z.string().nullable().optional(),
   address_tag: z.string().nullable().optional(),
-  insurer: z.string(),
-  insurer_iv: z.string().nullable().optional(),
-  insurer_tag: z.string().nullable().optional(),
-  moneyCollected: z.number(),
+  insurances: z.array(InsuranceSchema).optional(),
+  insurer_iv: z.array(z.string()).nullable().optional(),
+  insurer_tag: z.array(z.string()).nullable().optional(),
   createdAt: z.date(),
   updatedAt: z.date(),
   billerId: z.string(),
@@ -156,17 +166,84 @@ export const PatientSchema = z.object({
   groupNumber: z.string().nullable().optional(),
 });
 
-const PatientEventBulkSchema = z.array(
+const CasesBulkSchema = z.array(
   z.object({
-    patientId: z.string(),
-    type: z.string(),
-    eventContent: z.string().optional(),
-    date: z.date(),
-    fileUrls: z.array(z.string()).optional(),
-    transcript: z.string().optional(),
-    summary: z.string().optional(),
+    patientName: z.string().optional(),
+    patientId: z.string().optional(), // example : patient_id : "075873778"
+    mrn: z.string().optional(), // mrn or medical_record_number. Also listed as "MR#"
+    medical_record_number: z.string().optional(),
+    date_of_birth: z.string().optional(),
+    age: z.string().optional(),
+    sex: z.string().optional(),
+    race: z.string().optional(),
+    patient_phone: z.string().optional(),
+    patientAddress: z.string().optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    zip: z.string().optional(),
+    group_number: z.string().optional(),
+    emergency_contact_name: z.string().optional(),
+    emergency_contact_phone: z.string().optional(),
+    admission_date: z.string().date().optional(),
+    admission_time: z.string().time().optional(),
+    discharge_date: z.string().date().optional(),
+    discharge_time: z.string().time().optional(),
+    admitting_physician: z.string().optional(),
+    attending_physician: z.string().optional(),
+    attending_physician_npi: z.string().optional(),
+    attending_physician_opn: z.string().optional(),
+    attending_physician_address: z.string().optional(),
+    diagnosis: z.string().optional(),
+    procedure: z.string().optional(),
+    insurance_id: z.string().optional(),
+    insurance_name: z.string().optional(),
+    insurance_type: z.string().optional(),
+    insurance_plan: z.string().optional(),
+    insurance_primary_secondary: z.string().optional(),
+    insurance_start_date: z.string().date().optional(),
+    insurance_end_date: z.string().date().optional(),
+    facility_name: z.string().optional(),
+    facility_address: z.string().optional(),
+    facility_npi: z.string().optional(),
+    facility_type: z.string().optional(),
+    place_of_service: z.nativeEnum({
+      Home: "Home",
+      PCP_Physician_Office: "PCP/Physician Office",
+      Outpatient_Facility: "Outpatient/Facility",
+      Free_Standing_Facility: "Free Standing Facility",
+      Specialist: "Specialist",
+      Ambulatory_Surgical_Center: "Ambulatory Surgical Center",
+      Impatient_Hospital: "Impatient Hospital",
+      Independent_Lab: "Independent Lab",
+    }).optional(),
+    appointment_type: z
+      .nativeEnum({
+        Annual_Physical_Exam: "Annual Physical Exam (APE)",
+        Chronic_Care_Management: "Chronic Care Management (CCM)",
+        Consultation: "Consultation (Consult)",
+        Follow_Up: "Follow-Up (F/U)",
+        Immunization_Visit: "Immunization Visit (IV)",
+        New_Patient_Telehealth: "New Patient Telehealth (TH)",
+        New_Patient: "New Patient",
+        Post_Operative_Visit: "Post-Operative Visit (Post-Op)",
+        Pre_Operative_Assessment: "Pre-Operative Assessment (Pre-Op)",
+        Redraw: "Redraw",
+        Same_Day: "Same Day",
+        Scheduled: "Scheduled",
+        Sick_Visit: "Sick Visit (SV)",
+        True_PA: "True PA",
+        Urgent_Care_Visit: "Urgent Care Visit (UCV)",
+        Well_Child_Visit: "Well Child Visit (WCV)",
+      })
+      .optional(),
   }),
 );
+
+z.object({
+  // ...
+  type: z.nativeEnum(Action),
+  // ...
+});
 
 const addBillerDataToPatients = async (patients: Patient[]) => {
   const userId = patients.map((patient) => patient.billerId);
@@ -281,12 +358,44 @@ export const appRouter = createTRPCRouter({
       return filterUserForClient(user);
     }),
 
+  updateUserRole: privateProcedure
+    .input(
+      z.object({
+        role: z.string(),
+        userId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Ensure the user is authenticated
+      if (!ctx.userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      // Update the user's public metadata with the new role
+      (await clerkClient()).users.updateUserMetadata(input.userId, {
+        publicMetadata: {
+          role: input.role,
+        },
+      });
+      return { success: true };
+    }),
+
+  // (request: Request) {
+  //   const { role, userId } = await request.json();
+
+  //   await clerkClient.users.updateUserMetadata(userId, {
+  //     publicMetadata: {
+  //       role: role,
+  //     },
+  //   });
+  //   return NextResponse.json({ success: true });
+  // }
+
   /*
-        Gets all the patients for us. This does not need to be protected by user
-        authetication because people should be able to see all posts from the home
-        page without logging in.
+        Gets all the patients for us. TODO: This needS to be protected by user
+        authetication because people should NOT be able to see all patients from 
+        anywhere.
         */
-  getAll: publicProcedure.query(async ({ ctx }) => {
+  getAll: privateProcedure.query(async ({ ctx }) => {
     try {
       // Remove this line:
       // if (!ctx.userId) throw new Error("No user in context");
@@ -294,6 +403,7 @@ export const appRouter = createTRPCRouter({
       const patients = await ctx.prisma.patient.findMany({
         take: 100,
         orderBy: [{ createdAt: "desc" }],
+        include: { insurances: true },
       });
 
       return addBillerDataToPatients(patients.map(decryptPHI));
@@ -303,7 +413,7 @@ export const appRouter = createTRPCRouter({
     }
   }),
 
-  getById: publicProcedure
+  getById: privateProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const patient = await ctx.prisma.patient.findUnique({
@@ -322,6 +432,7 @@ export const appRouter = createTRPCRouter({
         where: { billerId: input.userId },
         take: 100,
         orderBy: [{ createdAt: "desc" }],
+        include: { insurances: true },
       });
       return patients.map(decryptPHI);
     }),
@@ -340,6 +451,9 @@ export const appRouter = createTRPCRouter({
         },
         take: 100,
         orderBy: [{ createdAt: "desc" }],
+        include: {
+          insurances: true, // Include insurances if needed
+        },
       });
       return patients.map(decryptPHI);
     }),
@@ -353,7 +467,7 @@ export const appRouter = createTRPCRouter({
       z.object({
         name: z.string(),
         insurer: z.string(),
-        moneyCollected: z.number(),
+
         address: z.string().nullable().optional(),
         zipCode: z.string().nullable().optional(),
         sex: z.string().nullable().optional(),
@@ -389,41 +503,15 @@ export const appRouter = createTRPCRouter({
 
       const { success } = await ratelimit.limit(billerId);
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
-      
+
       // First, delete all related PatientEvent records
-      await ctx.prisma.patientEvent.deleteMany({
+      await ctx.prisma.encounter.deleteMany({
         where: { patientId: input.patientId },
       });
 
       const patient = await ctx.prisma.patient.delete({
         where: {
           id: input.patientId,
-        },
-      });
-      return patient;
-    }),
-
-  updatePatientMoneyCollected: privateProcedure
-    .input(
-      z.object({
-        patientId: z.string(),
-        moneyCollected: z.number(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      const billerId = ctx.userId;
-
-      const { success } = await ratelimit.limit(billerId);
-      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
-
-      const patient = await ctx.prisma.patient.update({
-        where: {
-          id: input.patientId,
-        },
-        data: {
-          moneyCollected: {
-            increment: input.moneyCollected,
-          },
         },
       });
       return patient;
@@ -454,7 +542,7 @@ export const appRouter = createTRPCRouter({
         patientId: z.string(),
         name: z.string(),
         dob: z.string(),
-        insurer: z.string().optional(),
+        insurances: z.array(z.string()).optional(),
         serviceStart: z.string().optional(),
         serviceEnd: z.string().optional(),
         providerName: z.string(),
@@ -475,7 +563,6 @@ export const appRouter = createTRPCRouter({
       // Encrypt PHI before updating
       const encryptedData = encryptPHI({
         name: input.name,
-        insurer: input.insurer ?? "",
         address: input.address ?? null,
         zipCode: input.zipCode ?? null,
         sex: input.sex ?? null,
@@ -488,10 +575,9 @@ export const appRouter = createTRPCRouter({
         data: {
           ...encryptedData,
           billerId,
-          serviceStart: input.serviceStart ?? null,
-          serviceEnd: input.serviceEnd ?? null,
-          providerName: input.providerName ?? null,
-          facilityName: input.facilityName ?? null,
+          dob: toValidDateOrNull(input.dob),
+          serviceStart: toValidDateOrNull(input.serviceStart),
+          serviceEnd: toValidDateOrNull(input.serviceEnd),
           zipCode: input.zipCode ?? null,
           groupNumber: input.groupNumber ?? null,
           sex: input.sex ?? null,
@@ -517,7 +603,6 @@ export const appRouter = createTRPCRouter({
     facilityName: extractedData.facility_name ?? null,
     zipCode: extractedData.zip_code ?? null,
     groupNumber: extractedData.group_number ?? null,
-    moneyCollected: 0 // Default value, can be updated later
     billerId: user.id,
   */
   createPatientsBulk: privateProcedure
@@ -535,7 +620,6 @@ export const appRouter = createTRPCRouter({
           facilityName: z.string().nullable().optional(),
           zipCode: z.string().nullable().optional(),
           groupNumber: z.string().nullable().optional(),
-          moneyCollected: z.number().optional(),
           billerId: z.string(),
         }),
       ),
@@ -567,14 +651,14 @@ export const appRouter = createTRPCRouter({
       return { count: input.length };
     }),
 
-  getpatientEventsByPatientId: publicProcedure
+  getEncountersByPatientId: publicProcedure
     .input(
       z.object({
         patientId: z.string(),
       }),
     )
     .query(({ ctx, input }) =>
-      ctx.prisma.patientEvent.findMany({
+      ctx.prisma.encounter.findMany({
         where: {
           patientId: input.patientId,
         },
@@ -583,10 +667,54 @@ export const appRouter = createTRPCRouter({
       }),
     ),
 
-  getpatientEventsByPatientIds: publicProcedure
+  getAllEncountersByBillerId: privateProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      // Ensure the user is authenticated
+      if (!ctx.userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
+      // Get all patients for the biller
+      const patients = await ctx.prisma.patient.findMany({
+        where: { billerId: input.userId },
+        select: { id: true },
+      });
+
+      // Get all encounters for those patients and add patient details, Furthermore,
+      // get the physician details for each encounter using the physicianId tied to the encounter
+      const encounters = await ctx.prisma.encounter.findMany({
+        where: {
+          patientId: { in: patients.map((p) => p.id) },
+        },
+        take: 1000,
+        orderBy: [{ createdAt: "desc" }],
+        include: {
+          patient: {
+            include: {
+              insurances: true, // <-- This includes insurances with each patient
+            },
+          },
+          physician: true, // Include physician details
+          actions: true,
+        },
+      });
+
+      // Return encounters with patient details
+      return encounters.map((enc) => ({
+        ...enc,
+        patient: decryptPHI(enc.patient),
+      }));
+    }),
+
+  getEncountersByPatientIds: publicProcedure
     .input(z.object({ patientIds: z.array(z.string()) }))
     .query(({ ctx, input }) =>
-      ctx.prisma.patientEvent.findMany({
+      ctx.prisma.encounter.findMany({
         where: {
           patientId: { in: input.patientIds },
         },
@@ -595,7 +723,7 @@ export const appRouter = createTRPCRouter({
       }),
     ),
 
-  createPatientEvent: privateProcedure
+  createEncounter: privateProcedure
     .input(
       z.object({
         patientId: z.string(),
@@ -603,7 +731,8 @@ export const appRouter = createTRPCRouter({
         eventContent: z.string().optional(),
         date: z.date(),
         fileUrls: z.array(z.string()).optional(),
-        transcript: z.string().optional(),
+        physicianId: z.string(), // <-- Add this
+        appointmentType: z.string(), // <-- Add this
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -612,26 +741,297 @@ export const appRouter = createTRPCRouter({
       const { success } = await ratelimit.limit(billerId);
       if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
 
-      const patientEvent = await ctx.prisma.patientEvent.create({
+      const encounter = await ctx.prisma.encounter.create({
         data: {
           patientId: input.patientId,
-          type: input.eventType,
           content: input.eventContent,
-          date: input.date,
+          dateOfService: input.date,
           fileUrls: input.fileUrls,
-          transcript: input.transcript,
+          physicianId: input.physicianId, // <-- Add this
+          appointmentType: input.appointmentType, // <-- Add this
         },
       });
-      return patientEvent;
+      return encounter;
     }),
 
-  createPatientEventsBulk: privateProcedure
-    .input(PatientEventBulkSchema)
+  deleteEncounter: privateProcedure
+    .input(z.object({ encounterId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.patientEvent.createMany({
-        data: input,
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      // Delete the encounter
+      const encounter = await ctx.prisma.encounter.delete({
+        where: {
+          id: input.encounterId,
+        },
       });
+      return encounter;
     }),
+
+  createCasesBulk: privateProcedure
+    .input(CasesBulkSchema)
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+
+      // Quick access maps
+      const patientMap = new Map<string, Patient>();
+      const existingPatients = await ctx.prisma.patient.findMany({
+        where: { billerId },
+      });
+      existingPatients.forEach((p) => {
+        const key = `${normalize(p.name)}|${p.patientId}`;
+        patientMap.set(key, p);
+      });
+
+      const physicianMap = new Map<string, Physician>();
+      const existingPhysicians = await ctx.prisma.physician.findMany({});
+      existingPhysicians.forEach((p) => {
+        const key = `${normalize(p.name)}|${p.physicianNPI}`;
+        physicianMap.set(key, p);
+      });
+
+      const facilityMap = new Map<string, Facility>();
+      const existingFacilities = await ctx.prisma.facility.findMany({});
+      existingFacilities.forEach((f) => {
+        const key = `${normalize(f.name)}|${f.address}`;
+        facilityMap.set(key, f);
+      });
+
+      const incompleteRecords: any[] = [];
+
+      await Promise.all(
+        input.map(async (caseData) => {
+          // --- Patient matching/creation ---
+          let matchedPatient: Patient | undefined = undefined;
+          if (caseData.patientName && caseData.patientId) {
+            const patientkey = `${normalize(caseData.patientName)}|${caseData.patientId}`;
+            matchedPatient = patientMap.get(patientkey);
+
+            if (!matchedPatient) {
+              const idCandidates = existingPatients.filter(
+                (p) => p.patientId === caseData.patientId,
+              );
+              const threshold = 2;
+              for (const p of idCandidates) {
+                if (
+                  levenshteinTwoMatrixRows(p.name, caseData.patientName!) <=
+                    threshold &&
+                  levenshteinTwoMatrixRows(p.patientId, caseData.patientId!) <=
+                    threshold
+                ) {
+                  matchedPatient = p;
+                  break;
+                }
+              }
+            }
+          }
+          if (!matchedPatient) {
+            const newPatient = await ctx.prisma.patient.create({
+              data: {
+                name: caseData.patientName ?? "MISSING_PATIENT_NAME",
+                patientId: caseData.patientId ?? "MISSING_PATIENT_ID",
+                billerId,
+              },
+            });
+            matchedPatient = newPatient;
+            patientMap.set(
+              `${normalize(matchedPatient.name)}|${matchedPatient.patientId}`,
+              matchedPatient,
+            );
+            if (!caseData.patientName || !caseData.patientId) {
+              incompleteRecords.push({
+                type: "patient",
+                missing: [
+                  !caseData.patientName ? "patientName" : null,
+                  !caseData.patientId ? "patientId" : null,
+                ].filter(Boolean),
+                id: matchedPatient.id,
+              });
+            }
+          }
+
+          // --- Physician matching/creation ---
+          let matchedPhysician: Physician | undefined = undefined;
+          if (
+            caseData.attending_physician &&
+            caseData.attending_physician_npi
+          ) {
+            const physicianKey = `${normalize(caseData.attending_physician)}|${caseData.attending_physician_npi}`;
+            matchedPhysician = physicianMap.get(physicianKey);
+
+            if (!matchedPhysician) {
+              const npiCandidates = existingPhysicians.filter(
+                (p) => p.physicianNPI === caseData.attending_physician_npi,
+              );
+              const threshold = 2;
+              for (const p of npiCandidates) {
+                if (
+                  levenshteinTwoMatrixRows(
+                    p.name,
+                    caseData.attending_physician!,
+                  ) <= threshold &&
+                  levenshteinTwoMatrixRows(
+                    p.physicianNPI!,
+                    caseData.attending_physician_npi!,
+                  ) <= threshold
+                ) {
+                  matchedPhysician = p;
+                  break;
+                }
+              }
+            }
+          }
+          if (!matchedPhysician) {
+            const newPhysician = await ctx.prisma.physician.create({
+              data: {
+                name: caseData.attending_physician ?? "MISSING_PHYSICIAN_NAME",
+                address: caseData.attending_physician_address ?? null,
+                physicianNPI: caseData.attending_physician_npi ?? "MISSING_NPI",
+                opn: caseData.attending_physician_opn ?? null,
+                phone: null,
+              },
+            });
+            matchedPhysician = newPhysician;
+            physicianMap.set(
+              `${normalize(matchedPhysician.name)}|${matchedPhysician.physicianNPI}`,
+              matchedPhysician,
+            );
+            if (
+              !caseData.attending_physician ||
+              !caseData.attending_physician_npi
+            ) {
+              incompleteRecords.push({
+                type: "physician",
+                missing: [
+                  !caseData.attending_physician ? "attending_physician" : null,
+                  !caseData.attending_physician_npi
+                    ? "attending_physician_npi"
+                    : null,
+                ].filter(Boolean),
+                id: matchedPhysician.id,
+              });
+            }
+          }
+
+          // --- Facility matching/creation ---
+          let matchedFacility: Facility | undefined = undefined;
+          if (caseData.facility_name && caseData.facility_address) {
+            const facilityKey = `${normalize(caseData.facility_name)}|${caseData.facility_address}`;
+            matchedFacility = facilityMap.get(facilityKey);
+
+            if (!matchedFacility) {
+              const threshold = 2;
+              const candidates = existingFacilities.filter(
+                (f) => f.address === caseData.facility_address,
+              );
+              for (const f of candidates) {
+                if (
+                  levenshteinTwoMatrixRows(f.name, caseData.facility_name) <=
+                  threshold
+                ) {
+                  matchedFacility = f;
+                  break;
+                }
+              }
+            }
+          }
+          if (!matchedFacility) {
+            const newFacility = await ctx.prisma.facility.create({
+              data: {
+                name: caseData.facility_name ?? "MISSING_FACILITY_NAME",
+                address:
+                  caseData.facility_address ?? "MISSING_FACILITY_ADDRESS",
+                city: caseData.city ?? "missing_city",
+                state: caseData.state ?? "missing_state",
+                zipCode: caseData.zip ?? "missing_zip",
+                facilityNPI: caseData.facility_npi ?? undefined,
+                facilityType: caseData.facility_type ?? "Unknown",
+              },
+            });
+            matchedFacility = newFacility;
+            facilityMap.set(
+              `${normalize(matchedFacility.name)}|${matchedFacility.address}`,
+              matchedFacility,
+            );
+            if (!caseData.facility_name || !caseData.facility_address) {
+              incompleteRecords.push({
+                type: "facility",
+                missing: [
+                  !caseData.facility_name ? "facility_name" : null,
+                  !caseData.facility_address ? "facility_address" : null,
+                ].filter(Boolean),
+                id: matchedFacility.id,
+              });
+            }
+          }
+
+          // --- Encounter creation ---
+          await ctx.prisma.encounter.create({
+            data: {
+              patientId: matchedPatient.id,
+              physicianId: matchedPhysician.id,
+              dateOfService: caseData.admission_date
+                ? parseDate(caseData.admission_date)
+                : new Date(),
+              appointmentType: caseData.appointment_type ?? "Select",
+              fileUrls: [],
+              status: "Pending",
+              facilityId: matchedFacility?.id ?? undefined,
+              facilityName: caseData.facility_name ?? undefined,
+              placeOfService: caseData.place_of_service ?? undefined,
+              // ...other encounter fields from caseData...
+            },
+          });
+        }),
+      );
+
+      return { count: input.length, incompleteRecords };
+    }),
+
+  createAction: privateProcedure
+    .input(
+      z.object({
+        encounterId: z.string(),
+        date: z.date(),
+        type: z.nativeEnum(Action),
+        eventContent: z.string().optional(),
+        transcript: z.string().optional(),
+        summary: z.string().optional(),
+        fileUrls: z.array(z.string()).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const billerId = ctx.userId;
+      const { success } = await ratelimit.limit(billerId);
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      // Create the biller action
+      const action = await ctx.prisma.billerAction.create({
+        data: {
+          encounterId: input.encounterId, // <-- Add this
+          date: input.date,
+          type: input.type,
+          content: input.eventContent,
+          transcript: input.transcript,
+          summary: input.summary,
+          fileUrls: input.fileUrls,
+        },
+      });
+      return action;
+    }),
+
+  // createEncountersBulk: privateProcedure
+  //   .input(EncounterBulkSchema)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.prisma.encounter.createMany({
+  //       data: input,
+  //     });
+  //   }),
 });
 // export type definition of API
 export type AppRouter = typeof appRouter;

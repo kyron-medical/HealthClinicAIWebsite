@@ -8,17 +8,45 @@ import { useUser } from "@clerk/nextjs";
 
 interface ExtractedPatientData {
   patient_name: string;
-  insurance_name?: string;
+  patient_id?: string;
+  mrn?: string;
+  medical_record_number?: string;
   date_of_birth: string;
-  address?: string | null;
-  age?: string | number | null;
-  sex?: string | null;
-  state?: string | null;
-  city?: string | null;
-  provider_name?: string | null;
-  facility_name?: string | null;
-  zip?: string | null;
-  group_number?: string | null;
+  age?: string;
+  sex?: string;
+  race?: string;
+  patient_phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  group_number?: string;
+  emergency_contact_name?: string;
+  emergency_contact_phone?: string;
+  admission_date?: string;
+  admission_time?: string;
+  discharge_date?: string;
+  discharge_time?: string;
+  admitting_physician?: string;
+  attending_physician?: string;
+  attending_physician_npi?: string;
+  attending_physician_opn?: string;
+  attending_physician_address?: string;
+  diagnosis?: string;
+  procedure?: string;
+  insurance_id?: string;
+  insurance_name?: string;
+  insurance_type?: string;
+  insurance_plan?: string;
+  insurance_primary_secondary?: string;
+  insurance_start_date?: string;
+  insurance_end_date?: string;
+  facility_name?: string;
+  facility_address?: string;
+  facility_npi?: string;
+  facility_type?: string;
+  place_of_service?: string;
+  appointment_type?: string;
 }
 
 interface UploadFaceSheetsResult {
@@ -31,17 +59,17 @@ interface UploadFaceSheetsResult {
 }
 
 interface FaceSheetMassUploaderProps {
-  refetchPatientsAction: (options?: unknown) => Promise<unknown>;
+  refetchEncountersAction: (options?: unknown) => Promise<unknown>;
 }
 
 // const textract = new TextractClient({ region: "us-east-1" }); // set your region
 
 export function FaceSheetMassUploader({
-  refetchPatientsAction,
+  refetchEncountersAction,
 }: FaceSheetMassUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const createPatientsBulk = trpc.createPatientsBulk.useMutation();
+  const createCasesBulk = trpc.createCasesBulk.useMutation();
   const { user } = useUser();
   if (!user) {
     toast.error("You must be logged in to upload face sheets.");
@@ -64,9 +92,7 @@ export function FaceSheetMassUploader({
           typeof item.filename === "string" &&
           typeof item.status === "string" &&
           typeof item.extractedData === "object" &&
-          item.extractedData !== null &&
-          typeof item.extractedData.patient_name === "string" &&
-          typeof item.extractedData.date_of_birth === "string",
+          item.extractedData !== null
       )
     );
   }
@@ -84,12 +110,12 @@ export function FaceSheetMassUploader({
 
     setUploading(true);
     const toastId = toast.loading("Processing face sheets…", {
-      duration: 15000,
+      duration: 30000,
     });
 
     try {
       const response = await fetch(
-        "https://aws.kyronmedical.com/bapi/upload-face-sheets",
+        "https://www.kyronmedical.com/bapi/upload-face-sheets",
         {
           method: "POST",
           body: formData,
@@ -122,31 +148,72 @@ export function FaceSheetMassUploader({
         return;
       }
 
-      const newPatients = data.results.map((patient) => {
-        const extractedData = patient.extractedData;
+      const newEncounters = data.results.map((output) => {
+        const extractedData = output.extractedData;
         return {
-          name: extractedData.patient_name,
-          insurer: extractedData.insurance_name ?? "Unknown",
-          dob: new Date(extractedData.date_of_birth),
-          address: extractedData.address ?? null,
-          age: extractedData.age ?? null,
-          sex: extractedData.sex ?? null,
-          state: extractedData.state ?? null,
-          city: extractedData.city ?? null,
-          serviceEnd: null, // Default to null, can be updated later
-          providerName: extractedData.provider_name ?? null,
-          facilityName: extractedData.facility_name ?? null,
-          zipCode: extractedData.zip ?? null,
-          groupNumber: extractedData.group_number ?? null,
-          moneyCollected: 0, // Default value, can be updated later
-          billerId: user.id,
+          patientName: extractedData.patient_name || undefined,
+          patientId: extractedData.patient_id ?? undefined,
+          mrn:
+            extractedData.mrn ??
+            extractedData.medical_record_number ??
+            undefined,
+          medical_record_number:
+            extractedData.medical_record_number ?? undefined,
+          date_of_birth: extractedData.date_of_birth ?? undefined,
+          age: extractedData.age ? String(extractedData.age) : undefined,
+          sex: extractedData.sex ?? undefined,
+          race: extractedData.race ?? undefined,
+          patient_phone: extractedData.patient_phone ?? undefined,
+          patientAddress: extractedData.address ?? undefined,
+          city: extractedData.city ?? undefined,
+          state: extractedData.state ?? undefined,
+          zip: extractedData.zip ?? undefined,
+          group_number: extractedData.group_number ?? undefined,
+          emergency_contact_name:
+            extractedData.emergency_contact_name ?? undefined,
+          emergency_contact_phone:
+            extractedData.emergency_contact_phone ?? undefined,
+          admission_date: extractedData.admission_date
+            ? new Date(extractedData.admission_date).toISOString().split("T")[0]
+            : undefined,
+          admission_time: extractedData.admission_time ?? undefined,
+          discharge_date: extractedData.discharge_date
+            ? new Date(extractedData.discharge_date).toISOString().split("T")[0]
+            : undefined,
+          discharge_time: extractedData.discharge_time ?? undefined,
+          admitting_physician: extractedData.admitting_physician ?? undefined,
+          attending_physician: extractedData.attending_physician ?? undefined,
+          attending_physician_npi:
+            extractedData.attending_physician_npi ?? undefined,
+          attending_physician_opn:
+            extractedData.attending_physician_opn ?? undefined,
+          attending_physician_address:
+            extractedData.attending_physician_address ?? undefined,
+          diagnosis: extractedData.diagnosis ?? undefined,
+          procedure: extractedData.procedure ?? undefined,
+          insurance_id: extractedData.insurance_id ?? undefined,
+          insurance_name: extractedData.insurance_name ?? undefined,
+          insurance_type: extractedData.insurance_type ?? undefined,
+          insurance_plan: extractedData.insurance_plan ?? undefined,
+          insurance_primary_secondary:
+            extractedData.insurance_primary_secondary ?? undefined,
+          insurance_start_date: extractedData.insurance_start_date ?? undefined,
+          insurance_end_date: extractedData.insurance_end_date ?? undefined,
+          facility_name: extractedData.facility_name ?? undefined,
+          facility_address: extractedData.facility_address ?? undefined,
+          facility_npi: extractedData.facility_npi ?? undefined,
+          facility_type: extractedData.facility_type ?? undefined,
+          place_of_service: extractedData.place_of_service ?? undefined,
+          appointment_type: extractedData.appointment_type ?? undefined,
+          // You can add any additional fields here as needed
+          billerId: user.id, // If needed by your backend
         };
       });
 
       try {
-        await createPatientsBulk.mutateAsync(newPatients);
-        toast.success(`Created ${newPatients.length} patient(s)`);
-        await refetchPatientsAction(); // Immediately update the list
+        await createCasesBulk.mutateAsync(newEncounters);
+        toast.success(`Created ${newEncounters.length} encounter(s)`);
+        await refetchEncountersAction(); // Immediately update the list
       } catch (err) {
         toast.error(
           "Failed to create patients in bulk." +
@@ -176,6 +243,7 @@ export function FaceSheetMassUploader({
         className="hidden"
         onChange={handleFilesSelected}
       />
+
       {/* Only the "+" button is rendered here */}
       <button
         onClick={() => fileInputRef.current?.click()}

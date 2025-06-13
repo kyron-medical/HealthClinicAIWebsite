@@ -1,8 +1,6 @@
 import GetStarted from "@/app/_components/ui/started-button";
 
-
 const AboutSectionOne = () => {
-
   return (
     <>
       <section className="py-16 text-center md:py-20 lg:py-28">

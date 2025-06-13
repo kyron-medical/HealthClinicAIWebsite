@@ -20,52 +20,47 @@ model BlogPost {
 }
 
 model Patient {
-  id              String   @id @default(cuid())
-  name            String  @default("patient_name")
-  name_iv         String?           // now nullable (defaults to NULL)
-  name_tag        String?           // likewise
-  dob             DateTime @default(dbgenerated("'1000-01-01T00:00:00.000Z'"))  // default to a sentinel value
-  address         String?           // nullable
-  address_iv      String?           // nullable
-  address_tag     String?           // nullable
-  sex            String?           // nullable
-  sex_iv         String?           // nullable
-  sex_tag        String?           // nullable
-  insurer         String @default("insurer_name") // default to "insurer_name"
-  insurer_iv      String?           // nullable
-  insurer_tag     String?           // nullable
-  moneyCollected  Int @default(0) // default to 0
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  patientEvents   PatientEvent[]
-  billerId        String
-  serviceStart    DateTime @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
-  serviceEnd      DateTime?
-  providerName    String?           // already nullable
-  providerName_iv String?           // already nullable
-  providerName_tag String?          // already nullable
-  facilityName    String?           // already nullable
-  zipCode         String?           // already nullable
-  zipCode_iv      String?           // already nullable
-  zipCode_tag     String?           // already nullable
-  groupNumber     String?           // already nullable
+  id               String         @id @default(cuid())
+  name             String         @default("patient_name")
+  name_iv          String?
+  name_tag         String?
+  insurer          String         @default("insurer_name")
+  insurer_iv       String?
+  insurer_tag      String?
+  moneyCollected   Int            @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  billerId         String
+  address          String?
+  address_iv       String?
+  address_tag      String?
+  dob              DateTime       @default(dbgenerated("'1000-01-01 00:00:00'::timestamp without time zone"))
+  facilityName     String?
+  groupNumber      String?
+  providerName     String?
+  providerName_iv  String?
+  providerName_tag String?
+  serviceEnd       DateTime?
+  serviceStart     DateTime       @default(dbgenerated("'1900-01-01 00:00:00'::timestamp without time zone"))
+  sex              String?
+  sex_iv           String?
+  sex_tag          String?
+  zipCode          String?
+  zipCode_iv       String?
+  zipCode_tag      String?
+  PatientEvent     PatientEvent[]
 }
-
 
 model PatientEvent {
-  id        String   @id @default(cuid())
-  patientId String
-  date      DateTime
-  type      String
-  content   String?
+  id         String   @id
+  patientId  String
+  date       DateTime
+  type       String
+  content    String?
   transcript String?
-  summary   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  // Add an array of file urls
-  fileUrls  String[]
-  // Add a relation to the Patient model
-
-  patient Patient @relation(fields: [patientId], references: [id])
+  summary    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+  fileUrls   String[]
+  Patient    Patient  @relation(fields: [patientId], references: [id])
 }
-
