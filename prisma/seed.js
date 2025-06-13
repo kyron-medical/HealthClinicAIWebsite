@@ -38,11 +38,14 @@ function encryptPHI(patient) {
     encrypted.name_iv = iv;
     encrypted.name_tag = tag;
   }
-  if (patient.insurer) {
-    const { data, iv, tag } = encrypt(patient.insurer);
-    encrypted.insurer = data;
-    encrypted.insurer_iv = iv;
-    encrypted.insurer_tag = tag;
+  if (patient.insurances) {
+    for (let i = 0; i < patient.insurances.length; i++) {
+      const insurance = patient.insurances[i];
+      const { data, iv, tag } = encrypt(insurance);
+      encrypted.insurances[i] = data;
+      encrypted.insurer_iv = iv;
+      encrypted.insurer_tag = tag;
+    }
   }
   return encrypted;
 }

@@ -2,11 +2,18 @@
 
 import { useState } from "react";
 import EncounterModal from "../ui/encounter-modal";
-import { Encounter, Patient, Physician, billerAction } from "@prisma/client";
+import {
+  Encounter,
+  Insurance,
+  Patient,
+  Physician,
+  billerAction,
+} from "@prisma/client";
 import { createPortal } from "react-dom";
-import { trpc } from "trpc/client";
-import styles from "./styles/PatientRow.module.css";
 import { FaceSheetMassUploader } from "./FaceSheetUploader";
+import styles from "./styles/PatientRow.module.css";
+import { format } from "date-fns";
+import { displayDate } from "../../utils/utils";
 
 // Define interface for your row data
 interface PatientRow {
@@ -32,7 +39,7 @@ interface PatientRow {
 
 interface EncounterGridProps {
   encounters: (Encounter & {
-    patient: Patient;
+    patient: Patient & { insurances: Insurance[] };
     physician: Physician; // or the actual Physician type if you have it imported
     actions: billerAction[];
   })[];
@@ -41,7 +48,7 @@ interface EncounterGridProps {
 }
 
 // Status badge component with exact styling from image
-const StatusBadge = ({ status }) => {
+const StatusBadge = ({ status }: { status: string }) => {
   const redStatuses = [
     "Pending Information",
     "Information Requested",
@@ -94,20 +101,18 @@ const StatusBadge = ({ status }) => {
 
 const EncounterGridClient = ({
   encounters,
-  refetchEncountersAction: refetchEncountersAction,
+  refetchEncountersAction,
 }: EncounterGridProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEncounter, setSelectedEncounter] = useState<
     | (Encounter & {
-        patient: Patient;
-        physician: Physician; // or the actual Physician type if you have it imported
+        patient: Patient & { insurances: Insurance[] };
+        physician: Physician;
         actions: billerAction[];
       })
     | null
   >(null);
 
-  // New dashboard hooks
-  const [cases, setCases] = useState(encounters);
   const [filters, setFilters] = useState({
     productType: "",
     status: "",
@@ -122,7 +127,7 @@ const EncounterGridClient = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState<{
-    key: keyof PatientRow | null;
+    key: string | null;
     direction: "asc" | "desc";
   }>({ key: null, direction: "asc" });
 
@@ -143,7 +148,11 @@ const EncounterGridClient = ({
 
     // Insurance filter
     const matchesInsurance =
-      !filters.insurance || e.patient.insurer === filters.insurance;
+      !filters.insurance ||
+      (Array.isArray(e.patient.insurances) &&
+        e.patient.insurances.some(
+          (ins) => ins.name === filters.insurance, // or use another property if needed
+        ));
 
     // Physician filter
     const matchesPhysician =
@@ -161,12 +170,58 @@ const EncounterGridClient = ({
     );
   });
 
+  function getValueByPath<T>(obj: T, path: string): unknown {
+    return path
+      .split(".")
+      .reduce<unknown>(
+        (acc, part) =>
+          typeof acc === "object" && acc !== null
+            ? (acc as Record<string, unknown>)[part]
+            : undefined,
+        obj,
+      );
+  }
+
   const sortedEncounters = [...filteredEncounters].sort((a, b) => {
     if (!sortConfig.key) return 0;
-    const aValue = a[sortConfig.key];
-    const bValue = b[sortConfig.key];
-    if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-    if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+    const aValue = getValueByPath(a, sortConfig.key);
+    const bValue = getValueByPath(b, sortConfig.key);
+
+    // Handle undefined/null values
+    if (aValue == null && bValue == null) return 0;
+    if (aValue == null) return 1;
+    if (bValue == null) return -1;
+
+    // Compare as strings or numbers
+    if (typeof aValue === "string" && typeof bValue === "string") {
+      return sortConfig.direction === "asc"
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue);
+    }
+    if (typeof aValue === "number" && typeof bValue === "number") {
+      return sortConfig.direction === "asc" ? aValue - bValue : bValue - aValue;
+    }
+    // For dates
+    if (aValue instanceof Date && bValue instanceof Date) {
+      return sortConfig.direction === "asc"
+        ? aValue.getTime() - bValue.getTime()
+        : bValue.getTime() - aValue.getTime();
+    }
+    // Fallback to string comparison
+    const isPrimitive = (v: unknown): v is string | number | boolean | Date => {
+      return (
+        typeof v === "string" ||
+        typeof v === "number" ||
+        typeof v === "boolean" ||
+        v instanceof Date
+      );
+    };
+
+    if (isPrimitive(aValue) && isPrimitive(bValue)) {
+      return sortConfig.direction === "asc"
+        ? String(aValue).localeCompare(String(bValue))
+        : String(bValue).localeCompare(String(aValue));
+    }
     return 0;
   });
 
@@ -179,8 +234,13 @@ const EncounterGridClient = ({
   // Get unique values for filter dropdowns
   const uniqueStatuses = [...new Set(encounters.map((e) => e.status))];
   const uniqueFacilities = [...new Set(encounters.map((e) => e.facilityName))];
-  const uniqueInsurances = [
-    ...new Set(encounters.map((e) => e.patient.insurer).filter(Boolean)),
+  const uniqueInsurances: string[] = [
+    ...new Set(
+      encounters
+        .flatMap((e) => e.patient.insurances ?? [])
+        .map((ins) => ins.name)
+        .filter(Boolean),
+    ),
   ];
 
   const uniquePhysicians = [
@@ -201,7 +261,7 @@ const EncounterGridClient = ({
     setCurrentPage(1);
   };
 
-  const handleSort = (key: keyof PatientRow) => {
+  const handleSort = (key: string) => {
     let direction: "asc" | "desc" = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
       direction = "desc";
@@ -209,7 +269,7 @@ const EncounterGridClient = ({
     setSortConfig({ key, direction });
   };
 
-  const getSortIcon = (columnName: keyof PatientRow) => {
+  const getSortIcon = (columnName: string) => {
     if (sortConfig.key === columnName) {
       return sortConfig.direction === "asc" ? " ↑" : " ↓";
     }
@@ -236,25 +296,13 @@ const EncounterGridClient = ({
 
   const handleRowClick = (
     encounter: Encounter & {
-      patient: Patient;
+      patient: Patient & { insurances: Insurance[] };
       physician: Physician; // or the actual Physician type if you have it imported
       actions: billerAction[];
     },
   ) => {
     setSelectedEncounter(encounter);
     setModalOpen(true);
-  };
-
-  // Next/Previous patient navigation
-  const handleSetPatient = (
-    encounter: Encounter & {
-      patient: Patient;
-      physician: Physician; // or the actual Physician type if you have it imported
-      actions: billerAction[];
-    },
-  ) => {
-    setSelectedEncounter(encounter);
-    // refetch will be triggered automatically by the hook
   };
 
   return (
@@ -471,44 +519,31 @@ const EncounterGridClient = ({
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th
-                    className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                    onClick={() => handleSort("encounterId")}
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    onClick={() => handleSort("id")}
                   >
-                    Encounter ID{getSortIcon("encounterId")}
+                    Encounter ID{getSortIcon("id")}
                   </th>
                   <th
-                    className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                    onClick={() => handleSort("name")}
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    onClick={() => handleSort("patient.name")}
                   >
-                    Patient Name{getSortIcon("name")}
-                    {/* {!patient.name ||
-                       !patient.dob ||
-                       !patient.insurer ||
-                       patient.insurer === "Unknown" ||
-                       !patient.groupNumber ? (
-                        <span
-                          className={styles.pulseDot}
-                          title="Missing data"
-                          data-oid="3xqfb4n"
-                        ></span>
-                       ) : (
-                        <span data-oid="jrf0unt"></span>
-                       )} */}
+                    Patient Name{getSortIcon("patient.name")}
                   </th>
                   <th
-                    className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                    onClick={() => handleSort("physician")}
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    onClick={() => handleSort("physician.name")}
                   >
-                    Physician{getSortIcon("physician")}
+                    Physician{getSortIcon("physician.name")}
                   </th>
                   <th
-                    className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                    onClick={() => handleSort("dob")}
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    onClick={() => handleSort("patient.dob")}
                   >
-                    Date of Birth{getSortIcon("dob")}
+                    Date of Birth{getSortIcon("patient.dob")}
                   </th>
                   <th
-                    className="cursor-pointer px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"
                     onClick={() => handleSort("dateOfService")}
                   >
                     Date of Service{getSortIcon("dateOfService")}
@@ -528,10 +563,10 @@ const EncounterGridClient = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                {currentEncounters.map((encounter, index) => (
+                {currentEncounters.map((encounter) => (
                   <tr
                     key={encounter.id}
-                    className="transition hover:bg-gray-50 dark:hover:bg-gray-700"
+                    className="transition hover:bg-gray-200 dark:hover:bg-gray-700"
                     onClick={() => handleRowClick(encounter)} // Make row clickable
                   >
                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
@@ -550,8 +585,35 @@ const EncounterGridClient = ({
                         ></div>
                         </div> */}
                         <div className="ml-3">
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
-                            {encounter.patient.name}
+                          <div className="flex flex-row items-center justify-center gap-2 text-sm font-medium  text-gray-900 dark:text-white">
+                            <div>
+                              {(() => {
+                                const name = encounter.patient.name;
+                                if (name.includes(",")) {
+                                  const [last, first] = name
+                                    .split(",")
+                                    .map((s) => s.trim());
+                                  if (first && last) {
+                                    return `${first} ${last}`;
+                                  }
+                                }
+                                return name;
+                              })()}
+                            </div>
+                            <div>
+                              {!encounter.patient.name ||
+                              !encounter.patient.dob ||
+                              !encounter.patient.insurances ||
+                              encounter.patient.insurances.length === 0 ||
+                              !encounter.patient.groupNumber ? (
+                                <span
+                                  className={styles.pulseDot}
+                                  title="Missing data"
+                                ></span>
+                              ) : (
+                                <span></span>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -560,26 +622,45 @@ const EncounterGridClient = ({
                       {encounter.physician.name}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
-                      {encounter.patient.dob
-                        ? new Date(encounter.patient.dob).toLocaleDateString()
-                        : ""}
+                      {displayDate(encounter.patient.dob)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
-                      {encounter.dateOfService
-                        ? new Date(encounter.dateOfService).toLocaleDateString()
-                        : ""}
+                      {displayDate(encounter.patient.dob)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                       {encounter.facilityName}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
-                      {encounter.patient.insurer}
+                      {encounter.patient.insurances &&
+                      encounter.patient.insurances.length > 0
+                        ? encounter.patient.insurances[0].name
+                        : ""}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm">
                       <StatusBadge status={encounter.status} />
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-900 dark:text-white">
-                      {encounter.actions.length}
+                    <td className=" whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-white">
+                      <div className="flex flex-row items-center justify-between">
+                        <span>{encounter.actions.length}</span>
+
+                        <span className="ml-2 opacity-60 transition group-hover:opacity-100">
+                          {/* Right arrow icon */}
+                          <svg
+                            width="18"
+                            height="18"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 18l6-6-6-6"
+                            />
+                          </svg>
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -601,22 +682,22 @@ const EncounterGridClient = ({
           </div>
 
           <div className="flex items-center gap-2">
-            {[...Array(Math.min(5, totalPages))].map((_, i) => {
-              const pageNum = i + 1;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => setCurrentPage(pageNum)}
-                  className={`rounded px-3 py-2 text-sm transition ${
-                    currentPage === pageNum
-                      ? "bg-blue-600 text-white"
-                      : "border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
+            {Array.from(
+              { length: Math.min(5, totalPages) },
+              (_, i) => i + 1,
+            ).map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={() => setCurrentPage(pageNum)}
+                className={`rounded px-3 py-2 text-sm transition ${
+                  currentPage === pageNum
+                    ? "bg-blue-600 text-white"
+                    : "border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+                }`}
+              >
+                {pageNum}
+              </button>
+            ))}
             {totalPages > 5 && (
               <>
                 <span className="text-gray-500">...</span>

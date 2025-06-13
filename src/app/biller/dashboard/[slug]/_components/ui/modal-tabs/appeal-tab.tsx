@@ -6,6 +6,7 @@ import {
   Patient,
   Physician,
   Action,
+  Insurance,
 } from "@prisma/client";
 import { useState, useRef } from "react";
 import toast from "react-hot-toast";
@@ -76,7 +77,7 @@ interface PatientRow {
 
 type AppealFormProps = {
   encounter: Encounter & {
-    patient: Patient;
+    patient: Patient & { insurances: Insurance[] };
     physician: Physician; // or the actual Physician type if you have it imported
     actions: billerAction[];
   };

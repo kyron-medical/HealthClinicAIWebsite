@@ -61,3 +61,17 @@ export const levenshteinTwoMatrixRows = (input: string, target: string) => {
   // The result is the value at the bottom-right corner of the matrix
   return currRow[n];
 };
+
+export const toValidDateOrNull = (value: string | object | null | undefined) => {
+  if (!value) return null;
+  // If already a Date object, return as is
+  if (value instanceof Date) return value;
+
+  if (typeof value === "string" && value.trim() === "") return null;
+  // If value is a string, try to parse as ISO
+  if (typeof value === "string") {
+    const date = new Date(value);
+    return isNaN(date.getTime()) ? null : date;
+  }
+  return null;
+};

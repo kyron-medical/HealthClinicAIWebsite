@@ -6,10 +6,13 @@ import {
   Patient,
   Physician,
   Action,
+  Insurance,
 } from "@prisma/client";
+import { _ } from "@upstash/redis/zmscore-CjoCv9kz";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { trpc } from "trpc/client";
+import { displayDate } from "../../../utils/utils";
 
 // Define interface for your row data
 interface PatientRow {
@@ -55,12 +58,14 @@ type ExistingPatientDetails = {
 
 type DetailsFormProps = {
   encounter: Encounter & {
-    patient: Patient;
+    patient: Patient & { insurances: Insurance[] };
     physician: Physician; // or the actual Physician type if you have it imported
     actions: billerAction[];
   };
   refetchEncountersAction: (options?: unknown) => Promise<unknown>;
 };
+
+
 
 /*
 ===============================================================================
@@ -72,7 +77,7 @@ type DetailsFormProps = {
 
 export function DetailsForm({
   encounter: encounter,
-  refetchEncountersAction: refetchPatientsAction,
+  refetchEncountersAction: refetchEncountersAction,
 }: DetailsFormProps) {
   // Local form state for every field:
   const [firstName, setFirstName] = useState(
@@ -102,7 +107,9 @@ export function DetailsForm({
   const [zipCode, setZipCode] = useState("");
   const [editingZipCode, setEditingZipCode] = useState(false);
 
-  const [insurer, setInsurer] = useState(encounter.patient.insurer || "");
+  const [insurances, setInsurances] = useState(
+    encounter.patient.insurances || [],
+  );
   const [editingInsurer, setEditingInsurer] = useState(false);
 
   const [serviceStart, setServiceStart] = useState("");
@@ -221,6 +228,17 @@ export function DetailsForm({
   // Only require at least one field to be changed to enable save
   const formValid = dirty && !detailsMutation.isPending;
 
+  // Define a default insurance object for new entries
+  const defaultInsurance = {
+    id: "",
+    name: "",
+    patientId: null,
+    insuranceType: "",
+    insurancePlan: "",
+    insuranceStartDate: new Date(),
+    insuranceEndDate: null as Date | null,
+  };
+
   // Render form
   return (
     <form
@@ -236,8 +254,8 @@ export function DetailsForm({
           patientId: encounter.patient.id,
           name: `${firstName} ${lastName}`,
           dob: dob ?? undefined,
-          serviceStart: serviceStart ?? undefined,
-          serviceEnd: serviceEnd ?? undefined,
+          serviceStart: serviceStart ? serviceStart : undefined,
+          serviceEnd: serviceEnd ? serviceEnd : undefined,
           providerName: providerName ?? undefined,
           facilityName: facilityName ?? undefined,
           zipCode: zipCode ?? undefined,
@@ -245,7 +263,7 @@ export function DetailsForm({
           address: address ?? undefined,
           sex: sex ?? undefined,
         });
-        void refetchPatientsAction(); // Refetch patients after saving
+        void refetchEncountersAction(); // Refetch patients after saving
       }}
     >
       <h2 className="mb-2 text-2xl font-bold">Patient Details</h2>
@@ -332,7 +350,7 @@ export function DetailsForm({
             />
           ) : (
             <div className="flex items-center gap-2">
-              <span>{dob}</span>
+              <span>{displayDate(dob)}</span>
               <button
                 className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
                 onClick={() => setEditingDob(true)}
@@ -442,12 +460,26 @@ export function DetailsForm({
       {/* Insurer Name */}
       <div>
         <label>Insurer Name</label>
-        {editingInsurer || !insurer ? (
+        {editingInsurer || !insurances || insurances.length === 0 ? (
           <input
             type="text"
             className="mt-1 w-full rounded border px-2 py-1"
-            value={insurer}
-            onChange={handleChange(setInsurer)}
+            value={
+              Array.isArray(insurances)
+                ? insurances.map((ins) => ins.name).join(", ")
+                : insurances
+            }
+            onChange={(e) => {
+              // Split the string and map to insurance objects (with only name)
+              const names = e.target.value
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean);
+              setInsurances(
+                names.map((name) => ({ ...defaultInsurance, name })),
+              );
+              setDirty(true);
+            }}
             onBlur={() => setEditingInsurer(false)}
             autoFocus
             onKeyDown={(e) => {
@@ -458,7 +490,9 @@ export function DetailsForm({
           />
         ) : (
           <div className="flex items-center gap-2">
-            <span className="truncate text-sm">{insurer}</span>
+            <span className="truncate text-sm">
+              {insurances.map((ins) => ins.name).join(", ")}
+            </span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingInsurer(true)}
@@ -489,7 +523,7 @@ export function DetailsForm({
           />
         ) : (
           <div className="flex items-center gap-2">
-            <span className="truncate text-sm">{serviceStart}</span>
+            <span className="truncate text-sm">{displayDate(serviceStart)}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingServiceStart(true)}
@@ -520,7 +554,7 @@ export function DetailsForm({
           />
         ) : (
           <div className="flex items-center gap-2">
-            <span className="truncate text-sm">{serviceEnd}</span>
+            <span className="truncate text-sm">{displayDate(serviceEnd)}</span>
             <button
               className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600"
               onClick={() => setEditingServiceEnd(true)}

@@ -9,6 +9,7 @@ import { z } from "zod";
 import {
   Action,
   Encounter,
+  Insurance,
   Patient,
   Physician,
   billerAction,
@@ -50,21 +51,21 @@ interface EncounterModalProps {
   isOpen: boolean;
   onClose: () => void;
   encounter: Encounter & {
-    patient: Patient;
+    patient: Patient & { insurances: Insurance[] };
     physician: Physician; // or the actual Physician type if you have it imported
     actions: billerAction[];
   };
   setEncounter: (
     encounter:
       | (Encounter & {
-          patient: Patient;
+          patient: Patient & { insurances: Insurance[] };
           physician: Physician; // or the actual Physician type if you have it imported
           actions: billerAction[];
         })
       | null,
   ) => void;
   encounters: (Encounter & {
-    patient: Patient;
+    patient: Patient & { insurances: Insurance[] };
     physician: Physician; // or the actual Physician type if you have it imported
     actions: billerAction[];
   })[];

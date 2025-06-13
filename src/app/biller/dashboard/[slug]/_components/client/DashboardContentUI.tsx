@@ -4,14 +4,18 @@ import React, { useState, useEffect, useRef } from "react";
 import EncounterGridClient from "./GridUI";
 
 import { messages } from "../../data/dashboard-data";
-import type { Encounter } from "@prisma/client";
+import type { billerAction, Encounter, Insurance, Patient, Physician } from "@prisma/client";
 import { trpc } from "trpc/client";
 import { useUser } from "@clerk/nextjs";
 import ChatBot from "../ui/chat-bot";
-import { FaceSheetMassUploader } from "./FaceSheetUploader";
+
 
 interface DashboardContentClientProps {
-  patientEvents: Encounter[];
+  encounters: (Encounter & {
+      patient: Patient & { insurances: Insurance[] };
+      physician: Physician; // or the actual Physician type if you have it imported
+      actions: billerAction[];
+    })[];
 }
 
 const DashboardContentClient = (props: DashboardContentClientProps) => {
@@ -62,7 +66,7 @@ const DashboardContentClient = (props: DashboardContentClientProps) => {
 
   return (
     <>
-      <div className="flex h-screen bg-gray-100">
+      <div className="flex h-screen bg-white">
         {/* Floating Kyron AI Button */}
         <button
           className="fixed bottom-8 right-8 z-50 w-16 rounded-full bg-blue-600 p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"

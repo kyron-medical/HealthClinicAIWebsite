@@ -41,10 +41,11 @@ model BlogPost {
 
 model Patient {
   id           String      @id @default(cuid())
+  patientId   String      @default("missing_patient_id") // default to a sentinel value
   name         String      @default("patient_name")
   name_iv      String? // now nullable (defaults to NULL)
   name_tag     String? // likewise
-  dob          DateTime    @default(dbgenerated("'1900-01-01T00:00:00.000Z'")) // default to a sentinel value
+  dob          DateTime    @default(dbgenerated("1900-01-01T00:00:00.000Z")) // default to a sentinel value
   address      String? // nullable
   address_iv   String? // nullable
   address_tag  String? // nullable
@@ -82,8 +83,6 @@ model Insurance {
 model Physician {
   id           String   @id @default(cuid())
   name         String
-  name_iv      String? // nullable
-  name_tag     String? // nullable
   physicianNPI String   @default("missing_npi") // default to a sentinel value
   opn          String? // optional, can be null
   address      String?
