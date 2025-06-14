@@ -248,13 +248,13 @@ export function FaceSheetMassUploader({
       <button
         onClick={() => fileInputRef.current?.click()}
         disabled={uploading}
-        className={`rounded px-3 py-1 text-sm text-white ${
+        className={`rounded px-4 py-2 text-sm font-medium text-white transition ${
           uploading
             ? "cursor-not-allowed bg-gray-400"
             : "bg-blue-600 hover:bg-blue-700"
         }`}
       >
-        {uploading ? "Uploading…" : "+"}
+        {uploading ? "Uploading…" : "+ New Case"}
       </button>
     </div>
   );
