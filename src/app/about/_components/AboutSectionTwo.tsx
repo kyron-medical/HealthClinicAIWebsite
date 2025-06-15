@@ -69,6 +69,11 @@ const teamMembers = [
     title: "Product Management",
     image: "/images/team/kathy-sun.jpg",
   },
+  {
+    name: "Prasad Velmurugan",
+    title: "Marketing",
+    image: "/images/team/prasad-velmurugan.jpg",
+  }
 ];
 
 const AboutSectionTwo = () => {
